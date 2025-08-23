@@ -6,5 +6,8 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class Telegram extends WebhookHandler
 {
-    //hello
+    public function start(): void
+    {
+        $this->chat->message('Hello! Bot work!')->send();
+    }
 }
