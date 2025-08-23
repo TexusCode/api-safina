@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Pages;
 
-use DefStudio\Telegraph\Models\TelegraphChat;
 use Livewire\Component;
+use App\Texhub\Telegram;
+use DefStudio\Telegraph\Models\TelegraphChat;
 
 class Home extends Component
 {
