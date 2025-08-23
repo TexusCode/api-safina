@@ -250,4 +250,6 @@
         </div>
         <!-- End Card -->
     </div>
+
+    {{ $chats }}
 </div>
