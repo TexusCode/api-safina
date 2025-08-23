@@ -16,7 +16,7 @@ class Telegram extends WebhookHandler
 
     public static function deliver_chat_send($sms): void
     {
-        $chat = TelegraphChat::where('chat_id', '-4815311836')->first();
+        $chat = TelegraphChat::where('chat_id', '-1002955286366')->first();
         $chat->message($sms)->send();
     }
 }
