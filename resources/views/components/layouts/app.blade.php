@@ -15,14 +15,15 @@
     <div class="h-full pb-24">
         <div class="bg-neutral-950 w-full h-full max-w-sm mx-auto p-3 space-y-4 relative overflow-hidden">
             <div class="w-full flex justify-between items-center px-2 py-1.5 bg-neutral-800 rounded-xl">
-                <flux:button square variant="primary" color="blue">
-                    CP
+                <flux:button square variant="primary" color="blue" href="{{ route('profile') }}">
+                    SC
                 </flux:button>
                 <div class="flex flex-col justify-center text-center text-base font-semibold text-white">
-                    <flux:heading size="lg">Hugo Sainte-Marie</flux:heading>
-                    <flux:text class="max-sm:hidden">hugo@example.com</flux:text>
+                    <flux:heading size="lg" class="uppercase">Safina-Cleaning</flux:heading>
+                    <flux:text>hugo@example.com</flux:text>
                 </div>
-                <flux:button square variant="primary" color="yellow" class="relative">
+                <flux:button square variant="primary" color="yellow" class="relative"
+                    href="{{ route('notifications') }}">
                     <flux:icon.bell />
                     <span class="flex absolute top-0 end-0 -mt-2 -me-2">
                         <span

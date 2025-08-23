@@ -65,4 +65,20 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $this->chat->deleteMessage($this->messageId)->send();
     }
+    public function add_location(): void
+    {
+        //
+    }
+    public function edit(): void
+    {
+        //
+    }
+    public function done(): void
+    {
+        //
+    }
+    public function cancel(): void
+    {
+        //
+    }
 }

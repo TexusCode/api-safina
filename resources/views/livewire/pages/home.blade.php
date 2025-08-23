@@ -1,6 +1,6 @@
 <div class="space-y-4">
     <div class="bg-neutral-800 rounded-xl overflow-hidden w-full space-y-2 border border-neutral-700">
-        <div class="bg-blue-600 rounded-xl grid grid-cols-2 px-2 pt-4 pb-2 space-y-2">
+        <div class="bg-blue-600 rounded-xl grid grid-cols-2 px-2 py-4">
             <div class="text-white border-r-1 border-neutral-300 flex gap-2 justify-center items-center">
                 <div class="p-2 bg-white rounded-full text-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -12,43 +12,132 @@
                     </svg>
                 </div>
                 <div>
-                    <flux:text>Year to date</flux:text>
+                    <flux:text>Заработано</flux:text>
 
-                    <flux:heading size="xl" class="mb-1">$7,532.16</flux:heading>
+                    <flux:heading size="xl">70000c</flux:heading>
                 </div>
             </div>
             <div class="text-white flex gap-2 justify-center items-center">
-                <div class="p-2 bg-white rounded-full text-red-500">
+                <div class="p-2 bg-white rounded-full text-red-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-chart-pie">
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-trending-down">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
-                        <path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5" />
+                        <path d="M3 7l6 6l4 -4l8 8" />
+                        <path d="M21 10l0 7l-7 0" />
                     </svg>
                 </div>
                 <div>
-                    <flux:text>Year to date</flux:text>
+                    <flux:text>Затрачено</flux:text>
 
-                    <flux:heading size="xl" class="mb-1">$7,532.16</flux:heading>
+                    <flux:heading size="xl">10000c</flux:heading>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-4 w-full p-2">
-            <div class="w-full grid justify-center gap-1 group cursor-pointer">
+        <div class="grid grid-cols-4 w-full p-2 gap-2">
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-air-conditioning">
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrows-sort">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M8 16a3 3 0 0 1 -3 3" />
-                    <path d="M16 16a3 3 0 0 0 3 3" />
-                    <path d="M12 16v4" />
-                    <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                    <path d="M7 13v-3a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v3" />
+                    <path d="M3 9l4 -4l4 4m-4 -4v14" />
+                    <path d="M21 15l-4 4l-4 -4m4 4v-14" />
                 </svg>
-                <span class="text-white">Delivery</span>
+                <span class="text-white">Заказы</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-users-group">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                    <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                    <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                    <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                    <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                    <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+                </svg>
+                <span class="text-white">Сотрудники</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-code">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6" />
+                    <path d="M16 3v4" />
+                    <path d="M8 3v4" />
+                    <path d="M4 11h16" />
+                    <path d="M20 21l2 -2l-2 -2" />
+                    <path d="M17 17l-2 2l2 2" />
+                </svg>
+                <span class="text-white">Заявщик</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                    <path d="M3 9l4 0" />
+                </svg>
+                <span class="text-white">Курерь</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-mobile-message">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M11 3h10v8h-3l-4 2v-2h-3z" />
+                    <path d="M15 16v4a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1h2" />
+                    <path d="M10 18v.01" />
+                </svg>
+                <span class="text-white">СМС</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                    <path d="M3 7l9 6l9 -6" />
+                </svg>
+                <span class="text-white">Рассылка</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-tools">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+                    <path d="M14.5 5.5l4 4" />
+                    <path d="M12 8l-5 -5l-4 4l5 5" />
+                    <path d="M7 8l-1.5 1.5" />
+                    <path d="M16 12l5 5l-4 4l-5 -5" />
+                    <path d="M16 17l-1.5 1.5" />
+                </svg>
+                <span class="text-white">Заметки</span>
+            </div>
+            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                </svg>
+                <span class="text-white">Настройки</span>
             </div>
 
         </div>
@@ -56,7 +145,7 @@
 
     <div class="bg-neutral-800 rounded-xl grid grid-cols-3 p-3 border border-neutral-700">
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
-            <flux:text>Year to date</flux:text>
+            <flux:text class="text-center max-w-14 text-sm/4">Средный чек в месяц</flux:text>
 
             <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
 
@@ -67,7 +156,7 @@
             </div>
         </div>
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
-            <flux:text>Year to date</flux:text>
+            <flux:text class="text-center max-w-14 text-sm/4">Средный заказь в день</flux:text>
 
             <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
 
@@ -78,7 +167,7 @@
             </div>
         </div>
         <div class="flex flex-col items-center justify-center">
-            <flux:text>Year to date</flux:text>
+            <flux:text class="text-center max-w-14 text-sm/4">Средный заработок в день</flux:text>
 
             <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
 
