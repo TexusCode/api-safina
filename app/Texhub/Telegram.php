@@ -15,7 +15,6 @@ class Telegram extends WebhookHandler
         $this->chat->message('Hello! Bot work!')->send();
         Telegraph::message('hello world')
             ->keyboard(Keyboard::make()->buttons([
-                Button::make('Delete')->action('delete')->param('id', '42'),
                 Button::make('open')->url('https://test.it'),
                 Button::make('Web App')->webApp('https://web-app.test.it'),
                 Button::make('Login Url')->loginUrl('https://loginUrl.test.it'),
