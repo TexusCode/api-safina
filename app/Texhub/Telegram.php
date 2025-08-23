@@ -2,25 +2,31 @@
 
 namespace App\Texhub;
 
-use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use DefStudio\Telegraph\Enums\ChatActions;
+use DefStudio\Telegraph\Facades\Telegraph as FacadesTelegraph;
+use DefStudio\Telegraph\Keyboard\ReplyButton;
+use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
+use Illuminate\Support\Stringable;
+use Illuminate\Notifications\Action;
+use DefStudio\Telegraph\Telegraph;
+use Illuminate\Http\Request;
 
-class Telegram extends WebhookHandler
+class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function start(): void
     {
         $this->chat->message('Hello! Bot work!')->send();
         $this->chat->message('Hello! Bot work!')
-            ->keyboard(function (Keyboard $keyboard) {
-                return $keyboard
-                    ->button('Delete')->action('delete')->param('id', '42')
-                    ->button('open')->url('https://test.it')
-                    ->button('Web App')->webApp('https://web-app.test.it')
-                    ->button('Login Url')->loginUrl('https://loginUrl.test.it')
-                    ->button('Copy to Clipboard')->copyText('https://example.com/share/123');
-            })->send();
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make('🇹🇯 Тоҷикӣ')->action('lang_tajik'),
+                        Button::make('🇷🇺 Русский')->action('lang_russian'),
+                    ])
+            )->send();
     }
 
     public static function deliver_chat_send($sms): void
@@ -29,11 +35,12 @@ class Telegram extends WebhookHandler
         foreach ($chats as $chat)
             $chat->message($sms)->send();
         $chat->message('hello world')
-            ->keyboard(Keyboard::make()->buttons([
-                Button::make('Delete')->action('delete')->param('id', '42'),
-                Button::make('open')->url('https://test.it'),
-                Button::make('Web App')->webApp('https://web-app.test.it'),
-                Button::make('Login Url')->loginUrl('https://loginUrl.test.it'),
-            ]))->send();
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make('🇹🇯 Тоҷикӣ')->action('lang_tajik'),
+                        Button::make('🇷🇺 Русский')->action('lang_russian'),
+                    ])
+            )->send();
     }
 }
