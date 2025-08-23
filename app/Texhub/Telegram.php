@@ -19,17 +19,28 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start(): void
     {
         $this->chat->message('Hello! Bot work!')->send();
-        $this->chat->message('Hello! Bot work!')
-            ->keyboard(
-                Keyboard::make()
-                    ->row([
-                        Button::make('🇹🇯 Тоҷикӣ')->action('lang_tajik'),
-                        Button::make('🇷🇺 Русский')->action('lang_russian'),
-                    ])
-            )->send();
+        $this->chat->message(("Бахши лозимаро дар менюи дар зер буда интихоб намоед! 🔽"))
+            ->replyKeyboard(ReplyKeyboard::make()
+                ->row([
+                    ReplyButton::make('🔢 Тафтиши трек-код'),
+                    ReplyButton::make('➕ Обуна шудан')->requestContact(),
+                ])
+                ->row([
+                    ReplyButton::make('✅ Сурогаи склади Иву'),
+                    ReplyButton::make('🎞 Дарсхои ройгон'),
+                ])
+                ->row([
+                    ReplyButton::make('📍 Сурогаи склади Душанбе'),
+                    ReplyButton::make('👤 Тамос бо мушовир'),
+                ])
+                ->row([
+                    ReplyButton::make('💲 Нархнома'),
+                    ReplyButton::make('❌ Молҳои манъшуда'),
+                ])
+                ->resize())->send();
     }
 
-    public function deliver_chat_send($sms): void
+    public function deliver_chat_send($order_id): void
     {
         $chats = TelegraphChat::all();
         foreach ($chats as $chat) {
