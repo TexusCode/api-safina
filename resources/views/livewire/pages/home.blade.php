@@ -250,5 +250,8 @@
         </div>
         <!-- End Card -->
     </div>
+    <div class="text-white">
+        {{ $chats }}
+    </div>
     <button type="button" wire:click="send" class="bg-blue-600 p-3 rounded-xl text-lg text-white">Send</button>
 </div>

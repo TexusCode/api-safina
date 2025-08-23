@@ -12,7 +12,7 @@ class Home extends Component
     public function send()
     {
         $send = new Telegram();
-        $sms = $send->deliver_chat_send('salom');
+        $sms = $send->deliver_chat_send('sdkjhskdjfhgksjdfhkgjhsdfkjgh sdfgh sjfkdhgkjsd hf');
     }
     public function render()
     {
