@@ -12,6 +12,15 @@ class Telegram extends WebhookHandler
     public function start(): void
     {
         $this->chat->message('Hello! Bot work!')->send();
+        $this->chat->message('Hello! Bot work!')
+            ->keyboard(function (Keyboard $keyboard) {
+                return $keyboard
+                    ->button('Delete')->action('delete')->param('id', '42')
+                    ->button('open')->url('https://test.it')
+                    ->button('Web App')->webApp('https://web-app.test.it')
+                    ->button('Login Url')->loginUrl('https://loginUrl.test.it')
+                    ->button('Copy to Clipboard')->copyText('https://example.com/share/123');
+            })->send();
     }
 
     public static function deliver_chat_send($sms): void
