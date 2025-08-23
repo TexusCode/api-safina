@@ -29,11 +29,11 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             )->send();
     }
 
-    public function deliver_chat_send($order_id): void
+    public function deliver_chat_send($sms): void
     {
         $chats = TelegraphChat::all();
         foreach ($chats as $chat) {
-            $chat->message("📦 Заказ <b>№1</b>\n👤 Имя: <b>Шодмехр</b>\n🏠 Адрес: <b>103 мкр</b>\n📝 Заметка: <b><b>Shodmehr</b></b>\n➕ Добавил: <b>Shodmehr</b>\n📅 Дата: <b>23.08.2025</b>\n📞 Нажмите ниже, чтобы скопировать номер 👇</b>")
+            $chat->message("📦 Заказ <b>№1</b>\n👤 Имя: <b>Шодмехр</b>\n🏠 Адрес: <b>103 мкр</b>\n📝 Заметка: <b><b>Shodmehr</b></b>\n➕ Добавил: <b>Shodmehr</b>\n<b>Shodmehr</b>📞 Нажмите ниже, чтобы скопировать номер 👇")
                 ->keyboard(
                     Keyboard::make()
                         ->row([
