@@ -33,7 +33,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $chats = TelegraphChat::all();
         foreach ($chats as $chat) {
-            $chat->message("📦 Заказ <b>№1</b>\n👤 Имя: <b>Шодмехр</b>\n🏠 Адрес: <b>103 мкр</b>\n📝 Заметка: <b>Shodmehr</b>\n➕ Добавил: <b>Shodmehr</b>\n📅 Дата: <b>23.08.2025</b>\n📞 Нажмите ниже, чтобы скопировать номер 👇")
+            $chat->message("📦 Заказ <b>№1</b>\n👤 Имя: <b>Шодмехр</b>\n🏠 Адрес: <b>103 мкр</b>\n📝 Заметка: <b>Shodmehr</b>\n➕ Добавил: <b>Shodmehr</b>\n📅 Дата: <b>23.08.2025</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
                 ->keyboard(
                     Keyboard::make()
                         ->row([
