@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Pages;
 
+use App\Texhub\Telegram;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Livewire\Component;
 
 class Home extends Component
 {
     public $chats;
-    public function mount()
+    public function send()
     {
-        $this->chats = TelegraphChat::all();
+        $send = new Telegram();
+        $sms = $send->deliver_chat_send('salom');
     }
     public function render()
     {
