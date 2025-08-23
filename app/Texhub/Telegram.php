@@ -29,18 +29,23 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             )->send();
     }
 
-    public static function deliver_chat_send($sms): void
+    public function deliver_chat_send($sms): void
     {
         $chats = TelegraphChat::all();
-        foreach ($chats as $chat)
+        foreach ($chats as $chat) {
             $chat->message($sms)->send();
-        $chat->message('hello world')
-            ->keyboard(
-                Keyboard::make()
-                    ->row([
-                        Button::make('🇹🇯 Тоҷикӣ')->action('lang_tajik'),
-                        Button::make('🇷🇺 Русский')->action('lang_russian'),
-                    ])
-            )->send();
+            $chat->message('hello world')
+                ->keyboard(
+                    Keyboard::make()
+                        ->row([
+                            Button::make('🇹🇯 Тоҷикӣ')->action('lang_tajik'),
+                            Button::make('🇷🇺 Русский')->action('lang_russian'),
+                        ])
+                )->send();
+        }
+    }
+    public function lang_tajik(): void
+    {
+        $this->chat->deleteMessage($this->messageId)->send();
     }
 }
