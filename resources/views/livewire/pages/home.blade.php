@@ -35,7 +35,8 @@
             </div>
         </div>
         <div class="grid grid-cols-4 w-full p-2 gap-2">
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            <a href="{{ route('orders') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -45,8 +46,9 @@
                     <path d="M21 15l-4 4l-4 -4m4 4v-14" />
                 </svg>
                 <span class="text-white">Заказы</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('users') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -60,8 +62,9 @@
                     <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
                 </svg>
                 <span class="text-white">Сотрудники</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('applicant') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -75,8 +78,9 @@
                     <path d="M17 17l-2 2l2 2" />
                 </svg>
                 <span class="text-white">Заявщик</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('deliver') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -88,8 +92,9 @@
                     <path d="M3 9l4 0" />
                 </svg>
                 <span class="text-white">Курерь</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('sms') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -100,8 +105,9 @@
                     <path d="M10 18v.01" />
                 </svg>
                 <span class="text-white">СМС</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('bulk-sms') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -111,8 +117,9 @@
                     <path d="M3 7l9 6l9 -6" />
                 </svg>
                 <span class="text-white">Рассылка</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('todos') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -126,8 +133,9 @@
                     <path d="M16 17l-1.5 1.5" />
                 </svg>
                 <span class="text-white">Заметки</span>
-            </div>
-            <div class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+            </a>
+            <a href="{{ route('settings') }}"
+                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -138,7 +146,7 @@
                     <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                 </svg>
                 <span class="text-white">Настройки</span>
-            </div>
+            </a>
 
         </div>
     </div>
@@ -339,8 +347,6 @@
         </div>
         <!-- End Card -->
     </div>
-    <div class="text-white">
-        {{ $chats }}
-    </div>
+
     <button type="button" wire:click="send" class="bg-blue-600 p-3 rounded-xl text-lg text-white">Send</button>
 </div>

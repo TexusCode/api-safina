@@ -16,7 +16,7 @@
         {{ $slot }}
     </div>
 
-
+    <flux:toast />
 </body>
 
 </html>

@@ -2,12 +2,40 @@
 
 namespace App\Livewire\Auth;
 
-use Livewire\Attributes\Layout;
+use App\Models\User;
+use Flux\Flux;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class Login extends Component
 {
+    public $message = null;
+    public $phone;
+    public $password;
+    public $remember;
     #[Layout('components.layouts.auth')]
+    public function login()
+    {
+        $user = User::where('phone', $this->phone)->first();
+
+        if (!$user) {
+            $this->dispatch('alert', 'Номер телефона не найдено!');
+            return;
+        }
+
+        if (!Hash::check($this->password, $user->password)) {
+            $this->dispatch('alert', 'Неверный пароль, попробуйте ещё раз!');
+            return;
+        }
+
+        Auth::login($user, $this->remember);
+
+        $this->dispatch('alert', 'Вы успешно вошли в систему!');
+
+        return redirect()->route('home');
+    }
     public function render()
     {
         return view('livewire.auth.login');

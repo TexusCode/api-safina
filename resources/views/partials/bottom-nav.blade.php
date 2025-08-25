@@ -15,7 +15,8 @@
                         </svg>
                         <p class="text-sm font-semibold">Главная</p>
                     </a>
-                    <div class="flex flex-col justify-center items-center hover:text-blue-600">
+                    <a href="{{ route('orders') }}"
+                        class="flex flex-col justify-center items-center hover:text-blue-600">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -27,8 +28,8 @@
                             <path d="M17 14l-3.5 6h7z" />
                         </svg>
                         <p class="text-sm font-semibold">Заказы</p>
-                    </div>
-                    <div class="flex flex-col justify-center items-center">
+                    </a>
+                    <a href="{{ route('add-order') }}" class="flex flex-col justify-center items-center">
                         <svg class="size-6 opacity-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -39,9 +40,10 @@
                             <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
                         </svg>
                         <p class="text-xs font-semibold uppercase">Добавить</p>
-                    </div>
+                    </a>
 
-                    <div class="flex flex-col justify-center items-center hover:text-blue-600">
+                    <a href="{{ route('todos') }}"
+                        class="flex flex-col justify-center items-center hover:text-blue-600">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -55,8 +57,9 @@
                             <path d="M16 17l-1.5 1.5" />
                         </svg>
                         <p class="text-sm font-semibold">Заметки</p>
-                    </div>
-                    <div class="flex flex-col justify-center items-center hover:text-blue-600">
+                    </a>
+                    <a href="{{ route('customers') }}"
+                        class="flex flex-col justify-center items-center hover:text-blue-600">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -68,10 +71,10 @@
                             <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                         </svg>
                         <p class="text-sm font-semibold">Клиенты</p>
-                    </div>
+                    </a>
                 </div>
                 <div class="flex justify-center">
-                    <div
+                    <a href="{{ route('add-order') }}"
                         class="h-15 w-15 bg-blue-600 hover:bg-blue-500 absolute -top-7 rounded-full flex justify-center items-center text-white">
                         <svg class="size-10" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -81,7 +84,7 @@
                             <path d="M12 5l0 14" />
                             <path d="M5 12l14 0" />
                         </svg>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
