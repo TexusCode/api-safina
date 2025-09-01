@@ -17,4 +17,9 @@ class Order extends Model
         'application_status',
         'delivery_status',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

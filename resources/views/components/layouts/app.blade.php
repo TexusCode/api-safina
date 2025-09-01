@@ -8,6 +8,7 @@
     <title>{{ $title ?? 'Page Title' }}</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @fluxAppearance
     <link rel="stylesheet" href="{{ asset('preline.css') }}">
 </head>
 
@@ -42,6 +43,7 @@
     </div>
 
     @include('partials.bottom-nav')
+    @fluxScripts
 </body>
 
 </html>

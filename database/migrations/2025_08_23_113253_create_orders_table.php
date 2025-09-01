@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained();
             $table->unsignedInteger('no');
-            $table->foreignId('tariff_id')->nullable()->constrained();
+            $table->integer('tariff_id')->nullable();
             $table->text('square')->nullable();
             $table->text('note')->nullable();
             $table->decimal('subtotal', 10, 2)->nullable();

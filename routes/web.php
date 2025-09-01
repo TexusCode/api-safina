@@ -12,7 +12,9 @@ use App\Livewire\Pages\EditOrder;
 use App\Livewire\Pages\EmptyPage;
 use App\Livewire\Pages\Home;
 use App\Livewire\Pages\Notifications;
+use App\Livewire\Pages\OrderEdit;
 use App\Livewire\Pages\Orders;
+use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
@@ -47,4 +49,6 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/add-order', AddOrder::class)->name('add-order');
     Route::get('/edit-order', EditOrder::class)->name('edit-order');
     Route::get('/users', Users::class)->name('users');
+    Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
+    Route::get('/order-view/{id}', OrderView::class)->name('order-view');
 });
