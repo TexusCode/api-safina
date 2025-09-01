@@ -3,7 +3,8 @@
         <div class="absolute bottom-3 w-full left-0 px-3">
             <div class="bg-white rounded-xl relative h-15">
                 <div class="absolute top-0 left-0 grid grid-cols-5 w-full h-full gap-2 p-2">
-                    <a href="{{ route('home') }}" class="flex flex-col justify-center items-center hover:text-blue-600">
+                    <a href="{{ route('home') }}"
+                        class="flex flex-col justify-center items-center text-black hover:text-blue-600">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -16,7 +17,7 @@
                         <p class="text-sm font-semibold">Главная</p>
                     </a>
                     <a href="{{ route('orders') }}"
-                        class="flex flex-col justify-center items-center hover:text-blue-600">
+                        class="flex flex-col justify-center items-center hover:text-blue-600 text-black">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -29,7 +30,7 @@
                         </svg>
                         <p class="text-sm font-semibold">Заказы</p>
                     </a>
-                    <a href="{{ route('add-order') }}" class="flex flex-col justify-center items-center">
+                    <a href="{{ route('add-order') }}" class="flex flex-col justify-center items-center text-black">
                         <svg class="size-6 opacity-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -43,7 +44,7 @@
                     </a>
 
                     <a href="{{ route('todos') }}"
-                        class="flex flex-col justify-center items-center hover:text-blue-600">
+                        class="flex flex-col justify-center items-center hover:text-blue-600 text-black">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
@@ -59,7 +60,7 @@
                         <p class="text-sm font-semibold">Заметки</p>
                     </a>
                     <a href="{{ route('customers') }}"
-                        class="flex flex-col justify-center items-center hover:text-blue-600">
+                        class="flex flex-col justify-center items-center hover:text-blue-600 text-black">
                         <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
