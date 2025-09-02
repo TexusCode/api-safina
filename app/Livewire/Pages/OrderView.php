@@ -121,7 +121,7 @@ class OrderView extends Component
                     'order_id' => $this->order->id,
                     'type' => $this->type,
                     'quantity' => $this->quantity,
-                    'enum' => $this->quantity * 50,
+                    'enum' => $this->quantity * 35,
                 ]
             );
         }
