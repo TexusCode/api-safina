@@ -44,6 +44,7 @@
 
     @include('partials.bottom-nav')
     @fluxScripts
+
 </body>
 
 </html>

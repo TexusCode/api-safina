@@ -22,4 +22,12 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+    public function tariff()
+    {
+        return $this->belongsTo(Tariff::class);
+    }
+    public function suborders()
+    {
+        return $this->hasMany(Suborder::class);
+    }
 }

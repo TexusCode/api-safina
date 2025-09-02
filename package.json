@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@preline/select": "^3.2.3",
+        "flowbite": "^3.1.2",
         "preline": "^3.2.3"
     }
 }

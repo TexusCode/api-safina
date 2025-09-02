@@ -12,7 +12,7 @@ class Suborder extends Model
         'quantity',
         'width',
         'height',
-        'aquare',
+        'square',
         'enum',
     ];
 }

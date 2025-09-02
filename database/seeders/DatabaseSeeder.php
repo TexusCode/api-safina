@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Tariff;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('005335051'),
             'role' => 'admin'
         ]);
+        Tariff::create(['name' => '10s', 'price' => '10']);
+        Tariff::create(['name' => '12s', 'price' => '12']);
         Customer::create([
             'name' => 'shod',
             'phone' => '926463735',

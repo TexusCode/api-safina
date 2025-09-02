@@ -24,7 +24,6 @@ class Orders extends Component
             ->orderBy('id', 'desc')
             ->paginate(50);
 
-
         return view('livewire.pages.orders', [
             'orders' => $orders,
             'archive' => $archive

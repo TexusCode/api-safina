@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,7 +17,7 @@ return new class extends Migration
             $table->string('quantity')->default(1);
             $table->string('width')->nullable();
             $table->string('height')->nullable();
-            $table->string('aquare')->nullable();
+            $table->string('square')->nullable();
             $table->string('enum')->nullable();
             $table->timestamps();
         });
