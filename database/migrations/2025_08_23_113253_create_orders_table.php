@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained();
             $table->unsignedInteger('no');
             $table->integer('tariff_id')->nullable();
-            $table->text('square')->nullable();
-            $table->text('note')->nullable();
+            $table->string('square')->nullable();
+            $table->string('note')->nullable();
+            $table->string('status')->default('В ожидании');
             $table->decimal('subtotal', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->boolean('application_status')->default(false);

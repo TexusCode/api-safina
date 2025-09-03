@@ -14,6 +14,7 @@ class Order extends Model
         'note',
         'subtotal',
         'total',
+        'status',
         'application_status',
         'delivery_status',
     ];
@@ -29,5 +30,10 @@ class Order extends Model
     public function suborders()
     {
         return $this->hasMany(Suborder::class);
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
     }
 }

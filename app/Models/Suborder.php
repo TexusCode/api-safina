@@ -14,5 +14,6 @@ class Suborder extends Model
         'height',
         'square',
         'enum',
+        'polka',
     ];
 }

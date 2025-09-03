@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\Suborder;
 use Flux\Flux;
 use App\Models\Order;
+use App\Models\History;
 use Livewire\Component;
+use App\Models\Suborder;
+use Illuminate\Support\Facades\Auth;
 
 class OrderView extends Component
 {
@@ -19,6 +21,8 @@ class OrderView extends Component
     public $height_input = true;
     public $quantity_input = false;
     public $quantity_title;
+    public $telesh;
+    public $status;
     public function open()
     {
         $this->show = true;
@@ -35,6 +39,12 @@ class OrderView extends Component
     public function load($id)
     {
         $this->order = Order::find($id);
+        $this->status = $this->order->status;
+    }
+    public function updatedStatus()
+    {
+        $this->order->status = $this->status;
+        $this->order->save();
     }
     public function updatedType()
     {
@@ -54,7 +64,6 @@ class OrderView extends Component
             $this->width_input = false;
             $this->quantity_input = true;
             $this->quantity_title = "Количество";
-
         }
         if ($this->type == 'Одеяло') {
             $this->height_input = false;
@@ -67,23 +76,25 @@ class OrderView extends Component
             $this->width_input = false;
             $this->quantity_input = true;
             $this->quantity_title = "Весь в килограмм";
-
         }
     }
     public function add_suborder()
     {
-        if ($this->type == 'Колин') {
-            $square = (($this->width * $this->height) * 0.0001);
-            Suborder::create(
-                [
-                    'order_id' => $this->order->id,
-                    'type' => $this->type,
-                    'width' => $this->width,
-                    'height' => $this->height,
-                    'square' => $square,
-                    'enum' => $square * $this->order->tariff->price,
-                ]
-            );
+        if ($this->type === 'Колин') {
+            // Площадь в м² (если размеры даны в мм)
+            $square = ($this->width * $this->height) * 0.0001;
+
+            $price = $this->order->tariff_id ?? 0;
+
+            Suborder::create([
+                'order_id' => $this->order->id,
+                'type'     => $this->type,
+                'width'    => $this->width,
+                'height'   => $this->height,
+                'square'   => $square,
+                'enum'     => $square * $price,
+                'polka' => $this->telesh
+            ]);
         }
         if ($this->type == 'Курпача') {
             Suborder::create(
@@ -92,6 +103,7 @@ class OrderView extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity / 100,
                     'enum' => ($this->quantity / 100) * 20,
+                    'polka' => $this->telesh
                 ]
             );
         }
@@ -102,6 +114,7 @@ class OrderView extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 20,
+                    'polka' => $this->telesh
                 ]
             );
         }
@@ -112,6 +125,7 @@ class OrderView extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 50,
+                    'polka' => $this->telesh
                 ]
             );
         }
@@ -122,12 +136,25 @@ class OrderView extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 35,
+                    'polka' => $this->telesh
                 ]
             );
         }
-
+        History::create([
+            'content' => Auth::user()->name . ': добавил подзаказ!',
+            'order_id' => $this->order->id,
+            'user_id' => Auth::id()
+        ]);
         $this->reset(['width', 'height', 'quantity', 'show']);
-
+    }
+    public function delete($id)
+    {
+        Suborder::find($id)->delete();
+        History::create([
+            'content' => Auth::user()->name . ': удалил подзаказ!',
+            'order_id' => $this->order->id,
+            'user_id' => Auth::id()
+        ]);
     }
     public function render()
     {

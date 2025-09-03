@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('height')->nullable();
             $table->string('square')->nullable();
             $table->string('enum')->nullable();
+            $table->string('polka')->nullable();
             $table->timestamps();
         });
     }
