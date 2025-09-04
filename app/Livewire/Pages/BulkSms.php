@@ -28,6 +28,8 @@ class BulkSms extends Component
         foreach ($customers as $item) {
             $sms = new SmsController();
             $sms->sendSms($item->phone, $this->message);
+            $item->sms_status = true;
+            $item->save();
         }
         $this->dispatch('alert', 'Смс успешно отправлен!');
     }

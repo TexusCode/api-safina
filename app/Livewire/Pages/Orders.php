@@ -17,7 +17,7 @@ class Orders extends Component
             ->first();
 
         $orders = Order::where('id', '>=', $lastStart->id) // активные
-            ->orderBy('id', 'desc')
+            ->orderBy('no', 'desc')
             ->paginate(50);
 
         $archive = Order::where('id', '<', $lastStart->id) // архив
