@@ -29,7 +29,7 @@ class AddOrder extends Component
             ]);
         }
         Order::create([
-            'no' => $order->no += 1,
+            'no' => $order->no += 1 ?? 1,
             'customer_id' => $customer->id,
             'tariff_id' => $this->tariff,
             'note' => $this->note,
