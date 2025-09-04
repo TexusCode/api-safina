@@ -48,13 +48,14 @@
             </filter>
         </defs>
     </svg>
-
-    <div class="zwrfi mx-auto">
-        <p class="ja90s sikx1 c9jt8 dark:text-neutral-200">
-            No projects
-        </p>
-        <p class="r4xgm w4xo0 jy5gh dark:text-neutral-500">
-            No data here yet. We will notify you when there's an update.
-        </p>
+    <div class="flex flex-col items-center justify-center py-6">
+        <div class="text-center">
+            <p class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                Страница пуста
+            </p>
+            <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">
+                Пока ничего нет на этой странице
+            </p>
+        </div>
     </div>
 </div>

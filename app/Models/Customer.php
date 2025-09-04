@@ -14,4 +14,9 @@ class Customer extends Model
         'longitude',
         'sms_status',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

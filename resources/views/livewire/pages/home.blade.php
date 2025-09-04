@@ -14,7 +14,7 @@
                 <div>
                     <flux:text>Заработано</flux:text>
 
-                    <flux:heading size="xl">70000c</flux:heading>
+                    <flux:heading size="xl">{{ round($total) }}c</flux:heading>
                 </div>
             </div>
             <div class="text-white flex gap-2 justify-center items-center">
@@ -30,7 +30,7 @@
                 <div>
                     <flux:text>Затрачено</flux:text>
 
-                    <flux:heading size="xl">10000c</flux:heading>
+                    <flux:heading size="xl">{{ round($expenses) }}c</flux:heading>
                 </div>
             </div>
         </div>
@@ -134,219 +134,145 @@
                 </svg>
                 <span class="text-white">Заметки</span>
             </a>
-            <a href="{{ route('settings') }}"
+            <a href="{{ route('rashod') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-users">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                 </svg>
-                <span class="text-white">Настройки</span>
+                <span class="text-white">Затраты</span>
             </a>
 
         </div>
     </div>
 
     <div class="bg-neutral-800 rounded-xl grid grid-cols-3 p-3 border border-neutral-700">
+        <!-- Средний чек -->
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
             <flux:text class="text-center max-w-14 text-sm/4">Средный чек в месяц</flux:text>
 
-            <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
+            <flux:heading size="xl" class="mb-1">{{ round($avgCheck) }}</flux:heading>
 
             <div class="flex items-center gap-2">
+                @if($diffCheck >= 0)
                 <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-
-                <span class="text-sm text-green-600 dark:text-green-500">15.2%</span>
+                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffCheck }}%</span>
+                @else
+                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffCheck }}%</span>
+                @endif
             </div>
         </div>
+
+        <!-- Средний заказов в день -->
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
-            <flux:text class="text-center max-w-14 text-sm/4">Средный заказь в день</flux:text>
+            <flux:text class="text-center max-w-14 text-sm/4">Средный заказов в день</flux:text>
 
-            <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
+            <flux:heading size="xl" class="mb-1">{{ round($avgPerDay) }}</flux:heading>
 
             <div class="flex items-center gap-2">
+                @if($diffPerDay >= 0)
                 <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-
-                <span class="text-sm text-green-600 dark:text-green-500">15.2%</span>
+                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffPerDay }}%</span>
+                @else
+                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffPerDay }}%</span>
+                @endif
             </div>
         </div>
+
+        <!-- Средний заработок в день -->
         <div class="flex flex-col items-center justify-center">
             <flux:text class="text-center max-w-14 text-sm/4">Средный заработок в день</flux:text>
 
-            <flux:heading size="xl" class="mb-1">$7,532</flux:heading>
+            <flux:heading size="xl" class="mb-1">{{ round($avgEarningPerDay) }}</flux:heading>
 
             <div class="flex items-center gap-2">
+                @if($diffEarningPerDay >= 0)
                 <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-
-                <span class="text-sm text-green-600 dark:text-green-500">15.2%</span>
+                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffEarningPerDay }}%</span>
+                @else
+                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffEarningPerDay }}%</span>
+                @endif
             </div>
         </div>
-
-
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-        <!-- Card -->
-        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800
-                                    dark:border-neutral-700">
+
+        <!-- Заказы за месяц -->
+        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"></path>
-                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                    <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"></path>
-                    <path d="M2 7h20"></path>
-                    <path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16
-                                                12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0
-                                                0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0
-                                                0 1-2-2V7"></path>
+                    <path d="M3 3h18l-2 13H5L3 3z"></path>
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="15" cy="20" r="1"></circle>
                 </svg>
                 <div class="xafg0 hlt95 space-y-1">
-                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">
-                        In-store sales
-                    </h2>
-                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">
-                        $7,820.75
-                    </p>
+                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">Заказы за месяц</h2>
+                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">{{ $monthlyOrders }}</p>
                 </div>
             </div>
-
-            <div class="rwavo flex items-center n9hej">
-                <span class="w4xo0 g85n1 ah4ps dark:text-neutral-400">
-                    5k orders
-                </span>
-                <span class="inline-flex items-center n6i5x xs2f2 sikx1 bker9 kghwt">
-                    <svg class="e731n b9gop" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17">
-                        </polyline>
-                        <polyline points="16 7 22 7 22 13"></polyline>
-                    </svg>
-                    4.3%
-                </span>
-            </div>
         </div>
-        <!-- End Card -->
 
-        <!-- Card -->
-        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800
-                                    dark:border-neutral-700">
+        <!-- Новые клиенты -->
+        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <div class="xafg0 hlt95 space-y-1">
+                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">Новые клиенты</h2>
+                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">{{ $newCustomers }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- В ожидании -->
+        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
+            <div class="sm:flex o1uif">
+                <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" x2="22" y1="12" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0
-                                                1 4-10z"></path>
+                    <path d="M12 6v6l4 2"></path>
                 </svg>
                 <div class="xafg0 hlt95 space-y-1">
-                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">
-                        Website sales
-                    </h2>
-                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">
-                        $985.45
-                    </p>
+                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">В ожидании</h2>
+                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">{{ $pendingOrders }}</p>
                 </div>
             </div>
-
-            <div class="rwavo flex items-center n9hej">
-                <span class="w4xo0 g85n1 ah4ps dark:text-neutral-400">
-                    21k orders
-                </span>
-                <span class="inline-flex items-center n6i5x xs2f2 sikx1 bker9 kghwt">
-                    <svg class="e731n b9gop" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17">
-                        </polyline>
-                        <polyline points="16 7 22 7 22 13"></polyline>
-                    </svg>
-                    12.5%
-                </span>
-            </div>
         </div>
-        <!-- End Card -->
 
-        <!-- Card -->
-        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800
-                                    dark:border-neutral-700">
+        <!-- Доставлено -->
+        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0
-                                                6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
-                    </path>
-                    <path d="m15 9-6 6"></path>
-                    <path d="M9 9h.01"></path>
-                    <path d="M15 15h.01"></path>
+                    <path d="M3 3h18l-2 13H5L3 3z"></path>
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="15" cy="20" r="1"></circle>
                 </svg>
                 <div class="xafg0 hlt95 space-y-1">
-                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">
-                        Discount
-                    </h2>
-                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">
-                        $15,503.00
-                    </p>
+                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">Доставлено</h2>
+                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">{{ $deliveredOrders }}</p>
                 </div>
             </div>
-
-            <div class="rwavo flex items-center n9hej">
-                <span class="w4xo0 g85n1 ah4ps dark:text-neutral-400">
-                    6k orders
-                </span>
-            </div>
         </div>
-        <!-- End Card -->
 
-        <!-- Card -->
-        <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800
-                                    dark:border-neutral-700">
-            <div class="sm:flex o1uif">
-                <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 10c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2"></path>
-                    <path d="M10 16c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2"></path>
-                    <rect width="8" height="8" x="14" y="14" rx="2">
-                    </rect>
-                </svg>
-                <div class="xafg0 hlt95 space-y-1">
-                    <h2 class="as39u w4xo0 ah4ps dark:text-neutral-400">
-                        Affiliate
-                    </h2>
-                    <p class="tbkeq ba4pq cnneu jf8im dark:text-neutral-200">
-                        $3,982.53
-                    </p>
-                </div>
-            </div>
-
-            <div class="rwavo flex items-center n9hej">
-                <span class="w4xo0 g85n1 ah4ps dark:text-neutral-400">
-                    2.4 orders
-                </span>
-                <span class="inline-flex items-center n6i5x xs2f2 sikx1 jmzb2 kghwt">
-                    <svg class="e731n b9gop" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polyline points="22 17 13.5 8.5 8.5 13.5 2 7">
-                        </polyline>
-                        <polyline points="16 17 22 17 22 11"></polyline>
-                    </svg>
-                    4.4%
-                </span>
-            </div>
-        </div>
-        <!-- End Card -->
     </div>
 
-    <button type="button" wire:click="send" class="bg-blue-600 p-3 rounded-xl text-lg text-white">Send</button>
 </div>

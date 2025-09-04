@@ -16,6 +16,7 @@ use App\Livewire\Pages\OrderEdit;
 use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
+use App\Livewire\Pages\Rashod;
 use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
@@ -51,4 +52,5 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/users', Users::class)->name('users');
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
+    Route::get('/rashod', Rashod::class)->name('rashod');
 });
