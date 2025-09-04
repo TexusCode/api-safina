@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('customer_id');
             $table->unsignedInteger('no');
             $table->integer('tariff_id')->nullable();
             $table->string('square')->nullable();
