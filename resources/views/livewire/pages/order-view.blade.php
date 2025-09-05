@@ -74,7 +74,7 @@
             <option value="Отменено">Отменено</option>
         </select>
         @if($order->status == 'Готово')
-        <button type="button" wire:click="sms"
+        <button type="button" wire:click="smssend"
             class="py-2 w-full text-center text-base font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">
             Отправит смс
         </button>
