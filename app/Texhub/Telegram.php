@@ -62,7 +62,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ])
                     ->row([
                         Button::make('📍 Добавить адрес')->action('add_location')->param('id', $order->id),
-                        Button::make('✏️ Изменить')->webApp("https://api.safina-cleaning.tj/edit-order-single/$order->id"),
+                        Button::make('✏️ Изменить')->url("https://api.safina-cleaning.tj/edit-order-single/$order->id"),
                     ])
                     ->row([
                         Button::make('✅ Получено')->action('done')->param('id', $order->id),
