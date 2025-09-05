@@ -161,7 +161,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $longitude = $this->message->location()->longitude();
             $googlemap = Customer::where('map', true)->first();
             $googlemap->latitude = $latitude;
-            $googlemap->latitude = $longitude;
+            $googlemap->longitude = $longitude;
             $googlemap->map = false;
             $googlemap->save();
 
