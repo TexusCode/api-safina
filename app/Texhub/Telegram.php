@@ -49,10 +49,10 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
         $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(5465465);
+        $chat = TelegraphChat::find(2);
         $customer = $order->customer;
         if ($customer->latitude && $customer->longitude) {
-            $this->chat->location($customer->latitude, $customer->longitude)->send();
+            $chat->location($customer->latitude, $customer->longitude)->send();
         }
         $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
             ->keyboard(
@@ -80,7 +80,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $chat = TelegraphChat::find(2);
         $customer = $order->customer;
         if ($customer->latitude && $customer->longitude) {
-            $this->chat->location($customer->latitude, $customer->longitude)->send();
+            $chat->location($customer->latitude, $customer->longitude)->send();
         }
         $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
             ->keyboard(
