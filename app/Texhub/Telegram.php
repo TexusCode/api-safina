@@ -101,18 +101,12 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $order = Order::find($id);
 
-        // Сбрасываем "map" у всех клиентов
         Customer::where('map', true)->update(['map' => false]);
 
-        // Помечаем текущего клиента
         $order->customer->map = true;
         $order->customer->save();
 
-        // Находим чат
-        $chat = TelegraphChat::find(2);
-
-        // Отправляем запрос на геолокацию
-        $chat
+        $this->chat
             ->message('📍 Отправьте геолокацию заказа!')
             ->send();
     }
