@@ -77,7 +77,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
         $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(5465465);
+        $chat = TelegraphChat::find(2);
         $customer = $order->customer;
         if ($customer->latitude && $customer->longitude) {
             $this->chat->location($customer->latitude, $customer->longitude)->send();
