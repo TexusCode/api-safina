@@ -114,10 +114,6 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         // Отправляем запрос на геолокацию
         $chat
             ->message('📍 Отправьте геолокацию заказа!')
-            ->keyboard(
-                Keyboard::make()
-                    ->button('📍 Отправить геолокацию')->requestLocation()
-            )
             ->send();
     }
 
