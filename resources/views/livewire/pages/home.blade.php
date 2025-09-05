@@ -157,7 +157,7 @@
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
             <flux:text class="text-center max-w-14 text-sm/4">Средный чек в месяц</flux:text>
 
-            <flux:heading size="xl" class="mb-1">{{ round($avgCheck) }}</flux:heading>
+            <flux:heading size="xl" class="mb-1">{{ round($avgCheck) }}c</flux:heading>
 
             <div class="flex items-center gap-2">
                 @if($diffCheck >= 0)
@@ -191,7 +191,7 @@
         <div class="flex flex-col items-center justify-center">
             <flux:text class="text-center max-w-14 text-sm/4">Средный заработок в день</flux:text>
 
-            <flux:heading size="xl" class="mb-1">{{ round($avgEarningPerDay) }}</flux:heading>
+            <flux:heading size="xl" class="mb-1">{{ round($avgEarningPerDay) }}c</flux:heading>
 
             <div class="flex items-center gap-2">
                 @if($diffEarningPerDay >= 0)

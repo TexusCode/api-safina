@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Single;
 
 use App\Models\Order;
+use App\Texhub\Telegram;
 use Livewire\Component;
 use App\Models\Customer;
-use App\Texhub\Telegram;
+use Livewire\Attributes\Layout;
 
 class AddOrder extends Component
 {
+    #[Layout('components.layouts.auth')]
     public $customer_name;
     public $customer_phone;
     public $customer_address;
@@ -37,10 +39,10 @@ class AddOrder extends Component
         ]);
         $teleg = new Telegram();
         $teleg->deliver_chat_send($ord->id);
-        return redirect()->route('orders');
+        return redirect()->route('edit-order-single', $ord->id);
     }
     public function render()
     {
-        return view('livewire.pages.add-order');
+        return view('livewire.single.add-order');
     }
 }

@@ -11,8 +11,8 @@ class Sms extends Component
     public $message;
     public function send_message()
     {
-        // $sms = new SmsController();
-        // $sms->sendSms($this->phone, $this->message);
+        $sms = new SmsController();
+        $sms->sendSms($this->phone, $this->message);
         $this->reset(['phone', 'message']);
         $this->dispatch('alert', 'Смс успешно отправлен!');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Texhub;
 
+use App\Models\Customer;
+use App\Models\Order;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -18,67 +20,147 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function start(): void
     {
-        $this->chat->message('Hello! Bot work!')->send();
-        $this->chat->message(("Бахши лозимаро дар менюи дар зер буда интихоб намоед! 🔽"))
-            ->replyKeyboard(ReplyKeyboard::make()
-                ->row([
-                    ReplyButton::make('🔢 Тафтиши трек-код'),
-                    ReplyButton::make('➕ Обуна шудан')->requestContact(),
-                ])
-                ->row([
-                    ReplyButton::make('✅ Сурогаи склади Иву'),
-                    ReplyButton::make('🎞 Дарсхои ройгон'),
-                ])
-                ->row([
-                    ReplyButton::make('📍 Сурогаи склади Душанбе'),
-                    ReplyButton::make('👤 Тамос бо мушовир'),
-                ])
-                ->row([
-                    ReplyButton::make('💲 Нархнома'),
-                    ReplyButton::make('❌ Молҳои манъшуда'),
-                ])
-                ->resize())->send();
+        // $this->chat->message('Hello! Bot work!')->send();
+        // $this->chat->message(("Бахши лозимаро дар менюи дар зер буда интихоб намоед! 🔽"))
+        //     ->replyKeyboard(ReplyKeyboard::make()
+        //         ->row([
+        //             ReplyButton::make('🔢 Тафтиши трек-код'),
+        //             ReplyButton::make('➕ Обуна шудан')->requestContact(),
+        //         ])
+        //         ->row([
+        //             ReplyButton::make('✅ Сурогаи склади Иву'),
+        //             ReplyButton::make('🎞 Дарсхои ройгон'),
+        //         ])
+        //         ->row([
+        //             ReplyButton::make('📍 Сурогаи склади Душанбе'),
+        //             ReplyButton::make('👤 Тамос бо мушовир'),
+        //         ])
+        //         ->row([
+        //             ReplyButton::make('💲 Нархнома'),
+        //             ReplyButton::make('❌ Молҳои манъшуда'),
+        //         ])
+        //         ->resize())->send();
     }
 
     public function deliver_chat_send($order_id): void
     {
-        $chats = TelegraphChat::all();
-        foreach ($chats as $chat) {
-            $chat->message("📦 Заказ <b>№1</b>\n👤 Имя: <b>Шодмехр</b>\n🏠 Адрес: <b>103 мкр</b>\n📝 Заметка: <b>Shodmehr</b>\n➕ Добавил: <b>Shodmehr</b>\n📅 Дата: <b>23.08.2025</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
-                ->keyboard(
-                    Keyboard::make()
-                        ->row([
-                            Button::make('📞 +992XXXXXXXXX')->copyText('+992XXXXXXXXX'),
-                        ])
-                        ->row([
-                            Button::make('📍 Добавить адрес')->action('add_location'),
-                            Button::make('✏️ Изменить')->action('edit'),
-                        ])
-                        ->row([
-                            Button::make('✅ Получено')->action('done'),
-                            Button::make('❌ Отмена')->action('cancel'),
-                        ])
-                )->send();
+        $order = Order::find($order_id);
+        $name = $order->customer->name;
+        $phone = $order->customer->phone;
+        $address = $order->customer->adress;
+        $note = $order->note ?? "Нет заметок!";
+        $chat = TelegraphChat::find(5465465);
+        $customer = $order->customer;
+        if ($customer->latitude && $customer->longitude) {
+            $this->chat->location($customer->latitude, $customer->longitude)->send();
         }
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make("📞 $phone")->copyText("$phone"),
+                    ])
+                    ->row([
+                        Button::make('📍 Добавить адрес')->action('add_location')->param('id', $order->id),
+                        Button::make('✏️ Изменить')->url("https://api.safina-cleaning.tj/edit-order-single/$order->id"),
+                    ])
+                    ->row([
+                        Button::make('✅ Получено')->action('done')->param('id', $order->id),
+                        Button::make('❌ Отмена')->action('cancel')->param('id', $order->id),
+                    ])
+            )->send();
+    }
+    public function del_chat_send($order_id): void
+    {
+        $order = Order::find($order_id);
+        $name = $order->customer->name;
+        $phone = $order->customer->phone;
+        $address = $order->customer->adress;
+        $note = $order->note ?? "Нет заметок!";
+        $chat = TelegraphChat::find(5465465);
+        $customer = $order->customer;
+        if ($customer->latitude && $customer->longitude) {
+            $this->chat->location($customer->latitude, $customer->longitude)->send();
+        }
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make("📞 $phone")->copyText("$phone"),
+                    ])
+                    ->row([
+                        Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
+                    ])
+            )->send();
     }
     public function lang_tajik(): void
     {
         $this->chat->deleteMessage($this->messageId)->send();
     }
-    public function add_location(): void
+    public function add_location($id): void
     {
-        //
+        $order = Order::find($id);
+        Customer::where('map', true)->update(['map', false]);
+        $order->customer->map = true;
+        $order->customer->save();
+
+        $this->chat
+            ->message('Отправьте геолокацию заказа!')
+            ->keyboard(function ($keyboard) {
+                $keyboard->button('📍 Отправить геолокацию')->requestLocation();
+            })
+            ->send();
     }
-    public function edit(): void
+    public function dostavleno($id): void
     {
-        //
+        $order = Order::find($id);
+        $order->status = 'Доставлено';
+        $order->save();
+
+        $this->chat->deleteMessage($this->messageId)->send();
+
+        $this->chat
+            ->message("✅ Заказ №{$order->no} успешно доставлено!")
+            ->send();
     }
-    public function done(): void
+    public function done($id): void
     {
-        //
+        $order = Order::find($id);
+        $order->status = 'Получено';
+        $order->save();
+
+        $this->chat->deleteMessage($this->messageId)->send();
+
+        $this->chat
+            ->message("✅ Заказ №{$order->no} успешно получен!")
+            ->send();
     }
-    public function cancel(): void
+
+    public function cancel($id): void
     {
-        //
+        $order = Order::find($id);
+        $order->status = 'Отменено';
+        $order->save();
+
+        $this->chat->deleteMessage($this->messageId)->send();
+
+        $this->chat
+            ->message("❌ Заказ №{$order->no} был отменён.")
+            ->send();
+    }
+    public function handleChatMessage(Stringable $text): void
+    {
+        if ($this->message->location()) {
+            $latitude = $this->message->location()->latitude();
+            $longitude = $this->message->location()->longitude();
+            $googlemap = Customer::where('map', true)->first();
+            $googlemap->latitude = $latitude;
+            $googlemap->latitude = $longitude;
+            $googlemap->map = false;
+            $googlemap->save();
+
+            $this->chat->deleteMessage($this->messageId)->send();
+            $this->chat->message("Адрес успешно сохранено!")->send();
+        }
     }
 }

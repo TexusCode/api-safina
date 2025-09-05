@@ -21,7 +21,8 @@
                 </flux:button>
                 <div class="flex flex-col justify-center text-center text-base font-semibold text-white">
                     <flux:heading size="lg" class="uppercase">Safina-Cleaning</flux:heading>
-                    <flux:text>hugo@example.com</flux:text>
+                    <flux:text>{{ Auth::user()->phone }}
+                    </flux:text>
                 </div>
                 <flux:button square variant="primary" color="yellow" class="relative"
                     href="{{ route('notifications') }}">

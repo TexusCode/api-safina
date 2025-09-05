@@ -21,12 +21,19 @@ use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
 use App\Livewire\Pages\Users;
+use App\Livewire\Single\AddOrder as SingleAddOrder;
+use App\Livewire\Single\AddSubOrder;
+use App\Livewire\Single\EditOrder as SingleEditOrder;
 use Illuminate\Support\Facades\Route;
 
 //Auth Pages
 Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
 });
+
+Route::get('/add-order-single', SingleAddOrder::class)->name('add-order-single');
+Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-single');
+Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');

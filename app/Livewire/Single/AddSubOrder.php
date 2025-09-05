@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Single;
 
-use App\Http\Controllers\SmsController;
-use App\Texhub\Telegram;
-use Flux\Flux;
 use App\Models\Order;
-use App\Models\History;
 use Livewire\Component;
 use App\Models\Suborder;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 
-class OrderView extends Component
+class AddSubOrder extends Component
 {
+    #[Layout('components.layouts.auth')]
     public $order;
     public $quantity;
     public $width;
@@ -25,40 +22,6 @@ class OrderView extends Component
     public $quantity_title;
     public $telesh;
     public $status;
-    public function smssend()
-    {
-        $summa = $this->order->suborders->sum('enum');
-        $sms = new SmsController();
-        $message = "Добрый день, уважаемый клиент! 🙌\nВаш заказ готов ✅. Скоро курьер свяжется с вами для доставки.\nСумма вашего заказа составляет $summa сомони 💰.";
-        $sms->sendSms($this->order->customer->phone, $message);
-    }
-    public function open()
-    {
-        $this->show = true;
-    }
-
-    public function close()
-    {
-        $this->show = false;
-    }
-    public function mount($id)
-    {
-        $this->load($id);
-    }
-    public function load($id)
-    {
-        $this->order = Order::find($id);
-        $this->status = $this->order->status;
-    }
-    public function updatedStatus()
-    {
-        $this->order->status = $this->status;
-        $this->order->save();
-        if ($this->status == 'Готово') {
-            $tel = new Telegram();
-            $tel->del_chat_send($this->order->id);
-        }
-    }
     public function updatedType()
     {
         if ($this->type == 'Колин') {
@@ -93,6 +56,13 @@ class OrderView extends Component
     }
     public function add_suborder()
     {
+        $order = Order::where('no', $this->order)->orderBy('created_at', 'desc')->first();
+
+        // dd($order);
+        if ($order == null) {
+            $this->dispatch('alert', 'Заказ не найдено введите правилный номер заказа');
+            return;
+        }
         if ($this->type === 'Колин') {
             // Площадь в м² (если размеры даны в мм)
             $square = ($this->width * $this->height) * 0.0001;
@@ -100,7 +70,7 @@ class OrderView extends Component
             $price = $this->order->tariff_id ?? 0;
 
             Suborder::create([
-                'order_id' => $this->order->id,
+                'order_id' => $order->id,
                 'type'     => $this->type,
                 'width'    => $this->width,
                 'height'   => $this->height,
@@ -112,7 +82,7 @@ class OrderView extends Component
         if ($this->type == 'Курпача') {
             Suborder::create(
                 [
-                    'order_id' => $this->order->id,
+                    'order_id' => $order->id,
                     'type' => $this->type,
                     'quantity' => $this->quantity / 100,
                     'enum' => ($this->quantity / 100) * 20,
@@ -123,7 +93,7 @@ class OrderView extends Component
         if ($this->type == 'Болишт') {
             Suborder::create(
                 [
-                    'order_id' => $this->order->id,
+                    'order_id' => $order->id,
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 20,
@@ -134,7 +104,7 @@ class OrderView extends Component
         if ($this->type == 'Одеяло') {
             Suborder::create(
                 [
-                    'order_id' => $this->order->id,
+                    'order_id' => $order->id,
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 50,
@@ -145,7 +115,7 @@ class OrderView extends Component
         if ($this->type == 'Парда') {
             Suborder::create(
                 [
-                    'order_id' => $this->order->id,
+                    'order_id' => $order->id,
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 35,
@@ -153,24 +123,11 @@ class OrderView extends Component
                 ]
             );
         }
-        History::create([
-            'content' => Auth::user()->name . ': добавил подзаказ!',
-            'order_id' => $this->order->id,
-            'user_id' => Auth::id()
-        ]);
-        $this->reset(['width', 'height', 'quantity', 'show']);
-    }
-    public function delete($id)
-    {
-        Suborder::find($id)->delete();
-        History::create([
-            'content' => Auth::user()->name . ': удалил подзаказ!',
-            'order_id' => $this->order->id,
-            'user_id' => Auth::id()
-        ]);
+        $this->reset(['width', 'height', 'quantity', 'show', 'order', 'telesh']);
+        $this->dispatch('alert', 'Заказ успешно обновлен!');
     }
     public function render()
     {
-        return view('livewire.pages.order-view');
+        return view('livewire.single.add-sub-order');
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->longText('adress');
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
+            $table->boolean('map')->default(false);
             $table->boolean('sms_status')->default(false);
             $table->timestamps();
         });

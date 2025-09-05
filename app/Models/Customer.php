@@ -12,6 +12,7 @@ class Customer extends Model
         'adress',
         'latitude',
         'longitude',
+        'map',
         'sms_status',
     ];
 
