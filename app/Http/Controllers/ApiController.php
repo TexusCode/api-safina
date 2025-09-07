@@ -30,8 +30,8 @@ class ApiController extends Controller
                     'customer_id' => $item['customer_id'],
                     'status' => $status,
                     'tariff_id' => $item['tarif_id'],
-                    'created_at' => Carbon::parse($item['created_at']),
-                    'updated_at' => Carbon::parse($item['updated_at']),
+                    'created_at' => Carbon::parse($item['created_at'])->timezone('Asia/Tashkent'),
+                    'updated_at' => Carbon::parse($item['updated_at'])->timezone('Asia/Tashkent'),
                 ]
             );
             if ($item['price']) {
@@ -61,8 +61,8 @@ class ApiController extends Controller
                     'adress' => $item['location'],
                     'latitude' => $item['googlemap_1'],
                     'longitude' => $item['googlemap_2'],
-                    'created_at' => Carbon::parse($item['created_at']),
-                    'updated_at' => Carbon::parse($item['updated_at']),
+                    'created_at' => Carbon::parse($item['created_at'])->timezone('Asia/Tashkent'),
+                    'updated_at' => Carbon::parse($item['updated_at'])->timezone('Asia/Tashkent'),
                 ]
             );
         }
