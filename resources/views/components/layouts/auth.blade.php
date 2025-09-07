@@ -8,6 +8,7 @@
     <title>{{ $title ?? 'Login Page' }}</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <link rel="stylesheet" href="{{ asset('preline.css') }}">
 </head>
 
 <body class="bg-neutral-950 dark max-w-sm mx-auto p-3">
