@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
@@ -25,6 +26,10 @@ use App\Livewire\Single\AddOrder as SingleAddOrder;
 use App\Livewire\Single\AddSubOrder;
 use App\Livewire\Single\EditOrder as SingleEditOrder;
 use Illuminate\Support\Facades\Route;
+
+
+Route::get('/get-orders', [ApiController::class, 'get_orders']);
+Route::get('/get-customers', [ApiController::class, 'get_customers']);
 
 //Auth Pages
 Route::middleware('guest')->group(function () {
