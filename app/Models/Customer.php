@@ -15,7 +15,6 @@ class Customer extends Model
         'map',
         'sms_status',
     ];
-    public $timestamps = false;
 
     public function orders()
     {
