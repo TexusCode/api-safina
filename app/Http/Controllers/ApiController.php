@@ -37,7 +37,7 @@ class ApiController extends Controller
             if ($item['price']) {
                 Suborder::create([
                     'order_id' => $order->id,
-                    'quantity' => $item['carpet_quantity'],
+                    'quantity' => $item['carpet_quantity'] ?? 1,
                     'type' => 'Колин',
                     'enum' => $item['price']
                 ]);
