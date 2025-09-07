@@ -54,7 +54,7 @@
                                     class="flex rsdjd lnk45 divide-x divide-gray-200 pb094 -space-x-px dark:border-neutral-700 dark:divide-neutral-700">
                                     <!-- Copy Project Button Tooltip -->
                                     <div class="hs-tooltip inline-block">
-                                        <a href="tel:{{ $order->customer->phone }}"
+                                        <a href="tel:{{ $order->customer->phone ?? " Не известно"}}"
                                             class="hs-tooltip-toggle yl1cu inline-flex jkwm1 items-center n9hej jnhyh aqyoh jy5gh hj07t nzmya disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d16zw dark:bg-neutral-800 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                                             <svg class="e731n size-5" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -113,7 +113,7 @@
                             <div class="hlt95">
                                 <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 " href="#"
                                     target="_parent">
-                                    {{ $order->customer->phone }}
+                                    {{ $order->customer->phone ?? "Не известно"}}
                                     @if($order->status == 'В ожидании')
                                     | <span
                                         class="text-xs px-2 py-0.5 bg-orange-500 rounded-sm group-hover:text-white">В
@@ -137,7 +137,7 @@
                                     @endif
                                 </a>
                                 <p class="xs2f2 jy5gh dark:text-neutral-500">
-                                    {{ $order->customer->adress }}
+                                    {{ $order->customer->adress ?? "Не известно"}}
                                 </p>
                             </div>
 
@@ -147,7 +147,7 @@
                                     class="flex rsdjd lnk45 divide-x divide-gray-200 pb094 -space-x-px dark:border-neutral-700 dark:divide-neutral-700">
                                     <!-- Copy Project Button Tooltip -->
                                     <div class="hs-tooltip inline-block">
-                                        <a href="tel:{{ $order->customer->phone }}"
+                                        <a href="tel:{{ $order->customer->phone ?? " Не известно"}}"
                                             class="hs-tooltip-toggle yl1cu inline-flex jkwm1 items-center n9hej jnhyh aqyoh jy5gh hj07t nzmya disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden d16zw dark:bg-neutral-800 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                                             <svg class="e731n size-5" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
