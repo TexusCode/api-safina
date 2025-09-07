@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('phone');
             $table->longText('adress');
-            $table->decimal('latitude', 10, 7)->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->boolean('map')->default(false);
             $table->boolean('sms_status')->default(false);
             $table->timestamps();
