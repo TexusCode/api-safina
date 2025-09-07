@@ -30,8 +30,8 @@ class ApiController extends Controller
                     'customer_id' => $item['customer_id'],
                     'status' => $status,
                     'tariff_id' => $item['tarif_id'],
-                    'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
+                    'created_at' => Carbon::parse($item['created_at'])->setTimezone('Asia/Tashkent')->toDateTimeString(),
+                    'updated_at' => Carbon::parse($item['updated_at'])->setTimezone('Asia/Tashkent')->toDateTimeString(),
                 ]
             );
             if ($item['price']) {
@@ -60,8 +60,8 @@ class ApiController extends Controller
                 'adress'    => $item['location'],
                 'latitude'  => $item['googlemap_1'],
                 'longitude' => $item['googlemap_2'],
-                'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
+                'created_at' => Carbon::parse($item['created_at'])->setTimezone('Asia/Tashkent')->toDateTimeString(),
+                'updated_at' => Carbon::parse($item['updated_at'])->setTimezone('Asia/Tashkent')->toDateTimeString(),
             ]);
         }
 
