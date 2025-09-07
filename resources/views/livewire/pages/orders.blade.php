@@ -20,7 +20,7 @@
                             <div class="hlt95">
                                 <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 " href="#"
                                     target="_parent">
-                                    {{ $order->customer->phone ?? $order->customer->name}}
+                                    {{ $order->customer->phone ?? "Не известно"}}
                                     @if($order->status == 'В ожидании')
                                     | <span
                                         class="text-xs px-2 py-0.5 bg-orange-500 rounded-sm group-hover:text-white">В
