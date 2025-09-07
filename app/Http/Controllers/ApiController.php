@@ -19,9 +19,9 @@ class ApiController extends Controller
 
         foreach ($data['orders'] as $item) {
             if ($item['status'] == "deactive") {
-                $status = false;
+                $status = "Доставлено";
             } else {
-                $status = true;
+                $status = "Получено";
             }
             $order = Order::create(
                 [
