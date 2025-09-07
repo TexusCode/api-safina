@@ -61,8 +61,8 @@ class ApiController extends Controller
                     'adress'    => $item['location'],
                     'latitude'  => $item['googlemap_1'],
                     'longitude' => $item['googlemap_2'],
-                    'created_at' => Carbon::parse($item['created_at'])->timezone('Asia/Tashkent'),
-                    'updated_at' => Carbon::parse($item['updated_at'])->timezone('Asia/Tashkent'),
+                    'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
                 ]);
             });
         }
