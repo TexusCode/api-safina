@@ -53,18 +53,18 @@ class ApiController extends Controller
         $data = $response->json();
 
         foreach ($data['customers'] as $item) {
-            Customer::create(
-                [
-                    'id' => $item['id'],
-                    'name' => $item['name'],
-                    'phone' => $item['phone'],
-                    'adress' => $item['location'],
-                    'latitude' => $item['googlemap_1'],
+            Customer::withoutTimestamps(function () use ($item) {
+                Customer::create([
+                    'id'        => $item['id'],
+                    'name'      => $item['name'],
+                    'phone'     => $item['phone'],
+                    'adress'    => $item['location'],
+                    'latitude'  => $item['googlemap_1'],
                     'longitude' => $item['googlemap_2'],
                     'created_at' => Carbon::parse($item['created_at'])->timezone('Asia/Tashkent'),
                     'updated_at' => Carbon::parse($item['updated_at'])->timezone('Asia/Tashkent'),
-                ]
-            );
+                ]);
+            });
         }
 
         return response()->json(['success' => true, 'count' => count($data['orders'])]);
