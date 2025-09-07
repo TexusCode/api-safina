@@ -31,6 +31,7 @@ class Order extends Model
     {
         return $this->hasMany(Suborder::class);
     }
+    public $timestamps = false;
 
     public function histories()
     {
