@@ -23,11 +23,20 @@ class ApiController extends Controller
             } else {
                 $status = "Получено";
             }
+            $customerData = $item['customer'];
+            $customer = Customer::create([
+                'id'        => $customerData['id'],
+                'name'      => $customerData['name'],
+                'phone'     => $customerData['phone'],
+                'adress'    => $customerData['location'],
+                'latitude'  => $customerData['googlemap_1'],
+                'longitude' => $customerData['googlemap_2'],
+            ]);
             $order = Order::create(
                 [
                     'id' => $item['id'],
                     'no' => $item['no'],
-                    'customer_id' => $item['customer_id'],
+                    'customer_id' => $customer->id,
                     'status' => $status,
                     'tariff_id' => $item['tarif_id'],
                     'created_at' => Carbon::parse($item['created_at'])->setTimezone('Asia/Tashkent')->toDateTimeString(),
@@ -66,5 +75,22 @@ class ApiController extends Controller
         }
 
         return response()->json(['success' => true, 'count' => count($data['orders'])]);
+    }
+    public function activeOrders(Request $request)
+    {
+        $noone = Order::where('no', 1)
+            ->where('status', '<>', 'applicant')  // Исключаем заказы со статусом 'applicant'
+            ->orderBy('created_at', 'desc')  // Сортируем по дате создания, чтобы получить последний
+            ->first();
+
+        $orders = Order::where('created_at', '>=', $noone->created_at)
+            ->where('status', '<>', 'applicant') // Исключение заказов со статусом 'applicant'
+            ->orderBy('no', 'asc')  // Сортировка по id по убыванию
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'orders' => $orders,
+        ]);
     }
 }
