@@ -20,6 +20,8 @@ class EditOrder extends Component
     public $type = 'Колин';
     public $show = false;
     public $status;
+    public $no;
+
     public function open()
     {
         $this->show = true;
@@ -29,7 +31,7 @@ class EditOrder extends Component
     {
         $this->show = false;
     }
-    public function updatedType() {}
+
     public function add_suborder()
     {
 
@@ -97,12 +99,12 @@ class EditOrder extends Component
     public function add_order()
     {
         $customer = Customer::where('phone', $this->customer_phone)->first();
-        $order = Order::orderBy('id', 'desc')->first();
         $this->order->customer->adress = $this->customer_address;
         $this->order->customer->phone = $this->customer_phone;
         $this->order->customer->save();
 
         $this->order->tariff_id = $this->tariff;
+        $this->order->no = $this->no;
         $this->order->save();
 
         return redirect()->back();

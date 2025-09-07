@@ -26,6 +26,13 @@
                 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500
                 dark:focus:ring-neutral-600" placeholder="Введите адрес">
         </div>
+        <div class="">
+            <label for="no" class="block text-sm font-medium mb-2 dark:text-white">Номер заказа</label>
+            <input type="text" id="no" name="no" wire:model="no" required class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                                        focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                                        dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500
+                                        dark:focus:ring-neutral-600" placeholder="Введите номер заказа">
+        </div>
         <label class="block text-sm font-medium mb-2 dark:text-white mt-5">Выберите тариф</label>
         <div class="grid mt-2 grid-cols-3 gap-2">
 
