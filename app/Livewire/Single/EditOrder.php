@@ -95,6 +95,7 @@ class EditOrder extends Component
         $this->customer_phone = $this->order->customer->phone;
         $this->customer_address = $this->order->customer->adress;
         $this->tariff = $this->order->tariff_id;
+        $this->no = $this->order->no;
     }
     public function add_order()
     {
