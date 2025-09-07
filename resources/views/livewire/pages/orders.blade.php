@@ -44,7 +44,7 @@
                                     @endif
                                 </a>
                                 <p class="xs2f2 jy5gh dark:text-neutral-500">
-                                    {{ $order->customer->adress }}
+                                    {{ $order->customer->adress ?? "Не известно" }}
                                 </p>
                             </div>
 
