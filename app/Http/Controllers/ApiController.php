@@ -30,8 +30,8 @@ class ApiController extends Controller
                     'customer_id' => $item['customer_id'],
                     'status' => $status,
                     'tariff_id' => $item['tarif_id'],
-                    'created_at' => Carbon::parse($item['created_at'])->timezone('Asia/Tashkent'),
-                    'updated_at' => Carbon::parse($item['updated_at'])->timezone('Asia/Tashkent'),
+                    'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
                 ]
             );
             if ($item['price']) {
@@ -53,18 +53,16 @@ class ApiController extends Controller
         $data = $response->json();
 
         foreach ($data['customers'] as $item) {
-            Customer::withoutTimestamps(function () use ($item) {
-                Customer::create([
-                    'id'        => $item['id'],
-                    'name'      => $item['name'],
-                    'phone'     => $item['phone'],
-                    'adress'    => $item['location'],
-                    'latitude'  => $item['googlemap_1'],
-                    'longitude' => $item['googlemap_2'],
-                    'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
-                ]);
-            });
+            Customer::create([
+                'id'        => $item['id'],
+                'name'      => $item['name'],
+                'phone'     => $item['phone'],
+                'adress'    => $item['location'],
+                'latitude'  => $item['googlemap_1'],
+                'longitude' => $item['googlemap_2'],
+                'created_at' => Carbon::parse($item['created_at'])->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::parse($item['updated_at'])->format('Y-m-d H:i:s'),
+            ]);
         }
 
         return response()->json(['success' => true, 'count' => count($data['orders'])]);
