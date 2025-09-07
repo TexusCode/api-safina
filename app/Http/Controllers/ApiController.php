@@ -63,7 +63,6 @@ class ApiController extends Controller
 
         foreach ($data['customers'] as $item) {
             Customer::create([
-                'id'        => $item['id'],
                 'name'      => $item['name'],
                 'phone'     => $item['phone'],
                 'adress'    => $item['location'],
