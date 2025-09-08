@@ -66,7 +66,7 @@ class AddSubOrder extends Component
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
 
-            $price = $this->order->tariff_id;
+            $price = $order->tariff_id ?? 0;
 
             Suborder::create([
                 'order_id' => $order->id,
@@ -74,7 +74,7 @@ class AddSubOrder extends Component
                 'width'    => $this->width,
                 'height'   => $this->height,
                 'square'   => $square,
-                'enum'     => $square * $order->tariff_id,
+                'enum'     => $square * $price,
                 'polka' => $this->telesh
             ]);
         }
