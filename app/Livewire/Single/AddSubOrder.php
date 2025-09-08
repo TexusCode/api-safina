@@ -64,10 +64,9 @@ class AddSubOrder extends Component
             return;
         }
         if ($this->type == 'Колин') {
-            // Площадь в м² (если размеры даны в мм)
             $square = ($this->width * $this->height) * 0.0001;
 
-            $price = $this->order->tariff_id ?? 0;
+            $price = $this->order->tariff_id;
 
             Suborder::create([
                 'order_id' => $order->id,
@@ -75,7 +74,7 @@ class AddSubOrder extends Component
                 'width'    => $this->width,
                 'height'   => $this->height,
                 'square'   => $square,
-                'enum'     => $square * $price,
+                'enum'     => $square * $this->order->tariff_id,
                 'polka' => $this->telesh
             ]);
         }
