@@ -101,6 +101,9 @@
                     @if ($item->polka)
                     <span>T: {{ $item->polka }}</span>
                     @endif
+                    @if ($item->quantity)
+                    <span>{{ $item->quantity }}шт</span>
+                    @endif
                     @if ($item->type == 'Одеяло')
                     <span>{{ $item->quantity }}шт</span>
                     @endif
