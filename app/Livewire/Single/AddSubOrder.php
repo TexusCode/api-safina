@@ -74,7 +74,7 @@ class AddSubOrder extends Component
                 'width'    => $this->width,
                 'height'   => $this->height,
                 'square'   => $square,
-                'enum'     => $square * $this->order->tariff_id,
+                'enum'     => $square * $order->tariff_id,
                 'polka' => $this->telesh
             ]);
         }
