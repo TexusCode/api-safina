@@ -63,7 +63,7 @@ class AddSubOrder extends Component
             $this->dispatch('alert', 'Заказ не найдено введите правилный номер заказа');
             return;
         }
-        if ($this->type === 'Колин') {
+        if ($this->type == 'Колин') {
             // Площадь в м² (если размеры даны в мм)
             $square = ($this->width * $this->height) * 0.0001;
 
