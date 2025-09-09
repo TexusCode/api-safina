@@ -110,6 +110,9 @@
                     @if ($item->type == 'Колин')
                     <span>{{ $item->width . 'x' . $item->height }}см</span>
                     @endif
+                    @if ($item->type == 'Курпа')
+                    <span>{{ $item->width . 'x' . $item->height }}см</span>
+                    @endif
                     @if ($item->type == 'Болишт')
                     <span>{{ $item->quantity }}шт</span>
                     @endif
