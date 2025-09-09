@@ -1,5 +1,6 @@
 <div class="space-y-4">
     <div class="bg-neutral-800 rounded-xl overflow-hidden w-full space-y-2 border border-neutral-700">
+        @if (Auth::user()->role == 'admin')
         <div class="bg-blue-600 rounded-xl grid grid-cols-2 px-2 py-4">
             <div class="text-white border-r-1 border-neutral-300 flex gap-2 justify-center items-center">
                 <div class="p-2 bg-white rounded-full text-green-600">
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="grid grid-cols-4 w-full p-2 gap-2">
             <a href="{{ route('orders') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
@@ -151,7 +153,7 @@
 
         </div>
     </div>
-
+    @if(Auth::user()->role == 'admin')
     <div class="bg-neutral-800 rounded-xl grid grid-cols-3 p-3 border border-neutral-700">
         <!-- Средний чек -->
         <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
@@ -204,6 +206,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="grid grid-cols-2 gap-4">
 

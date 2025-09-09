@@ -160,6 +160,11 @@ class OrderView extends Component
         ]);
         $this->reset(['width', 'height', 'quantity', 'show']);
     }
+    public function deleteorder()
+    {
+        $this->order->delete();
+        return redirect()->route('orders');
+    }
     public function delete($id)
     {
         Suborder::find($id)->delete();

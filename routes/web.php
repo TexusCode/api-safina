@@ -42,6 +42,10 @@ Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-singl
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
+    Route::get('/bulk-sms', BulkSms::class)->name('bulk-sms');
+    Route::get('/todos', Todos::class)->name('todos');
+    Route::get('/users', Users::class)->name('users');
+    Route::get('/rashod', Rashod::class)->name('rashod');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
@@ -57,12 +61,9 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/applicant', Applicant::class)->name('applicant');
     Route::get('/deliver', Deliver::class)->name('deliver');
     Route::get('/sms', Sms::class)->name('sms');
-    Route::get('/bulk-sms', BulkSms::class)->name('bulk-sms');
-    Route::get('/todos', Todos::class)->name('todos');
     Route::get('/add-order', AddOrder::class)->name('add-order');
     Route::get('/edit-order', EditOrder::class)->name('edit-order');
-    Route::get('/users', Users::class)->name('users');
+
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
-    Route::get('/rashod', Rashod::class)->name('rashod');
 });

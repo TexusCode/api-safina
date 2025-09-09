@@ -16,9 +16,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::user()->role == 'admin') {
-            return redirect()->route('empty-page');
+        if (Auth::user()->role == 'admin') {
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->route('empty-page');
     }
 }

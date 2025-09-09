@@ -23,5 +23,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('005335051'),
             'role' => 'admin'
         ]);
+        Order::create([
+            'no' => 1,
+            'customer_id' => 1,
+            'tariff_id' => 10,
+        ]);
+
+        Customer::create([
+            'name' => 'shod',
+            'phone' => '005335051',
+            'adress' => '103mkr',
+        ]);
     }
 }
