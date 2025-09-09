@@ -72,6 +72,11 @@ class OrderView extends Component
             $this->quantity_input = true;
             $this->quantity_title = "Длина в сантиметрах";
         }
+        if ($this->type == 'Курпа') {
+            $this->height_input = true;
+            $this->width_input = true;
+            $this->quantity_input = false;
+        }
         if ($this->type == 'Болишт') {
             $this->height_input = false;
             $this->width_input = false;
