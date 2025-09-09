@@ -93,7 +93,7 @@ class OrderView extends Component
     }
     public function add_suborder()
     {
-        if ($this->type === 'Колин') {
+        if ($this->type == 'Колин') {
             // Площадь в м² (если размеры даны в мм)
             $square = ($this->width * $this->height) * 0.0001;
 
@@ -106,6 +106,20 @@ class OrderView extends Component
                 'height'   => $this->height,
                 'square'   => $square,
                 'enum'     => $square * $price,
+                'polka' => $this->telesh
+            ]);
+        }
+        if ($this->type == 'Курпа') {
+            // Площадь в м² (если размеры даны в мм)
+            $square = ($this->width * $this->height) * 0.0001;
+
+            Suborder::create([
+                'order_id' => $this->order->id,
+                'type'     => $this->type,
+                'width'    => $this->width,
+                'height'   => $this->height,
+                'square'   => $square,
+                'enum'     => $square * 20,
                 'polka' => $this->telesh
             ]);
         }

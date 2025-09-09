@@ -73,6 +73,16 @@ class EditOrder extends Component
                 ]
             );
         }
+        if ($this->type === 'Курпа') {
+            // Площадь в м² (если размеры даны в мм)
+            $square = ($this->width * $this->height) * 0.0001;
+
+            Suborder::create([
+                'order_id' => $this->order->id,
+                'type'     => $this->type,
+                'quantity' => $this->quantity,
+            ]);
+        }
         if ($this->type == 'Парда') {
             Suborder::create(
                 [

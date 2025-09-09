@@ -8,6 +8,7 @@
             <option disabled selected="">Выберите тип подзаказа!</option>
             <option value="Колин">Колин</option>
             <option value="Курпача">Курпача</option>
+            <option value="Курпа">Курпа</option>
             <option value="Болишт">Болишт</option>
             <option value="Одеяло">Одеяло</option>
             <option value="Парда">Парда</option>
