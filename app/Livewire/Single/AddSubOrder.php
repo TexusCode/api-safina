@@ -88,7 +88,7 @@ class AddSubOrder extends Component
             $square = ($this->width * $this->height) * 0.0001;
 
             Suborder::create([
-                'order_id' => $this->order->id,
+                'order_id' => $order->id,
                 'type'     => $this->type,
                 'width'    => $this->width,
                 'height'   => $this->height,
