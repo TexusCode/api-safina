@@ -24,7 +24,7 @@ class BulkSms extends Component
     }
     public function send_message()
     {
-        $customers = Customer::where('sms_status', false)->take(50);
+        $customers = Customer::where('sms_status', false)->take(50)->get();
         foreach ($customers as $item) {
             $sms = new SmsController();
             $sms->sendSms($item->phone, $this->message);
