@@ -111,7 +111,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             if ($item->type == 'Парда') {
                 $quantity = "$item->quantity кг";
             }
-            $orders = $orders . "\n" . $item->type . ":" . $quantity;
+            $orders = $orders . $item->type . ": " . $quantity;
         }
         if ($customer->latitude && $customer->longitude) {
             $chat->location($customer->latitude, $customer->longitude)->send();
