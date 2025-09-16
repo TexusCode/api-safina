@@ -82,19 +82,8 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $note = $order->note ?? "Нет заметок!";
         $chat = TelegraphChat::find(1);
         $customer = $order->customer;
-        if ($customer->latitude && $customer->longitude) {
-            $chat->location($customer->latitude, $customer->longitude)->send();
-        }
-        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n💲 Сумма: <b>$total c</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
-            ->keyboard(
-                Keyboard::make()
-                    ->row([
-                        Button::make("📞 $phone")->copyText("$phone"),
-                    ])
-                    ->row([
-                        Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
-                    ])
-            )->send();
+
+        $orders = '';
         foreach ($suborders as $item) {
             if ($item->type == 'Колин') {
                 $quantity = "$item->width x $item->height см";
@@ -122,9 +111,21 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             if ($item->type == 'Парда') {
                 $quantity = "$item->quantity кг";
             }
-            $polka = $item->polka ?? null;
-            $chat->message("Тип: $item->type \nОбъем: $quantity\nЦена: $item->enum сомони\nТелешка: $polka")->send();
+            $orders = $orders . "\n" . $item->type . ":" . $quantity;
         }
+        if ($customer->latitude && $customer->longitude) {
+            $chat->location($customer->latitude, $customer->longitude)->send();
+        }
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n💲 Сумма: <b>$total c</b>\n$orders\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make("📞 $phone")->copyText("$phone"),
+                    ])
+                    ->row([
+                        Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
+                    ])
+            )->send();
     }
     public function lang_tajik(): void
     {
