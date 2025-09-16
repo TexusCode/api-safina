@@ -4,6 +4,7 @@ namespace App\Texhub;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Suborder;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -73,6 +74,8 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function del_chat_send($order_id): void
     {
         $order = Order::find($order_id);
+        $suborders = Suborder::where('id', $order->id)->get();
+        $total = $suborders->sum('enum') ?? null;
         $name = $order->customer->name;
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
@@ -82,7 +85,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         if ($customer->latitude && $customer->longitude) {
             $chat->location($customer->latitude, $customer->longitude)->send();
         }
-        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n💲 Сумма: <b>$total c</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
             ->keyboard(
                 Keyboard::make()
                     ->row([
@@ -92,6 +95,36 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                         Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
                     ])
             )->send();
+        foreach ($suborders as $item) {
+            if ($item->type == 'Колин') {
+                $quantity = "$item->width x $item->height см";
+            }
+
+            if ($item->type == 'Курпа') {
+                $quantity = "$item->width x $item->height см";
+            }
+
+            if ($item->type == 'Болишт') {
+                $quantity = "$item->quantity шт";
+            }
+            if ($item->type == 'Курпача') {
+                $quantity = "$item->quantity м";
+            }
+            if ($item->polka) {
+                $quantity = "T:  $item->polka";
+            }
+            if ($item->quantity) {
+                $quantity = "$item->quantity шт";
+            }
+            if ($item->type == 'Одеяло') {
+                $quantity = "$item->quantity шт";
+            }
+            if ($item->type == 'Парда') {
+                $quantity = "$item->quantity кг";
+            }
+            $polka = $item->polka ?? null;
+            $chat->message("Тип: $item->type \nОбъем: $quantity\nЦена: $item->enum\nТелешка: $polka")->send();
+        }
     }
     public function lang_tajik(): void
     {
