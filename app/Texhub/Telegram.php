@@ -74,8 +74,8 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function del_chat_send($order_id): void
     {
         $order = Order::find($order_id);
-        $suborders = Suborder::where('id', $order->id)->get();
-        $total = $suborders->sum('enum') ?? null;
+        $suborders = Suborder::where('order_id', $order->id)->get();
+        $total = $suborders->isNotEmpty() ? $suborders->sum('enum') : null;
         $name = $order->customer->name;
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
@@ -123,7 +123,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 $quantity = "$item->quantity кг";
             }
             $polka = $item->polka ?? null;
-            $chat->message("Тип: $item->type \nОбъем: $quantity\nЦена: $item->enum\nТелешка: $polka")->send();
+            $chat->message("Тип: $item->type \nОбъем: $quantity\nЦена: $item->enum сомони\nТелешка: $polka")->send();
         }
     }
     public function lang_tajik(): void
