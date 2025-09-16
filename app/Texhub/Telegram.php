@@ -86,32 +86,25 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $orders = '';
         foreach ($suborders as $item) {
             if ($item->type == 'Колин') {
-                $quantity = "$item->width x $item->height см";
+                $quantity = $item->width . "x" . $item->height . "см";
             }
-
             if ($item->type == 'Курпа') {
-                $quantity = "$item->width x $item->height см";
+                $quantity = $item->width . "x" . $item->height . "см";
             }
-
             if ($item->type == 'Болишт') {
-                $quantity = "$item->quantity шт";
+                $quantity = $item->quantity . "шт";
             }
             if ($item->type == 'Курпача') {
-                $quantity = "$item->quantity м";
-            }
-            if ($item->polka) {
-                $quantity = "T:  $item->polka";
-            }
-            if ($item->quantity) {
-                $quantity = "$item->quantity шт";
+                $quantity = $item->quantity . "м";
             }
             if ($item->type == 'Одеяло') {
-                $quantity = "$item->quantity шт";
+                $quantity = $item->quantity . "шт";
             }
             if ($item->type == 'Парда') {
-                $quantity = "$item->quantity кг";
+                $quantity = $item->quantity . "кг";
             }
             $orders = $orders . $item->type . ": " . $quantity . " - ";
+            $quantity = null;
         }
         if ($customer->latitude && $customer->longitude) {
             $chat->location($customer->latitude, $customer->longitude)->send();
