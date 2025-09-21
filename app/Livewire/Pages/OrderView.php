@@ -31,6 +31,11 @@ class OrderView extends Component
         $sms = new SmsController();
         $message = "Добрый день, уважаемый клиент! 🙌\nВаш заказ готов ✅. Скоро курьер свяжется с вами для доставки.\nСумма вашего заказа составляет $summa сомони 💰.";
         $sms->sendSms($this->order->customer->phone, $message);
+        History::create([
+            'content' => Auth::user()->name . "отправил смс клиенту: $message",
+            'order_id' => $this->order->id,
+            'user_id' => Auth::id()
+        ]);
     }
     public function open()
     {
