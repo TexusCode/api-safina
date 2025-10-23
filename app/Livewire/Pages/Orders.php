@@ -30,8 +30,8 @@ class Orders extends Component
             if ($customers->isNotEmpty()) {
                 $orders->whereIn('customer_id', $customers);
             } else {
+                $orders->where('no', 'like', '%' . $this->search . '%');
             }
-            $orders->where('no', 'like', '%' . $this->search . '%');
         }
         return $orders->where('id', '>=', $lastStart->id) // активные
             ->orderBy('no', 'desc')
