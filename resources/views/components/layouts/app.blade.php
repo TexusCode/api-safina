@@ -1,5 +1,5 @@
-<!DOCTYPE html class="dark">
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{ asset('preline.css') }}">
 </head>
 
-<body class="bg-neutral-950 dark">
-    <div class="h-full pb-24">
+<body class="bg-neutral-950 dark h-full">
+    <div class="h-full pb-24 overflow-scroll">
         <div class="bg-neutral-950 w-full h-full max-w-sm mx-auto p-3 space-y-4 relative overflow-hidden">
             <div class="w-full flex justify-between items-center px-2 py-1.5 bg-neutral-800 rounded-xl">
                 <flux:button square variant="primary" color="blue" href="{{ route('profile') }}">
