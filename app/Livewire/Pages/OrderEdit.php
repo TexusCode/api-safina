@@ -3,9 +3,10 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Order;
+use App\Models\History;
 use Livewire\Component;
 use App\Models\Customer;
-use App\Models\History;
+use App\Texhub\Telegram;
 use Illuminate\Support\Facades\Auth;
 
 class OrderEdit extends Component
@@ -44,6 +45,9 @@ class OrderEdit extends Component
             'order_id' => $this->order->id,
             'user_id' => Auth::id()
         ]);
+        $message = Auth::user()->name . ": Изменил. Заказ №" . $this->order->id;
+        $tel = new Telegram();
+        $tel->send_history($message);
         return redirect()->route('order-view', $this->order->id);
     }
     public function render()

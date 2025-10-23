@@ -19,6 +19,7 @@
                         Изменить
                     </a>
                 </div>
+                @if (Auth::user()->role == 'admin')
                 <div class="flex flex-col jkwm1">
                     <button type="button" wire:confirm="Точно хотите удалить" wire:click="deleteorder"
                         class="an00p inline-flex items-center n9hej xs2f2 sikx1 pb094 rsdjd azddh bg-red-500 kew0r hover:bg-red-600  disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden zx3z8 vtle8">
@@ -35,6 +36,7 @@
                         </svg>
                     </button>
                 </div>
+                @endif
             </div>
         </div>
         <div class="wc6fu mb-5">
@@ -88,6 +90,7 @@
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
             <option value="Готово">Готово</option>
+            <option value="Готово">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
         </select>
@@ -131,6 +134,7 @@
                     @if ($item->type == 'Парда')
                     <span>{{ $item->quantity }}кг</span>
                     @endif
+                    @if($order->status !== "Готово" && $order->status !== "Доставлено")
                     <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
                             wire:click="delete({{ $item->id }})" class="text-red-500"><svg class="size-4"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -140,6 +144,7 @@
                                 <path d="M18 6l-12 12" />
                                 <path d="M6 6l12 12" />
                             </svg></button></span>
+                    @endif
                 </div>
             </li>
             @endforeach

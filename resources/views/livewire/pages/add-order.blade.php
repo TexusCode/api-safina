@@ -74,6 +74,9 @@
         dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500
         dark:focus:ring-neutral-600" rows="3" placeholder="Добавьте примечание, если есть!"></textarea>
         </div>
+        <div class="mt-5">
+            <flux:checkbox wire:model="three_car" label="Отправить на машину №3" />
+        </div>
         <button type="submit" class="py-2 mt-5 w-full text-center text-base font-medium rounded-lg border border-transparent
             bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700
             disabled:opacity-50 disabled:pointer-events-none">

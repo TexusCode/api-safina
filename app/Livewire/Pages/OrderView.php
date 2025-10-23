@@ -10,6 +10,7 @@ use App\Models\History;
 use Livewire\Component;
 use App\Models\Suborder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class OrderView extends Component
 {
@@ -28,14 +29,18 @@ class OrderView extends Component
     public function smssend()
     {
         $summa = $this->order->suborders->sum('enum');
+        $no = $this->order->no;
         $sms = new SmsController();
-        $message = "Добрый день, уважаемый клиент! 🙌Сумма вашего заказа составляет $summa сомони 💰.";
+        $message = "Добрый день, уважаемый клиент! 🙌Сумма вашего заказа №$no составляет $summa сомони 💰.";
         $sms->sendSms($this->order->customer->phone, $message);
         History::create([
             'content' => Auth::user()->name . "отправил смс клиенту: $message",
             'order_id' => $this->order->id,
             'user_id' => Auth::id()
         ]);
+        $message = FacadesAuth::user()->name . ": Лӣропатд смс клиенту. Заказ №" . $this->order->no;
+        $tel = new Telegram();
+        $tel->send_history($message);
     }
     public function open()
     {
@@ -63,7 +68,15 @@ class OrderView extends Component
             $tel = new Telegram();
             $tel->del_chat_send($this->order->id);
         }
+        if ($this->status == 'Готово / Отправить на машину №3') {
+            $tel = new Telegram();
+            $tel->del_chat_send_three($this->order->id);
+        }
+        $message = FacadesAuth::user()->name . ": Изменил статус заказа №" . $this->order->no . " на " . $this->status;
+        $tel = new Telegram();
+        $tel->send_history($message);
     }
+
     public function updatedType()
     {
         if ($this->type == 'Колин') {
@@ -182,6 +195,9 @@ class OrderView extends Component
             'order_id' => $this->order->id,
             'user_id' => Auth::id()
         ]);
+        $message = FacadesAuth::user()->name . ": Добавил подзаказ в заказ №" . $this->order->no;
+        $tel = new Telegram();
+        $tel->send_history($message);
         $this->reset(['width', 'height', 'quantity', 'show']);
     }
     public function deleteorder()
@@ -191,12 +207,16 @@ class OrderView extends Component
     }
     public function delete($id)
     {
-        Suborder::find($id)->delete();
+        $sub = Suborder::find($id);
         History::create([
             'content' => Auth::user()->name . ': удалил подзаказ!',
             'order_id' => $this->order->id,
             'user_id' => Auth::id()
         ]);
+        $message = FacadesAuth::user()->name . ": удалил подзаказ. Заказ №" . $this->order->id . $sub;
+        $tel = new Telegram();
+        $tel->send_history($message);
+        $sub->delete();
     }
     public function render()
     {

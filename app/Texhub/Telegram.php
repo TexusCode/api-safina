@@ -19,28 +19,10 @@ use Illuminate\Http\Request;
 
 class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
-    public function start(): void
+    public function send_history($message): void
     {
-        // $this->chat->message('Hello! Bot work!')->send();
-        // $this->chat->message(("Бахши лозимаро дар менюи дар зер буда интихоб намоед! 🔽"))
-        //     ->replyKeyboard(ReplyKeyboard::make()
-        //         ->row([
-        //             ReplyButton::make('🔢 Тафтиши трек-код'),
-        //             ReplyButton::make('➕ Обуна шудан')->requestContact(),
-        //         ])
-        //         ->row([
-        //             ReplyButton::make('✅ Сурогаи склади Иву'),
-        //             ReplyButton::make('🎞 Дарсхои ройгон'),
-        //         ])
-        //         ->row([
-        //             ReplyButton::make('📍 Сурогаи склади Душанбе'),
-        //             ReplyButton::make('👤 Тамос бо мушовир'),
-        //         ])
-        //         ->row([
-        //             ReplyButton::make('💲 Нархнома'),
-        //             ReplyButton::make('❌ Молҳои манъшуда'),
-        //         ])
-        //         ->resize())->send();
+        $chat = TelegraphChat::find(2);
+        $chat->message($message)->send();
     }
 
     public function deliver_chat_send($order_id): void
@@ -71,7 +53,84 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ])
             )->send();
     }
+    public function deliver_chat_send_three($order_id): void
+    {
+        $order = Order::find($order_id);
+        $name = $order->customer->name;
+        $phone = $order->customer->phone;
+        $address = $order->customer->adress;
+        $note = $order->note ?? "Нет заметок!";
+        $chat = TelegraphChat::find(2);
+        $customer = $order->customer;
+        if ($customer->latitude && $customer->longitude) {
+            $chat->location($customer->latitude, $customer->longitude)->send();
+        }
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make("📞 $phone")->copyText("$phone"),
+                    ])
+                    ->row([
+                        Button::make('📍 Добавить адрес')->action('add_location')->param('id', $order->id),
+                        Button::make('✏️ Изменить')->url("https://api.safina-cleaning.tj/edit-order-single/$order->id"),
+                    ])
+                    ->row([
+                        Button::make('✅ Получено')->action('done')->param('id', $order->id),
+                        Button::make('❌ Отмена')->action('cancel')->param('id', $order->id),
+                    ])
+            )->send();
+    }
     public function del_chat_send($order_id): void
+    {
+        $order = Order::find($order_id);
+        $suborders = Suborder::where('order_id', $order->id)->get();
+        $total = $suborders->isNotEmpty() ? $suborders->sum('enum') : null;
+        $name = $order->customer->name;
+        $phone = $order->customer->phone;
+        $address = $order->customer->adress;
+        $note = $order->note ?? "Нет заметок!";
+        $chat = TelegraphChat::find(1);
+        $customer = $order->customer;
+
+        $orders = '';
+        foreach ($suborders as $item) {
+            if ($item->type == 'Колин') {
+                $quantity = $item->width . "x" . $item->height . "см";
+            }
+            if ($item->type == 'Курпа') {
+                $quantity = $item->width . "x" . $item->height . "см";
+            }
+            if ($item->type == 'Болишт') {
+                $quantity = $item->quantity . "шт";
+            }
+            if ($item->type == 'Курпача') {
+                $quantity = $item->quantity . "м";
+            }
+            if ($item->type == 'Одеяло') {
+                $quantity = $item->quantity . "шт";
+            }
+            if ($item->type == 'Парда') {
+                $quantity = $item->quantity . "кг";
+            }
+            $orders = $orders . $item->type . ": " . $quantity . " - ";
+            $quantity = null;
+        }
+        if ($customer->latitude && $customer->longitude) {
+            $chat->location($customer->latitude, $customer->longitude)->send();
+        }
+        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n💲 Сумма: <b>$total c</b>\n$orders\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
+            ->keyboard(
+                Keyboard::make()
+                    ->row([
+                        Button::make("📞 $phone")->copyText("$phone"),
+                    ])
+                    ->row([
+                        Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
+                    ])
+            )->send();
+    }
+    public function del_chat_send_three($order_id): void
     {
         $order = Order::find($order_id);
         $suborders = Suborder::where('order_id', $order->id)->get();
@@ -174,6 +233,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $this->chat
             ->message("❌ Заказ №{$order->no} был отменён.")
             ->send();
+        $order->delete();
     }
     public function handleChatMessage(Stringable $text): void
     {

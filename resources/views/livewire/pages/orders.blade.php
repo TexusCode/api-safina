@@ -1,4 +1,5 @@
 <div>
+    <flux:input size="sm" placeholder="Поиск ...." wire:model.live="search" />
     <flux:tab.group class="my-5">
         <!-- tabs -->
         <flux:tabs variant="segmented" class="w-full" wire:model="tab">
@@ -12,7 +13,7 @@
                 <!-- List Group -->
                 <ul class="space-y-3 mb-5">
                     <!-- List Item -->
-                    @foreach ($orders as $order)
+                    @foreach ($this->orders as $order)
                     <li class=" u9m3z lnk45 dark:border-neutral-700">
                         <div class="flex vyfcq items-center">
                             <span class="text-white font-bold border-neutral-700 border-1 py-1 px-1.5 rounded-lg">#{{
@@ -93,7 +94,7 @@
                     @endforeach
                     <!-- End List Item -->
                 </ul>
-                <flux:table :paginate="$orders">
+                <flux:table :paginate="$this->orders">
                     <!-- ... -->
                 </flux:table>
                 <!-- End List Group -->
@@ -105,7 +106,7 @@
                 <!-- List Group -->
                 <ul class="space-y-3 mb-5">
                     <!-- List Item -->
-                    @foreach ($archive as $order)
+                    @foreach ($this->archive as $order)
                     <li class=" u9m3z lnk45 dark:border-neutral-700">
                         <div class="flex vyfcq items-center">
                             <span class="text-white font-bold border-neutral-700 border-1 py-1 px-1.5 rounded-lg">#{{
@@ -186,7 +187,7 @@
                     @endforeach
                     <!-- End List Item -->
                 </ul>
-                <flux:table :paginate="$archive">
+                <flux:table :paginate="$this->archive">
                     <!-- ... -->
                 </flux:table>
                 <!-- End List Group -->
