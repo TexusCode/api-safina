@@ -29,7 +29,7 @@ class OrderView extends Component
     {
         $summa = $this->order->suborders->sum('enum');
         $sms = new SmsController();
-        $message = "Добрый день, уважаемый клиент! 🙌\nВаш заказ готов ✅. Скоро курьер свяжется с вами для доставки.\nСумма вашего заказа составляет $summa сомони 💰.";
+        $message = "Добрый день, уважаемый клиент! 🙌Сумма вашего заказа составляет $summa сомони 💰.";
         $sms->sendSms($this->order->customer->phone, $message);
         History::create([
             'content' => Auth::user()->name . "отправил смс клиенту: $message",
