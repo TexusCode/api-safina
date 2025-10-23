@@ -90,7 +90,7 @@
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
             <option value="Готово">Готово</option>
-            <option value="Готово">Готово / Отправить на машину №3</option>
+            <option value="Готово / Отправить на машину №3">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
         </select>
@@ -134,7 +134,8 @@
                     @if ($item->type == 'Парда')
                     <span>{{ $item->quantity }}кг</span>
                     @endif
-                    @if($order->status !== "Готово" && $order->status !== "Доставлено")
+                    @if($order->status !== "Готово" && $order->status !== "Готово / Отправить на машину №3" &&
+                    $order->status !== "Доставлено")
                     <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
                             wire:click="delete({{ $item->id }})" class="text-red-500"><svg class="size-4"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -157,8 +158,9 @@
             </li>
         </ul>
         @endif
-        <button type="button" wire:click="open" {{ $order->status
-            =="Готово"?'disabled':'' }} {{ $order->status
+        <button type="button" wire:click="open" {{ $order->status =="Готово"?'disabled':'' }}
+            {{ $order->status =="Готово / Отправить на машину №3"?'disabled':'' }}
+            {{ $order->status
             =="Доставлено"?'disabled':'' }}
             class="py-2 mt-3 w-full text-center text-base font-medium rounded-lg border border-transparent bg-blue-600
             text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50
