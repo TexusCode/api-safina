@@ -21,8 +21,8 @@
     ];
 @endphp
 
-<div class="space-y-5">
-    <div class="grid gap-4 md:flex-row md:items-end md:justify-between">
+<div class="space-y-5 w-full">
+    <div class="grid gap-4 md:flex-row md:items-end md:justify-between w-full">
         <div>
             <flux:heading size="lg">История звонков</flux:heading>
             <flux:text class="text-sm text-neutral-400">Актуальные звонки из телефонии.</flux:text>
@@ -30,7 +30,7 @@
         <div class="w-full">
             <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск</flux:text>
             <input id="search" type="text" wire:model.live="search"
-                class="mt-2 block w-full rounded-xl border w-full border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
+                class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Телефон или тип">
         </div>
     </div>
