@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\CallHistoryController;
 use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\StatusCheck;
@@ -8,6 +9,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Pages\AddOrder;
 use App\Livewire\Pages\Applicant;
 use App\Livewire\Pages\BulkSms;
+use App\Livewire\Pages\CallHistory as CallHistoryPage;
 use App\Livewire\Pages\Customers;
 use App\Livewire\Pages\Deliver;
 use App\Livewire\Pages\EditOrder;
@@ -32,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/get-orders', [ApiController::class, 'get_orders']);
 Route::get('/get-customers', [ApiController::class, 'get_customers']);
+Route::post('/call-history-log', [CallHistoryController::class, 'store']);
 
 //Auth Pages
 Route::middleware('guest')->group(function () {
@@ -66,6 +69,7 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/sms', Sms::class)->name('sms');
     Route::get('/add-order', AddOrder::class)->name('add-order');
     Route::get('/edit-order', EditOrder::class)->name('edit-order');
+    Route::get('/call-history', CallHistoryPage::class)->name('call-history');
 
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
