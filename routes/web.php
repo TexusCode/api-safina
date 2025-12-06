@@ -52,7 +52,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/rashod', Rashod::class)->name('rashod');
-    Route::get('/call-history', CallHistory::class)->name('call-history');
+    Route::get('/call-historys', CallHistory::class)->name('call-history');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
