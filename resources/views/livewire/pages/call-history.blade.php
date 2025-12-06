@@ -30,7 +30,7 @@
         </div>
         <div class="w-full">
             <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск</flux:text>
-            <input id="search" type="text" wire:model.debounce.400ms="search"
+            <input id="search" type="text" wire:model.live="search"
                 class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Телефон или тип">
         </div>
@@ -39,7 +39,7 @@
     <div class="grid gap-3 grid-cols-2">
         @foreach ($statCards as $card)
             <div
-                class="flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
+                class="{{ $card['label']=="Всего (месяц)"?"col-span-full":"col-span-1" }} flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
                 <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/25">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
