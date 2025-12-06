@@ -27,7 +27,7 @@
             <flux:heading size="lg">История звонков</flux:heading>
             <flux:text class="text-sm text-neutral-400">Актуальные звонки из телефонии.</flux:text>
         </div>
-        <div class="w-full md:w-64">
+        <div class="w-full">
             <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск</flux:text>
             <input id="search" type="text" wire:model.live="search"
                 class="mt-2 block w-full rounded-xl border w-full border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
