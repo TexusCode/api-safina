@@ -69,6 +69,7 @@ class AddSubOrder extends Component
             return;
         }
         $status = $this->status ?? 'в стирке';
+        $isPrimary = true;
 
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
@@ -84,6 +85,7 @@ class AddSubOrder extends Component
                 'enum'     => $square * $price,
                 'polka' => $this->telesh,
                 'status'   => $status,
+                'is_primary' => $isPrimary,
             ]);
         }
         if ($this->type === 'Курпа') {
@@ -99,6 +101,7 @@ class AddSubOrder extends Component
                 'enum'     => $square * 20,
                 'polka' => $this->telesh,
                 'status'   => $status,
+                'is_primary' => $isPrimary,
             ]);
         }
         if ($this->type == 'Курпача') {
@@ -110,6 +113,7 @@ class AddSubOrder extends Component
                     'enum' => ($this->quantity / 100) * 20,
                     'polka' => $this->telesh,
                     'status' => $status,
+                    'is_primary' => $isPrimary,
                 ]
             );
         }
@@ -122,6 +126,7 @@ class AddSubOrder extends Component
                     'enum' => $this->quantity * 20,
                     'polka' => $this->telesh,
                     'status' => $status,
+                    'is_primary' => $isPrimary,
                 ]
             );
         }
@@ -134,6 +139,7 @@ class AddSubOrder extends Component
                     'enum' => $this->quantity * 50,
                     'polka' => $this->telesh,
                     'status' => $status,
+                    'is_primary' => $isPrimary,
                 ]
             );
         }
@@ -146,6 +152,7 @@ class AddSubOrder extends Component
                     'enum' => $this->quantity * 35,
                     'polka' => $this->telesh,
                     'status' => $status,
+                    'is_primary' => $isPrimary,
                 ]
             );
         }
@@ -156,6 +163,7 @@ class AddSubOrder extends Component
     public function render()
     {
         $recentSuborders = Suborder::with('order')
+            ->where('is_primary', true)
             ->orderBy('created_at', 'desc')
             ->limit(30)
             ->get();

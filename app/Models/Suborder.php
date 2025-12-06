@@ -17,6 +17,7 @@ class Suborder extends Model
         'enum',
         'polka',
         'status',
+        'is_primary',
     ];
 
     public function order(): BelongsTo
