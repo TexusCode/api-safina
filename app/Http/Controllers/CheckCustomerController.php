@@ -11,13 +11,7 @@ class CheckCustomerController extends Controller
     public function checkCustomer(Request $request): JsonResponse
     {
         $rawPhone = (string) $request->phone;;
-        $digits = preg_replace('/\D+/', '', $rawPhone);
-
-        if ($digits === '') {
-            return response()->json(['message' => 'Клиент не найден'], 404);
-        }
-
-        $variants = $this->buildVariants($digits);
+        $variants = $this->buildVariants($rawPhone);
 
         foreach ($variants as $phone) {
             $customer = Customer::where('phone', $phone)->first();
