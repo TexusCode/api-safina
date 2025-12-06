@@ -13,18 +13,24 @@ class CallHistoryController extends Controller
     {
         $this->logRequest($request);
 
-        $validated = $request->validate([
-            'caller_phone'    => 'required|string|max:32',
-            'receiver_phone'  => 'nullable|string|max:32',
-            'call_type'       => 'required|string|max:32',
-            'duration_seconds'=> 'nullable|integer|min:0',
-            'started_at'      => 'required|date',
-            'audio_path'      => 'nullable|string|max:255',
-            'external_id'     => 'nullable|string|max:64',
-        ]);
+        $validated = $request->all();
+
+        $validated = [
+            'caller_phone'     => $validated['caller_phone'] ?? null,
+            'receiver_phone'   => $validated['receiver_phone'] ?? null,
+            'call_type'        => $validated['call_type'] ?? 'incoming',
+            'duration_seconds' => (int) ($validated['duration_seconds'] ?? 0),
+            'started_at'       => $validated['started_at'] ?? now()->toDateTimeString(),
+            'audio_path'       => $validated['audio_path'] ?? null,
+            'external_id'      => $validated['external_id'] ?? null,
+        ];
+
+        if (empty($validated['caller_phone'])) {
+            return response()->json(['message' => 'caller_phone is required'], 422);
+        }
 
         $validated['call_type'] = $this->normalizeCallType($validated['call_type']);
-        $validated['duration_seconds'] = $validated['duration_seconds'] ?? 0;
+        $validated['duration_seconds'] = max(0, (int) $validated['duration_seconds']);
 
         $call = CallHistory::create($validated);
 
