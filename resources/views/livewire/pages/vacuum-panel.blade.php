@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-6 h-screen overflow-y-scroll">
     <div>
         <h1 class="text-2xl font-semibold text-gray-400">Панель пылесосчика</h1>
         <p class="mt-1 text-sm text-gray-500">Показываются подзаказы за последние 4 дня, которые ещё находятся в стирке.</p>
@@ -9,7 +9,7 @@
             Новых подзаказов для пылесоса нет.
         </div>
     @else
-        <div class="grid gap-4 h-full overflow-y-scroll">
+        <div class="grid gap-4 ">
             @foreach ($suborders as $suborder)
                 @php
                     $size = '—';
