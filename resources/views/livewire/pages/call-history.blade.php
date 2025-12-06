@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-3 grid-cols-2">
         @foreach ($statCards as $card)
             <div
                 class="flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
