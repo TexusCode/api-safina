@@ -89,6 +89,7 @@
             <option value="Получено">Получено</option>
             <option value="В стирке">В стирке</option>
             <option value="В пылесосе">В пылесосе</option>
+            <option value="Повторныя стирка">Повторныя стирка</option>
             <option value="Готово">Готово</option>
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
