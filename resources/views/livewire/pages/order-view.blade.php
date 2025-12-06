@@ -87,8 +87,8 @@
             =="Доставлено"?'disabled':'' }}>
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
-            <option value="Получено">В стирке</option>
-            <option value="Получено">В пылесосе</option>
+            <option value="В стирке">В стирке</option>
+            <option value="В пылесосе">В пылесосе</option>
             <option value="Готово">Готово</option>
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
