@@ -10,35 +10,41 @@ class CheckCustomerController extends Controller
 {
     public function checkCustomer(Request $request): JsonResponse
     {
-        $rawPhone = (string) $request->phone;;
-        $variants = $this->buildVariants($rawPhone);
+        $rawPhone = (string) $request->input('phone', '');
+        $normalized = $this->normalizePhone($rawPhone);
 
-        foreach ($variants as $phone) {
-            $customer = Customer::where('phone', $phone)->first();
+        if ($normalized === null) {
+            return response()->json(['message' => 'Клиент не найден'], 404);
+        }
 
-            if ($customer) {
-                return response()->json([
-                    'phone' => $customer->phone,
-                    'name'  => $customer->name,
-                ]);
-            }
+        $customer = Customer::where('phone', $normalized)->first();
+
+        if ($customer) {
+            return response()->json([
+                'phone' => $customer->phone,
+                'name'  => $customer->name,
+            ]);
         }
 
         return response()->json(['message' => 'Клиент не найден'], 404);
     }
 
-    private function buildVariants(string $digits): array
+    private function normalizePhone(string $phone): ?string
     {
-        $local = str_starts_with($digits, '992') ? substr($digits, 3) : $digits;
-        $local = $local ?: $digits;
+        $digits = preg_replace('/\D+/', '', $phone);
 
-        $withCountry = '992' . ltrim($local, '+');
-        $withPlus = '+' . $withCountry;
+        if ($digits === '') {
+            return null;
+        }
 
-        return array_values(array_unique(array_filter([
-            $withPlus,
-            $withCountry,
-            $local,
-        ])));
+        if (str_starts_with($digits, '992')) {
+            $digits = substr($digits, 3);
+        }
+
+        if (strlen($digits) !== 9) {
+            return null;
+        }
+
+        return $digits;
     }
 }
