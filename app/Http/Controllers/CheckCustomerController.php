@@ -13,14 +13,15 @@ class CheckCustomerController extends Controller
 
         $customer = Customer::where('phone', $request->phone)->first();
 
-        if ($customer) {
-            return response()->json([
-                'phone' => $customer->phone,
-                'name'  => $customer->name,
-            ]);
-        }
+        // if ($customer) {
+        //     return response()->json([
+        //         'phone' => $customer->phone,
+        //         'name'  => $customer->name,
+        //     ]);
+        // }
 
-        return response()->json(['message' => 'Клиент не найден'], 404);
+        // return response()->json(['message' => 'Клиент не найден'], 404);
+        return $customer;
     }
 
 }
