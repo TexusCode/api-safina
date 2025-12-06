@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Suborder extends Model
 {
@@ -15,5 +16,11 @@ class Suborder extends Model
         'square',
         'enum',
         'polka',
+        'status',
     ];
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

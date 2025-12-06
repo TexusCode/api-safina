@@ -21,7 +21,7 @@ class AddSubOrder extends Component
     public $quantity_input = false;
     public $quantity_title;
     public $telesh;
-    public $status;
+    public $status = 'в стирке';
     public function updatedType()
     {
         if ($this->type == 'Колин') {
@@ -68,6 +68,8 @@ class AddSubOrder extends Component
             $this->dispatch('alert', 'Заказ не найдено введите правилный номер заказа');
             return;
         }
+        $status = $this->status ?? 'в стирке';
+
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
 
@@ -80,7 +82,8 @@ class AddSubOrder extends Component
                 'height'   => $this->height,
                 'square'   => $square,
                 'enum'     => $square * $price,
-                'polka' => $this->telesh
+                'polka' => $this->telesh,
+                'status'   => $status,
             ]);
         }
         if ($this->type === 'Курпа') {
@@ -94,7 +97,8 @@ class AddSubOrder extends Component
                 'height'   => $this->height,
                 'square'   => $square,
                 'enum'     => $square * 20,
-                'polka' => $this->telesh
+                'polka' => $this->telesh,
+                'status'   => $status,
             ]);
         }
         if ($this->type == 'Курпача') {
@@ -104,7 +108,8 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity / 100,
                     'enum' => ($this->quantity / 100) * 20,
-                    'polka' => $this->telesh
+                    'polka' => $this->telesh,
+                    'status' => $status,
                 ]
             );
         }
@@ -115,7 +120,8 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 20,
-                    'polka' => $this->telesh
+                    'polka' => $this->telesh,
+                    'status' => $status,
                 ]
             );
         }
@@ -126,7 +132,8 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 50,
-                    'polka' => $this->telesh
+                    'polka' => $this->telesh,
+                    'status' => $status,
                 ]
             );
         }
@@ -137,15 +144,22 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 35,
-                    'polka' => $this->telesh
+                    'polka' => $this->telesh,
+                    'status' => $status,
                 ]
             );
         }
         $this->reset(['width', 'height', 'quantity', 'show', 'order', 'telesh']);
+        $this->status = 'в стирке';
         $this->dispatch('alert', 'Заказ успешно обновлен!');
     }
     public function render()
     {
-        return view('livewire.single.add-sub-order');
+        $recentSuborders = Suborder::with('order')
+            ->orderBy('created_at', 'desc')
+            ->limit(30)
+            ->get();
+
+        return view('livewire.single.add-sub-order', compact('recentSuborders'));
     }
 }
