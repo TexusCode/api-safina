@@ -9,7 +9,7 @@
             Новых подзаказов для пылесоса нет.
         </div>
     @else
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div class="grid gap-4 h-full overflow-y-scroll">
             @foreach ($suborders as $suborder)
                 @php
                     $size = '—';
