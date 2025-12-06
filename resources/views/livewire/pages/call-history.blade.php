@@ -20,47 +20,41 @@
         </div>
     </div>
 
-    <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-        <table class="min-w-full divide-y divide-gray-200 text-sm">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">Тип</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">От кого</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">Кому</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">Длительность</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">Дата</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-500">Аудио</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100 bg-white">
-                @forelse ($callHistories as $call)
-                    <tr>
-                        <td class="px-4 py-3 text-gray-900">
-                            {{ $typeLabels[$call->call_type] ?? ucfirst($call->call_type) }}
-                        </td>
-                        <td class="px-4 py-3 font-medium text-gray-900">{{ $call->caller_phone }}</td>
-                        <td class="px-4 py-3 text-gray-700">{{ $call->receiver_phone ?? '—' }}</td>
-                        <td class="px-4 py-3 text-gray-700">{{ gmdate('H:i:s', $call->duration_seconds) }}</td>
-                        <td class="px-4 py-3 text-gray-700">{{ optional($call->started_at)->format('d.m.Y H:i') }}</td>
-                        <td class="px-4 py-3">
-                            @if ($call->audio_path)
-                                <a href="{{ $call->audio_path }}" class="text-blue-600 hover:underline" target="_blank">
-                                    Скачать
-                                </a>
-                            @else
-                                <span class="text-gray-400">Нет</span>
-                            @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="px-4 py-6 text-center text-gray-500">
-                            История звонков пока пуста.
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="space-y-3">
+        @forelse ($callHistories as $call)
+            <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div class="text-xs uppercase tracking-wide text-gray-500">{{ $typeLabels[$call->call_type] ?? ucfirst($call->call_type) }}</div>
+                    <span class="text-xs text-gray-400">{{ optional($call->started_at)->format('d.m.Y H:i') }}</span>
+                </div>
+                <div class="mt-3 space-y-2 text-sm text-gray-700">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">От кого</span>
+                        <span class="font-semibold text-gray-900">{{ $call->caller_phone }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Кому</span>
+                        <span>{{ $call->receiver_phone ?? '—' }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Длительность</span>
+                        <span>{{ gmdate('H:i:s', $call->duration_seconds) }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Аудио</span>
+                        @if ($call->audio_path)
+                            <a href="{{ $call->audio_path }}" class="text-blue-600 hover:underline" target="_blank">Скачать</a>
+                        @else
+                            <span class="text-gray-400">Нет</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="rounded-2xl border border-dashed border-gray-300 bg-white p-6 text-center text-sm text-gray-500">
+                История звонков пока пуста.
+            </div>
+        @endforelse
     </div>
 
     <div>
