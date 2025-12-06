@@ -15,8 +15,6 @@
         ['label' => 'Всего (месяц)', 'value' => number_format($stats['month_total']), 'colors' => 'from-purple-600 via-fuchsia-600 to-indigo-600', 'icon' => 'M3 12h18M12 3l9 9-9 9'],
         ['label' => 'Сегодня', 'value' => number_format($stats['today_total']), 'colors' => 'from-emerald-600 to-lime-500', 'icon' => 'M5 12l5 5l9 -9'],
         ['label' => 'Суммарное время', 'value' => $stats['total_duration'], 'colors' => 'from-sky-600 to-cyan-500', 'icon' => 'M12 8v4l3 3M21 12a9 9 0 1 1 -18 0a9 9 0 0 1 18 0'],
-        ['label' => 'Входящие (месяц)', 'value' => number_format($stats['incoming_month']), 'colors' => 'from-emerald-500 to-green-600', 'icon' => 'M4 4h5l2 5l-4 2a11 11 0 0 0 5 5l2 -4l5 2'],
-        ['label' => 'Исходящие (месяц)', 'value' => number_format($stats['outgoing_month']), 'colors' => 'from-sky-500 to-blue-600', 'icon' => 'M5 12h14M12 5l7 7l-7 7'],
         ['label' => 'Пропущено (месяц)', 'value' => number_format($stats['missed_month']), 'colors' => 'from-rose-600 to-orange-500', 'icon' => 'M5 5l14 14M19 5l-14 14'],
         ['label' => 'Пропущено сегодня', 'value' => number_format($stats['missed_today']), 'colors' => 'from-amber-500 to-red-600', 'icon' => 'M12 6v6l4 2'],
     ];
@@ -36,10 +34,10 @@
         </div>
     </div>
 
-    <div class="grid gap-3 grid-cols-2">
+    <div class="grid gap-3 grid-cols-1">
         @foreach ($statCards as $card)
             <div
-                class="{{ $card['label']=="Всего (месяц)"?"col-span-full":"col-span-1" }} flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
+                class=" flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
                 <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/25">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
