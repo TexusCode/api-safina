@@ -34,7 +34,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/get-orders', [ApiController::class, 'get_orders']);
 Route::get('/get-customers', [ApiController::class, 'get_customers']);
-Route::get('/call-history-log', [CallHistoryController::class, 'store']);
 
 //Auth Pages
 Route::middleware('guest')->group(function () {
