@@ -29,8 +29,8 @@
         </div>
         <div class="w-full md:w-64">
             <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск</flux:text>
-            <input id="search" type="text" wire:model.debounce.400ms="search"
-                class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
+            <input id="search" type="text" wire:model.live="search"
+                class="mt-2 block w-full rounded-xl border w-full border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Телефон или тип">
         </div>
     </div>
