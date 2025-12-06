@@ -9,7 +9,7 @@
 <div class="space-y-6">
     <div class="grid gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-            <h1 class="text-2xl font-semibold text-gray-900">История звонков</h1>
+            <h1 class="text-2xl font-semibold text-gray-400">История звонков</h1>
             <p class="text-sm text-gray-500">Последние звонки, которые пришли из телефонии.</p>
         </div>
         <div class="w-full md:w-72">
