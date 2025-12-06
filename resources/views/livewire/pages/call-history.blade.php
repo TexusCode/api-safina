@@ -47,9 +47,7 @@
                     <flux:text class="text-sm text-neutral-400">
                         {{ optional($call->started_at)->format('d.m.Y H:i') }}
                     </flux:text>
-                    @if ($call->external_id)
-                        <span class="ml-auto text-xs text-neutral-500">ID: {{ $call->external_id }}</span>
-                    @endif
+                    <span class="ml-auto text-xs text-neutral-500">{{ optional($call->started_at)->diffForHumans(null, false, false) }}</span>
                 </div>
 
                 <div class="mt-4 grid gap-3 sm:grid-cols-2">
