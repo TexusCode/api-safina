@@ -1,12 +1,12 @@
-@php
-    $typeLabels = [
-        'incoming' => 'Входящий',
-        'outgoing' => 'Исходящий',
-        'missed' => 'Пропущенный',
-    ];
-@endphp
 
 <div class="space-y-6">
+    @php
+        $typeLabels = [
+            'incoming' => 'Входящий',
+            'outgoing' => 'Исходящий',
+            'missed' => 'Пропущенный',
+        ];
+    @endphp
     @if ($errorMessage)
         <div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             {{ $errorMessage }}
