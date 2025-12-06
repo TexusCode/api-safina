@@ -40,7 +40,7 @@
         @foreach ($statCards as $card)
             <div
                 class="{{ $card['label']=="Всего (месяц)"?"col-span-full":"col-span-1" }} flex items-center gap-2 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-2 text-white shadow-lg shadow-black/20">
-                <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/25">
+                <span class="flex p-2 items-center justify-center rounded-2xl bg-white/25">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
                         <path d="{{ $card['icon'] }}" />
