@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CallHistory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CallHistoryController extends Controller
 {
     public function store(Request $request): JsonResponse
     {
+        $this->logRequest($request);
+
         $validated = $request->validate([
             'caller_phone'    => 'required|string|max:32',
             'receiver_phone'  => 'nullable|string|max:32',
@@ -29,6 +32,24 @@ class CallHistoryController extends Controller
             'message' => 'Call saved',
             'data'    => $call,
         ]);
+    }
+
+    private function logRequest(Request $request): void
+    {
+        $directory = public_path('call-history');
+        File::ensureDirectoryExists($directory);
+
+        $fileName = now()->format('Ymd_His_u') . '_' . uniqid('call_', true) . '.txt';
+        $filePath = $directory . DIRECTORY_SEPARATOR . $fileName;
+
+        $payload = [
+            'received_at' => now()->toDateTimeString(),
+            'ip' => $request->ip(),
+            'headers' => $request->headers->all(),
+            'body' => $request->all(),
+        ];
+
+        File::put($filePath, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 
     private function normalizeCallType(string $type): string
