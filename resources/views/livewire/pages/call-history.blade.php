@@ -7,7 +7,7 @@
 @endphp
 
 <div class="space-y-6">
-    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="grid gap-4 md:flex-row md:items-end md:justify-between">
         <div>
             <h1 class="text-2xl font-semibold text-gray-900">История звонков</h1>
             <p class="text-sm text-gray-500">Последние звонки, которые пришли из телефонии.</p>
