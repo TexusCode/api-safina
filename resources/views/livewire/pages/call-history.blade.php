@@ -23,12 +23,12 @@
 @endphp
 
 <div class="space-y-5">
-    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="grid gap-4">
         <div>
             <flux:heading size="lg">История звонков</flux:heading>
             <flux:text class="text-sm text-neutral-400">Актуальные звонки из телефонии.</flux:text>
         </div>
-        <div class="w-full md:w-64">
+        <div class="w-full">
             <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск</flux:text>
             <input id="search" type="text" wire:model.debounce.400ms="search"
                 class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-3 grid-cols-2">
         @foreach ($statCards as $card)
             <div
                 class="flex items-center gap-3 rounded-2xl bg-gradient-to-br {{ $card['colors'] }} p-4 text-white shadow-lg shadow-black/20">
