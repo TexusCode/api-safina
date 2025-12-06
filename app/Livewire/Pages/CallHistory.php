@@ -12,8 +12,6 @@ class CallHistory extends Component
     use WithPagination;
 
     public $search = '';
-
-    #[Layout('components.layouts.auth')]
     public function render()
     {
         $search = trim($this->search);
