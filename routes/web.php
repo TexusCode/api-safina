@@ -76,3 +76,4 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 
 
 Route::get('check-customer/{phone}',[CheckCustomerController::class,'checkCustomer'])->name('check-customer');
+Route::get('/call-history-log', [CallHistoryController::class, 'store']);
