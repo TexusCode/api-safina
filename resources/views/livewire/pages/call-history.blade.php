@@ -7,6 +7,12 @@
 @endphp
 
 <div class="space-y-6">
+    @if ($errorMessage)
+        <div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+            {{ $errorMessage }}
+        </div>
+    @endif
+
     <div class="grid gap-4 md:flex-row md:items-end md:justify-between">
         <div>
             <h1 class="text-2xl font-semibold text-gray-200">История звонков</h1>
@@ -57,7 +63,9 @@
         @endforelse
     </div>
 
-    <div>
-        {{ $callHistories->links() }}
-    </div>
+    @if (method_exists($callHistories, 'links'))
+        <div>
+            {{ $callHistories->links() }}
+        </div>
+    @endif
 </div>
