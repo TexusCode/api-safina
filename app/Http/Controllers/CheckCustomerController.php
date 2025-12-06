@@ -10,51 +10,41 @@ class CheckCustomerController extends Controller
 {
     public function checkCustomer(Request $request): JsonResponse
     {
-        $phoneVariants = $this->buildPhoneVariants((string) $request->input('phone', ''));
+        $rawPhone = (string) $request->input('phone', '');
+        $digits = preg_replace('/\D+/', '', $rawPhone);
 
-        if (empty($phoneVariants)) {
+        if ($digits === '') {
             return response()->json(['message' => 'Клиент не найден'], 404);
         }
 
-        $customer = Customer::whereIn('phone', $phoneVariants)->first();
+        $variants = $this->buildVariants($digits);
 
-        if (! $customer) {
-            return response()->json(['message' => 'Клиент не найден'], 404);
+        foreach ($variants as $phone) {
+            $customer = Customer::where('phone', $phone)->first();
+
+            if ($customer) {
+                return response()->json([
+                    'phone' => $customer->phone,
+                    'name'  => $customer->name,
+                ]);
+            }
         }
 
-        return response()->json([
-            'phone' => $customer->phone,
-            'name'  => $customer->name,
-        ]);
+        return response()->json(['message' => 'Клиент не найден'], 404);
     }
 
-    private function buildPhoneVariants(string $phone): array
+    private function buildVariants(string $digits): array
     {
-        $compact = preg_replace('/[\s()-]+/', '', trim($phone));
+        $local = str_starts_with($digits, '992') ? substr($digits, 3) : $digits;
+        $local = $local ?: $digits;
 
-        if ($compact === '' || $compact === null) {
-            return [];
-        }
+        $withCountry = '992' . ltrim($local, '+');
+        $withPlus = '+' . $withCountry;
 
-        $variants = [$compact];
-
-        if ($compact[0] !== '+') {
-            $variants[] = '+' . $compact;
-        }
-
-        $digits = preg_replace('/\D+/', '', $compact);
-
-        if ($digits !== '') {
-            $variants[] = $digits;
-
-            $withCountry = str_starts_with($digits, '992')
-                ? $digits
-                : '992' . $digits;
-
-            $variants[] = $withCountry;
-            $variants[] = '+' . $withCountry;
-        }
-
-        return array_values(array_unique(array_filter($variants)));
+        return array_values(array_unique(array_filter([
+            $withPlus,
+            $withCountry,
+            $local,
+        ])));
     }
 }
