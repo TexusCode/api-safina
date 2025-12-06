@@ -26,6 +26,7 @@ use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
 use App\Livewire\Pages\Users;
 use App\Livewire\Pages\VacuumPanel;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Livewire\Single\AddOrder as SingleAddOrder;
 use App\Livewire\Single\AddSubOrder;
 use App\Livewire\Single\EditOrder as SingleEditOrder;
@@ -76,3 +77,5 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 
 
 Route::get('check-customer/{phone}',[CheckCustomerController::class,'checkCustomer'])->name('check-customer');
+Route::post('/call-history-log', [CallHistoryController::class, 'store'])
+    ->withoutMiddleware([VerifyCsrfToken::class]);
