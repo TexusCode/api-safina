@@ -22,7 +22,7 @@
 @endphp
 
 <div class="space-y-5">
-    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="grid gap-4 md:flex-row md:items-end md:justify-between">
         <div>
             <flux:heading size="lg">История звонков</flux:heading>
             <flux:text class="text-sm text-neutral-400">Актуальные звонки из телефонии.</flux:text>
