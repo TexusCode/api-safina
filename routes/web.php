@@ -52,6 +52,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/rashod', Rashod::class)->name('rashod');
+    Route::get('/call-history', CallHistory::class)->name('call-history');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
@@ -69,7 +70,6 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/sms', Sms::class)->name('sms');
     Route::get('/add-order', AddOrder::class)->name('add-order');
     Route::get('/edit-order', EditOrder::class)->name('edit-order');
-    Route::get('/call-history', CallHistory::class)->name('call-history');
 
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
