@@ -15,6 +15,13 @@ class CallHistoryController extends Controller
 
         $validated = $request->all();
 
+        if (empty($validated)) {
+            $jsonPayload = json_decode($request->getContent(), true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($jsonPayload)) {
+                $validated = $jsonPayload;
+            }
+        }
+
         $validated = [
             'caller_phone'     => $validated['caller_phone'] ?? null,
             'receiver_phone'   => $validated['receiver_phone'] ?? null,
