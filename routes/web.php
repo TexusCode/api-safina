@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
@@ -69,3 +70,6 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
 });
+
+
+Route::get('check-customer',[CheckCustomerController::class,'checkCustomer'])->name('check-customer');

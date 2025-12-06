@@ -170,6 +170,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->save();
 
         $this->chat->deleteMessage($this->messageId)->send();
+        //hello
 
         $this->chat
             ->message("❌ Заказ №{$order->no} был отменён.")
