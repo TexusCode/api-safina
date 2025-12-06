@@ -34,10 +34,22 @@ class CallHistory extends Component
             ->latest('started_at')
             ->paginate(12);
 
+        $monthStart = Carbon::now()->startOfMonth();
+        $now = Carbon::now();
+
         $stats = [
-            'total' => CallHistoryModel::count(),
-            'today' => CallHistoryModel::whereDate('started_at', Carbon::today())->count(),
-            'duration' => gmdate('H:i:s', (int) CallHistoryModel::sum('duration_seconds')),
+            'month_total' => CallHistoryModel::whereBetween('started_at', [$monthStart, $now])->count(),
+            'today_total' => CallHistoryModel::whereDate('started_at', Carbon::today())->count(),
+            'total_duration' => gmdate('H:i:s', (int) CallHistoryModel::sum('duration_seconds')),
+            'incoming_month' => CallHistoryModel::where('call_type', 'incoming')
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'missed_month' => CallHistoryModel::where('call_type', 'missed')
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'missed_today' => CallHistoryModel::where('call_type', 'missed')
+                ->whereDate('started_at', Carbon::today())
+                ->count(),
         ];
 
         return view('livewire.pages.call-history', [
