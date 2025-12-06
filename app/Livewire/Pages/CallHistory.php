@@ -37,6 +37,16 @@ class CallHistory extends Component
         $monthStart = Carbon::now()->startOfMonth();
         $now = Carbon::now();
 
+        $missedScope = function ($builder) {
+            return $builder->where(function ($q) {
+                $q->where('call_type', 'missed')
+                    ->orWhere(function ($sub) {
+                        $sub->where('call_type', 'outgoing')
+                            ->where('duration_seconds', 0);
+                    });
+            });
+        };
+
         $stats = [
             'month_total' => CallHistoryModel::whereBetween('started_at', [$monthStart, $now])->count(),
             'today_total' => CallHistoryModel::whereDate('started_at', Carbon::today())->count(),
@@ -44,10 +54,14 @@ class CallHistory extends Component
             'incoming_month' => CallHistoryModel::where('call_type', 'incoming')
                 ->whereBetween('started_at', [$monthStart, $now])
                 ->count(),
-            'missed_month' => CallHistoryModel::where('call_type', 'missed')
+            'outgoing_month' => CallHistoryModel::where('call_type', 'outgoing')
+                ->where('duration_seconds', '>', 0)
                 ->whereBetween('started_at', [$monthStart, $now])
                 ->count(),
-            'missed_today' => CallHistoryModel::where('call_type', 'missed')
+            'missed_month' => $missedScope(CallHistoryModel::query())
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'missed_today' => $missedScope(CallHistoryModel::query())
                 ->whereDate('started_at', Carbon::today())
                 ->count(),
         ];
