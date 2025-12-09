@@ -1,4 +1,18 @@
 <div>
+    <div class="grid gap-3 my-4 md:grid-cols-2">
+        <div>
+            <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск по телефону</flux:text>
+            <input type="text" wire:model.live="searchPhone"
+                class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Например: +992...">
+        </div>
+        <div>
+            <flux:text class="text-xs uppercase tracking-wide text-neutral-500">Поиск по номеру заказа</flux:text>
+            <input type="text" wire:model.live="searchOrder"
+                class="mt-2 block w-full rounded-xl border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Например: 123">
+        </div>
+    </div>
     <flux:tab.group class="my-5">
         <!-- tabs -->
         <flux:tabs variant="segmented" class="w-full" wire:model="tab">
