@@ -29,6 +29,7 @@ class AddOrder extends Component
                 'name' => $this->customer_name,
                 'phone' => $this->customer_phone,
                 'adress' => $this->customer_address,
+                'sms_status'=>true
             ]);
         }
         $ord = Order::create([

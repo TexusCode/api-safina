@@ -20,6 +20,10 @@
                     </a>
                 </div>
                 @if (Auth::user()->role == 'admin')
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
                 <div class="flex flex-col jkwm1">
                     <button type="button" wire:confirm="Точно хотите удалить" wire:click="deleteorder"
                         class="an00p inline-flex items-center n9hej xs2f2 sikx1 pb094 rsdjd azddh bg-red-500 kew0r hover:bg-red-600  disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden zx3z8 vtle8">
@@ -89,6 +93,9 @@
             =="Доставлено"?'disabled':'' }}>
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
+            <option value="В стирке">В стирке</option>
+            <option value="В пылесосе">В пылесосе</option>
+            <option value="Повторныя стирка">Повторныя стирка</option>
             <option value="Готово">Готово</option>
             <option value="Готово / Отправить на машину №3">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>

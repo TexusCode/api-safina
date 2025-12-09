@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\CallHistoryController;
+use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
 use App\Livewire\Pages\AddOrder;
 use App\Livewire\Pages\Applicant;
 use App\Livewire\Pages\BulkSms;
+use App\Livewire\Pages\CallHistory;
 use App\Livewire\Pages\Customers;
 use App\Livewire\Pages\Deliver;
 use App\Livewire\Pages\EditOrder;
@@ -22,6 +25,8 @@ use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
 use App\Livewire\Pages\Users;
+use App\Livewire\Pages\VacuumPanel;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Livewire\Single\AddOrder as SingleAddOrder;
 use App\Livewire\Single\AddSubOrder;
 use App\Livewire\Single\EditOrder as SingleEditOrder;
@@ -39,6 +44,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/add-order-single', SingleAddOrder::class)->name('add-order-single');
 Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-single');
 Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
+Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
@@ -46,6 +52,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/rashod', Rashod::class)->name('rashod');
+    Route::get('/call-historys', CallHistory::class)->name('call-history');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
@@ -67,3 +74,8 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');
     Route::get('/order-view/{id}', OrderView::class)->name('order-view');
 });
+
+
+Route::get('check-customer/{phone}',[CheckCustomerController::class,'checkCustomer'])->name('check-customer');
+Route::post('/call-history-log', [CallHistoryController::class, 'store'])
+    ->withoutMiddleware([VerifyCsrfToken::class]);
