@@ -1,40 +1,42 @@
 <div class="space-y-4">
     <div class="bg-neutral-800 rounded-xl overflow-hidden w-full space-y-2 border border-neutral-700">
         @if (Auth::user()->role == 'admin')
-        <div class="bg-blue-600 rounded-xl grid grid-cols-2 px-2 py-4">
-            <div class="text-white border-r-1 border-neutral-300 flex gap-2 justify-center items-center">
-                <div class="p-2 bg-white rounded-full text-green-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-trending-up">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 17l6 -6l4 4l8 -8" />
-                        <path d="M14 7l7 0l0 7" />
-                    </svg>
-                </div>
-                <div>
-                    <flux:text>Заработано</flux:text>
+            <div class="bg-blue-600 rounded-xl grid grid-cols-2 px-2 py-4">
+                <div class="text-white border-r-1 border-neutral-300 flex gap-2 justify-center items-center">
+                    <div class="p-2 bg-white rounded-full text-green-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-trending-up">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 17l6 -6l4 4l8 -8" />
+                            <path d="M14 7l7 0l0 7" />
+                        </svg>
+                    </div>
+                    <div>
+                        <flux:text>Заработано</flux:text>
 
-                    <flux:heading size="xl">{{ round($total) }}c</flux:heading>
+                        <flux:heading size="xl">{{ round($total) }}c</flux:heading>
+                    </div>
+                </div>
+                <div class="text-white flex gap-2 justify-center items-center">
+                    <div class="p-2 bg-white rounded-full text-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-trending-down">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 7l6 6l4 -4l8 8" />
+                            <path d="M21 10l0 7l-7 0" />
+                        </svg>
+                    </div>
+                    <div>
+                        <flux:text>Затрачено</flux:text>
+
+                        <flux:heading size="xl">{{ round($expenses) }}c</flux:heading>
+                    </div>
                 </div>
             </div>
-            <div class="text-white flex gap-2 justify-center items-center">
-                <div class="p-2 bg-white rounded-full text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-trending-down">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 7l6 6l4 -4l8 8" />
-                        <path d="M21 10l0 7l-7 0" />
-                    </svg>
-                </div>
-                <div>
-                    <flux:text>Затрачено</flux:text>
-
-                    <flux:heading size="xl">{{ round($expenses) }}c</flux:heading>
-                </div>
-            </div>
-        </div>
         @endif
         <div class="grid grid-cols-4 w-full p-2 gap-2">
             <a href="{{ route('orders') }}"
@@ -98,8 +100,9 @@
             <a href="{{ route('sms') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-device-mobile-message">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M11 3h10v8h-3l-4 2v-2h-3z" />
@@ -111,37 +114,22 @@
             <a href="{{ route('bulk-sms') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                     <path d="M3 7l9 6l9 -6" />
                 </svg>
                 <span class="text-white">Рассылка</span>
             </a>
-            <a href="{{ route('todos') }}"
-                class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
-                <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-tools">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
-                    <path d="M14.5 5.5l4 4" />
-                    <path d="M12 8l-5 -5l-4 4l5 5" />
-                    <path d="M7 8l-1.5 1.5" />
-                    <path d="M16 12l5 5l-4 4l-5 -5" />
-                    <path d="M16 17l-1.5 1.5" />
-                </svg>
-                <span class="text-white">Заметки</span>
-            </a>
+
             <a href="{{ route('rashod') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                     <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -153,11 +141,12 @@
             <a href="{{ route('call-history') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-phone-call">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-phone-call">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 4h5l2 5l-4 2a11 11 0 0 0 5 5l2 -4l5 2v5a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                    <path
+                        d="M4 4h5l2 5l-4 2a11 11 0 0 0 5 5l2 -4l5 2v5a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                     <path d="M15 7a2 2 0 0 1 2 2" />
                     <path d="M15 3a6 6 0 0 1 6 6" />
                 </svg>
@@ -166,59 +155,59 @@
 
         </div>
     </div>
-    @if(Auth::user()->role == 'admin')
-    <div class="bg-neutral-800 rounded-xl grid grid-cols-3 p-3 border border-neutral-700">
-        <!-- Средний чек -->
-        <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
-            <flux:text class="text-center max-w-14 text-sm/4">Средный чек в месяц</flux:text>
+    @if (Auth::user()->role == 'admin')
+        <div class="bg-neutral-800 rounded-xl grid grid-cols-3 p-3 border border-neutral-700">
+            <!-- Средний чек -->
+            <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
+                <flux:text class="text-center max-w-14 text-sm/4">Средный чек в месяц</flux:text>
 
-            <flux:heading size="xl" class="mb-1">{{ round($avgCheck) }}c</flux:heading>
+                <flux:heading size="xl" class="mb-1">{{ round($avgCheck) }}c</flux:heading>
 
-            <div class="flex items-center gap-2">
-                @if($diffCheck >= 0)
-                <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffCheck }}%</span>
-                @else
-                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
-                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffCheck }}%</span>
-                @endif
+                <div class="flex items-center gap-2">
+                    @if ($diffCheck >= 0)
+                        <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
+                        <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffCheck }}%</span>
+                    @else
+                        <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                        <span class="text-sm text-red-600 dark:text-red-500">{{ $diffCheck }}%</span>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Средний заказов в день -->
+            <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
+                <flux:text class="text-center max-w-14 text-sm/4">Средный заказов в день</flux:text>
+
+                <flux:heading size="xl" class="mb-1">{{ round($avgPerDay) }}</flux:heading>
+
+                <div class="flex items-center gap-2">
+                    @if ($diffPerDay >= 0)
+                        <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
+                        <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffPerDay }}%</span>
+                    @else
+                        <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                        <span class="text-sm text-red-600 dark:text-red-500">{{ $diffPerDay }}%</span>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Средний заработок в день -->
+            <div class="flex flex-col items-center justify-center">
+                <flux:text class="text-center max-w-14 text-sm/4">Средный заработок в день</flux:text>
+
+                <flux:heading size="xl" class="mb-1">{{ round($avgEarningPerDay) }}c</flux:heading>
+
+                <div class="flex items-center gap-2">
+                    @if ($diffEarningPerDay >= 0)
+                        <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
+                        <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffEarningPerDay }}%</span>
+                    @else
+                        <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
+                        <span class="text-sm text-red-600 dark:text-red-500">{{ $diffEarningPerDay }}%</span>
+                    @endif
+                </div>
             </div>
         </div>
-
-        <!-- Средний заказов в день -->
-        <div class="flex flex-col items-center justify-center border-r-1 border-neutral-300">
-            <flux:text class="text-center max-w-14 text-sm/4">Средный заказов в день</flux:text>
-
-            <flux:heading size="xl" class="mb-1">{{ round($avgPerDay) }}</flux:heading>
-
-            <div class="flex items-center gap-2">
-                @if($diffPerDay >= 0)
-                <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffPerDay }}%</span>
-                @else
-                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
-                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffPerDay }}%</span>
-                @endif
-            </div>
-        </div>
-
-        <!-- Средний заработок в день -->
-        <div class="flex flex-col items-center justify-center">
-            <flux:text class="text-center max-w-14 text-sm/4">Средный заработок в день</flux:text>
-
-            <flux:heading size="xl" class="mb-1">{{ round($avgEarningPerDay) }}c</flux:heading>
-
-            <div class="flex items-center gap-2">
-                @if($diffEarningPerDay >= 0)
-                <flux:icon.arrow-trending-up variant="micro" class="text-green-600 dark:text-green-500" />
-                <span class="text-sm text-green-600 dark:text-green-500">+{{ $diffEarningPerDay }}%</span>
-                @else
-                <flux:icon.arrow-trending-down variant="micro" class="text-red-600 dark:text-red-500" />
-                <span class="text-sm text-red-600 dark:text-red-500">{{ $diffEarningPerDay }}%</span>
-                @endif
-            </div>
-        </div>
-    </div>
     @endif
 
     <div class="grid grid-cols-2 gap-4">
@@ -227,8 +216,9 @@
         <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M3 3h18l-2 13H5L3 3z"></path>
                     <circle cx="9" cy="20" r="1"></circle>
                     <circle cx="15" cy="20" r="1"></circle>
@@ -244,8 +234,9 @@
         <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -260,8 +251,9 @@
         <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="M12 6v6l4 2"></path>
                 </svg>
@@ -276,8 +268,9 @@
         <div class="tbd2k i1iav aqyoh rsdjd kvbsq er6t7 hj07t dark:bg-neutral-800 dark:border-neutral-700">
             <div class="sm:flex o1uif">
                 <svg class="s6z6a wyf4w lwpi2 e731n odrp3 jn2lz dark:text-neutral-600"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M3 3h18l-2 13H5L3 3z"></path>
                     <circle cx="9" cy="20" r="1"></circle>
                     <circle cx="15" cy="20" r="1"></circle>
