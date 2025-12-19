@@ -1,7 +1,7 @@
 <div class="space-y-6 h-screen overflow-y-scroll">
     <div>
         <h1 class="text-2xl font-semibold text-gray-400">Панель пылесосчика</h1>
-        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных ровно 4 дня назад и ещё
+        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных 4 или 10 дней назад и ещё
             находящихся в стирке.</p>
     </div>
     @livewire('components.alert')

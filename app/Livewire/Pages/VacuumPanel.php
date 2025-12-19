@@ -41,8 +41,14 @@ class VacuumPanel extends Component
 
     public function render()
     {
-        $fourDaysAgoStart = now()->subDays(4)->startOfDay();
-        $fourDaysAgoEnd = $fourDaysAgoStart->copy()->endOfDay();
+        $dayWindows = collect([4, 10])->map(function (int $days) {
+            $start = now()->subDays($days)->startOfDay();
+
+            return [
+                'start' => $start,
+                'end' => $start->copy()->endOfDay(),
+            ];
+        });
         $repeatWashCooldown = now()->subDay();
 
         $suborders = Suborder::with('order')
@@ -50,8 +56,13 @@ class VacuumPanel extends Component
             ->where('type', 'Колин')
             ->whereNotNull('width')
             ->whereNotNull('height')
-            ->whereHas('order', function ($query) use ($fourDaysAgoStart, $fourDaysAgoEnd, $repeatWashCooldown) {
-                $query->whereBetween('created_at', [$fourDaysAgoStart, $fourDaysAgoEnd])
+            ->whereHas('order', function ($query) use ($dayWindows, $repeatWashCooldown) {
+                $query->where(function ($dateQuery) use ($dayWindows) {
+                    foreach ($dayWindows as $index => $window) {
+                        $method = $index === 0 ? 'whereBetween' : 'orWhereBetween';
+                        $dateQuery->{$method}('created_at', [$window['start'], $window['end']]);
+                    }
+                })
                     ->where(function ($orderQuery) use ($repeatWashCooldown) {
                         $orderQuery->where('status', '!=', 'повторная стирка')
                             ->orWhere('updated_at', '<=', $repeatWashCooldown);
