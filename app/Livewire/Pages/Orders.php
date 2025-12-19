@@ -46,7 +46,7 @@ class Orders extends Component
 
         $ready = (clone $ordersBaseQuery)
             ->when($lastStart, fn ($query) => $query->where('id', '>=', $lastStart->id))
-            ->whereNotIn('status', ['Доставлено', 'В ожидании'])
+            ->whereNotIn('status', ['Доставлено', 'В ожидании', 'Отменено', 'Готово'])
             ->orderBy('id', 'desc')
             ->paginate(50, ['*'], 'readyPage');
 

@@ -16,7 +16,7 @@
     <flux:tab.group class="my-5">
         <!-- tabs -->
         <flux:tabs variant="segmented" class="w-full" wire:model="tab">
-            <flux:tab name="profile" icon="calendar">Текуший месяц</flux:tab>
+            <flux:tab name="profile" icon="calendar">Месяц</flux:tab>
             <flux:tab name="ready" icon="check-badge">Готовые</flux:tab>
             <flux:tab name="account" icon="archive-box">Архив</flux:tab>
         </flux:tabs>
@@ -44,18 +44,6 @@
                                         @if ($order->status == 'Получено')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-blue-500 rounded-sm group-hover:text-white">Получено</span>
-                                        @endif
-                                        @if ($order->status == 'Готово')
-                                            | <span
-                                                class="text-xs px-2 py-0.5 bg-purple-500 rounded-sm group-hover:text-white">Готово</span>
-                                        @endif
-                                        @if ($order->status == 'Доставлено')
-                                            | <span
-                                                class="text-xs px-2 py-0.5 bg-green-500 rounded-sm group-hover:text-white">Доставлено</span>
-                                        @endif
-                                        @if ($order->status == 'Отменено')
-                                            | <span
-                                                class="text-xs px-2 py-0.5 bg-red-500 rounded-sm group-hover:text-white">Отменено</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
