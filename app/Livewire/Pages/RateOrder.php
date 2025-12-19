@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Models\Order;
 use App\Models\Review;
+use App\Support\ReviewLink;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -17,8 +18,14 @@ class RateOrder extends Component
     public bool $alreadyReviewed = false;
 
     #[Layout('components.layouts.auth')]
-    public function mount(int $orderId): void
+    public function mount(string $token): void
     {
+        $orderId = ReviewLink::verifyToken($token);
+
+        if (! $orderId) {
+            return;
+        }
+
         $this->order = Order::with('customer')->find($orderId);
 
         if (! $this->order) {

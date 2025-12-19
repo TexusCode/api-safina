@@ -2,9 +2,11 @@
 
 namespace App\Texhub;
 
+use App\Http\Controllers\SmsController;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Suborder;
+use App\Support\ReviewLink;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -205,8 +207,16 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
         $this->chat->deleteMessage($this->messageId)->send();
 
+        $reviewUrl = ReviewLink::urlForOrder($order->id);
+
+        // SMS с просьбой оценить
+        $sms = new SmsController();
+        $smsMessage = "🙏 Спасибо, что выбрали Safina Cleaning! Нам важно ваше мнение.\n"
+            . "Пожалуйста, оцените нашу работу по заказу №{$order->no} и поделитесь впечатлением: {$reviewUrl}";
+        $sms->sendSms($order->customer->phone, $smsMessage);
+
         $this->chat
-            ->message("✅ Заказ №{$order->no} успешно доставлено!")
+            ->message("✅ Заказ №{$order->no} успешно доставлен!")
             ->send();
     }
     public function done($id): void

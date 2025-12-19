@@ -47,7 +47,7 @@ Route::get('/add-order-single', SingleAddOrder::class)->name('add-order-single')
 Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-single');
 Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
 Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
-Route::get('/rate/{orderId}', RateOrder::class)->name('rate-order');
+Route::get('/rate/{token}', RateOrder::class)->name('rate-order');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
