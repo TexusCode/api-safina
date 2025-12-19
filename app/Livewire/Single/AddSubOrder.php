@@ -70,6 +70,7 @@ class AddSubOrder extends Component
         }
         $status = $this->status ?? 'в стирке';
         $isPrimary = true;
+        $polka = $this->telesh ?: Suborder::determinePolkaForOrderNo($order->no);
 
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
@@ -83,7 +84,7 @@ class AddSubOrder extends Component
                 'height'   => $this->height,
                 'square'   => $square,
                 'enum'     => $square * $price,
-                'polka' => $this->telesh,
+                'polka' => $polka,
                 'status'   => $status,
                 'is_primary' => $isPrimary,
             ]);
@@ -99,7 +100,7 @@ class AddSubOrder extends Component
                 'height'   => $this->height,
                 'square'   => $square,
                 'enum'     => $square * 20,
-                'polka' => $this->telesh,
+                'polka' => $polka,
                 'status'   => $status,
                 'is_primary' => $isPrimary,
             ]);
@@ -111,7 +112,7 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity / 100,
                     'enum' => ($this->quantity / 100) * 20,
-                    'polka' => $this->telesh,
+                    'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
                 ]
@@ -124,7 +125,7 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 20,
-                    'polka' => $this->telesh,
+                    'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
                 ]
@@ -137,7 +138,7 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 50,
-                    'polka' => $this->telesh,
+                    'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
                 ]
@@ -150,7 +151,7 @@ class AddSubOrder extends Component
                     'type' => $this->type,
                     'quantity' => $this->quantity,
                     'enum' => $this->quantity * 35,
-                    'polka' => $this->telesh,
+                    'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
                 ]
