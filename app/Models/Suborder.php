@@ -17,6 +17,7 @@ class Suborder extends Model
         'square',
         'enum',
         'polka',
+        'teleshka',
         'status',
         'is_primary',
     ];

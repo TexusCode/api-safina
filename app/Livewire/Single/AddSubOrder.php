@@ -70,7 +70,7 @@ class AddSubOrder extends Component
         }
         $status = $this->status ?? 'в стирке';
         $isPrimary = true;
-        $polka = $this->telesh ?: Suborder::determinePolkaForOrderNo($order->no);
+        $polka = $this->telesh;
 
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
@@ -79,13 +79,13 @@ class AddSubOrder extends Component
 
             Suborder::create([
                 'order_id' => $order->id,
-                'type'     => $this->type,
-                'width'    => $this->width,
-                'height'   => $this->height,
-                'square'   => $square,
-                'enum'     => $square * $price,
-                'polka' => $polka,
-                'status'   => $status,
+                'type' => $this->type,
+                'width' => $this->width,
+                'height' => $this->height,
+                'square' => $square,
+                'enum' => $square * $price,
+                'teleshka' => $polka,
+                'status' => $status,
                 'is_primary' => $isPrimary,
             ]);
         }
@@ -95,13 +95,13 @@ class AddSubOrder extends Component
 
             Suborder::create([
                 'order_id' => $order->id,
-                'type'     => $this->type,
-                'width'    => $this->width,
-                'height'   => $this->height,
-                'square'   => $square,
-                'enum'     => $square * 20,
+                'type' => $this->type,
+                'width' => $this->width,
+                'height' => $this->height,
+                'square' => $square,
+                'enum' => $square * 20,
                 'polka' => $polka,
-                'status'   => $status,
+                'status' => $status,
                 'is_primary' => $isPrimary,
             ]);
         }

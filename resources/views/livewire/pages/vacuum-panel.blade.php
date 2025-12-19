@@ -1,7 +1,8 @@
 <div class="space-y-6 h-screen overflow-y-scroll">
     <div>
         <h1 class="text-2xl font-semibold text-gray-400">Панель пылесосчика</h1>
-        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных ровно 4 дня назад и ещё находящихся в стирке.</p>
+        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных ровно 4 дня назад и ещё
+            находящихся в стирке.</p>
     </div>
     @livewire('components.alert')
 
@@ -15,7 +16,8 @@
                 @php
                     $size = $suborder->width . ' × ' . $suborder->height . ' см';
                 @endphp
-                <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm" wire:key="suborder-{{ $suborder->id }}">
+                <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+                    wire:key="suborder-{{ $suborder->id }}">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <p class="text-xs uppercase tracking-wide text-gray-500">Тип</p>
@@ -43,12 +45,17 @@
                             <dd class="text-gray-900">№{{ $suborder->order->no ?? '—' }}</dd>
                         </div>
                         <div class="flex justify-between">
-                            <dt class="text-gray-500">Тележка</dt>
+                            <dt class="text-gray-500">Полка</dt>
                             <dd class="text-gray-900">{{ $suborder->polka ?? '—' }}</dd>
                         </div>
                         <div class="flex justify-between">
+                            <dt class="text-gray-500">Тележка</dt>
+                            <dd class="text-gray-900">{{ $suborder->teleshka ?? '—' }}</dd>
+                        </div>
+                        <div class="flex justify-between">
                             <dt class="text-gray-500">Добавлен</dt>
-                            <dd class="text-gray-900">{{ optional(optional($suborder->order)->created_at)->format('d.m.Y H:i') }}</dd>
+                            <dd class="text-gray-900">
+                                {{ optional(optional($suborder->order)->created_at)->format('d.m.Y H:i') }}</dd>
                         </div>
                         <div class="flex justify-between">
                             <dt class="text-gray-500">Статус</dt>

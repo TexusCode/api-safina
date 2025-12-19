@@ -20,7 +20,6 @@
                     </a>
                 </div>
                 @if (Auth::user()->role == 'admin')
-
                     <div class="flex flex-col jkwm1">
                         <button type="button" wire:confirm="Точно хотите удалить" wire:click="deleteorder"
                             class="an00p inline-flex items-center n9hej xs2f2 sikx1 pb094 rsdjd azddh bg-red-500 kew0r hover:bg-red-600  disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden zx3z8 vtle8">
@@ -82,10 +81,12 @@
 
     </div>
     <div class="grid grid-cols-2 gap-2">
-        <select wire:model.live="status" class="{{ trim($order->status) == 'Получено' ? 'col-span-1' : 'col-span-2' }} py-3 px-4 pe-9
+        <select wire:model.live="status"
+            class="{{ trim($order->status) == 'Получено' ? 'col-span-1' : 'col-span-2' }} py-3 px-4 pe-9
             block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500
             disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
-            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" {{ in_array($order->status, ['Готово', 'Готово / Отправить на машину №3', 'Доставлено']) ? 'disabled' : '' }}>
+            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+            {{ in_array($order->status, ['Готово', 'Готово / Отправить на машину №3', 'Доставлено']) ? 'disabled' : '' }}>
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
             <option value="В стирке">В стирке</option>
@@ -124,8 +125,8 @@
                             @if ($item->type == 'Курпача')
                                 <span>{{ $item->quantity }}м</span>
                             @endif
-                            @if ($item->polka)
-                                <span>T: {{ $item->polka }}</span>
+                            @if ($item->teleshka)
+                                <span>T: {{ $item->teleshka ?? '- ?>' }}</span>
                             @endif
                             @if ($item->quantity)
                                 <span>{{ $item->quantity }}шт</span>
@@ -138,9 +139,10 @@
                             @endif
                             <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
                                     wire:click="delete({{ $item->id }})" class="text-red-500"><svg class="size-4"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-x">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M18 6l-12 12" />
                                         <path d="M6 6l12 12" />
@@ -259,8 +261,8 @@
 
     {{-- Modal --}}
 
-    <div x-data="{ open: @entangle('show') }" x-show="open"
-        class="fixed inset-0 z-50 flex items-center justify-center p-3" x-cloak>
+    <div x-data="{ open: @entangle('show') }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center p-3"
+        x-cloak>
         <!-- Тёмный фон -->
         <div class="absolute inset-0 bg-black/70" @click="$wire.close()"></div>
 

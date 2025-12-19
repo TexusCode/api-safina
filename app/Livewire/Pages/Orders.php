@@ -44,6 +44,12 @@ class Orders extends Component
             ->orderBy('no', 'desc')
             ->paginate(50, ['*'], 'ordersPage');
 
+        $ready = (clone $ordersBaseQuery)
+            ->when($lastStart, fn ($query) => $query->where('id', '>=', $lastStart->id))
+            ->whereNotIn('status', ['Доставлено', 'В ожидании'])
+            ->orderBy('id', 'desc')
+            ->paginate(50, ['*'], 'readyPage');
+
         $archive = (clone $ordersBaseQuery)
             ->when($lastStart, fn ($query) => $query->where('id', '<', $lastStart->id)) // архив
             ->orderByRaw($pendingFirst)
@@ -52,6 +58,7 @@ class Orders extends Component
 
         return view('livewire.pages.orders', [
             'orders' => $orders,
+            'ready' => $ready,
             'archive' => $archive,
         ]);
     }
@@ -59,12 +66,14 @@ class Orders extends Component
     public function updatingSearchPhone(): void
     {
         $this->resetPage('ordersPage');
+        $this->resetPage('readyPage');
         $this->resetPage('archivePage');
     }
 
     public function updatingSearchOrder(): void
     {
         $this->resetPage('ordersPage');
+        $this->resetPage('readyPage');
         $this->resetPage('archivePage');
     }
 
