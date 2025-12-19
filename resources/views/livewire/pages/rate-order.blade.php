@@ -50,7 +50,7 @@
                     <div class="space-y-2">
                         <label class="text-sm text-gray-200">Ваш отзыв</label>
                         <textarea wire:model.defer="feedback" rows="4"
-                            class="w-full rounded-xl border border-neutral-800 text-black  bg-neutral-900 text-sm  placeholder:text-gray-500 focus:border-amber-400 focus:ring-amber-400"
+                            class="w-full rounded-xl border border-neutral-800 bg-neutral-900 text-sm text-white placeholder:text-gray-500 focus:border-amber-400 focus:ring-amber-400"
                             placeholder="Расскажите, что вам понравилось или что можно улучшить"></textarea>
                         @error('feedback')
                             <p class="text-xs text-red-400">{{ $message }}</p>
