@@ -4,7 +4,7 @@
             <img src="https://safina-cleaning.tj/public/assets/logo.png" alt="Safina Cleaning" class="h-14">
             <div class="text-center space-y-1">
                 <h1 class="text-2xl font-semibold">Оцените нашу работу</h1>
-                @if($order)
+                @if ($order)
                     <p class="text-sm text-gray-400">Заказ №{{ $order->no }}</p>
                 @else
                     <p class="text-sm text-red-400">Заказ не найден</p>
@@ -29,14 +29,13 @@
                         <p class="text-sm text-gray-300 text-center">Выберите оценку</p>
                         <div class="grid grid-cols-5 gap-2">
                             @foreach ([
-                                1 => '😞',
-                                2 => '😕',
-                                3 => '😐',
-                                4 => '😊',
-                                5 => '🤩',
-                            ] as $value => $emoji)
-                                <button type="button"
-                                    wire:click="$set('rating', {{ $value }})"
+        1 => '😞',
+        2 => '😕',
+        3 => '😐',
+        4 => '😊',
+        5 => '🤩',
+    ] as $value => $emoji)
+                                <button type="button" wire:click="$set('rating', {{ $value }})"
                                     class="flex flex-col items-center gap-1 rounded-xl border p-3 transition {{ $rating === $value ? 'bg-amber-500/20 border-amber-400' : 'bg-neutral-900 border-neutral-800 hover:border-amber-500/60' }}">
                                     <span class="text-2xl">{{ $emoji }}</span>
                                     <span class="text-xs text-gray-300">{{ $value }}</span>
@@ -51,7 +50,7 @@
                     <div class="space-y-2">
                         <label class="text-sm text-gray-200">Ваш отзыв</label>
                         <textarea wire:model.defer="feedback" rows="4"
-                            class="w-full rounded-xl border border-neutral-800 bg-neutral-900 text-sm text-white placeholder:text-gray-500 focus:border-amber-400 focus:ring-amber-400"
+                            class="w-full rounded-xl border border-neutral-800 text-black  bg-neutral-900 text-sm  placeholder:text-gray-500 focus:border-amber-400 focus:ring-amber-400"
                             placeholder="Расскажите, что вам понравилось или что можно улучшить"></textarea>
                         @error('feedback')
                             <p class="text-xs text-red-400">{{ $message }}</p>

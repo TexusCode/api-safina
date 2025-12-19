@@ -50,4 +50,8 @@
             </div>
         @endforelse
     </div>
+
+    <div>
+        {{ $reviews->links() }}
+    </div>
 </div>
