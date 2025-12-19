@@ -63,26 +63,32 @@ class VacuumPanel extends Component
             )
             ->get();
 
-        $this->assignPolkaIfMissing($suborders);
+        $this->assignPolkaIfNeeded($suborders);
 
         return view('livewire.pages.vacuum-panel', [
             'suborders' => $suborders,
         ]);
     }
 
-    private function assignPolkaIfMissing(Collection $suborders): void
+    private function assignPolkaIfNeeded(Collection $suborders): void
     {
         $suborders->each(function (Suborder $suborder) {
-            if ($suborder->polka || ! $suborder->order) {
+            if (! $suborder->order) {
                 return;
             }
 
             $polka = Suborder::determinePolkaForOrderNo($suborder->order->no);
 
-            if ($polka) {
-                $suborder->update(['polka' => $polka]);
-                $suborder->polka = $polka;
+            if (! $polka) {
+                return;
             }
+
+            if ($suborder->polka === $polka) {
+                return;
+            }
+
+            $suborder->update(['polka' => $polka]);
+            $suborder->polka = $polka;
         });
     }
 }
