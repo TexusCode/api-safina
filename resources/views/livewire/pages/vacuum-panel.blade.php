@@ -13,12 +13,7 @@
         <div class="grid gap-4 ">
             @foreach ($suborders as $suborder)
                 @php
-                    $size = '—';
-                    if (!is_null($suborder->width) && !is_null($suborder->height)) {
-                        $size = $suborder->width . ' × ' . $suborder->height . ' см';
-                    } elseif (!is_null($suborder->quantity)) {
-                        $size = rtrim(rtrim(number_format($suborder->quantity, 2, '.', ''), '0'), '.') . ' шт';
-                    }
+                    $size = $suborder->width . ' × ' . $suborder->height . ' см';
                 @endphp
                 <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm" wire:key="suborder-{{ $suborder->id }}">
                     <div class="flex items-start justify-between gap-4">

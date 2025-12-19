@@ -47,6 +47,9 @@ class VacuumPanel extends Component
 
         $suborders = Suborder::with('order')
             ->where('status', '!=', 'готов')
+            ->where('type', 'Колин')
+            ->whereNotNull('width')
+            ->whereNotNull('height')
             ->whereHas('order', function ($query) use ($fourDaysAgoStart, $fourDaysAgoEnd, $repeatWashCooldown) {
                 $query->whereBetween('created_at', [$fourDaysAgoStart, $fourDaysAgoEnd])
                     ->where(function ($orderQuery) use ($repeatWashCooldown) {
