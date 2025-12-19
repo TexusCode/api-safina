@@ -21,6 +21,7 @@ use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\Rashod;
+use App\Livewire\Pages\RateOrder;
 use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
@@ -45,6 +46,7 @@ Route::get('/add-order-single', SingleAddOrder::class)->name('add-order-single')
 Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-single');
 Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
 Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
+Route::get('/rate/{orderId}', RateOrder::class)->name('rate-order');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
