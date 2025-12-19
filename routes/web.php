@@ -22,6 +22,7 @@ use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\Rashod;
 use App\Livewire\Pages\RateOrder;
+use App\Livewire\Pages\Reviews;
 use App\Livewire\Pages\Settings;
 use App\Livewire\Pages\Sms;
 use App\Livewire\Pages\Todos;
@@ -55,6 +56,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/users', Users::class)->name('users');
     Route::get('/rashod', Rashod::class)->name('rashod');
     Route::get('/call-historys', CallHistory::class)->name('call-history');
+    Route::get('/reviews', Reviews::class)->name('reviews');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
