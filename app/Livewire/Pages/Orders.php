@@ -39,19 +39,19 @@ class Orders extends Component
         $pendingFirst = "CASE WHEN status = 'В ожидании' THEN 0 ELSE 1 END";
 
         $orders = (clone $ordersBaseQuery)
-            ->when($lastStart, fn ($query) => $query->where('id', '>=', $lastStart->id)) // активные
+            ->when($lastStart, fn($query) => $query->where('id', '>=', $lastStart->id)) // активные
             ->orderByRaw($pendingFirst)
             ->orderBy('no', 'desc')
             ->paginate(50, ['*'], 'ordersPage');
 
         $ready = (clone $ordersBaseQuery)
-            ->when($lastStart, fn ($query) => $query->where('id', '>=', $lastStart->id))
+            ->when($lastStart, fn($query) => $query->where('id', '>=', $lastStart->id))
             ->whereNotIn('status', ['Доставлено', 'В ожидании', 'Отменено', 'Готово'])
             ->orderBy('id', 'desc')
             ->paginate(50, ['*'], 'readyPage');
 
         $archive = (clone $ordersBaseQuery)
-            ->when($lastStart, fn ($query) => $query->where('id', '<', $lastStart->id)) // архив
+            ->when($lastStart, fn($query) => $query->where('id', '<', $lastStart->id)) // архив
             ->orderByRaw($pendingFirst)
             ->orderBy('id', 'desc')
             ->paginate(50, ['*'], 'archivePage');
