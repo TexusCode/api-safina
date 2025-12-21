@@ -10,6 +10,8 @@ use App\Livewire\Pages\AddOrder;
 use App\Livewire\Pages\Applicant;
 use App\Livewire\Pages\BulkSms;
 use App\Livewire\Pages\CallHistory;
+use App\Livewire\Pages\CancelOrder;
+use App\Livewire\Pages\CancelReviews;
 use App\Livewire\Pages\Customers;
 use App\Livewire\Pages\Deliver;
 use App\Livewire\Pages\EditOrder;
@@ -48,6 +50,7 @@ Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-
 Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
 Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
 Route::get('/rate/{token}', RateOrder::class)->name('rate-order');
+Route::get('/cancel/{token}', CancelOrder::class)->name('cancel-order');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
@@ -57,6 +60,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/rashod', Rashod::class)->name('rashod');
     Route::get('/call-historys', CallHistory::class)->name('call-history');
     Route::get('/reviews', Reviews::class)->name('reviews');
+    Route::get('/cancel-reviews', CancelReviews::class)->name('cancel-reviews');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {

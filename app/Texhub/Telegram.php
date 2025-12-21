@@ -6,6 +6,7 @@ use App\Http\Controllers\SmsController;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Suborder;
+use App\Support\CancellationLink;
 use App\Support\ReviewLink;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
@@ -209,7 +210,6 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
         $reviewUrl = ReviewLink::urlForOrder($order->id);
 
-        // SMS с просьбой оценить
         $sms = new SmsController();
         $smsMessage = "🙏 Спасибо, что выбрали Safina Cleaning! Нам важно ваше мнение.\n"
             . "Пожалуйста, оцените нашу работу по заказу №{$order->no} и поделитесь впечатлением: {$reviewUrl}";
@@ -238,8 +238,14 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->status = 'Отменено';
         $order->save();
 
+        $cancelUrl = CancellationLink::urlForOrder($order->id);
+
+        $sms = new SmsController();
+        $smsMessage = "❌ Ваш заказ №{$order->no} был отменен.\n"
+            . "Помогите нам стать лучше — укажите причину отмены: {$cancelUrl}";
+        $sms->sendSms($order->customer->phone, $smsMessage);
+
         $this->chat->deleteMessage($this->messageId)->send();
-        //hello
 
         $this->chat
             ->message("❌ Заказ №{$order->no} был отменён.")
