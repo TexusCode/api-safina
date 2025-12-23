@@ -46,12 +46,12 @@ class VacuumPanel extends Component
         $repeatWashCooldown = now()->subDay();
 
         $suborders = Suborder::with('order')
-            ->whereNotIn('status', ['Готово', 'Доставлено', 'Готово / Отправить на машину №3'])
             ->where('type', 'Колин')
             ->whereNotNull('width')
             ->whereNotNull('height')
             ->whereHas('order', function ($query) use ($windowStart, $windowEnd, $repeatWashCooldown) {
                 $query->whereBetween('created_at', [$windowStart, $windowEnd])
+                    ->whereNotIn('status', ['Готово', 'Доставлено', 'Готово / Отправить на машину №3'])
                     ->where(function ($orderQuery) use ($repeatWashCooldown) {
                         $orderQuery->where('status', '!=', 'повторная стирка')
                             ->orWhere('updated_at', '<=', $repeatWashCooldown);
