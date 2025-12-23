@@ -17,7 +17,7 @@ class VacuumPanel extends Component
             ->where('status', '!=', 'готов')
             ->first();
 
-        if (! $suborder) {
+        if (!$suborder) {
             return;
         }
 
@@ -30,7 +30,7 @@ class VacuumPanel extends Component
     {
         $suborder = Suborder::with('order')->find($suborderId);
 
-        if (! $suborder || ! $suborder->order) {
+        if (!$suborder || !$suborder->order) {
             return;
         }
 
@@ -46,7 +46,7 @@ class VacuumPanel extends Component
         $repeatWashCooldown = now()->subDay();
 
         $suborders = Suborder::with('order')
-            ->where('status', '!=', 'готов')
+            ->whereNotIn('status', ['Готово', 'Доставлено', 'Готово / Отправить на машину №3'])
             ->where('type', 'Колин')
             ->whereNotNull('width')
             ->whereNotNull('height')
@@ -73,13 +73,13 @@ class VacuumPanel extends Component
     private function assignPolkaIfNeeded(Collection $suborders): void
     {
         $suborders->each(function (Suborder $suborder) {
-            if (! $suborder->order) {
+            if (!$suborder->order) {
                 return;
             }
 
             $polka = Suborder::determinePolkaForOrderNo($suborder->order->no);
 
-            if (! $polka) {
+            if (!$polka) {
                 return;
             }
 
