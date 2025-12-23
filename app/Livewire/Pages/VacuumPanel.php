@@ -50,6 +50,7 @@ class VacuumPanel extends Component
 
         $suborders = Suborder::with('order')
             ->where('type', 'Колин')
+            ->where('status', '!=', 'готов')
             ->whereNotNull('width')
             ->whereNotNull('height')
             ->whereHas('order', function ($query) use ($windowStart, $windowEnd, $repeatWashCooldown, $searchOrder) {
