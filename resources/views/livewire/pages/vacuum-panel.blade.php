@@ -45,6 +45,10 @@
                             <dd class="text-gray-900">№{{ $suborder->order->no ?? '—' }}</dd>
                         </div>
                         <div class="flex justify-between">
+                            <dt class="text-gray-500">Статус заказа</dt>
+                            <dd class="text-gray-900">{{ $suborder->order->status ?? '—' }}</dd>
+                        </div>
+                        <div class="flex justify-between">
                             <dt class="text-gray-500">Полка</dt>
                             <dd class="text-gray-900">{{ $suborder->polka ?? '—' }}</dd>
                         </div>
