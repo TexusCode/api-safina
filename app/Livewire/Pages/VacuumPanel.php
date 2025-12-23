@@ -10,6 +10,8 @@ use Livewire\Component;
 
 class VacuumPanel extends Component
 {
+    public string $searchOrder = '';
+
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
     {
@@ -44,14 +46,18 @@ class VacuumPanel extends Component
         $windowEnd = now()->subDays(4)->endOfDay();
         $windowStart = now()->subDays(14)->startOfDay();
         $repeatWashCooldown = now()->subDay();
+        $searchOrder = trim($this->searchOrder);
 
         $suborders = Suborder::with('order')
             ->where('type', 'Колин')
             ->whereNotNull('width')
             ->whereNotNull('height')
-            ->whereHas('order', function ($query) use ($windowStart, $windowEnd, $repeatWashCooldown) {
+            ->whereHas('order', function ($query) use ($windowStart, $windowEnd, $repeatWashCooldown, $searchOrder) {
                 $query->whereBetween('created_at', [$windowStart, $windowEnd])
                     ->whereNotIn('status', ['Готово', 'Доставлено', 'Готово / Отправить на машину №3'])
+                    ->when($searchOrder !== '', function ($orderQuery) use ($searchOrder) {
+                        $orderQuery->where('no', 'like', '%' . $searchOrder . '%');
+                    })
                     ->where(function ($orderQuery) use ($repeatWashCooldown) {
                         $orderQuery->where('status', '!=', 'повторная стирка')
                             ->orWhere('updated_at', '<=', $repeatWashCooldown);
