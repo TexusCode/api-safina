@@ -29,6 +29,16 @@
                     <option value="type_desc">Тип: Я → А</option>
                 </select>
             </div>
+            <div class="w-full sm:max-w-xs">
+                <label class="text-xs uppercase tracking-wide text-gray-500" for="typeFilter">Тип</label>
+                <select id="typeFilter" wire:model.live="typeFilter"
+                    class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+                    <option value="all">Все типы</option>
+                    @foreach ($typeOptions as $type)
+                        <option value="{{ $type }}">{{ $type }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
     @livewire('components.alert')

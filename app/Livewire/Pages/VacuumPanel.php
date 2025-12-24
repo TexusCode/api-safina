@@ -13,6 +13,7 @@ class VacuumPanel extends Component
     public string $searchOrder = '';
     public string $dateWindow = '4-14';
     public string $sortBy = 'date_desc';
+    public string $typeFilter = 'all';
 
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
@@ -56,8 +57,13 @@ class VacuumPanel extends Component
         $repeatWashCooldown = now()->subDay();
         $searchOrder = trim($this->searchOrder);
 
+        $typeOptions = ['Колин', 'Одеяло', 'Курпа', 'Курпача'];
         $subordersQuery = Suborder::with('order')
-            ->whereIn('type', ['Колин', 'Курпача', 'Одеяло', 'Курпа'])
+            ->when($this->typeFilter !== 'all', function ($query) {
+                $query->where('type', $this->typeFilter);
+            }, function ($query) use ($typeOptions) {
+                $query->whereIn('type', $typeOptions);
+            })
             ->where('status', '!=', 'готов')
             ->whereNotNull('width')
             ->whereNotNull('height')
@@ -105,6 +111,7 @@ class VacuumPanel extends Component
             'suborders' => $suborders,
             'windowOptions' => $windowOptions,
             'windowKey' => $windowKey,
+            'typeOptions' => $typeOptions,
         ]);
     }
 
