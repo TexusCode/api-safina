@@ -12,6 +12,7 @@ class VacuumPanel extends Component
 {
     public string $searchOrder = '';
     public string $dateWindow = '4-14';
+    public string $sortBy = 'date_desc';
 
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
@@ -55,7 +56,7 @@ class VacuumPanel extends Component
         $repeatWashCooldown = now()->subDay();
         $searchOrder = trim($this->searchOrder);
 
-        $suborders = Suborder::with('order')
+        $subordersQuery = Suborder::with('order')
             ->whereIn('type', ['Колин', 'Курпача', 'Одеяло', 'Курпа'])
             ->where('status', '!=', 'готов')
             ->whereNotNull('width')
@@ -70,12 +71,33 @@ class VacuumPanel extends Component
                         $orderQuery->where('status', '!=', 'повторная стирка')
                             ->orWhere('updated_at', '<=', $repeatWashCooldown);
                     });
-            })
-            ->orderBy(
-                Order::select('created_at')
-                    ->whereColumn('orders.id', 'suborders.order_id')
-            )
-            ->get();
+            });
+
+        switch ($this->sortBy) {
+            case 'date_asc':
+                $subordersQuery->orderBy(
+                    Order::select('created_at')
+                        ->whereColumn('orders.id', 'suborders.order_id'),
+                    'asc'
+                );
+                break;
+            case 'type_asc':
+                $subordersQuery->orderBy('type', 'asc');
+                break;
+            case 'type_desc':
+                $subordersQuery->orderBy('type', 'desc');
+                break;
+            case 'date_desc':
+            default:
+                $subordersQuery->orderBy(
+                    Order::select('created_at')
+                        ->whereColumn('orders.id', 'suborders.order_id'),
+                    'desc'
+                );
+                break;
+        }
+
+        $suborders = $subordersQuery->get();
 
         $this->assignPolkaIfNeeded($suborders);
 
