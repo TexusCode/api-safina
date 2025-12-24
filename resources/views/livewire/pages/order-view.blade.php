@@ -137,7 +137,7 @@
                             @if ($item->type == 'Парда')
                                 <span>{{ $item->quantity }}кг</span>
                             @endif
-                            @if ($item->status == 'готово')
+                            @if ($item->status == 'готов')
                                 <span>✅</span>
                             @endif
                             <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
