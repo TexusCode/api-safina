@@ -92,6 +92,7 @@
             <option value="В стирке">В стирке</option>
             <option value="В пылесосе">В пылесосе</option>
             <option value="Повторныя стирка">Повторныя стирка</option>
+            <option value="Готово к отправке">Готово к отправке</option>
             <option value="Готово">Готово</option>
             <option value="Готово / Отправить на машину №3">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>
@@ -208,8 +209,9 @@
                         class="relative group-last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
                         <div class="relative wzd7f qqwrg flex jkwm1 items-center">
                             <svg class="e731n mo9p3 c9jt8 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path d="M20 6 9 17l-5-5"></path>
                             </svg>
                         </div>

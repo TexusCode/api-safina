@@ -19,7 +19,8 @@ class VacuumPanel extends Component
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
     {
-        $suborder = Suborder::where('id', $suborderId)
+        $suborder = Suborder::with('order')
+            ->where('id', $suborderId)
             ->where('status', '!=', 'готов')
             ->first();
 
@@ -28,6 +29,19 @@ class VacuumPanel extends Component
         }
 
         $suborder->update(['status' => 'готов']);
+
+        if ($suborder->order) {
+            $hasNotReady = $suborder->order->suborders()
+                ->where('status', '!=', 'готов')
+                ->exists();
+
+            if (
+                !$hasNotReady
+                && !in_array($suborder->order->status, ['Готово', 'Готово / Отправить на машину №3', 'Доставлено'], true)
+            ) {
+                $suborder->order->update(['status' => 'Готово к отправке']);
+            }
+        }
 
         $this->dispatch('alert', 'Подзаказ отмечен как готов');
     }

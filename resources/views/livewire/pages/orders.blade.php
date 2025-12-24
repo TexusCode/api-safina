@@ -49,6 +49,11 @@
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-green-500 rounded-sm group-hover:text-white">Доставлено</span>
                                         @endif
+                                        @if ($order->status == 'Готово к отправке')
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
+                                                к отправке</span>
+                                        @endif
                                         @if ($order->status == 'Готово')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-purple-500 rounded-sm group-hover:text-white">Готово</span>
@@ -151,6 +156,11 @@
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-red-500 rounded-sm group-hover:text-white">Отменено</span>
                                         @endif
+                                        @if ($order->status == 'Готово к отправке')
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
+                                                к отправке</span>
+                                        @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
                                         {{ $order->customer->adress ?? 'Не известно' }}
@@ -236,6 +246,11 @@
                                         @if ($order->status == 'Отменено')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-red-500 rounded-sm group-hover:text-white">Отменено</span>
+                                        @endif
+                                        @if ($order->status == 'Готово к отправке')
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
+                                                к отправке</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
