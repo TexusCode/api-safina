@@ -11,6 +11,7 @@ use Livewire\Component;
 class VacuumPanel extends Component
 {
     public string $searchOrder = '';
+    public string $dateWindow = '4-14';
 
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
@@ -43,13 +44,19 @@ class VacuumPanel extends Component
 
     public function render()
     {
-        $windowEnd = now()->subDays(4)->endOfDay();
-        $windowStart = now()->subDays(14)->startOfDay();
+        $windowOptions = [
+            '4-14' => ['start' => 14, 'end' => 4, 'label' => 'от 4 до 14 дней назад'],
+            '3-13' => ['start' => 13, 'end' => 3, 'label' => 'от 3 до 13 дней назад'],
+            '2-12' => ['start' => 12, 'end' => 2, 'label' => 'от 2 до 12 дней назад'],
+        ];
+        $windowKey = array_key_exists($this->dateWindow, $windowOptions) ? $this->dateWindow : '4-14';
+        $windowStart = now()->subDays($windowOptions[$windowKey]['start'])->startOfDay();
+        $windowEnd = now()->subDays($windowOptions[$windowKey]['end'])->endOfDay();
         $repeatWashCooldown = now()->subDay();
         $searchOrder = trim($this->searchOrder);
 
         $suborders = Suborder::with('order')
-            ->where('type', 'Колин')
+            ->whereIn('type', ['Колин', 'Курпача', 'Одеяло', 'Курпа'])
             ->where('status', '!=', 'готов')
             ->whereNotNull('width')
             ->whereNotNull('height')
@@ -74,6 +81,8 @@ class VacuumPanel extends Component
 
         return view('livewire.pages.vacuum-panel', [
             'suborders' => $suborders,
+            'windowOptions' => $windowOptions,
+            'windowKey' => $windowKey,
         ]);
     }
 

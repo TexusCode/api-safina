@@ -1,7 +1,7 @@
 <div class="space-y-6 h-screen overflow-y-scroll">
     <div>
         <h1 class="text-2xl font-semibold text-gray-400">Панель пылесосчика</h1>
-        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных от 4 до 14 дней назад и ещё
+        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных {{ $windowOptions[$windowKey]['label'] }} и ещё
             находящихся в стирке.</p>
         <form class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end" wire:submit.prevent="$refresh">
             <div class="w-full sm:max-w-xs">
@@ -9,6 +9,15 @@
                 <input id="searchOrder" type="text" wire:model.defer="searchOrder"
                     class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Например: 123">
+            </div>
+            <div class="w-full sm:max-w-xs">
+                <label class="text-xs uppercase tracking-wide text-gray-500" for="dateWindow">Период заказов</label>
+                <select id="dateWindow" wire:model.defer="dateWindow"
+                    class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+                    @foreach ($windowOptions as $key => $option)
+                        <option value="{{ $key }}">{{ $option['label'] }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit"
                 class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500">
