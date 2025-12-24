@@ -137,6 +137,9 @@
                             @if ($item->type == 'Парда')
                                 <span>{{ $item->quantity }}кг</span>
                             @endif
+                            @if ($item->status == 'готово')
+                                <span>✅</span>
+                            @endif
                             <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
                                     wire:click="delete({{ $item->id }})" class="text-red-500"><svg class="size-4"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
