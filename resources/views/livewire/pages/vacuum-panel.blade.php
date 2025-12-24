@@ -1,11 +1,13 @@
 <div class="space-y-6 h-screen overflow-y-scroll">
     <div>
         <h1 class="text-2xl font-semibold text-gray-400">Панель пылесосчика</h1>
-        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных {{ $windowOptions[$windowKey]['label'] }} и ещё
+        <p class="mt-1 text-sm text-gray-500">Показываются подзаказы заказов, созданных
+            {{ $windowOptions[$windowKey]['label'] }} и ещё
             находящихся в стирке.</p>
-        <div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end">
+        <div class="mt-4 grid grid-cols-2 gap-2">
             <div class="w-full sm:max-w-xs">
-                <label class="text-xs uppercase tracking-wide text-gray-500" for="searchOrder">Поиск по номеру заказа</label>
+                <label class="text-xs uppercase tracking-wide text-gray-500" for="searchOrder">Поиск по номеру
+                    заказа</label>
                 <input id="searchOrder" type="text" wire:model.live.debounce.300ms="searchOrder"
                     class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Например: 123">
