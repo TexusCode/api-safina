@@ -32,7 +32,7 @@ class CallHistory extends Component
 
         $callHistories = (clone $query)
             ->latest('started_at')
-            ->paginate(12);
+            ->paginate(50);
 
         $monthStart = Carbon::now()->startOfMonth();
         $now = Carbon::now();
