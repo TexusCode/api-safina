@@ -36,6 +36,11 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
+                                        @php
+                                            $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
+                                            $actualCount = (int) ($order->actual_suborders_count ?? 0);
+                                            $remainingToAdd = max($plannedQuantity - $actualCount, 0);
+                                        @endphp
                                         @if ($order->status == 'В ожидании')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-orange-500 rounded-sm group-hover:text-white">В
@@ -62,9 +67,9 @@
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-red-500 rounded-sm group-hover:text-white">Отменено</span>
                                         @endif
-                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                        @if ($remainingToAdd > 0)
                                             | <span
-                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $remainingToAdd }}</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
@@ -139,6 +144,11 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
+                                        @php
+                                            $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
+                                            $actualCount = (int) ($order->actual_suborders_count ?? 0);
+                                            $remainingToAdd = max($plannedQuantity - $actualCount, 0);
+                                        @endphp
                                         @if ($order->status == 'В ожидании')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-orange-500 rounded-sm group-hover:text-white">В
@@ -165,9 +175,9 @@
                                                 class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
                                                 к отправке</span>
                                         @endif
-                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                        @if ($remainingToAdd > 0)
                                             | <span
-                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $remainingToAdd }}</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
@@ -234,6 +244,11 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
+                                        @php
+                                            $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
+                                            $actualCount = (int) ($order->actual_suborders_count ?? 0);
+                                            $remainingToAdd = max($plannedQuantity - $actualCount, 0);
+                                        @endphp
                                         @if ($order->status == 'В ожидании')
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-orange-500 rounded-sm group-hover:text-white">В
@@ -260,9 +275,9 @@
                                                 class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
                                                 к отправке</span>
                                         @endif
-                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                        @if ($remainingToAdd > 0)
                                             | <span
-                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $remainingToAdd }}</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
