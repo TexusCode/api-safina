@@ -28,10 +28,12 @@ class Orders extends Component
         $ordersBaseQuery = Order::query()
             ->with('customer')
             ->withCount(['suborders as actual_suborders_count' => function ($query) {
-                $query->whereNotNull('enum');
+                $query->whereNotNull('enum')
+                    ->where('enum', '>', 0);
             }])
             ->withSum(['suborders as planned_suborders_quantity' => function ($query) {
-                $query->whereNull('enum');
+                $query->whereNull('enum')
+                    ->orWhere('enum', 0);
             }], 'quantity')
             ->when($this->trimmed($this->searchOrder), function ($query, $searchOrder) {
                 $query->where('no', 'like', "%{$searchOrder}%");

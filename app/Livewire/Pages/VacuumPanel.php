@@ -32,7 +32,8 @@ class VacuumPanel extends Component
 
         if ($suborder->order) {
             $relevantSuborders = $suborder->order->suborders()
-                ->whereNotNull('enum');
+                ->whereNotNull('enum')
+                ->where('enum', '>', 0);
             $hasNotReady = (clone $relevantSuborders)
                 ->where('status', '!=', 'готов')
                 ->exists();

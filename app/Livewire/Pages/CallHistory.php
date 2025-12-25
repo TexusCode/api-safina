@@ -41,7 +41,7 @@ class CallHistory extends Component
             return $builder->where(function ($q) {
                 $q->where('call_type', 'missed')
                     ->orWhere(function ($sub) {
-                        $sub->where('call_type', 'outgoing')
+                        $sub->where('call_type', 'incoming')
                             ->where('duration_seconds', 0);
                     });
             });
@@ -55,7 +55,6 @@ class CallHistory extends Component
                 ->whereBetween('started_at', [$monthStart, $now])
                 ->count(),
             'outgoing_month' => CallHistoryModel::where('call_type', 'outgoing')
-                ->where('duration_seconds', '>', 0)
                 ->whereBetween('started_at', [$monthStart, $now])
                 ->count(),
             'missed_month' => $missedScope(CallHistoryModel::query())

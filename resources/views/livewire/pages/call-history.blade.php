@@ -57,7 +57,7 @@
     <div class="space-y-2">
         @forelse ($callHistories as $call)
             @php
-                $displayType = ($call->call_type === 'outgoing' && (int) $call->duration_seconds === 0)
+                $displayType = ($call->call_type === 'incoming' && (int) $call->duration_seconds === 0)
                     ? 'missed'
                     : $call->call_type;
                 $style = $typeStyles[$displayType] ?? ['bg' => 'bg-neutral-800/40', 'border' => 'border-neutral-700', 'icon' => 'M5 4h14M12 4v16'];
