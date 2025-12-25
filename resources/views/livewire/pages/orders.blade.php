@@ -62,6 +62,10 @@
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-red-500 rounded-sm group-hover:text-white">Отменено</span>
                                         @endif
+                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
+                                        @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
                                         {{ $order->customer->adress ?? 'Не известно' }}
@@ -161,6 +165,10 @@
                                                 class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
                                                 к отправке</span>
                                         @endif
+                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
+                                        @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">
                                         {{ $order->customer->adress ?? 'Не известно' }}
@@ -251,6 +259,10 @@
                                             | <span
                                                 class="text-xs px-2 py-0.5 bg-teal-500 rounded-sm group-hover:text-white">Готово
                                                 к отправке</span>
+                                        @endif
+                                        @if (($order->remaining_suborders_count ?? 0) > 0)
+                                            | <span
+                                                class="text-xs px-2 py-0.5 bg-gray-700 rounded-sm group-hover:text-white">-{{ $order->remaining_suborders_count }}</span>
                                         @endif
                                     </a>
                                     <p class="xs2f2 jy5gh dark:text-neutral-500">

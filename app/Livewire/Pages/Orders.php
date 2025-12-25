@@ -27,6 +27,10 @@ class Orders extends Component
 
         $ordersBaseQuery = Order::query()
             ->with('customer')
+            ->withCount(['suborders as remaining_suborders_count' => function ($query) {
+                $query->whereNotNull('enum')
+                    ->where('status', '!=', 'готов');
+            }])
             ->when($this->trimmed($this->searchOrder), function ($query, $searchOrder) {
                 $query->where('no', 'like', "%{$searchOrder}%");
             })

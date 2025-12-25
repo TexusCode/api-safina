@@ -31,12 +31,16 @@ class VacuumPanel extends Component
         $suborder->update(['status' => 'готов']);
 
         if ($suborder->order) {
-            $hasNotReady = $suborder->order->suborders()
+            $relevantSuborders = $suborder->order->suborders()
+                ->whereNotNull('enum');
+            $hasNotReady = (clone $relevantSuborders)
                 ->where('status', '!=', 'готов')
                 ->exists();
+            $hasRelevant = (clone $relevantSuborders)->exists();
 
             if (
-                !$hasNotReady
+                $hasRelevant
+                && !$hasNotReady
                 && !in_array($suborder->order->status, ['Готово', 'Готово / Отправить на машину №3', 'Доставлено'], true)
             ) {
                 $suborder->order->update(['status' => 'Готово к отправке']);
