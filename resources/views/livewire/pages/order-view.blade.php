@@ -98,6 +98,10 @@
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
         </select>
+        <button type="button" wire:click="notifyDeliveryTomorrow"
+            class="col-span-2 py-2 text-center text-base font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Уведомить клиента о доставке завтра
+        </button>
         @if ($order->status == 'Получено')
             <button type="button" wire:click="smssend"
                 class="py-2 w-full text-center text-base font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-hidden focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none">

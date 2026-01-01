@@ -81,6 +81,20 @@ class OrderView extends Component
         $tel->send_history($message);
     }
 
+    public function notifyDeliveryTomorrow(): void
+    {
+        $sms = new SmsController();
+        $message = "Здравствуйте, уважаемый клиент! Ваш заказ №{$this->order->no} готов к доставке завтра. "
+            . "Завтра вам позвонят, пожалуйста, будьте на связи. Если не ответите, доставка будет перенесена на следующий день.";
+        $sms->sendSms($this->order->customer->phone, $message);
+
+        History::create([
+            'content' => Auth::user()->name . " отправил смс клиенту: $message",
+            'order_id' => $this->order->id,
+            'user_id' => Auth::id(),
+        ]);
+    }
+
     public function updatedType()
     {
         if ($this->type == 'Колин') {

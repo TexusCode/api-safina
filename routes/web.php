@@ -86,6 +86,6 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 });
 
 
-Route::get('check-customer/{phone}',[CheckCustomerController::class,'checkCustomer'])->name('check-customer');
+Route::get('check-customer/{phone}', [CheckCustomerController::class, 'checkCustomer'])->name('check-customer');
 Route::post('/call-history-log', [CallHistoryController::class, 'store'])
     ->withoutMiddleware([VerifyCsrfToken::class]);
