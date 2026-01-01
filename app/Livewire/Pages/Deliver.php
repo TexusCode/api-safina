@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Order;
+use App\Models\BankTransaction;
 use Livewire\Component;
 
 class Deliver extends Component
@@ -12,6 +13,7 @@ class Deliver extends Component
         $order = Order::find($id);
         $order->status = 'Доставлено';
         $order->save();
+        BankTransaction::recordOrderIncome($order);
     }
 
     public function render()

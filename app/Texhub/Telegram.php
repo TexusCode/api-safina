@@ -4,6 +4,7 @@ namespace App\Texhub;
 
 use App\Http\Controllers\SmsController;
 use App\Models\Customer;
+use App\Models\BankTransaction;
 use App\Models\Order;
 use App\Models\Suborder;
 use App\Support\CancellationLink;
@@ -205,6 +206,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order = Order::find($id);
         $order->status = 'Доставлено';
         $order->save();
+        BankTransaction::recordOrderIncome($order);
 
         $this->chat->deleteMessage($this->messageId)->send();
 

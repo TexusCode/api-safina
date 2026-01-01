@@ -7,6 +7,7 @@ use App\Texhub\Telegram;
 use Flux\Flux;
 use App\Models\Order;
 use App\Models\History;
+use App\Models\BankTransaction;
 use Livewire\Component;
 use App\Models\Suborder;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,9 @@ class OrderView extends Component
     {
         $this->order->status = $this->status;
         $this->order->save();
+        if ($this->status == 'Доставлено') {
+            BankTransaction::recordOrderIncome($this->order);
+        }
         if ($this->status == 'Готово') {
             $tel = new Telegram();
             $tel->del_chat_send($this->order->id);

@@ -8,6 +8,7 @@ use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
 use App\Livewire\Pages\AddOrder;
 use App\Livewire\Pages\Applicant;
+use App\Livewire\Pages\Bank;
 use App\Livewire\Pages\BulkSms;
 use App\Livewire\Pages\CallHistory;
 use App\Livewire\Pages\CancelOrder;
@@ -58,6 +59,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/rashod', Rashod::class)->name('rashod');
+    Route::get('/bank', Bank::class)->name('bank');
     Route::get('/call-historys', CallHistory::class)->name('call-history');
     Route::get('/reviews', Reviews::class)->name('reviews');
     Route::get('/cancel-reviews', CancelReviews::class)->name('cancel-reviews');
