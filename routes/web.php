@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/get-orders', [ApiController::class, 'get_orders']);
 Route::get('/get-customers', [ApiController::class, 'get_customers']);
+Route::view('/', 'pages.landing')->name('landing');
 
 //Auth Pages
 Route::middleware('guest')->group(function () {
@@ -66,7 +67,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
-    Route::get('/', Home::class)->name('home');
+    Route::get('/home', Home::class)->name('home');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get(
         '/notifications',
