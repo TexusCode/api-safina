@@ -293,7 +293,7 @@
     <header class="relative overflow-hidden">
         <nav class="max-w-6xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-4">
             <a href="#top" class="flex items-center gap-3 font-display text-xl tracking-tight">
-                <span class="h-11 w-11 rounded-2xl bg-white border border-neutral-100 flex items-center justify-center">
+                <span class="h-11 w-11  flex items-center justify-center">
                     {{-- @include('icons.outline.sparkles', ['class' => 'size-6 text-[var(--teal)]']) --}}
                     <img src="{{ asset('images/favicon_tezkor.png') }}" alt="">
                 </span>
