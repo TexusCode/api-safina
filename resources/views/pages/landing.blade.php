@@ -23,6 +23,8 @@
     <meta name="twitter:description"
         content="Профессиональная стирка ковров, одеял, подушек и пледов. Бесплатная доставка, быстрые сроки 2-4 дня.">
     <meta name="twitter:image" content="{{ asset('assets/logo.png') }}">
+    <link rel="icon" href="{{ asset('images/favicon_tezkor.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('images/favicon_tezkor.png') }}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -292,7 +294,8 @@
         <nav class="max-w-6xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-4">
             <a href="#top" class="flex items-center gap-3 font-display text-xl tracking-tight">
                 <span class="h-11 w-11 rounded-2xl bg-white border border-neutral-100 flex items-center justify-center">
-                    @include('icons.outline.sparkles', ['class' => 'size-6 text-[var(--teal)]'])
+                    {{-- @include('icons.outline.sparkles', ['class' => 'size-6 text-[var(--teal)]']) --}}
+                    <img src="{{ asset('images/favicon_tezkor.png') }}" alt="">
                 </span>
                 Safina Cleaning
             </a>
