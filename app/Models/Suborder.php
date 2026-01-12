@@ -20,6 +20,8 @@ class Suborder extends Model
         'teleshka',
         'status',
         'is_primary',
+        'vacuum_lead_id',
+        'washer_id',
     ];
 
     protected static function booted(): void
@@ -44,6 +46,16 @@ class Suborder extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function vacuumLead(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'vacuum_lead_id');
+    }
+
+    public function washer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'washer_id');
     }
 
     public static function determinePolkaForOrderNo(?int $orderNo): ?string

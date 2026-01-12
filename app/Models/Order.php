@@ -36,4 +36,9 @@ class Order extends Model
     {
         return $this->hasMany(History::class);
     }
+
+    public function returns()
+    {
+        return $this->hasMany(OrderReturn::class);
+    }
 }

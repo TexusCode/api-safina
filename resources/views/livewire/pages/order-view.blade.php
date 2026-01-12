@@ -19,6 +19,12 @@
                         Изменить
                     </a>
                 </div>
+                <div class="flex flex-col jkwm1">
+                    <button type="button" wire:confirm="Вернуть заказ в заявщики?" wire:click="returnOrder"
+                        class="an00p inline-flex items-center n9hej xs2f2 sikx1 pb094 rsdjd azddh bg-amber-500 kew0r hover:bg-amber-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden zx3z8 vtle8">
+                        Возврат
+                    </button>
+                </div>
                 @if (Auth::user()->role == 'admin')
                     <div class="flex flex-col jkwm1">
                         <button type="button" wire:confirm="Точно хотите удалить" wire:click="deleteorder"
@@ -97,6 +103,7 @@
             <option value="Готово / Отправить на машину №3">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>
             <option value="Отменено">Отменено</option>
+            <option value="Возврат">Возврат</option>
         </select>
         <button type="button" wire:click="notifyDeliveryTomorrow"
             class="col-span-2 py-2 text-center text-base font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
@@ -144,6 +151,12 @@
                             @endif
                             @if ($item->status == 'готов')
                                 <span>✅</span>
+                            @endif
+                            @if ($item->vacuumLead)
+                                <span>Старший: {{ $item->vacuumLead->name }}</span>
+                            @endif
+                            @if ($item->washer)
+                                <span>Мойшик: {{ $item->washer->name }}</span>
                             @endif
                             <span class="flex items-center gap-3">{{ round($item->enum, 2) }}c <button type="button"
                                     wire:click="delete({{ $item->id }})" class="text-red-500"><svg class="size-4"

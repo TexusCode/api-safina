@@ -7,6 +7,7 @@ use App\Texhub\Telegram;
 use Flux\Flux;
 use App\Models\Order;
 use App\Models\History;
+use App\Models\OrderReturn;
 use App\Models\BankTransaction;
 use Livewire\Component;
 use App\Models\Suborder;
@@ -27,6 +28,36 @@ class OrderView extends Component
     public $quantity_title;
     public $telesh;
     public $status;
+    public function returnOrder(): void
+    {
+        $amount = $this->order->suborders->sum('enum');
+        $this->status = 'Возврат';
+        $this->order->status = $this->status;
+        $this->order->save();
+
+        OrderReturn::updateOrCreate(
+            ['order_id' => $this->order->id],
+            [
+                'order_no' => $this->order->no,
+                'status' => $this->status,
+                'amount' => $amount,
+                'returned_by' => Auth::id(),
+                'returned_at' => now(),
+            ]
+        );
+
+        $tel = new Telegram();
+        $tel->deliver_chat_send($this->order->id);
+
+        History::create([
+            'content' => Auth::user()->name . ': оформил возврат заказа!',
+            'order_id' => $this->order->id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $message = FacadesAuth::user()->name . ": Вернул заказ №" . $this->order->no . " в заявщики";
+        $tel->send_history($message);
+    }
     public function smssend()
     {
         $summa = $this->order->suborders->sum('enum');
@@ -58,7 +89,7 @@ class OrderView extends Component
     }
     public function load($id)
     {
-        $this->order = Order::find($id);
+        $this->order = Order::with(['suborders.vacuumLead', 'suborders.washer'])->find($id);
         $this->status = $this->order->status;
     }
     public function updatedStatus()

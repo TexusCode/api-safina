@@ -3,6 +3,7 @@
 namespace App\Livewire\Single;
 
 use App\Models\Order;
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Suborder;
 use Livewire\Attributes\Layout;
@@ -22,6 +23,17 @@ class AddSubOrder extends Component
     public $quantity_title;
     public $telesh;
     public $status = 'в стирке';
+    public ?int $washerLeadId = null;
+
+    public function mount(): void
+    {
+        $this->washerLeadId = session('washer_lead_id');
+    }
+
+    public function updatedWasherLeadId($value): void
+    {
+        session(['washer_lead_id' => $value ?: null]);
+    }
     public function updatedType()
     {
         if ($this->type == 'Колин') {
@@ -71,6 +83,7 @@ class AddSubOrder extends Component
         $status = $this->status ?? 'в стирке';
         $isPrimary = true;
         $polka = $this->telesh;
+        $washerId = $this->washerLeadId ?: null;
 
         if ($this->type == 'Колин') {
             $square = ($this->width * $this->height) * 0.0001;
@@ -87,6 +100,7 @@ class AddSubOrder extends Component
                 'teleshka' => $polka,
                 'status' => $status,
                 'is_primary' => $isPrimary,
+                'washer_id' => $washerId,
             ]);
         }
         if ($this->type === 'Курпа') {
@@ -103,6 +117,7 @@ class AddSubOrder extends Component
                 'polka' => $polka,
                 'status' => $status,
                 'is_primary' => $isPrimary,
+                'washer_id' => $washerId,
             ]);
         }
         if ($this->type == 'Курпача') {
@@ -115,6 +130,7 @@ class AddSubOrder extends Component
                     'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
+                    'washer_id' => $washerId,
                 ]
             );
         }
@@ -128,6 +144,7 @@ class AddSubOrder extends Component
                     'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
+                    'washer_id' => $washerId,
                 ]
             );
         }
@@ -141,6 +158,7 @@ class AddSubOrder extends Component
                     'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
+                    'washer_id' => $washerId,
                 ]
             );
         }
@@ -154,6 +172,7 @@ class AddSubOrder extends Component
                     'polka' => $polka,
                     'status' => $status,
                     'is_primary' => $isPrimary,
+                    'washer_id' => $washerId,
                 ]
             );
         }
@@ -169,6 +188,8 @@ class AddSubOrder extends Component
             ->limit(30)
             ->get();
 
-        return view('livewire.single.add-sub-order', compact('recentSuborders'));
+        $washerUsers = User::where('role', 'washer')->orderBy('name')->get();
+
+        return view('livewire.single.add-sub-order', compact('recentSuborders', 'washerUsers'));
     }
 }

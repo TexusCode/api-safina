@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Manager
@@ -15,6 +16,12 @@ class Manager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        $role = Auth::user()?->role;
+
+        if (in_array($role, ['admin', 'manager'], true)) {
+            return $next($request);
+        }
+
+        return redirect()->route('empty-page');
     }
 }

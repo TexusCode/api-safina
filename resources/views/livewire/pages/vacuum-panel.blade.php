@@ -24,6 +24,8 @@
                 <label class="text-xs uppercase tracking-wide text-gray-500" for="sortBy">Сортировка</label>
                 <select id="sortBy" wire:model.live="sortBy"
                     class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+                    <option value="order_no_desc">Номер заказа: новые → старые</option>
+                    <option value="order_no_asc">Номер заказа: старые → новые</option>
                     <option value="date_desc">Дата: новые → старые</option>
                     <option value="date_asc">Дата: старые → новые</option>
                     <option value="type_asc">Тип: А → Я</option>
@@ -37,6 +39,16 @@
                     <option value="all">Все типы</option>
                     @foreach ($typeOptions as $type)
                         <option value="{{ $type }}">{{ $type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="w-full col-span-full">
+                <label class="text-xs uppercase tracking-wide text-gray-500" for="vacuumLeadId">Старший в смене</label>
+                <select id="vacuumLeadId" wire:model.live="vacuumLeadId"
+                    class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+                    <option value="">Не выбран</option>
+                    @foreach ($vacuumUsers as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
             </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CallHistoryController;
 use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Manager;
 use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
 use App\Livewire\Pages\AddOrder;
@@ -24,6 +25,7 @@ use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\Rashod;
+use App\Livewire\Pages\Returns;
 use App\Livewire\Pages\RateOrder;
 use App\Livewire\Pages\Reviews;
 use App\Livewire\Pages\Settings;
@@ -56,12 +58,16 @@ Route::get('/cancel/{token}', CancelOrder::class)->name('cancel-order');
 // Admin Pages
 Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
-    Route::get('/bulk-sms', BulkSms::class)->name('bulk-sms');
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
-    Route::get('/rashod', Rashod::class)->name('rashod');
     Route::get('/bank', Bank::class)->name('bank');
     Route::get('/call-historys', CallHistory::class)->name('call-history');
+});
+// Manager + Admin Pages
+Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function () {
+    Route::get('/bulk-sms', BulkSms::class)->name('bulk-sms');
+    Route::get('/rashod', Rashod::class)->name('rashod');
+    Route::get('/returns', Returns::class)->name('returns');
     Route::get('/reviews', Reviews::class)->name('reviews');
     Route::get('/cancel-reviews', CancelReviews::class)->name('cancel-reviews');
 });
@@ -90,3 +96,5 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 Route::get('check-customer/{phone}', [CheckCustomerController::class, 'checkCustomer'])->name('check-customer');
 Route::post('/call-history-log', [CallHistoryController::class, 'store'])
     ->withoutMiddleware([VerifyCsrfToken::class]);
+
+require __DIR__ . '/super-admin.php';

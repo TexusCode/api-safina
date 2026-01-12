@@ -25,6 +25,13 @@ class Orders extends Component
             ->latest('id')
             ->first();
 
+        $previousStart = $lastStart
+            ? Order::where('no', 1)
+                ->where('id', '<', $lastStart->id)
+                ->latest('id')
+                ->first()
+            : null;
+
         $ordersBaseQuery = Order::query()
             ->with('customer')
             ->withCount(['suborders as actual_suborders_count' => function ($query) {
@@ -59,14 +66,29 @@ class Orders extends Component
             ->paginate(50, ['*'], 'readyPage');
 
         $archive = (clone $ordersBaseQuery)
-            ->when($lastStart, fn($query) => $query->where('id', '<', $lastStart->id)) // архив
+            ->when(
+                $previousStart,
+                fn($query) => $query->where('id', '<', $previousStart->id),
+                fn($query) => $query->when($lastStart, fn($q) => $q->where('id', '<', $lastStart->id))
+            ) // архив
             ->orderByRaw($pendingFirst)
             ->orderBy('id', 'desc')
             ->paginate(50, ['*'], 'archivePage');
 
+        $previousMonth = (clone $ordersBaseQuery)
+            ->when(
+                $previousStart && $lastStart,
+                fn($query) => $query->whereBetween('id', [$previousStart->id, $lastStart->id - 1]),
+                fn($query) => $query->whereRaw('1 = 0')
+            )
+            ->orderByRaw($pendingFirst)
+            ->orderBy('no', 'desc')
+            ->paginate(50, ['*'], 'previousPage');
+
         return view('livewire.pages.orders', [
             'orders' => $orders,
             'ready' => $ready,
+            'previousMonth' => $previousMonth,
             'archive' => $archive,
         ]);
     }
@@ -75,6 +97,7 @@ class Orders extends Component
     {
         $this->resetPage('ordersPage');
         $this->resetPage('readyPage');
+        $this->resetPage('previousPage');
         $this->resetPage('archivePage');
     }
 
@@ -82,6 +105,7 @@ class Orders extends Component
     {
         $this->resetPage('ordersPage');
         $this->resetPage('readyPage');
+        $this->resetPage('previousPage');
         $this->resetPage('archivePage');
     }
 

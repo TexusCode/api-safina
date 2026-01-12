@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Models\Order;
 use App\Models\Suborder;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -12,9 +13,10 @@ class VacuumPanel extends Component
 {
     public string $searchOrder = '';
     public string $dateWindow = '4-14';
-    public string $sortBy = 'date_desc';
+    public string $sortBy = 'order_no_desc';
     public string $typeFilter = 'all';
     public array $typeOptions = ['Колин', 'Одеяло', 'Курпа', 'Курпача'];
+    public ?int $vacuumLeadId = null;
 
     #[Layout('components.layouts.auth')]
     public function markAsReady(int $suborderId): void
@@ -28,7 +30,11 @@ class VacuumPanel extends Component
             return;
         }
 
-        $suborder->update(['status' => 'готов']);
+        $updates = ['status' => 'готов'];
+        if ($this->vacuumLeadId) {
+            $updates['vacuum_lead_id'] = $this->vacuumLeadId;
+        }
+        $suborder->update($updates);
 
         if ($suborder->order) {
             $relevantSuborders = $suborder->order->suborders()
@@ -99,6 +105,20 @@ class VacuumPanel extends Component
             });
 
         switch ($this->sortBy) {
+            case 'order_no_asc':
+                $subordersQuery->orderBy(
+                    Order::select('no')
+                        ->whereColumn('orders.id', 'suborders.order_id'),
+                    'asc'
+                );
+                break;
+            case 'order_no_desc':
+                $subordersQuery->orderBy(
+                    Order::select('no')
+                        ->whereColumn('orders.id', 'suborders.order_id'),
+                    'desc'
+                );
+                break;
             case 'date_asc':
                 $subordersQuery->orderBy(
                     Order::select('created_at')
@@ -126,11 +146,24 @@ class VacuumPanel extends Component
 
         $this->assignPolkaIfNeeded($suborders);
 
+        $vacuumUsers = User::where('role', 'vacuum')->orderBy('name')->get();
+
         return view('livewire.pages.vacuum-panel', [
             'suborders' => $suborders,
             'windowOptions' => $windowOptions,
             'windowKey' => $windowKey,
+            'vacuumUsers' => $vacuumUsers,
         ]);
+    }
+
+    public function mount(): void
+    {
+        $this->vacuumLeadId = session('vacuum_lead_id');
+    }
+
+    public function updatedVacuumLeadId($value): void
+    {
+        session(['vacuum_lead_id' => $value ?: null]);
     }
 
     private function assignPolkaIfNeeded(Collection $suborders): void

@@ -109,10 +109,13 @@
                                disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
                                dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         <option disabled selected="">Выберите рол сотрудника!</option>
+                        <option value="super-admin">Супер админ</option>
                         <option value="admin">Админ</option>
                         <option value="manager">Менеджер</option>
                         <option value="deliver">Доставшик</option>
                         <option value="applicant">Заявщик</option>
+                        <option value="vacuum">Пылесосчик</option>
+                        <option value="washer">Мойшик</option>
                     </select>
 
                     <!-- Пароль -->
