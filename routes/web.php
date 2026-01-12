@@ -24,6 +24,7 @@ use App\Livewire\Pages\OrderEdit;
 use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
+use App\Livewire\Pages\QualityControl;
 use App\Livewire\Pages\Rashod;
 use App\Livewire\Pages\Returns;
 use App\Livewire\Pages\RateOrder;
@@ -68,6 +69,7 @@ Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function 
     Route::get('/bulk-sms', BulkSms::class)->name('bulk-sms');
     Route::get('/rashod', Rashod::class)->name('rashod');
     Route::get('/returns', Returns::class)->name('returns');
+    Route::get('/quality-control', QualityControl::class)->name('quality-control');
     Route::get('/reviews', Reviews::class)->name('reviews');
     Route::get('/cancel-reviews', CancelReviews::class)->name('cancel-reviews');
 });

@@ -22,6 +22,9 @@ class Suborder extends Model
         'is_primary',
         'vacuum_lead_id',
         'washer_id',
+        'qc_status',
+        'qc_checked_at',
+        'qc_checked_by',
     ];
 
     protected static function booted(): void
@@ -56,6 +59,11 @@ class Suborder extends Model
     public function washer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'washer_id');
+    }
+
+    public function qualityChecker(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'qc_checked_by');
     }
 
     public static function determinePolkaForOrderNo(?int $orderNo): ?string
