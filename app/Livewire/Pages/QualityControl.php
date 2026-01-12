@@ -65,9 +65,21 @@ class QualityControl extends Component
 
     public function render()
     {
+        $windowStart = now()->subDays(15)->startOfDay();
+        $windowEnd = now()->subDay()->endOfDay();
+
         $teleshkaOptions = Suborder::query()
             ->whereNotNull('teleshka')
             ->where('teleshka', '!=', '')
+            ->whereHas('order', function ($query) use ($windowStart, $windowEnd) {
+                $query->whereBetween('created_at', [$windowStart, $windowEnd])
+                    ->whereNotIn('status', [
+                        'Доставлено',
+                        'Готово',
+                        'Готово к отправке',
+                        'Готово / Отправить на машину №3',
+                    ]);
+            })
             ->distinct()
             ->orderBy('teleshka')
             ->pluck('teleshka')
@@ -76,6 +88,15 @@ class QualityControl extends Component
         $suborders = Suborder::with(['order', 'qualityChecker'])
             ->when($this->teleshka, function ($query) {
                 $query->where('teleshka', $this->teleshka);
+            })
+            ->whereHas('order', function ($query) use ($windowStart, $windowEnd) {
+                $query->whereBetween('created_at', [$windowStart, $windowEnd])
+                    ->whereNotIn('status', [
+                        'Доставлено',
+                        'Готово',
+                        'Готово к отправке',
+                        'Готово / Отправить на машину №3',
+                    ]);
             })
             ->orderBy('created_at', 'desc')
             ->get();
