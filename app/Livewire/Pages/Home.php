@@ -9,6 +9,7 @@ use App\Models\Rashodho;
 use App\Models\Suborder;
 use App\Texhub\Telegram;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
 {
@@ -42,6 +43,9 @@ class Home extends Component
     }
     public function mount()
     {
+        if (Auth::user()?->role === 'operator') {
+            redirect()->route('operator-dashboard')->send();
+        }
         $this->calculateStats();
         $this->calculateStat();
     }
