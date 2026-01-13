@@ -89,7 +89,7 @@ class OrderView extends Component
     }
     public function load($id)
     {
-        $this->order = Order::with(['suborders.vacuumLead', 'suborders.washer'])->find($id);
+        $this->order = Order::with(['suborders.vacuumLead', 'suborders.washer', 'operator'])->find($id);
         $this->status = $this->order->status;
     }
     public function updatedStatus()

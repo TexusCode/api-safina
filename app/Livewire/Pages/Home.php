@@ -109,10 +109,21 @@ class Home extends Component
             ->whereYear('created_at', now()->year)
             ->sum('price');
 
+        $monthStart = now()->startOfMonth();
+        $monthEnd = now()->endOfMonth();
+        $operatorStats = Order::with('operator')
+            ->whereBetween('created_at', [$monthStart, $monthEnd])
+            ->whereNotNull('operator_id')
+            ->selectRaw('operator_id, COUNT(*) as total')
+            ->groupBy('operator_id')
+            ->orderByDesc('total')
+            ->get();
+
         return view('livewire.pages.home', [
             'orders' => $orders,
             'total'  => $total,
             'expenses'  => $totalExpenses,
+            'operatorStats' => $operatorStats,
         ]);
     }
 }

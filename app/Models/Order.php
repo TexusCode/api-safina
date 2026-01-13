@@ -17,6 +17,7 @@ class Order extends Model
         'status',
         'application_status',
         'delivery_status',
+        'operator_id',
     ];
 
     public function customer()
@@ -40,5 +41,10 @@ class Order extends Model
     public function returns()
     {
         return $this->hasMany(OrderReturn::class);
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class, 'operator_id');
     }
 }

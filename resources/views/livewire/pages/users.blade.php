@@ -116,6 +116,7 @@
                         <option value="applicant">Заявщик</option>
                         <option value="vacuum">Пылесосчик</option>
                         <option value="washer">Мойшик</option>
+                        <option value="operator">Оператор</option>
                     </select>
 
                     <!-- Пароль -->

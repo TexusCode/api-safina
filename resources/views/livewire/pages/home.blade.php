@@ -67,6 +67,13 @@
                 </svg>
                 <span class="text-white">Сотрудники</span>
             </a>
+            @if (in_array(Auth::user()->role, ['admin', 'operator'], true))
+                <a href="{{ route('operator-dashboard') }}"
+                    class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
+                    @include('icons.outline.user', ['class' => 'size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200'])
+                    <span class="text-white">Оператор</span>
+                </a>
+            @endif
             <a href="{{ route('applicant') }}"
                 class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                 <svg class="size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200"
@@ -489,6 +496,23 @@
                             <flux:heading size="lg">{{ round($avgEarningPerDay) }}c</flux:heading>
                             <span class="text-xs text-neutral-500">{{ $diffEarningPerDay }}%</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-neutral-700 bg-neutral-900/60 p-4">
+                    <div class="flex items-center justify-between">
+                        <flux:text class="text-neutral-300">Операторы за месяц</flux:text>
+                        <span class="text-xs text-neutral-500">Кол-во заказов</span>
+                    </div>
+                    <div class="mt-3 space-y-2 text-sm">
+                        @forelse ($operatorStats as $stat)
+                            <div class="flex items-center justify-between">
+                                <span class="text-neutral-300">{{ $stat->operator->name ?? '—' }}</span>
+                                <span class="text-neutral-100">{{ $stat->total }}</span>
+                            </div>
+                        @empty
+                            <div class="text-neutral-500">Нет данных за этот месяц</div>
+                        @endforelse
                     </div>
                 </div>
             </div>

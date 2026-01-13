@@ -7,6 +7,7 @@ use App\Texhub\Telegram;
 use Livewire\Component;
 use App\Models\Customer;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
 
 class AddOrder extends Component
 {
@@ -36,6 +37,7 @@ class AddOrder extends Component
             'customer_id' => $customer->id,
             'tariff_id' => $this->tariff,
             'note' => $this->note,
+            'operator_id' => Auth::id(),
         ]);
         $teleg = new Telegram();
         $teleg->deliver_chat_send($ord->id);

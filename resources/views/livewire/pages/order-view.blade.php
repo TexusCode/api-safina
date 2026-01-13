@@ -81,6 +81,12 @@
                 <dd class="ga1u8 inline-flex smdr3 items-center n9hej vrmqq sikx1 w4xo0 c9jt8 dark:text-neutral-200">
                     {{ $order->tariff_id }}c
                 </dd>
+                <dt class="ga1u8 w4xo0 jy5gh dark:text-neutral-500">
+                    Оператор:
+                </dt>
+                <dd class="ga1u8 inline-flex smdr3 items-center n9hej vrmqq sikx1 w4xo0 c9jt8 dark:text-neutral-200">
+                    {{ $order->operator->name ?? '—' }}
+                </dd>
             </dl>
             <!-- End List -->
         </div>

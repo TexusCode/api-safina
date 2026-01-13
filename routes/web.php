@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CallHistoryController;
 use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Operator;
 use App\Http\Middleware\Manager;
 use App\Http\Middleware\StatusCheck;
 use App\Livewire\Auth\Login;
@@ -24,6 +25,7 @@ use App\Livewire\Pages\OrderEdit;
 use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
 use App\Livewire\Pages\Profile;
+use App\Livewire\Pages\OperatorDashboard;
 use App\Livewire\Pages\QualityControl;
 use App\Livewire\Pages\Rashod;
 use App\Livewire\Pages\Returns;
@@ -62,7 +64,6 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/bank', Bank::class)->name('bank');
-    Route::get('/call-historys', CallHistory::class)->name('call-history');
 });
 // Manager + Admin Pages
 Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function () {
@@ -72,6 +73,11 @@ Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function 
     Route::get('/quality-control', QualityControl::class)->name('quality-control');
     Route::get('/reviews', Reviews::class)->name('reviews');
     Route::get('/cancel-reviews', CancelReviews::class)->name('cancel-reviews');
+});
+// Operator + Admin Pages
+Route::middleware(['auth', Operator::class, StatusCheck::class])->group(function () {
+    Route::get('/call-historys', CallHistory::class)->name('call-history');
+    Route::get('/operator-dashboard', OperatorDashboard::class)->name('operator-dashboard');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {

@@ -37,6 +37,7 @@ class AddOrder extends Component
             'customer_id' => $customer->id,
             'tariff_id' => $this->tariff,
             'note' => $this->note,
+            'operator_id' => Auth::id(),
         ]);
         if ($this->three_car == true) {
             //
