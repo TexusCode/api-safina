@@ -44,7 +44,7 @@ class Home extends Component
     public function mount()
     {
         if (Auth::user()?->role === 'operator') {
-            redirect()->route('operator-dashboard')->send();
+            return redirect()->route('operator-dashboard');
         }
         $this->calculateStats();
         $this->calculateStat();
@@ -125,8 +125,8 @@ class Home extends Component
 
         return view('livewire.pages.home', [
             'orders' => $orders,
-            'total'  => $total,
-            'expenses'  => $totalExpenses,
+            'total' => $total,
+            'expenses' => $totalExpenses,
             'operatorStats' => $operatorStats,
         ]);
     }
