@@ -16,7 +16,7 @@ class DeliverRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()?->role === 'deliver') {
+        if (in_array(Auth::user()?->role, ['deliver', 'admin'], true)) {
             return $next($request);
         }
 

@@ -19,7 +19,7 @@ class Manager
         if (Auth::user()?->role === 'operator') {
             return redirect()->route('operator-dashboard');
         }
-        if (Auth::user()?->role === 'manager') {
+        if (in_array(Auth::user()?->role, ['manager', 'admin'], true)) {
             return $next($request);
         }
 

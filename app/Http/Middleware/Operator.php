@@ -16,7 +16,7 @@ class Operator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()?->role === 'operator') {
+        if (in_array(Auth::user()?->role, ['operator', 'admin'], true)) {
             return $next($request);
         }
 

@@ -13,6 +13,10 @@
                 class="inline-flex items-center rounded-lg border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-200 hover:bg-neutral-900">
                 Звонки
             </a>
+            <button type="button" wire:click="logout"
+                class="inline-flex items-center rounded-lg border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-200 hover:bg-neutral-900">
+                Выйти
+            </button>
         </div>
     </div>
 

@@ -16,7 +16,7 @@ class ApplicantRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()?->role === 'applicant') {
+        if (in_array(Auth::user()?->role, ['applicant', 'admin'], true)) {
             return $next($request);
         }
 

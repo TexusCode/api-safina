@@ -37,7 +37,6 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
-                                        | <span class="text-xs text-neutral-400">Оператор: {{ $order->operator->name ?? '—' }}</span>
                                         @php
                                             $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
                                             $actualCount = (int) ($order->actual_suborders_count ?? 0);
@@ -146,7 +145,6 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
-                                        | <span class="text-xs text-neutral-400">Оператор: {{ $order->operator->name ?? '—' }}</span>
                                         @php
                                             $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
                                             $actualCount = (int) ($order->actual_suborders_count ?? 0);
@@ -245,7 +243,6 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
-                                        | <span class="text-xs text-neutral-400">Оператор: {{ $order->operator->name ?? '—' }}</span>
                                         @php
                                             $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
                                             $actualCount = (int) ($order->actual_suborders_count ?? 0);
@@ -346,7 +343,6 @@
                                     <a class="sikx1 c9jt8  focus:outline-hidden group dark:text-neutral-200 "
                                         href="#" target="_parent">
                                         {{ $order->customer->phone ?? 'Не известно' }}
-                                        | <span class="text-xs text-neutral-400">Оператор: {{ $order->operator->name ?? '—' }}</span>
                                         @php
                                             $plannedQuantity = (int) ($order->planned_suborders_quantity ?? 0);
                                             $actualCount = (int) ($order->actual_suborders_count ?? 0);

@@ -10,6 +10,14 @@ use Livewire\Component;
 class OperatorDashboard extends Component
 {
     #[Layout('components.layouts.auth')]
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
+
+    #[Layout('components.layouts.auth')]
     public function render()
     {
         $userId = Auth::id();
