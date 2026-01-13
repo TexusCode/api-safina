@@ -4,9 +4,13 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CallHistoryController;
 use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\ApplicantRole;
+use App\Http\Middleware\DeliverRole;
 use App\Http\Middleware\Operator;
 use App\Http\Middleware\Manager;
 use App\Http\Middleware\StatusCheck;
+use App\Http\Middleware\Vacuum;
+use App\Http\Middleware\Washer;
 use App\Livewire\Auth\Login;
 use App\Livewire\Pages\AddOrder;
 use App\Livewire\Pages\Applicant;
@@ -24,6 +28,7 @@ use App\Livewire\Pages\Notifications;
 use App\Livewire\Pages\OrderEdit;
 use App\Livewire\Pages\Orders;
 use App\Livewire\Pages\OrderView;
+use App\Livewire\Pages\OperatorAddOrder;
 use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\OperatorDashboard;
 use App\Livewire\Pages\QualityControl;
@@ -54,8 +59,6 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/add-order-single', SingleAddOrder::class)->name('add-order-single');
 Route::get('/edit-order-single/{id}', SingleEditOrder::class)->name('edit-order-single');
-Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
-Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
 Route::get('/rate/{token}', RateOrder::class)->name('rate-order');
 Route::get('/cancel/{token}', CancelOrder::class)->name('cancel-order');
 // Admin Pages
@@ -64,6 +67,7 @@ Route::middleware(['auth', Admin::class, StatusCheck::class])->group(function ()
     Route::get('/todos', Todos::class)->name('todos');
     Route::get('/users', Users::class)->name('users');
     Route::get('/bank', Bank::class)->name('bank');
+    Route::get('/add-order', AddOrder::class)->name('add-order');
 });
 // Manager + Admin Pages
 Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function () {
@@ -78,6 +82,19 @@ Route::middleware(['auth', Manager::class, StatusCheck::class])->group(function 
 Route::middleware(['auth', Operator::class, StatusCheck::class])->group(function () {
     Route::get('/call-historys', CallHistory::class)->name('call-history');
     Route::get('/operator-dashboard', OperatorDashboard::class)->name('operator-dashboard');
+    Route::get('/operator-add-order', OperatorAddOrder::class)->name('operator-add-order');
+});
+// Vacuum Pages (public)
+Route::get('/vacuum-panel', VacuumPanel::class)->name('vacuum-panel');
+// Washer Pages (public)
+Route::get('/add-suborder-single', AddSubOrder::class)->name('add-suborder-single');
+// Deliver Pages
+Route::middleware(['auth', DeliverRole::class, StatusCheck::class])->group(function () {
+    Route::get('/deliver', Deliver::class)->name('deliver');
+});
+// Applicant Pages
+Route::middleware(['auth', ApplicantRole::class, StatusCheck::class])->group(function () {
+    Route::get('/applicant', Applicant::class)->name('applicant');
 });
 // Other Pages
 Route::middleware(['auth', StatusCheck::class])->group(function () {
@@ -90,10 +107,7 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
     Route::get('/404', EmptyPage::class)->name('empty-page');
     Route::get('/customers', Customers::class)->name('customers');
     Route::get('/orders', Orders::class)->name('orders');
-    Route::get('/applicant', Applicant::class)->name('applicant');
-    Route::get('/deliver', Deliver::class)->name('deliver');
     Route::get('/sms', Sms::class)->name('sms');
-    Route::get('/add-order', AddOrder::class)->name('add-order');
     Route::get('/edit-order', EditOrder::class)->name('edit-order');
 
     Route::get('/order-edit/{id}', OrderEdit::class)->name('order-edit');

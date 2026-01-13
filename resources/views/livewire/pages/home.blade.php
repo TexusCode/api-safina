@@ -67,7 +67,7 @@
                 </svg>
                 <span class="text-white">Сотрудники</span>
             </a>
-            @if (in_array(Auth::user()->role, ['admin', 'operator'], true))
+            @if (Auth::user()->role == 'operator')
                 <a href="{{ route('operator-dashboard') }}"
                     class="w-full grid justify-center gap-1 group cursor-pointer text-sm text-center">
                     @include('icons.outline.user', ['class' => 'size-12 p-2 bg-neutral-700 group-hover:bg-blue-600 rounded-full text-white mx-auto duration-200'])

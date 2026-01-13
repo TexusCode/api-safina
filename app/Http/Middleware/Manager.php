@@ -16,9 +16,7 @@ class Manager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $role = Auth::user()?->role;
-
-        if (in_array($role, ['admin', 'manager'], true)) {
+        if (Auth::user()?->role === 'manager') {
             return $next($request);
         }
 

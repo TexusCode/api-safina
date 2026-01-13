@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Operator
+class ApplicantRole
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class Operator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()?->role === 'operator') {
+        if (Auth::user()?->role === 'applicant') {
             return $next($request);
         }
 

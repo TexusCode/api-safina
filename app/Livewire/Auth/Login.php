@@ -34,7 +34,17 @@ class Login extends Component
 
         $this->dispatch('alert', 'Вы успешно вошли в систему!');
 
-        return redirect()->route('home');
+        return redirect()->route(match ($user->role) {
+            'super-admin' => 'super-admin.dashboard',
+            'admin' => 'home',
+            'manager' => 'home',
+            'operator' => 'operator-dashboard',
+            'vacuum' => 'vacuum-panel',
+            'washer' => 'add-suborder-single',
+            'deliver' => 'deliver',
+            'applicant' => 'applicant',
+            default => 'home',
+        });
     }
     public function render()
     {

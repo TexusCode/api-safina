@@ -5,7 +5,7 @@
             <flux:text class="text-neutral-400">Ваши заказы и статистика</flux:text>
         </div>
         <div class="flex items-center gap-2">
-            <a href="{{ route('add-order') }}"
+            <a href="{{ route('operator-add-order') }}"
                 class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
                 Добавить заказ
             </a>
