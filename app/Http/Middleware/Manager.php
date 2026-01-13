@@ -16,6 +16,9 @@ class Manager
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (Auth::user()?->role === 'operator') {
+            return redirect()->route('operator-dashboard');
+        }
         if (Auth::user()?->role === 'manager') {
             return $next($request);
         }
