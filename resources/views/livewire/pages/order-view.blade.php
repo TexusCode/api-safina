@@ -25,7 +25,7 @@
                         Возврат
                     </button>
                 </div>
-                @if (Auth::user()->role == ['admin', 'manager'])
+                @if (Auth::user()->role == 'admin' && Auth::user()->role == 'manager')
                     <div class="flex flex-col jkwm1">
                         <button type="button" wire:confirm="Точно хотите удалить" wire:click="deleteorder"
                             class="an00p inline-flex items-center n9hej xs2f2 sikx1 pb094 rsdjd azddh bg-red-500 kew0r hover:bg-red-600  disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden zx3z8 vtle8">
