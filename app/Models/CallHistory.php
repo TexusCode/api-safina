@@ -14,6 +14,7 @@ class CallHistory extends Model
         'started_at',
         'audio_path',
         'external_id',
+        'category',
     ];
 
     protected $casts = [
