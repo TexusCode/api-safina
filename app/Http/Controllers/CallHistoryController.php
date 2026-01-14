@@ -47,13 +47,41 @@ class CallHistoryController extends Controller
         $payload = $this->extractPayload($request);
 
         $externalId = $payload['external_id'] ?? null;
+        $callerPhone = $payload['caller_phone'] ?? null;
+        $receiverPhone = $payload['receiver_phone'] ?? null;
         $category = $payload['category'] ?? null;
 
-        if (empty($externalId) || empty($category)) {
-            return response()->json(['message' => 'external_id and category are required'], 422);
+        if (empty($category)) {
+            return response()->json(['message' => 'category is required'], 422);
         }
 
-        $call = CallHistory::where('external_id', $externalId)->first();
+        if (empty($externalId) && empty($callerPhone) && empty($receiverPhone)) {
+            return response()->json(['message' => 'external_id or phone is required'], 422);
+        }
+
+        $call = null;
+
+        if (!empty($externalId)) {
+            $call = CallHistory::where('external_id', $externalId)->first();
+        }
+
+        if (!$call) {
+            $call = CallHistory::query()
+                ->when(!empty($callerPhone) && !empty($receiverPhone), function ($query) use ($callerPhone, $receiverPhone) {
+                    $query->where(function ($q) use ($callerPhone, $receiverPhone) {
+                        $q->where('caller_phone', $callerPhone)
+                            ->orWhere('receiver_phone', $receiverPhone);
+                    });
+                })
+                ->when(!empty($callerPhone) && empty($receiverPhone), function ($query) use ($callerPhone) {
+                    $query->where('caller_phone', $callerPhone);
+                })
+                ->when(empty($callerPhone) && !empty($receiverPhone), function ($query) use ($receiverPhone) {
+                    $query->where('receiver_phone', $receiverPhone);
+                })
+                ->latest('started_at')
+                ->first();
+        }
 
         if ($call) {
             $call->category = $category;
@@ -69,9 +97,9 @@ class CallHistoryController extends Controller
             $call = CallHistory::create([
                 'external_id' => $externalId,
                 'category' => $category,
-                'receiver_phone' => $payload['receiver_phone'] ?? null,
+                'receiver_phone' => $receiverPhone,
                 'call_type' => $this->normalizeCallType($payload['call_type'] ?? 'incoming'),
-                'caller_phone' => $payload['caller_phone'] ?? null,
+                'caller_phone' => $callerPhone,
                 'duration_seconds' => (int) ($payload['duration_seconds'] ?? 0),
                 'started_at' => $payload['started_at'] ?? now()->toDateTimeString(),
                 'audio_path' => $payload['audio_path'] ?? null,
