@@ -1,130 +1,78 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire\Pages;
 
-use App\Models\CallHistory;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use App\Models\CallHistory as CallHistoryModel;
+use Illuminate\Support\Carbon;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithPagination;
 
-class CallHistoryController extends Controller
+class CallHistory extends Component
 {
-    public function store(Request $request): JsonResponse
+    use WithPagination;
+
+    public $search = '';
+    protected $queryString = ['search'];
+
+    public function render()
     {
-        $this->logRequest($request);
+        $search = trim($this->search);
 
-        $payload = $this->extractPayload($request);
+        $query = CallHistoryModel::query();
 
-        $data = [
-            'caller_phone'     => $payload['caller_phone'] ?? null,
-            'receiver_phone'   => $payload['receiver_phone'] ?? null,
-            'call_type'        => $payload['call_type'] ?? 'incoming',
-            'duration_seconds' => (int) ($payload['duration_seconds'] ?? 0),
-            'started_at'       => $payload['started_at'] ?? now()->toDateTimeString(),
-            'audio_path'       => $payload['audio_path'] ?? null,
-            'external_id'      => $payload['external_id'] ?? null,
-            'category'         => $payload['category'] ?? null, // <- новая категория
-        ];
-
-        if (empty($data['caller_phone'])) {
-            return response()->json(['message' => 'caller_phone is required'], 422);
+        if ($search !== '') {
+            $query->where(function ($subQuery) use ($search) {
+                $subQuery->where('caller_phone', 'like', "%{$search}%")
+                    ->orWhere('receiver_phone', 'like', "%{$search}%")
+                    ->orWhere('call_type', 'like', "%{$search}%")
+                    ->orWhere('external_id', 'like', "%{$search}%");
+            });
         }
 
-        $data['call_type'] = $this->normalizeCallType($data['call_type']);
-        $data['duration_seconds'] = max(0, (int) $data['duration_seconds']);
+        $callHistories = (clone $query)
+            ->latest('started_at')
+            ->paginate(50);
 
-        $call = CallHistory::create($data);
+        $monthStart = Carbon::now()->startOfMonth();
+        $now = Carbon::now();
 
-        return response()->json([
-            'message' => 'Call saved',
-            'data'    => $call,
+        $missedScope = function ($builder) {
+            return $builder->where(function ($q) {
+                $q->where('call_type', 'missed')
+                    ->orWhere(function ($sub) {
+                        $sub->where('call_type', 'incoming')
+                            ->where('duration_seconds', 0);
+                    });
+            });
+        };
+
+        $stats = [
+            'month_total' => CallHistoryModel::whereBetween('started_at', [$monthStart, $now])->count(),
+            'today_total' => CallHistoryModel::whereDate('started_at', Carbon::today())->count(),
+            'total_duration' => gmdate('H:i:s', (int) CallHistoryModel::sum('duration_seconds')),
+            'incoming_month' => CallHistoryModel::where('call_type', 'incoming')
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'outgoing_month' => CallHistoryModel::where('call_type', 'outgoing')
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'missed_month' => $missedScope(CallHistoryModel::query())
+                ->whereBetween('started_at', [$monthStart, $now])
+                ->count(),
+            'missed_today' => $missedScope(CallHistoryModel::query())
+                ->whereDate('started_at', Carbon::today())
+                ->count(),
+        ];
+
+        return view('livewire.pages.call-history', [
+            'callHistories' => $callHistories,
+            'stats' => $stats,
         ]);
     }
 
-    // Если принимаете категорию отдельным POST на /call-category
-    public function storeCategory(Request $request): JsonResponse
+    public function updatingSearch(): void
     {
-        $payload = $this->extractPayload($request);
-
-        $externalId = $payload['external_id'] ?? null;
-        $category   = $payload['category'] ?? null;
-
-        if (empty($externalId) || empty($category)) {
-            return response()->json(['message' => 'external_id and category are required'], 422);
-        }
-
-        $call = CallHistory::where('external_id', $externalId)->first();
-
-        if ($call) {
-            $call->category = $category;
-            // при необходимости обновить доп. поля
-            if (!empty($payload['receiver_phone'])) {
-                $call->receiver_phone = $payload['receiver_phone'];
-            }
-            if (!empty($payload['call_type'])) {
-                $call->call_type = $this->normalizeCallType($payload['call_type']);
-            }
-            $call->save();
-        } else {
-            $call = CallHistory::create([
-                'external_id'    => $externalId,
-                'category'       => $category,
-                'receiver_phone' => $payload['receiver_phone'] ?? null,
-                'call_type'      => $this->normalizeCallType($payload['call_type'] ?? 'incoming'),
-                'caller_phone'   => $payload['caller_phone'] ?? null,
-                'duration_seconds' => (int) ($payload['duration_seconds'] ?? 0),
-                'started_at'     => $payload['started_at'] ?? now()->toDateTimeString(),
-                'audio_path'     => $payload['audio_path'] ?? null,
-            ]);
-        }
-
-        return response()->json(['message' => 'Category saved', 'data' => $call]);
-    }
-
-    private function extractPayload(Request $request): array
-    {
-        $payload = $request->all();
-        if (empty($payload)) {
-            $jsonPayload = json_decode($request->getContent(), true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($jsonPayload)) {
-                $payload = $jsonPayload;
-            }
-        }
-        return $payload;
-    }
-
-    private function logRequest(Request $request): void
-    {
-        $directory = public_path('call-history');
-        File::ensureDirectoryExists($directory);
-
-        $fileName = now()->format('Ymd_His_u') . '_' . uniqid('call_', true) . '.txt';
-        $filePath = $directory . DIRECTORY_SEPARATOR . $fileName;
-
-        $payload = [
-            'received_at' => now()->toDateTimeString(),
-            'ip' => $request->ip(),
-            'headers' => $request->headers->all(),
-            'body' => $request->all(),
-        ];
-
-        File::put($filePath, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-    }
-
-    private function normalizeCallType(string $type): string
-    {
-        $map = [
-            'входящий'   => 'incoming',
-            'исходящий'  => 'outgoing',
-            'пропущенный'=> 'missed',
-        ];
-
-        $key = mb_strtolower(trim($type));
-        if (isset($map[$key])) {
-            return $map[$key];
-        }
-
-        $allowed = ['incoming', 'outgoing', 'missed'];
-        return in_array($key, $allowed, true) ? $key : 'incoming';
+        $this->resetPage();
     }
 }

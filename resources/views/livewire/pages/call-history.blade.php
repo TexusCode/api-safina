@@ -77,6 +77,7 @@
                     </div>
                     <p class="text-xs text-neutral-500">{{ optional($call->started_at)->format('d.m H:i') }} • {{ gmdate('H:i:s', $call->duration_seconds) }}</p>
                     <p class="text-sm text-neutral-300">{{ $call->caller_phone }} → {{ $call->receiver_phone ?? '—' }}</p>
+                    <p class="text-xs text-neutral-400">Категория: {{ $call->category ?: '—' }}</p>
                 </div>
                 @if ($call->audio_path)
                     <a href="{{ $call->audio_path }}" target="_blank"
