@@ -54,6 +54,95 @@
 
     @livewire('components.alert')
 
+    <div class="mt-5">
+        <flux:card size="sm" class="p-4">
+            <div class="flex flex-wrap gap-3 items-end">
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-sm font-medium mb-2 dark:text-white">Поиск</label>
+                    <input type="text" wire:model.live.debounce.300ms="search"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        placeholder="Сумма, категория или описание">
+                </div>
+
+                <div class="min-w-[200px]">
+                    <label class="block text-sm font-medium mb-2 dark:text-white">Категория</label>
+                    <flux:select wire:model.live="categoryFilter" placeholder="Все категории">
+                        <flux:select.option value="">Все категории</flux:select.option>
+                        @foreach ($categories as $category)
+                            <flux:select.option :value="$category">{{ $category }}</flux:select.option>
+                        @endforeach
+                    </flux:select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2 dark:text-white">С</label>
+                    <input type="date" wire:model.live="dateFrom"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2 dark:text-white">По</label>
+                    <input type="date" wire:model.live="dateTo"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                </div>
+
+                <div class="min-w-[180px]">
+                    <label class="block text-sm font-medium mb-2 dark:text-white">Сортировка</label>
+                    <select wire:model.live="sortField"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        <option value="created_at">Дата</option>
+                        <option value="price">Сумма</option>
+                        <option value="category">Категория</option>
+                    </select>
+                </div>
+
+                <div class="min-w-[140px]">
+                    <label class="block text-sm font-medium mb-2 dark:text-white">Направление</label>
+                    <select wire:model.live="sortDirection"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        <option value="desc">Убыв.</option>
+                        <option value="asc">Возр.</option>
+                    </select>
+                </div>
+
+                <div class="min-w-[120px]">
+                    <label class="block text-sm font-medium mb-2 dark:text-white">Показать</label>
+                    <select wire:model.live="perPage"
+                        class="py-2.5 px-3 block w-full border-gray-200 rounded-lg sm:text-sm
+                            focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50
+                            disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
+                            dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div>
+                    <button type="button" wire:click="resetFilters"
+                        class="py-2.5 px-4 rounded-lg border border-gray-200 text-sm font-medium
+                            hover:bg-gray-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800">
+                        Сбросить
+                    </button>
+                </div>
+            </div>
+        </flux:card>
+    </div>
 
     <div class="grid gap-2 mt-5">
         @foreach ($rashod as $todo)
