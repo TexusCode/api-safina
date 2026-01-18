@@ -33,6 +33,17 @@ class Rashod extends Component
         $this->dispatch('alert', 'Успешно доавлено');
         $this->dispatch('modal-close', name: 'add-expense');
     }
+
+    public function delete($id)
+    {
+        if (auth()->user()?->role !== 'admin') {
+            abort(403);
+        }
+
+        Rashodho::whereKey($id)->delete();
+        $this->dispatch('alert', 'Расход удален');
+        $this->resetPage();
+    }
     public function render()
     {
         $rashod = Rashodho::orderBy('created_at', 'desc')->paginate(50);
