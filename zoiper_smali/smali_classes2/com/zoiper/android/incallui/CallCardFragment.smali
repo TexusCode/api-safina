@@ -2488,7 +2488,20 @@
 .end method
 
 .method public bv(Ljava/lang/String;)V
-    .locals 1
+    .locals 2
+
+    # === CUSTOMER LOOKUP START ===
+    iget-object v0, p0, Lcom/zoiper/android/incallui/CallCardFragment;->xCustomerInfo:Landroid/widget/TextView;
+    if-eqz v0, :bv_no_customer_view
+    const/16 v1, 0x8
+    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V
+    invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+    move-result v1
+    if-nez v1, :bv_no_customer_view
+    const-string v1, "https://safina-cleaning.tj"
+    invoke-static {v0, p1, v1}, Lcom/zoiper/android/incallui/CustomerInfoLookup;->lookup(Landroid/widget/TextView;Ljava/lang/String;Ljava/lang/String;)V
+    :bv_no_customer_view
+    # === CUSTOMER LOOKUP END ===
 
     .line 713
     invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z

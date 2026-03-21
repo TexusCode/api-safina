@@ -20,4 +20,5 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
-/com.zoiper.android.app.apk
+/zoiper_decoded
+/zoiper_smali
