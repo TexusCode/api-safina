@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/sync_purchases" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/audio_issues" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/one_way_audio" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/visit_help_section" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/other" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-</LinearLayout>

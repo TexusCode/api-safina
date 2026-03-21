@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:background="@color/primary_background" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@id/account_list" android:background="@color/primary_background" android:visibility="visible" android:layout_width="match_parent" android:layout_height="wrap_content" android:divider="@drawable/preference_list_divider" android:dividerHeight="@dimen/preference_list_divider_height" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

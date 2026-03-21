@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen android:title="@string/pref_title_bluetooth" android:key="@string/pref_key_bluetooth"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_use_full_blueparrot_functionality" android:key="@string/pref_key_use_full_blueparrot_functionality" android:summary="@string/use_full_blueparrot_functionality_pref_summary" android:defaultValue="false" />
-    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_request_bluetooth_permission" android:key="@string/pref_key_request_bluetooth_permission" android:summary="@string/pref_label_summary_bluetooth_permission" android:defaultValue="false" />
-</PreferenceScreen>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="agree_and_continue_button_height">70.0dp</dimen>
-    <dimen name="agree_and_continue_button_width">400.0dp</dimen>
-    <dimen name="text_additional_text_size">25.0sp</dimen>
-    <dimen name="text_button_agree_and_continue_size">35.0sp</dimen>
-    <dimen name="text_terms_and_condition_size">45.0sp</dimen>
-</resources>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/activity_zoiper_preference_container" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomToolbar android:theme="@style/ThemeOverlay.AppCompat.ActionBar" android:id="@id/my_toolbar" android:background="@color/toolbar_background_color" android:layout_width="match_parent" android:layout_height="?actionBarSize" style="@style/ToolbarStyle" />
-    <com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:id="@id/container" android:layout_width="match_parent" android:layout_height="match_parent" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

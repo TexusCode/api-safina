@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.tabs.ViewPagerTabs android:textSize="@dimen/view_pager_tabs_text_size" android:layout_gravity="top" android:orientation="horizontal" android:id="@id/lists_pager_header" android:focusable="false" android:layout_width="match_parent" android:layout_height="?actionBarSize" android:layout_weight="0.0" android:elevation="@dimen/view_elevation" custom:ripple_color_api_14="@color/primary_background" custom:ripple_drawable_api_21="@drawable/ripple_primary_background" style="@style/ToolbarTabTextStyle"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res-auto" />

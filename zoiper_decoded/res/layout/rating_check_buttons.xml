@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/rating_button_yes" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/rating_button_yes_but_no" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/rating_button_no" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VerticticalButtonsTheme" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

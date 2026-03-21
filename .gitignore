@@ -26,4 +26,5 @@ Thumbs.db
 /zoiper_safina_final.apk
 /zoiper_custom.keystore
 *.apk
+*.idsig
 *.keystore

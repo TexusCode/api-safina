@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical" android:background="@color/primary_background" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/account_list_content" />
-    <com.zoiper.android.util.themeframework.customviews.CustomFloatingActionButton android:layout_gravity="end|bottom" android:id="@id/fab" android:background="@color/accent" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="16.0dp" android:src="@drawable/ic_add_account_plus_pressed" android:contentDescription="@string/content_description_create_account_button" app:elevation="0.0dp" app:fabSize="normal" />
-    <ImageView android:layout_gravity="end|bottom" android:id="@id/add_account_lock" android:visibility="gone" android:layout_width="16.0dp" android:layout_height="16.0dp" android:layout_marginRight="24.0dp" android:layout_marginBottom="24.0dp" android:src="@drawable/premium_lock_normal" android:elevation="16.0dp" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>

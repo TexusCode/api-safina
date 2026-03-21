@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:clipChildren="false" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:id="@id/contact_tile_frame" android:paddingLeft="@dimen/favorites_row_start_padding" android:paddingRight="@dimen/favorites_row_end_padding" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:paddingStart="@dimen/favorites_row_start_padding" android:paddingEnd="@dimen/favorites_row_end_padding">
-        <com.zoiper.android.contacts.PhoneFavoriteListView android:id="@id/contact_tile_list" android:paddingTop="@dimen/favorites_row_top_padding" android:paddingBottom="@dimen/floating_action_button_list_bottom_padding" android:scrollbars="none" android:fadingEdge="none" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent" android:divider="@null" android:nestedScrollingEnabled="true" />
-    </com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>
-    <com.zoiper.android.util.EmptyContentView android:layout_gravity="center" android:id="@id/empty_list_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" />
-</com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>
