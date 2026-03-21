@@ -3176,7 +3176,7 @@
 .end method
 
 .method public onViewCreated(Landroid/view/View;Landroid/os/Bundle;)V
-    .locals 4
+    .locals 6
 
     .line 189
     invoke-super {p0, p1, p2}, Lcom/zoiper/android/incallui/BaseFragment;->onViewCreated(Landroid/view/View;Landroid/os/Bundle;)V
@@ -3719,6 +3719,32 @@
 
     .line 310
     invoke-virtual {p2, v0}, Landroid/widget/ImageView;->setVisibility(I)V
+
+    # === CUSTOMER INFO VIEW START ===
+    const v1, 0x7f090308
+    invoke-virtual {p1, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object v1
+    if-eqz v1, :cond_customer_view_skip
+    check-cast v1, Landroid/view/ViewGroup;
+    invoke-virtual {p0}, Lcom/zoiper/android/incallui/CallCardFragment;->getContext()Landroid/content/Context;
+    move-result-object v2
+    new-instance v3, Landroid/widget/TextView;
+    invoke-direct {v3, v2}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
+    const v4, -0x1
+    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setTextColor(I)V
+    const v4, 0x41500000
+    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setTextSize(F)V
+    const/16 v4, 0x8
+    invoke-virtual {v3, v4, v4, v4, v4}, Landroid/widget/TextView;->setPadding(IIII)V
+    invoke-virtual {v3, v0}, Landroid/widget/TextView;->setVisibility(I)V
+    new-instance v4, Landroid/widget/LinearLayout$LayoutParams;
+    const/4 v5, -0x1
+    const/4 v2, -0x2
+    invoke-direct {v4, v5, v2}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+    invoke-virtual {v1, v3, v4}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    iput-object v3, p0, Lcom/zoiper/android/incallui/CallCardFragment;->xCustomerInfo:Landroid/widget/TextView;
+    :cond_customer_view_skip
+    # === CUSTOMER INFO VIEW END ===
 
     const p2, 0x7f090334
 
