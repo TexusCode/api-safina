@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout android:id="@id/drawer_layout_id" android:fitsSystemWindows="true" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/app_bar_main" />
+    <com.google.android.material.navigation.NavigationView android:layout_gravity="start" android:id="@id/navigation_view_id" android:background="@color/secondary_darkest" android:fitsSystemWindows="false" android:layout_width="wrap_content" android:layout_height="match_parent">
+        <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+            <include layout="@layout/nav_header_main" />
+            <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@id/navigation_list_id" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:divider="@android:color/transparent" android:dividerHeight="0.0dp" />
+        </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/config_label_calls"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_auto_answer">
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:layout="@layout/auto_answer_preference_title_layout" android:key="@string/pref_key_auto_answer_incoming_calls" android:defaultValue="false" />
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_instant_auto_answer" android:key="@string/pref_key_instant_auto_answer" android:dependency="@string/pref_key_auto_answer_incoming_calls" android:defaultValue="false" />
+        <com.zoiper.android.preferences.api.EditTextPreferenceWrapper android:hint="@string/pref_answer_after_hint" android:title="@string/pref_label_answer_after" android:key="@string/pref_key_answer_after" android:dependency="@string/pref_key_auto_answer_incoming_calls" android:defaultValue="5" android:inputType="number" />
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_keep_settings_after_restart" android:key="@string/pref_key_keep_settings_after_restart" android:dependency="@string/pref_key_auto_answer_incoming_calls" android:defaultValue="false" />
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_call_recordings">
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:layout="@layout/record_all_calls_preference_title_layout" android:title="@string/enable_recording" android:key="@string/pref_key_record_all_calls" android:defaultValue="false" />
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:layout="@layout/record_mp3_preference_title_layout" android:title="@string/pref_title_record_calls_in_mp3" android:key="@string/pref_key_record_calls_in_mp3" android:defaultValue="false" />
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_category_title_call_automation" android:key="@string/pref_category_key_automation">
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_title_call_waiting" android:key="@string/pref_key_call_waiting" android:summary="@string/pref_summary_call_waiting" android:defaultValue="true" />
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+</PreferenceScreen>

@@ -45,6 +45,7 @@ class CheckCustomerController extends Controller
         return response()->json([
             'phone' => $customer->phone,
             'name'  => $customer->name,
+            'adress' => $customer->adress,
             'orders_total' => $totalOrdersSum,
             'last_order' => $lastOrder ? [
                 'number' => $lastOrder->no,

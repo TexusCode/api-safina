@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:background="@drawable/app_background" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <WebView android:id="@id/voip_providers_web_view" android:layout_width="match_parent" android:layout_height="match_parent" />
+    <ProgressBar android:id="@id/voip_providers_webview_progress" android:layout_width="match_parent" android:layout_height="wrap_content" style="?android:progressBarStyleHorizontal" />
+</com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>

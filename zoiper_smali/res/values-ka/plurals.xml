@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_hours">
+        <item quantity="one">1 სთ</item>
+        <item quantity="other">%d სთ</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one">1 წთ</item>
+        <item quantity="other">%d წთ</item>
+    </plurals>
+    <plurals name="duration_seconds">
+        <item quantity="one">1 წამი</item>
+        <item quantity="other">%d წმ</item>
+    </plurals>
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_info_hint_next">"הקש על 'הבא' כדי לראות רשימה של ספקים פופולריים באזור שלך."</string>
+    <string name="account_info_hint_provider">יש צורך בחשבון ספק או חשבון PBX עסקי על מנת להתחבר לZoiPer.</string>
+    <string name="activity_not_available">לא נמצא יישום מתאים במכשיר זה</string>
+    <string name="all_contacts_empty">אין לך עדיין אנשי קשר</string>
+    <string name="all_contacts_empty_add_contact_action">הוסף איש קשר</string>
+    <string name="call_assistant">התקשר %s</string>
+    <string name="call_callback">שיחה חוזרת</string>
+    <string name="call_car">התקשר לרכב</string>
+    <string name="call_company_main">התקשר לחברה ראשית</string>
+    <string name="call_custom">התקשר %s</string>
+    <string name="call_detail_account">חשבון: %s</string>
+    <string name="call_detail_call_back_content_description">התקשר חזרה</string>
+    <string name="call_detail_codec">קודק: %s</string>
+    <string name="call_detail_duration_format" formatted="false">%s דקות %s שניות</string>
+    <string name="call_detail_list_header">רשימת שיחות</string>
+    <string name="call_detail_menu_remove_from_call_log">מחק מיומן השיחות</string>
+    <string name="call_detail_network_quality">איכות רשם כללית: %s/5.0</string>
+    <string name="call_detail_title">פרטי שיחה</string>
+    <string name="call_details_full_network_statistics">סטטיסטיקת רשת מלאה</string>
+    <string name="call_disambig_title">בחר מספר</string>
+    <string name="call_fax_home">התקשר לפקס בית</string>
+    <string name="call_fax_work">התקשר לפקס עבודה</string>
+    <string name="call_home">התקשר הביתה</string>
+    <string name="call_isdn">התקשר לISDN</string>
+    <string name="call_log_action_details">פרטי שיחה</string>
+    <string name="call_log_action_send_message">שלח הודעה</string>
+    <string name="call_log_action_video_call">שיחת וידאו</string>
+    <string name="call_log_activity_label">היסטוריה</string>
+    <string name="call_log_all_title">הכל</string>
+    <string name="call_log_calls_empty">אין שיחות</string>
+    <string name="call_log_clear">נקה יומן שיחות</string>
+    <string name="call_log_header_other">ישן יותר</string>
+    <string name="call_log_header_today">היום</string>
+    <string name="call_log_header_yesterday">אתמול</string>
+    <string name="call_log_item_count_and_date">(%1$d) <xliff id="date">%2$s</xliff> </string>
+    <string name="call_log_listview_footer_text">הצג את היסטוריית השיחות המלאה</string>
+    <string name="call_log_missed_empty">אין שיחות</string>
+    <string name="call_log_missed_title">לא נענו</string>
+    <string name="call_log_presence_content_description">סמל נוכחות</string>
+    <string name="call_log_type_incoming">שיחה נכנסת</string>
+    <string name="call_log_type_missed">שיחה שלא נענתה</string>
+    <string name="call_log_type_ougoing">שיחה יוצאת</string>
+    <string name="call_main">התקשר לראשי</string>
+    <string name="call_mms">התקשר MMS</string>
+    <string name="call_mobile">התקשר לנייד</string>
+    <string name="call_other">התקשר</string>
+    <string name="call_other_fax">התקשר לפקס</string>
+    <string name="call_pager">התקשר לביפר</string>
+    <string name="call_radio">התקשר לרדיו</string>
+    <string name="call_telex">התקשר לtelex</string>
+    <string name="call_transfer_selection_title">בחר שיחה:</string>
+    <string name="call_tty_tdd">התקשר לTTY/TDD</string>
+    <string name="call_work">התקשר לעבודה</string>
+    <string name="call_work_mobile">התקשר לנייד עבודה</string>
+    <string name="call_work_pager">התקשר לביפר עבודה</string>
+    <string name="choose_provider_text">בחר ספק מהרשימה</string>
+    <string name="clear_call_log_confirmation_message">פעולה זו תמחק את כל השיחות מההיסטוריה שלך.</string>
+    <string name="clear_call_log_confirmation_title">לנקות היסטוריית שיחות?</string>
+    <string name="clear_call_log_progress_title">מנקה היסטוריית יומן שיחות…</string>
+    <string name="contacts_list">אנשי קשר</string>
+    <string name="description_add_to_existing_contact_action">הוסף ^1 לאיש קשר קיים</string>
+    <string name="description_call_back_action">התקשר חזרה ^1</string>
+    <string name="description_contact_details">פרטי התקשרות עבור ^1</string>
+    <string name="description_create_new_contact_action">צור איש קשר עבור ^1</string>
+    <string name="description_details_action">פרטי שיחה עבור ^1</string>
+    <string name="description_incoming_answered_call">שיחות שנענו מ ^1, ^2, ^3.</string>
+    <string name="description_incoming_missed_call">שיחות שלא נענו מ ^1, ^2, ^3.</string>
+    <string name="description_num_calls">%1$d שיחות.</string>
+    <string name="description_outgoing_call">התקשר ל^1, ^2, ^3.</string>
+    <string name="description_send_message_action">שלח הודעה ל ^1</string>
+    <string name="description_video_call_action">שיחת וידאו ^1.</string>
+    <string name="letter_tile_letter_font_family">sans-serif-light</string>
+    <string name="list_delimiter">", "</string>
+    <string name="list_filter_phones">כל אנשי הקשר עם מספרי טלפון</string>
+    <string name="missing_contacts_permission_contact_sources">"כדי לראות חשבונות עם אנשי קשר, 
+ הפעל את הרשאת 'אנשי קשר'."</string>
+    <string name="next_button">הבא</string>
+    <string name="permission_no_contacts">"כדי לראות את אנשי הקשר שלך, 
+ הפעל את הרשאת 'אנשי קשר'."</string>
+    <string name="permission_no_search">"כדי לחפש באנשי הקשר שלך, הפעל את הרשאת 'אנשי קשר'."</string>
+    <string name="permission_no_speeddial">"כדי לאפשר חיוג מהיר, 
+ הפעל את ההרשאה 'אנשי קשר'."</string>
+    <string name="pref_label_use_preconditions">השתמש בתנאים מקדימים</string>
+    <string name="provisioning_request_timeout">פסק זמן לבקשת הקצאה</string>
+    <string name="remove_contact">הסר</string>
+    <string name="search_shortcut_add_to_contact">הוסף לאיש קשר</string>
+    <string name="search_shortcut_call_number">התקשר %s</string>
+    <string name="search_shortcut_create_new_contact">צור איש קשר חדש</string>
+    <string name="show_more_providers_button">הצג עוד</string>
+    <string name="speed_dial_empty">אף אחד עדיין לא נמצא בחיוג המהיר שלך</string>
+    <string name="speed_dial_empty_add_favorite_action">הוסף מועדף</string>
+</resources>

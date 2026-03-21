@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_hours">
+        <item quantity="one">1 час</item>
+        <item quantity="few">%d часа</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часов</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one">1 минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
+    <plurals name="duration_seconds">
+        <item quantity="one">1 секунда</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунд</item>
+    </plurals>
+    <plurals name="recipient_count">
+        <item quantity="one">%1$s получатель</item>
+        <item quantity="few">%1$s получателей</item>
+        <item quantity="many">%1$s получатели</item>
+        <item quantity="other">%1$s получателей</item>
+    </plurals>
+    <plurals name="search_results_title">
+        <item quantity="one">%1$s результат для \"%2$s\"</item>
+        <item quantity="few">%1$s результатов для \"%2$s\"</item>
+        <item quantity="many">%1$s результатов для \"%2$s\"</item>
+        <item quantity="other">%1$s результаты для \"%2$s\"</item>
+    </plurals>
+</resources>

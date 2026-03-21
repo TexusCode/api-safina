@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abc_action_bar_home_description">Zur Startseite</string>
+    <string name="abc_action_bar_up_description">Nach oben</string>
+    <string name="abc_action_menu_overflow_description">Weitere Optionen</string>
+    <string name="abc_action_mode_done">Fertig</string>
+    <string name="abc_activity_chooser_view_see_all">Alle anzeigen</string>
+    <string name="abc_activitychooserview_choose_application">App auswählen</string>
+    <string name="abc_capital_off">AUS</string>
+    <string name="abc_capital_on">AN</string>
+    <string name="abc_menu_alt_shortcut_label">Alt +</string>
+    <string name="abc_menu_ctrl_shortcut_label">Strg +</string>
+    <string name="abc_menu_delete_shortcut_label">Löschen</string>
+    <string name="abc_menu_enter_shortcut_label">Eingabetaste</string>
+    <string name="abc_menu_function_shortcut_label">Funktionstaste +</string>
+    <string name="abc_menu_meta_shortcut_label">Meta-Taste +</string>
+    <string name="abc_menu_shift_shortcut_label">Umschalttaste +</string>
+    <string name="abc_menu_space_shortcut_label">Leertaste</string>
+    <string name="abc_menu_sym_shortcut_label">Sym-Taste +</string>
+    <string name="abc_prepend_shortcut_label">Menütaste +</string>
+    <string name="abc_search_hint">Suchen…</string>
+    <string name="abc_searchview_description_clear">Suchanfrage löschen</string>
+    <string name="abc_searchview_description_query">Suchanfrage</string>
+    <string name="abc_searchview_description_search">Suche</string>
+    <string name="abc_searchview_description_submit">Anfrage senden</string>
+    <string name="abc_searchview_description_voice">Sprachsuche</string>
+    <string name="abc_shareactionprovider_share_with">Teilen mit</string>
+    <string name="abc_shareactionprovider_share_with_application">Mit %s teilen</string>
+    <string name="abc_toolbar_collapse_description">Minimieren</string>
+    <string name="about_label_brand">Marke: %s</string>
+    <string name="about_label_copyright">Copyright %s</string>
+    <string name="about_label_library_revision">Bibliothek-Revision: %s</string>
+    <string name="about_label_manufacturer">Hersteller: %s</string>
+    <string name="about_label_model">Modell: %s</string>
+    <string name="about_warning">Diese Software wird durch mehrere Gesetze geschützt.</string>
+    <string name="accent_color_pref_summary">FAB Button, Details</string>
+    <string name="accent_color_pref_title">Farbe zum Hervorheben</string>
+    <string name="accessibility_overflow">Mehr</string>
+    <string name="account_info_hint_next">Tippen Sie Weiter, um eine Liste mit den beliebtesten Providern in Ihrer Region zu sehen.</string>
+    <string name="account_info_hint_provider">Sie brauchen einen Account bei einem Provider oder IhreTK-Anlage im Büro, um Zoiper verwenden zu können.</string>
+    <string name="account_phone">Nur Telefon, nicht synchronisiert</string>
+    <string name="account_selection_mwi_count">%1$d neu</string>
+    <string name="account_selection_mwi_new_message_no_count">Neue Nachrichten</string>
+    <string name="account_type">Accounttyp</string>
+    <string name="account_wizard_create_account_button">Account anlegen</string>
+    <string name="account_wizard_hostname_resolution_failure_dialog_message">"Falscher Hostname oder schlechte/fehlende Internetverbindung. 
+TIP: Kontrolliere den Hostnamen und die Netzwerk Einstellungen. 
+ 
+Weiter ?"</string>
+    <string name="account_wizard_missing_username_dialog_text">Username erforderlich.</string>
+    <string name="account_wizard_providers_list_button">Providerliste</string>
+    <string name="account_wizard_wrong_hostname_format_dialog_message">Hostname ist ungültig.</string>
+    <string name="action_bar_top_search">Suche ...</string>
+    <string name="action_menu_back_from_search">Suche abbrechen</string>
+    <string name="action_menu_dialpad_button">Wahlfeld</string>
+    <string name="action_visit">Besuchen</string>
+    <string name="activity_not_available">Keine App dafür auf diesem Gerät</string>
+    <string name="activity_title_contacts_filter">Kontakt-Quellen</string>
+    <string name="add_additional_accounts_dialog_message">Benötigen Sie gleichzeitig mehrere Accounts? Upgrade auf Zoiper Gold und schalten Sie diese Funktion frei.</string>
+    <string name="add_additional_accounts_dialog_title">Premium Upgrade</string>
+    <string name="add_contact_not_available">Keine Kontakte-App verfügbar</string>
+    <string name="adding_recipients">Empfänger hinzugefügen…</string>
+    <string name="agree_and_continue_button_text">Zustimmen und fortfahren</string>
+    <string name="all_contacts_empty">Sie haben noch keine Kontakte</string>
+    <string name="all_contacts_empty_add_contact_action">Kontakt hinzufügen</string>
+    <string name="already_subscribed_label_warning">Bereits abonniert!</string>
+    <string name="anonymous_registration_dialog_text">Nur wenige Server unterstützen anonyme Anmeldung. Wirklich fortfahren?</string>
+    <string name="application_logo">Anwendungslogo</string>
+    <string name="apply_button">Anwenden</string>
+    <string name="apply_custom_colors_action">Farben übernehmen</string>
+    <string name="apply_theme_action">Thema übernehmen</string>
+    <string name="are_you_happy_with">Sind Sie zufrieden mit %s?</string>
+    <string name="attachment_error">Anhangfehler</string>
+    <string name="audio_driver_notice">Einige Telefone können einfrieren oder sich aufhängen mit openSL ES.</string>
+    <string name="audio_mode_bluetooth">Bluetooth</string>
+    <string name="audio_mode_earpiece">Handset-Hörer</string>
+    <string name="audio_mode_speaker">Lautsprecher</string>
+    <string name="audio_mode_wired_headset">Kabel-Headset</string>
+    <string name="audio_thread_stats_details">"Eingang: 
+ 
+Gesamt: %1$d 
+Überschreitung 25ms: %2$d 
+Überschreitung 50ms: %3$d 
+ 
+Ausgang: 
+ 
+Gesamt: %4$d 
+Überschreitung 25ms: %5$d 
+Überschreitung 50ms: %6$d"</string>
+    <string name="audio_thread_stats_label">Audio High Thread-Statistik:</string>
+    <string name="audio_thread_stats_notification_text">Für detaillierte Statistik anklicken.</string>
+    <string name="audio_thread_stats_notification_title">Audio High Thread Statistik</string>
+    <string name="authentication_dialogs_negative_button">Nein</string>
+    <string name="authentication_dialogs_positive_button">Ja</string>
+    <string name="authentication_without_password_dialog_text">Nur wenige Server unterstützen die Authentifizierung ohne Passwort. Wirklich fortfahren?</string>
+    <string name="auto_accept_not_in_range">Wert außerhalb von: 1-120</string>
+    <string name="average_input_bitrate">Durchschnittlich erhaltene Bitrate</string>
+    <string name="average_output_bitrate">Durchschnittlich gesendete Bitrate</string>
+    <string name="background_color_pref_summary">Hintergrundfarbe aller Ansichten</string>
+    <string name="background_color_pref_title">Hintergrund</string>
+    <string name="background_statistics_charging">Laden</string>
+    <string name="background_statistics_connectivity">Verbindung</string>
+    <string name="background_statistics_push">Push</string>
+    <string name="background_statistics_wakeup">Aufwecken</string>
+    <string name="background_stats_label">Hintergrund-Statistiken:</string>
+    <string name="bad_audio_dialog_title">Schlechte Netzwerkqualität!</string>
+    <string name="bad_audio_quality_dialog_msg" formatted="false">"Schlechte Anrufqualität wegen schlechter Internetverbindung zum Server. 
+ 
+ Netzwerkstatistiken: 
+ Paketverlust ausgehend: %.1f %% 
+ Jitter ausgehend: %d ms 
+ Paketverlust eingehend: %.1f %%"</string>
+    <string name="bad_expiration_time">Der Server %1$s verlangt eine niedrige maximale Registrierungszeit von %2$s %3$s. Für einen optimalen Akkuverbrauch empfehlen wir eine maximale Ablaufzeit von 1 Monat.</string>
+    <string name="banner_part_1">Sie nutzen die freie Zoiper-App.</string>
+    <string name="banner_part_2">Upgrade auf</string>
+    <string name="banner_part_3"> Kombi </string>
+    <string name="banner_part_4">Jetzt!</string>
+    <string name="billing_package_not_available">Käufe sind für dieses Anwendungspaket nicht verfügbar</string>
+    <string name="button_audio_issues">Audio-Probleme</string>
+    <string name="button_cancel">Abbruch</string>
+    <string name="button_clear_test_purchases">Testkäufe löschen</string>
+    <string name="button_create_new">Neu erstellen</string>
+    <string name="button_enable">Aktivieren</string>
+    <string name="button_get_configuration_text">Konfiguration erhalten</string>
+    <string name="button_next">Weiter</string>
+    <string name="button_no">Nein</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_one_way_audio">Einseitiges Audio</string>
+    <string name="button_other">Sonstige</string>
+    <string name="button_overwrite">Überschreiben</string>
+    <string name="button_rates_text">Preise</string>
+    <string name="button_retry">Wiederholen</string>
+    <string name="button_save">Speichern</string>
+    <string name="button_signup_text">Registrieren</string>
+    <string name="button_subscribe">Abonnieren</string>
+    <string name="button_sync_purchases">Sync-Käufe</string>
+    <string name="button_visit_help_section">Besuchen Sie unsere Hilfe</string>
+    <string name="button_yes">Ja</string>
+    <string name="call_assistant">%s anrufen</string>
+    <string name="call_callback">Zurückrufen</string>
+    <string name="call_car">Auto anrufen</string>
+    <string name="call_company_main">Hauptnummer Firma anrufen</string>
+    <string name="call_custom">%s anrufen</string>
+    <string name="call_detail_account">Account: %s</string>
+    <string name="call_detail_call_back_content_description">Zurückrufen</string>
+    <string name="call_detail_codec">Codec: %s</string>
+    <string name="call_detail_duration_format" formatted="false">%s min %s sek</string>
+    <string name="call_detail_list_header">Anrufliste</string>
+    <string name="call_detail_menu_remove_from_call_log">Aus dem Anruf-Log löschen</string>
+    <string name="call_detail_network_quality">Gesamt-Netzqualität: %s/5,0</string>
+    <string name="call_detail_title">Anrufdetails</string>
+    <string name="call_details_full_network_statistics">Vollständige Netz-Statistik</string>
+    <string name="call_disambig_title">Nummer auswählen</string>
+    <string name="call_fax_home">Heim-Fax anrufen</string>
+    <string name="call_fax_work">Arbeits-Fax anrufen</string>
+    <string name="call_home">zu hause anrufen</string>
+    <string name="call_isdn">ISDN anrufen</string>
+    <string name="call_log_action_details">Anrufdetails</string>
+    <string name="call_log_action_send_message">Nachricht senden</string>
+    <string name="call_log_action_video_call">Videoanruf</string>
+    <string name="call_log_activity_label">Geschichte</string>
+    <string name="call_log_all_title">Alle</string>
+    <string name="call_log_calls_empty">Keine Anrufe</string>
+    <string name="call_log_clear">Anruf-Log löschen</string>
+    <string name="call_log_header_other">Älter</string>
+    <string name="call_log_header_today">Heute</string>
+    <string name="call_log_header_yesterday">Gestern</string>
+    <string name="call_log_item_count_and_date">(%1$d) <xliff id="date"> %2$s </xliff> </string>
+    <string name="call_log_listview_footer_text">Gesamten Anrufverlauf ansehen</string>
+    <string name="call_log_missed_empty">Keine Anrufe</string>
+    <string name="call_log_missed_title">Verpasste</string>
+    <string name="call_log_popup_copy_number">Nummer kopieren</string>
+    <string name="call_log_popup_edit_number_before_call">Nummer vor dem Anruf bearbeiten</string>
+    <string name="call_log_presence_content_description">Präsenz-Symbol</string>
+    <string name="call_log_type_incoming">Eingehender Anruf</string>
+    <string name="call_log_type_missed">Verpasster Anruf</string>
+    <string name="call_log_type_ougoing">Ausgehender Anruf</string>
+    <string name="call_main">Hauptnummer anrufen</string>
+    <string name="call_mms">MMS anrufen</string>
+    <string name="call_mobile">Handy anrufen</string>
+    <string name="call_not_send_missing_default_account">Anruf kann nicht gesendet werden. Standardkonto fehlt.</string>
+    <string name="call_not_send_service_not_running">Anruf kann nicht gesendet werden. Service wird nicht ausgeführt.</string>
+    <string name="call_other">Anrufen</string>
+    <string name="call_other_fax">Fax anrufen</string>
+    <string name="call_pager">Pager anrufen</string>
+    <string name="call_radio">Radio anrufen</string>
+    <string name="call_recording">Anrufaufzeichnung</string>
+    <string name="call_recordings_location_description_help_text">"&lt;h3>Zugriff Aufzeichnungen&lt;/h3> 
+ &lt;body>Sie können auf Ihre Aufzeichnungen mit dem Datenmanager Ihres Android-Geräts zugreifen.&lt;/p> 
+&lt;p>&amp;nbsp;&lt;/p> 
+&lt;p> 
+&lt;ul> 
+&lt;li>Samsung &amp;ndash; Samsung Eigene Daten&lt;/li> 
+&lt;li>Huawei &amp;ndash; Dateien&lt;/li> 
+&lt;li>Xiaomi - Mi File Manager&lt;/li> 
+&lt;li>Google Pixel - Dateien&lt;/li> 
+&lt;/ul> 
+&lt;/p> 
+&lt;p>&amp;nbsp;&lt;/p> 
+&lt;p>Alternativen: Total Commander&lt;/p> 
+&lt;p>&amp;nbsp;&lt;/p> 
+&lt;p>Diese sind hier zu finden:&amp;nbsp; 
+Interner Speicher im Ordner /Android/data/com.APPNAME/files&lt;/p> 
+ &lt;p>Hinweis: Aufgrund von Änderungen im Android-Frameword kann auf den zuvor genutzten Speicherort nicht mehr zugegriffen werden. 
+ Können Sie Ihre Aufzeichnungen nicht sehen, schauen Sie im Internen Speicher im Ordner /APPNAME nach.&lt;/body>"</string>
+    <string name="call_recordings_snackbar_help_action_title">Hier</string>
+    <string name="call_recordings_snackbar_help_message">Finden Sie heraus wie Sie auf Ihre Aufzeichnungen zugreifen können</string>
+    <string name="call_request_dialog_accept">Annehmen</string>
+    <string name="call_request_dialog_content">Möchten Sie eine Anrufumleitung von: %1$s auf: %2$s Anruf halten?</string>
+    <string name="call_request_dialog_reject">Ablehnen</string>
+    <string name="call_request_dialog_title">Umleitungsanfrage:</string>
+    <string name="call_telex">Telex anrufen</string>
+    <string name="call_transfer_selection_title">Bitte wählen Sie einen Anruf:</string>
+    <string name="call_tty_tdd">TTY/TDD anrufen</string>
+    <string name="call_work">Arbeit anrufen</string>
+    <string name="call_work_mobile">Firmen-Handy anrufen</string>
+    <string name="call_work_pager">Firmen-Pager anrufen</string>
+    <string name="calling_via_template">Anruf über %s</string>
+    <string name="can_not_access_google_play_store">Kein Zugriff auf Google Play Store</string>
+    <string name="cannot_load_wrapper_lib_message">Fehler beim Laden der eigenen Bibliothek. Ihr Telefon unterstützt diese möglicherweise nicht, oder der Download ist unvollständig. Installation wiederholen und uns unter support@zoiper.com kontaktieren, wenn es nicht hilft.</string>
+    <string name="card_title_call_ended">Anruf beendet</string>
+    <string name="card_title_conf_call">Telefonkonferenz</string>
+    <string name="card_title_dialing">Wird gewählt</string>
+    <string name="card_title_hanging_up">Wird aufgehängt</string>
+    <string name="card_title_incoming_call">Eingehender Anruf</string>
+    <string name="card_title_video_call">Videoanruf</string>
+    <string name="card_title_video_call_error">Kann Videoanruf nicht verbinden</string>
+    <string name="card_title_video_call_rejected">Video-Anfrage abgelehnt</string>
+    <string name="card_title_video_call_requesting">Video wird angefragt</string>
+    <string name="cert_error_cert">Peer-Zertifikat ungültig</string>
+    <string name="cert_error_date">Zertifikat noch nicht gültig oder bereits abgelaufen</string>
+    <string name="cert_error_internal">Interner oder anderer nicht erkannter Fehler</string>
+    <string name="cert_error_issuer">Aussteller nicht vertrauenswürdig</string>
+    <string name="cert_error_name">Zertifikatnamen stimmen nicht überein</string>
+    <string name="cert_error_revoked">Zertifikat widerrufen oder abgelehnt</string>
+    <string name="certificate_is_not_trusted">Sicherheitszertifikat ist nicht vertrauenswürdig!</string>
+    <string name="change_colors_pref_summary">Eigene Farbauswahl</string>
+    <string name="chat">Chat</string>
+    <string name="chat_aim">Chat in AIM</string>
+    <string name="chat_gtalk">Chat in Google Talk</string>
+    <string name="chat_icq">Chat in ICQ</string>
+    <string name="chat_invalid_account">Ungültiger Account</string>
+    <string name="chat_jabber">Chat in Jabber</string>
+    <string name="chat_msn">Chat in Windows Live</string>
+    <string name="chat_qq">Chat in QQ</string>
+    <string name="chat_select_account">Account auswählen</string>
+    <string name="chat_sip_account_warning">Instant Messaging ist nur für die SIP-Accounts unterstützt</string>
+    <string name="chat_skype">Chat in Skype</string>
+    <string name="chat_yahoo">Chat in Yahoo</string>
+    <string name="choose_provider_text">Wählen Sie einen Anbieter aus der Liste</string>
+    <string name="choose_voip_provider">Wählen Sie einen VoIP-Provider</string>
+    <string name="clear_call_log_confirmation_message">Alle Anrufe werden aus Ihrer Geschichte gelöscht.</string>
+    <string name="clear_call_log_confirmation_title">Anrufverlauf löschen?</string>
+    <string name="clear_call_log_progress_title">Anruf-Log History wird gelöscht…</string>
+    <string name="clear_certification_cache_pref_summary">HTTPS-Zertifikats-Cache löschen.</string>
+    <string name="clear_devug_log_msg">Haben Sie das Debug-Protokoll gesendet?</string>
+    <string name="clear_zrtp_cache_pref_summary">Löscht cached SAS für ZRTP.</string>
+    <string name="color_picker_button_pref_title">Farben ändern</string>
+    <string name="combo_premium_feature_title">Kombipaket</string>
+    <string name="combo_skip_confirm_are_you_sure">Sind Sie sicher, dass Sie die kostenfreie <i>eingeschränkte</i> Version nutzen wollen?</string>
+    <string name="combo_skip_confirm_business_features"><b>Geschäftsfunktionen</b> - Aufzeichnung, Konferenz, Rufumleitung, mehrere Accounts, Anwesenheit, ZRTP-Verschlüsselung, MWI, QoS/DSCP, Automatische Rufannahme</string>
+    <string name="combo_skip_confirm_codecs"><b>Zusätzliche Codecs</b> - Unterstützung G729 und h264</string>
+    <string name="combo_skip_confirm_reliable_incoming"><b>Kommende Rufe zuverlässig</b> - Push-Proxy-Dienst</string>
+    <string name="combo_skip_confirm_terms">Mit \"JA\" stimmen Sie unseren <a href="https://www.zoiper.com/en/zoiper-general-terms"><u>Allgemeinen Geschäftsbedingungen</u></a> und <a href="https://www.zoiper.com/en/zoiper-privacy-policy"><u>Datenschutzbestimmungen</u></a>zu.</string>
+    <string name="combo_skip_confirm_title">Ihnen werden zukünftig diese Funktionen fehlen:</string>
+    <string name="combo_skip_confirm_wideband_audio"><b>Breitband-Audio</b> - Verbesserte Audioqualität &amp; geringere Latenz dank G.722, G.726, Opus, Speex</string>
+    <string name="combo_subs_button_continue">Weiter</string>
+    <string name="combo_subs_screen_free_trial_button">%1$s TAGE FREIE TESTZEITRAUM</string>
+    <string name="combo_subs_screen_monthly_price">%1$s/Monat</string>
+    <string name="combo_subs_screen_monthly_title">monatlich</string>
+    <string name="combo_subs_screen_no_charge">Keine Kosten im Testzeitraum. Abbrechen ist jederzeit möglich.</string>
+    <string name="combo_subs_screen_terms_continue">Mit \"WEITER\" stimmen Sie unseren <a href="https://www.zoiper.com/en/zoiper-general-terms"><u>Allgemeinen Geschäftsbedingungen</u></a> und <a href="https://www.zoiper.com/en/zoiper-privacy-policy"><u>Datenschutzbestimmungen</u></a> zu.</string>
+    <string name="combo_subs_screen_terms_trial">Mit \"%1$s TAGE TESTZEITRAUM\" stimmen Sie unseren &lt;a href=https://www.zoiper.com/en/zoiper-general-terms>&lt;u>Allgemeinen Geschäftsbedingungen&lt;/u>&lt;/a> und &lt;a href=https://www.zoiper.com/en/zoiper-privacy-policy>&lt;u>Datenschutzbestimmungen&lt;/u>&lt;/a> zu.</string>
+    <string name="combo_subs_screen_yearly_annual">Jährlich %1$s/Jahr</string>
+    <string name="combo_subs_screen_yearly_only">Nur %1$s/Monat</string>
+    <string name="common_google_play_services_enable_button">Aktivieren</string>
+    <string name="common_google_play_services_enable_text">%1$s funktioniert erst nach der Aktivierung der Google Play-Dienste.</string>
+    <string name="common_google_play_services_enable_title">Google Play-Dienste aktivieren</string>
+    <string name="common_google_play_services_install_button">Installieren</string>
+    <string name="common_google_play_services_install_text">Zur Nutzung von %1$s sind die Google Play-Dienste erforderlich, die auf deinem Gerät nicht installiert sind.</string>
+    <string name="common_google_play_services_install_title">Google Play-Dienste installieren</string>
+    <string name="common_google_play_services_notification_channel_name">Verfügbarkeit von Google Play-Diensten</string>
+    <string name="common_google_play_services_notification_ticker">Fehler bei Zugriff auf Google Play-Dienste</string>
+    <string name="common_google_play_services_unknown_issue">%1$s hat Probleme mit Google Play-Diensten. Bitte versuche es noch einmal.</string>
+    <string name="common_google_play_services_unsupported_text">Zur Nutzung von %1$s sind Google Play-Dienste erforderlich, die auf deinem Gerät nicht unterstützt werden.</string>
+    <string name="common_google_play_services_update_button">Aktualisieren</string>
+    <string name="common_google_play_services_update_text">%1$s wird nur ausgeführt, wenn du die Google Play-Dienste aktualisierst.</string>
+    <string name="common_google_play_services_update_title">Google Play-Dienste aktualisieren</string>
+    <string name="common_google_play_services_updating_text">Zur Nutzung von %1$s sind Google Play-Dienste erforderlich, die gerade aktualisiert werden.</string>
+    <string name="common_google_play_services_wear_update_text">Eine neue Version der Google Play-Dienste wird benötigt. Diese wird in Kürze automatisch aktualisiert.</string>
+    <string name="common_open_on_phone">Auf Smartphone öffnen</string>
+    <string name="common_signin_button_text">Anmelden</string>
+    <string name="common_signin_button_text_long">Über Google anmelden</string>
+    <string name="config_label_about">Über</string>
+    <string name="config_label_accounts">Accounts</string>
+    <string name="config_label_advanced">Fortgeschritten</string>
+    <string name="config_label_audio">Audio</string>
+    <string name="config_label_bluetooth">Bluetooth</string>
+    <string name="config_label_calls">Rufe</string>
+    <string name="config_label_connectivity">Verbindung</string>
+    <string name="config_label_contacts">Kontakte</string>
+    <string name="config_label_customize">Anpassen</string>
+    <string name="config_label_diagnostic">Diagnose</string>
+    <string name="config_label_enterprise">Unternehmen</string>
+    <string name="config_label_exit">Beenden</string>
+    <string name="config_label_incoming_calls">Kommende Rufe</string>
+    <string name="config_label_information">Information</string>
+    <string name="config_label_premium_features">Premium-Features</string>
+    <string name="config_label_settings">Einstellungen</string>
+    <string name="config_label_social">Folgen Sie uns</string>
+    <string name="config_label_statistics">Statistik</string>
+    <string name="config_label_translate">Übersetzen</string>
+    <string name="config_label_video">Video</string>
+    <string name="config_label_warnings">Warnungen</string>
+    <string name="config_label_zoiper_pro_premium_section">Funktionen</string>
+    <string name="confirm_dialog_title">Löschen?</string>
+    <string name="cont_desc_application_logo">Anwendungslogo</string>
+    <string name="cont_desc_change_presence_status">Anwesenheitsstatus ändern</string>
+    <string name="cont_desc_config_item_icon">Konfiguration</string>
+    <string name="cont_desc_move_item">Artikel nach oben oder unten setzen</string>
+    <string name="cont_desc_register_unregister_button">%s anmelden/abmelden</string>
+    <string name="cont_desc_set_default_account">%s Account als Standard festlegen</string>
+    <string name="contact_us_label">Kontaktieren Sie uns</string>
+    <string name="contactsList">Kontakte</string>
+    <string name="contacts_list">Kontakte</string>
+    <string name="content_description_account_info_fragment">Beschreibung Provider</string>
+    <string name="content_description_account_selectable_as_default">%s - als Default wählbar</string>
+    <string name="content_description_account_selected_as_default">%s - Default-Account</string>
+    <string name="content_description_choose_provider_fragment">Provider wählen</string>
+    <string name="content_description_create_account_button">Account erstellen</string>
+    <string name="content_description_detection_fragment">Erkennung</string>
+    <string name="content_description_dialpad_editbox">Nummer</string>
+    <string name="content_description_fab_add_contact">Kontakt hinzufügen</string>
+    <string name="content_description_fab_new_message">Neue Nachricht</string>
+    <string name="content_description_fab_open_dialpad">Wahlfeld öffnen</string>
+    <string name="content_description_facebook_icon">Facebook Icon</string>
+    <string name="content_description_hostname_fragment">Hostname</string>
+    <string name="content_description_login_main_fragment">Login</string>
+    <string name="content_description_login_password_textbox">Passwort eingeben</string>
+    <string name="content_description_login_username_textbox">Benutzernamen eingeben</string>
+    <string name="content_description_nav_drawer_account_status_image_locked">Account gesperrt</string>
+    <string name="content_description_nav_drawer_account_status_image_register">Account anmelden</string>
+    <string name="content_description_nav_drawer_account_status_image_unregister">Account abmelden</string>
+    <string name="content_description_nav_drawer_hide_accounts_button">Alle Kontakte verbergen</string>
+    <string name="content_description_nav_drawer_show_accounts_button">Alle Accounts anzeigen</string>
+    <string name="content_description_nav_header" formatted="false">Aktueller Account: %s, Account-Status: %s</string>
+    <string name="content_description_optional_parameters_fragment">Optionale Parameter</string>
+    <string name="content_description_preference_dialog_list_radio">Einstellungsdialog Radio Check</string>
+    <string name="content_description_provider_fragment">Konfiguration Provider</string>
+    <string name="content_description_record_all_calls_checkbox">Alle Rufe aufzeichnen</string>
+    <string name="content_description_tab_all_contacts">Alle Kontakte</string>
+    <string name="content_description_tab_call_log">Anrufprotokoll</string>
+    <string name="content_description_tab_favorites">Favoriten</string>
+    <string name="content_description_tab_messages">Nachrichten</string>
+    <string name="content_description_twitter_icon">Twitter Icon</string>
+    <string name="copy">Kopieren</string>
+    <string name="copy_email">E-mail-Adresse kopieren</string>
+    <string name="copy_message_text">Text kopieren</string>
+    <string name="copy_number">Telefonnummer kopieren</string>
+    <string name="current_input_bitrate">Aktuell empfangene Bitrate</string>
+    <string name="current_input_jitter_ms">Aktuell empfangene Jitter</string>
+    <string name="current_input_loss_permill">Aktueller Paketverlust</string>
+    <string name="current_outgoing_interarrival_jitter">Interarrival Jitter</string>
+    <string name="current_outgoing_roundtrip_time">Aktuelle Paketumlaufzeit</string>
+    <string name="current_output_bitrate">Aktuell gesendete Bitrate</string>
+    <string name="custom_list_filter">Benutzerdefinierte Ansicht festlegen</string>
+    <string name="default_theme_label">Vorgegeben</string>
+    <string name="delete_account_prompt">Account löschen?</string>
+    <string name="delete_debug_log_file_not_existing_summary">Log-Datei existiert nicht</string>
+    <string name="delete_debug_log_msg">ZoiPer Debug-Datei wirklich löschen?</string>
+    <string name="delete_debug_log_summary">Dateigröße Debug-Log: %s</string>
+    <string name="delete_recorded_file">Aufzeichnung löschen?</string>
+    <string name="delete_thread">Thread löschen</string>
+    <string name="delivered_label">Geliefert:</string>
+    <string name="delivery_toast_body">Nachricht empfangen von %s.</string>
+    <string name="depleted_prepaid_licenses">Aufgebrauchte Prepaid-Lizenzen</string>
+    <string name="description_add_to_existing_contact_action">^1 zu bestehenden Kontakt hinzufügen</string>
+    <string name="description_call_back_action">^1 zurückrufen</string>
+    <string name="description_clear_search">Suche löschen</string>
+    <string name="description_contact_details">Kontaktdaten zu ^1s</string>
+    <string name="description_create_new_contact_action">Kontakt erstellen für ^1</string>
+    <string name="description_delete_button">Backspace</string>
+    <string name="description_details_action">Anrufdetails für ^1</string>
+    <string name="description_direction_left">Schieben Sie nach links für %s.</string>
+    <string name="description_direction_right">Schieben Sie nach rechts für %s.</string>
+    <string name="description_direction_up">Schieben Sie nach oben für %s.</string>
+    <string name="description_incoming_answered_call">Beantworteter Anruf von ^1, ^2, ^3.</string>
+    <string name="description_incoming_missed_call">Verpasster Anruf von ^1, ^2, ^3.</string>
+    <string name="description_num_calls">%1$d Anrufe.</string>
+    <string name="description_outgoing_call">Anruf an ^1, ^2, ^3.</string>
+    <string name="description_quick_contact_for">Schnellkontakt für %1$s</string>
+    <string name="description_send_message_action">Nachricht senden an ^1</string>
+    <string name="description_target_accept_upgrade_to_video_request">Video-Anfrage akzeptieren</string>
+    <string name="description_target_answer">Antworten</string>
+    <string name="description_target_answer_video_call">Mit Video-Call antworten</string>
+    <string name="description_target_decline">Ablehnen</string>
+    <string name="description_target_decline_upgrade_to_video_request">Video-Anfrage ablehnen</string>
+    <string name="description_target_send_message">Nachricht senden</string>
+    <string name="description_video_call_action">Videoanruf ^1.</string>
+    <string name="detection_fragment_button_finish">Beenden</string>
+    <string name="detection_fragment_button_skip">Überspringen</string>
+    <string name="detection_fragment_found_recommended_text">Gefunden (empfohlen)</string>
+    <string name="detection_fragment_found_text">Gefunden</string>
+    <string name="detection_fragment_message_please_choose">Bitte wählen Sie zwischen den folgenden Konfigurationen</string>
+    <string name="detection_fragment_message_please_wait">Bitte warten Sie. Mögliche Konfigurationen werden getestet</string>
+    <string name="detection_fragment_not_found_text">Nicht gefunden</string>
+    <string name="detection_fragment_processing_text">Wird bearbeitet</string>
+    <string name="detection_fragment_skip_dialog_no">Nein</string>
+    <string name="detection_fragment_skip_dialog_yes">Ja</string>
+    <string name="detection_fragment_skip_message">Sind Sie sicher, dass Sie die automatische Erkennung überspringen möchten?</string>
+    <string name="detection_fragment_untested_text">Nicht getestet</string>
+    <string name="diagnostics_reference_fragment_logcat_send_failed">Logcat Sendung fehlgeschlagen</string>
+    <string name="diagnostics_reference_fragment_logcat_send_success">Logcat wurde erfolgreich gesendet</string>
+    <string name="diagnostics_reference_fragment_verbose_logging_started">Ausführliches Logging gestartet</string>
+    <string name="dialer_label_not_registered">Nicht registriert</string>
+    <string name="dialog_error_message">Entschuldigung, etwas ist schief gelaufen!</string>
+    <string name="dialog_loading">Laden ...</string>
+    <string name="dialog_text_invalid_push_token">"Kommende Rufe nicht möglich. 
+ 
+• Prüfen Sie, dass sie sich in keinem eingeschränkten Netzwerk befinden 
+• Google-Dienste sind installiert 
+• Google-Dienste sind aktualisiert"</string>
+    <string name="dialog_text_play_services_missing_or_incorrect_version">Kein Google Play Dienst verfügbar oder falsche Version. Push-Funktion ist daher nicht funktionsfähig und ist deaktiviert.</string>
+    <string name="dialog_text_video_upgrade_request_no_camera_permission">"Gegenstelle will auf Videoanruf wechseln. 
+Zoiper braucht für die Videoanzeige die Kamera Berechtigung. 
+ 
+Wollen Sie die %s Kamera Berechtigung erlauben?"</string>
+    <string name="dialog_title_invalid_push_token">Warnung!</string>
+    <string name="dialog_title_video_upgrade_request_no_camera_permission">Videoanruf Anforderung</string>
+    <string name="dialpad_dial_button">Wählen</string>
+    <string name="dialpad_message_dial_from_search_field">Um andere Zeichen als 0-9, #, *, + zu wählen, kehren Sie zur vorherigen Seite zurück und nutzen die Suche.</string>
+    <string name="directory_search_label">Verzeichnis</string>
+    <string name="discard">Verwerfen</string>
+    <string name="discard_message_reason">Ihre Nachricht wird verworfen, weil sie keine gültigen Empfänger hat.</string>
+    <string name="discdar_changes_title">Änderungen verwerfen?</string>
+    <string name="display_all_contacts">Alle Kontakte</string>
+    <string name="display_more_groups">Weitere Gruppen...</string>
+    <string name="display_ungrouped">Alle anderen Kontakte</string>
+    <string name="dnd_access_dialog_text">"%1$s Zugriff erlauben, um Lautlos-Einstellungen des Geräts zu ändern. Somit werden %1$s Anrufe nicht durch GSM-Anrufe, Benachrichtigungen von anderen Aps usw. unterbrochen. 
+ 
+Diese Option einstellen unter Einstellungen -> Töne &amp; Benachrichtigung -> Anrufschutz."</string>
+    <string name="dnd_access_dialog_title">Zugriff Anrufschutz</string>
+    <string name="done">Zurück</string>
+    <string name="draft_separator">,</string>
+    <string name="email">E-Mail</string>
+    <string name="emailLabelsGroup">E-Mail</string>
+    <string name="email_custom">E-Mail an %s</string>
+    <string name="email_home">E-Mail Haus</string>
+    <string name="email_mobile">E-Mail Handy</string>
+    <string name="email_other">E-Mail</string>
+    <string name="email_work">E-Mail Arbeit</string>
+    <string name="enable_push_notifications_pref_title">Push-Proxy aktivieren</string>
+    <string name="enable_push_summary">empfohlen, geringster Stromverbrauch, höchste Zuverlässigkeit, erfordert Abonnement</string>
+    <string name="enable_recording">Alle Anrufe aufzeichnen</string>
+    <string name="enterprise_activity_activate_button_title"><b>Aktivieren</b></string>
+    <string name="enterprise_activity_activated_text">Aktiviert</string>
+    <string name="enterprise_activity_activation_result_failed_credentials">Falscher Benutzername und/oder Passwort</string>
+    <string name="enterprise_activity_activation_result_failed_other">Aktivierung fehlgeschlagen</string>
+    <string name="enterprise_activity_activation_result_network_error">Verbindung zum Lizenzierungsserver fehlgeschlagen</string>
+    <string name="enterprise_activity_activation_result_no_prepaid">Ihre Lizenzgrenze ist erreicht. Erwerben Sie weitere Lizenzen über sales@zoiper.com.</string>
+    <string name="enterprise_activity_activation_result_not_purchased">Sie besitzen keine Lizenz für diese Anwendung. Erwerben Sie eine Volumenlizenz unter www.zoiper.com.</string>
+    <string name="enterprise_activity_activation_result_success">Aktivierung erfolgreich</string>
+    <string name="enterprise_activity_body_text">"Geben Sie unten die Zugangsdaten ein, die Sie von Ihrer IT, dem System-Administrator 
+ Ihres Unternehmens oder vom VoIP-Provider erhalten haben:"</string>
+    <string name="enterprise_activity_body_text_activated">"Business-Lizenz erfolgreich aktiviert. 
+Alle App-Funktionen inklusive Push-Benachrichtigungen wurden aktiviert und können genutzt werden."</string>
+    <string name="enterprise_activity_bullet_point_text_companies">Firmen</string>
+    <string name="enterprise_activity_bullet_point_text_enterprises">Unternehmen</string>
+    <string name="enterprise_activity_bullet_point_text_voip_providers">VoIP-Provider</string>
+    <string name="enterprise_activity_missing_username_password">Benutzername und Passwort erforderlich</string>
+    <string name="enterprise_activity_multiple_license_text"><b>Mehrere Lizenzen werden zur Verfügung gestellt für:</b></string>
+    <string name="enterprise_activity_password_edittext_hint">Passwort</string>
+    <string name="enterprise_activity_reset_button_hint">Fall Sie eine Lizenz aktivieren müssen, die mit einem anderen Account verbunden ist, klicken Sie dazu auf Reset.</string>
+    <string name="enterprise_activity_reset_button_text">Reset</string>
+    <string name="enterprise_activity_username_edittext_hint">Benutzername</string>
+    <string name="enterprise_activity_your_business_license_text"><b>Ihre Geschäftslizenz</b></string>
+    <string name="error_code_label">Fehler:</string>
+    <string name="error_msg_cannot_read_extarnal_storage">Externer Speicher kann nicht gelesen werden. Das Medium ist möglicherweise nicht angeschlossen.</string>
+    <string name="error_msg_cannot_read_recordings_location">Speicherort der Aufzeichnungen kann nicht gelesen werden. Möglicherweise kein Zugriff auf Speicherplatz.</string>
+    <string name="eventLabelsGroup">Besondere Daten</string>
+    <string name="expand_button_title">Erweitert</string>
+    <string name="feature_not_available">Diese Funktion ist in der aktuellen Version nicht verfügbar.</string>
+    <string name="from_label">Von:</string>
+    <string name="full_name">Name</string>
+    <string name="get_individual_feature_dialog_message">Wegen der Drittanbieterlizenz ist dieser zusätzliche Codec durch einen weiteren In-App-Kauf verfügbar.</string>
+    <string name="get_individual_feature_dialog_title">Option(en) freischalten</string>
+    <string name="get_stable_version">Stabile Version erhalten</string>
+    <string name="get_zoiper_gold_dialog_message">Diese Funktion steht ausschließlich mit Zoiper Gold zur Verfügung. Sie können einen In-App-Kauf machen und ein Update durchführen.</string>
+    <string name="get_zoiper_gold_dialog_title">Upgrade auf Premium</string>
+    <string name="ghostData_company">Firma</string>
+    <string name="ghostData_title">Titel</string>
+    <string name="go_private">zu privat</string>
+    <string name="google_analytics_pref_summary">Anonyme Analysedaten an Google übermitteln.</string>
+    <string name="groupsLabel">Gruppen</string>
+    <string name="gsm_account_name">GSM-Anruf</string>
+    <string name="has_draft">Entwurf</string>
+    <string name="held_call_list_label">Liste der Anrufe in der Warteschleife</string>
+    <string name="high_battery_use_label">Hohe Akkuverbrauch</string>
+    <string name="hostname_dialog_button_no">Nein</string>
+    <string name="hostname_dialog_button_use_anyway">Trotzdem verwenden</string>
+    <string name="hostname_empty_dialog_message">Sie müssen zunächst den Hostnamen/IP Ihres VoIP-Providers eingeben!</string>
+    <string name="hostname_empty_dialog_positive_button">Ok</string>
+    <string name="hostname_helper">"Dies könnte 'Domain', 'SIP Server', 'Registrar' oder 'SIP-Proxy' heißen. Zum Beispiel 'sip.example.com' oder '123.21.123.32:5060'. 
+ 
+Oder suchen Sie nach dem Namen Ihres Providers. Vielleicht kennen wir die Einstellungen."</string>
+    <string name="hostname_hint">Hostname oder Provider</string>
+    <string name="hostname_title">Geben Sie Ihren Hostnamen ein und wählen Sie Ihren Provider aus der Liste</string>
+    <string name="hostname_wrong_message">Hostname ist höchstwahrscheinlich falsch. Prüfen Sie Ihre Netzwerkverbindung und/oder den Hostname-String.</string>
+    <string name="https_error_message">SSL/TLS-Zertifikat-Fehler. Für weitere Informationen klicken Sie auf Technische Daten.</string>
+    <string name="imLabelsGroup">IM</string>
+    <string name="import_color_pref_summary">Importiere Farben des aktuellen Themas</string>
+    <string name="import_colors_pref_title">Farben importieren</string>
+    <string name="in_call_recording_text">AUFZEICHNUNG</string>
+    <string name="includes_all_these_features">Diese Funktionen sind enthalten.</string>
+    <string name="incoming_screen_missing_solution">Aktivieren Sie die Option der Benachrichtigungen für kommende Rufe oder erhöhen Sie deren Priorität. Lesen Sie hier, wie Sie dies für verschiedene Geräte einstellen können.</string>
+    <string name="incoming_screen_missing_title">Benachrichtigungskanal für kommende Rufe ist dekativiert oder niedrig priorisiert. Dies führt möglicherweise zu fehlenden kommenden Rufen.</string>
+    <string name="incoming_via_template">Eingehend über %s</string>
+    <string name="information_activity_privacy_view_label">Datenschutz</string>
+    <string name="information_activity_terms_view_label">Nutzungsbedingungen</string>
+    <string name="init_lib_failed_dialog_title">Initialisierung fehlgeschlagen</string>
+    <string name="keep_alive_wifi_pref_summary">Verhindert W-LAN Sleepmodus. Android W-LAN Sleep-Policy nicht überschreibbar.</string>
+    <string name="keep_push_message">Weiterhin kommende Rufe erhalten?</string>
+    <string name="label_codec_g729_description">3G-Kosten verringern und die Audioqualität in Netzwerken mit niedriger Bandbreite mit dem Codec G.729 verbessern.</string>
+    <string name="label_codec_h264_description">Patentlizenz für H.254 Video-Codec</string>
+    <string name="label_log_with_qr">Mit einem QR-Code anmelden</string>
+    <string name="label_monthly_subscription">Monatliches Abonnement</string>
+    <string name="label_monthly_subscription_description">Beschreibung monatliches Abonnement</string>
+    <string name="label_notes">Anmerkungen</string>
+    <string name="label_purchase">Kaufen</string>
+    <string name="label_purchased">Gekauft</string>
+    <string name="label_sip_address">SIP</string>
+    <string name="label_subscribed">Abonniert</string>
+    <string name="label_yearly_subscription">Jährliches Abonnement</string>
+    <string name="label_yearly_subscription_description">Beschreibung jährliches Abonnement</string>
+    <string name="label_zoiper_gold">GOLD</string>
+    <string name="label_zoiper_gold_description">"Premium-Funktionen: 
+ \t• Konferenz 
+ \t• Rufumleitung 
+ \t• Präsenz 
+ \t• ZRTP 
+ \t• Möglichkeit mehrerer Accounts 
+ \t• Zusätzliche Audio-Codecs für SIP-Accounts (G.722, G.726, Opus Wide/Narrow/Super/Full, Speex Ultra/Wide)"</string>
+    <string name="last_input_bitrate">Zuletzt empfangene Bitrate</string>
+    <string name="last_input_jitter_ms">Zuletzt empfangene Jitter</string>
+    <string name="last_input_loss_permill">Letzter Paketverlust</string>
+    <string name="last_outgoing_roundtrip_time">Letzte Paketumlaufzeit</string>
+    <string name="last_output_bitrate">Zuletzt gesendete Bitrate</string>
+    <string name="later">Später</string>
+    <string name="leave_feedback">Bitte sagen Sie uns, was wir verbessern können:</string>
+    <string name="leave_recomendation">Möchten Sie uns auf Google Play weiterempfehlen?</string>
+    <string name="letter_tile_letter_font_family">Sans-Serif-light</string>
+    <string name="limited_version_expired_msg">Diese Version läuft am %s ab.</string>
+    <string name="list_delimiter">", "</string>
+    <string name="list_filter_all_accounts">Alle Kontakte</string>
+    <string name="list_filter_all_starred">Favoriten</string>
+    <string name="list_filter_customize">Anpassen</string>
+    <string name="list_filter_phones">Alle Kontakte mit Telefonnummern</string>
+    <string name="list_filter_single">Kontakt</string>
+    <string name="loading_conversations">Gespräche werden geladen.</string>
+    <string name="loading_data_message">Daten werden geladen</string>
+    <string name="local_invisible_directory">Sonstige</string>
+    <string name="local_search_label">Alle Kontakte</string>
+    <string name="locked">Gesperrt</string>
+    <string name="login_activity_action_bar_title">Account-Einrichtung</string>
+    <string name="login_password_hint">Passwort</string>
+    <string name="login_username_hint">Benutzername @ PBX/VoIP Provider</string>
+    <string name="manage_conference_label">Telefonkonferenz verwalten</string>
+    <string name="map_custom">Adresse %s anzeigen</string>
+    <string name="map_home">Hausadresse anzeigen</string>
+    <string name="map_other">Adresse anzeigen</string>
+    <string name="map_work">Arbeitsadresse anzeigen</string>
+    <string name="menu_add_address_to_contacts">%s zu Kontakten hinzufügen</string>
+    <string name="menu_add_to_contacts">Zu Kontakten hinzufügen</string>
+    <string name="menu_call">Anruf</string>
+    <string name="menu_delete">Thread löschen</string>
+    <string name="menu_delete_all">Alle Threads löschen</string>
+    <string name="menu_help">Hilfe</string>
+    <string name="menu_view_contact">Kontakt anzeigen</string>
+    <string name="message_count_format">   (%1$s)</string>
+    <string name="message_count_notification">%1$s neue Nachrichten</string>
+    <string name="message_details_title">Nachrichtendetails</string>
+    <string name="message_failed_body">Tippen Sie, um die Nachricht zu überprüfen, und versuchen Sie es erneut.</string>
+    <string name="message_options">Nachrichten-Optionen</string>
+    <string name="message_saved_as_draft">Nachricht als Entwurf gespeichert.</string>
+    <string name="message_send_failed_title">Nachricht nicht gesendet</string>
+    <string name="message_timestamp_format">%1$s - %2$s</string>
+    <string name="messagelist_sender_self">Ich</string>
+    <string name="minutes">Minuten</string>
+    <string name="missing_aduio_dialog_cancel">ABBRECHEN</string>
+    <string name="missing_aduio_dialog_msg">"Fehlendes einseitiges oder beidseitiges Audio. Besuchen Sie zur Lösung des Problems unsere Webseite. 
+"</string>
+    <string name="missing_aduio_dialog_title">Einseitiges oder fehlendes Audio!</string>
+    <string name="missing_aduio_dialog_visit">BESUCHEN</string>
+    <string name="missing_contacts_permission_contact_sources">"Um Accounts mit Kontakten zu sehen, 
+schalten Sie die Kontakt-Erlaubnis ein."</string>
+    <string name="missing_microphone_permission_error_toast">Telefonieren ohne Zugriff auf das Mikrofon nicht möglich.</string>
+    <string name="missing_name">(Kein Name)</string>
+    <string name="msg_account_exists">Ein Account mit diesem Namen existiert bereits. Überschreiben oder ein neues erstellen?</string>
+    <string name="msg_camera_framework_bug">Tut uns leid, bei der Android-Kamera ist ein Problem aufgetreten. Möglicherweise müssen Sie das Gerät neu starten.</string>
+    <string name="msg_default_status">Halten Sie den Barcode in den Rechteck, um ihn zu scannen.</string>
+    <string name="msg_email_successful_sent">E-Mail erfolgreich gesendet</string>
+    <string name="msg_enter_credentials">Zugangsdaten eingeben</string>
+    <string name="msg_error_while_sending_email">Fehler beim Senden der E-Mail</string>
+    <string name="msg_insert_account_failed">Einfügen des Accounts fehlgeschlagen.</string>
+    <string name="msg_options_rate_dialog">Wählen Sie eine Option:</string>
+    <string name="msg_qr_click_here">&lt;a href=http://www.zoiper.com/qr/>Klicken Sie hier für weitere Informationen&lt;/a></string>
+    <string name="msg_qr_close_scanner">Scanner wird in %d Sekunden geschlossen</string>
+    <string name="nameLabelsGroup">Name</string>
+    <string name="name_family">Nachname</string>
+    <string name="name_given">Vorname</string>
+    <string name="name_middle">Zweiter Vorname</string>
+    <string name="name_phonetic">Phonetischer Name</string>
+    <string name="name_phonetic_family">Phonetischer Nachname</string>
+    <string name="name_phonetic_given">Phonetischer Vorname</string>
+    <string name="name_phonetic_middle">Phonetischer zweiter Vorname</string>
+    <string name="name_prefix">Namenspräfix</string>
+    <string name="name_suffix">Namenssuffix</string>
+    <string name="nav_drawer_add_account_text">Account hinzufügen</string>
+    <string name="navigation_drawer_close">Navigationsleiste schließen</string>
+    <string name="navigation_drawer_open">Navigationsleiste öffnen</string>
+    <string name="network_statistics">Netzwerk-Statistik</string>
+    <string name="network_statistics_codec_label">Codec:</string>
+    <string name="network_statistics_none">Sicherheit: keine</string>
+    <string name="network_statistics_sample_rate_label">Abtastrate:</string>
+    <string name="network_statistics_sdes">Sicherheit: SDES SRTP</string>
+    <string name="network_statistics_unconfirmed">Sicherheit: ZRTP unbestätigt</string>
+    <string name="network_statistics_zrtp">Sicherheit: ZRTP / SRTP</string>
+    <string name="never">Nie</string>
+    <string name="new_interface_fragment_text">"Unser Design-Team möchte, dass Zoiper nicht nur gut aussieht, sondern auch einfach in der Handhabung ist. 
+Testen Sie Zoiper 2.x mit einer schlanken Oberfläche. Übersichtlich mit vielen Funktionen."</string>
+    <string name="new_interface_fragment_title">Neue Oberfläche</string>
+    <string name="new_message">Neue Nachricht</string>
+    <string name="new_updates_available_for_all">"- Standard-Account für die native Dialer-Integration hinzugefügt 
+ - Lautsprecherverstärkung 
+ - Video 
+ - Widget 
+ - Verschlüsselung (TLS) + SRTP 
+ - Polnische Übersetzung hinzugefügt 
+ - Keep-Alive-Option auf SIP-Accounts hinzugefügt 
+ - Option hinzugefügt, Nachrichten aus der Anrufliste senden 
+ - Anklopfen für Nicht Gold-Benutzer 
+ - Fehlerbehebungen und Zuverlässigkeitsverbesserungen 
+"</string>
+    <string name="new_updates_available_for_all_title">Verfügbar für alle:</string>
+    <string name="new_updates_zoiper_gold">"- Konferenzen 
+ - Präsenz 
+ - Rufumleitung 
+ - Breitband-Audio (opus und mehr) 
+ - Verschlüsselung (ZRTP) 
+"</string>
+    <string name="new_updates_zoiper_gold_button">ZoiPer Gold erhalten</string>
+    <string name="new_updates_zoiper_gold_title">ZoiPer Gold-Benutzer:</string>
+    <string name="next_button">Weiter</string>
+    <string name="next_button_text">Weiter</string>
+    <string name="nicknameLabelsGroup">Spitzname</string>
+    <string name="no">Abbrechen</string>
+    <string name="no_account_created">Kein Account</string>
+    <string name="no_activity_to_handle_msg">Für diese Funktion ist keine App installiert.</string>
+    <string name="no_app_to_handle_intent">Keine App zur Wiedergabe der Datei</string>
+    <string name="no_app_to_handle_the_url">Keine App zum Öffnen der URL!</string>
+    <string name="no_background_statistics_data">Noch keine Hintergrund-Statistiken.</string>
+    <string name="no_call_records_hint">Keine Aufzeichnungen <b>gefunden</b>.</string>
+    <string name="no_conversations">Keine Gespräche.</string>
+    <string name="no_email_client">Keine E-mail-Clients installiert.</string>
+    <string name="no_external_storage">Kein Speicher für Aufzeichnungen gefunden</string>
+    <string name="no_internet_connection_dialog_msg">Sie benötigen eine Internetverbindung, um fortzufahren.</string>
+    <string name="no_internet_connection_dialog_positive_button">Ok</string>
+    <string name="no_internet_connection_error_message">Keine Internetverbindung</string>
+    <string name="no_phone_permissions_granted">Keine \"Telefon\"-Berechtigungen erteilt</string>
+    <string name="no_subject_view">(Kein Thema)</string>
+    <string name="not_at_all">Überhaupt nicht</string>
+    <string name="not_set">Nicht festgelegt</string>
+    <string name="notification_action_accept">Annehmen</string>
+    <string name="notification_action_answer">Antworten</string>
+    <string name="notification_action_answer_video">Video</string>
+    <string name="notification_action_answer_voice">Stimme</string>
+    <string name="notification_action_dismiss">Ablehnen</string>
+    <string name="notification_action_end_call">Auflegen</string>
+    <string name="notification_channel_call_log">Rufprotokoll-Kanal</string>
+    <string name="notification_channel_in_call">In-Anruf-Kanal</string>
+    <string name="notification_channel_incoming_call">Kanal kommende Rufe</string>
+    <string name="notification_channel_messages">Nachrichtenkanal</string>
+    <string name="notification_channel_mwi">MWI-Kanal</string>
+    <string name="notification_channel_registration">Registrierungskanal</string>
+    <string name="notification_channel_statistics">Statistik-Kanal</string>
+    <string name="notification_dialing">Wird gewählt</string>
+    <string name="notification_failed_multiple">%s Nachrichten konnten nicht gesendet werden</string>
+    <string name="notification_failed_multiple_title">Nachrichten nicht gesendet</string>
+    <string name="notification_incoming_call">Eingehender Anruf</string>
+    <string name="notification_missedCallTicker">Verpasster Anruf von %s</string>
+    <string name="notification_missedCallTitle">Verpasster Anruf</string>
+    <string name="notification_missedCallsMsg">%s verpasste Anrufe</string>
+    <string name="notification_missedCallsTitle">Verpasste Anrufe</string>
+    <string name="notification_missed_call_call_back">Zurückrufen</string>
+    <string name="notification_missed_call_message">Nachricht</string>
+    <string name="notification_mwi_label">Sprachnachricht</string>
+    <string name="notification_mwi_msg_multiple">%d neue Sprachnachrichten</string>
+    <string name="notification_mwi_msg_single">1 neue Mitteilung</string>
+    <string name="notification_on_hold">In Warteschleife</string>
+    <string name="notification_ongoing_call">Laufender Anruf</string>
+    <string name="notification_requesting_video_call">Eingehende Videoanfrage</string>
+    <string name="notification_user_disconnected">%s getrennt.</string>
+    <string name="notification_user_no_account">Kein Account</string>
+    <string name="notification_user_not_registered">%s nicht registriert.</string>
+    <string name="notification_user_registered">%s registriert.</string>
+    <string name="notification_user_registering">%s wird registriert.</string>
+    <string name="notification_user_registration_failed" formatted="false">%s Registrierung fehlgeschlagen. (%s)</string>
+    <string name="number_rewriting_dialog_info">Standard-Land ist nicht ausgewählt.</string>
+    <string name="ok">OK</string>
+    <string name="on_hold">In der Warteschleife</string>
+    <string name="on_local_hold">Lokale Warteschleife</string>
+    <string name="on_remote_hold">Remote-Warteschleife</string>
+    <string name="onscreenChangeToVoiceText">Audioanruf</string>
+    <string name="onscreen_add_call_text">Anruf hinzufügen</string>
+    <string name="onscreen_call_record_text">Anrufaufzeichnung</string>
+    <string name="onscreen_call_statistics_text">Anrufstatistik</string>
+    <string name="onscreen_end_call_text">Anruf beenden</string>
+    <string name="onscreen_hold_text_checked">Anruf fortsetzen</string>
+    <string name="onscreen_hold_text_unchecked">Anruf halten</string>
+    <string name="onscreen_manage_conference_text">Telefonkonferenz verwalten</string>
+    <string name="onscreen_manage_held_call_list_text">Liste der Anrufe in der Warteschleife verwalten</string>
+    <string name="onscreen_merge_calls_text">Anrufe verbinden</string>
+    <string name="onscreen_mute_text">Stummschalten</string>
+    <string name="onscreen_overflow_text">Mehr Optionen</string>
+    <string name="onscreen_pause_video_text">Video anhalten</string>
+    <string name="onscreen_show_dialpad_text">Wahlfeld</string>
+    <string name="onscreen_stop_recording_text">Aufzeichnung beenden</string>
+    <string name="onscreen_swap_calls_text">Wechseln</string>
+    <string name="onscreen_switch_camera_text">Anrufliste anzeigen</string>
+    <string name="onscreen_transfer_call_text">Anruf umleiten</string>
+    <string name="onscreen_video_call_text">Videoanruf</string>
+    <string name="open_keyboard_to_compose_message">Tastatur öffnen, um die Nachricht einzugeben</string>
+    <string name="optional_parameters_fragment_authentication_username_hint">Authentifizierungs-Benutzername</string>
+    <string name="optional_parameters_fragment_button_next">Weiter</string>
+    <string name="optional_parameters_fragment_button_skip">Überspringen</string>
+    <string name="optional_parameters_fragment_outbound_proxy_hint">Outbound-Proxy</string>
+    <string name="optional_parameters_fragment_use_checkbox_title">Mein Anbieter/PBX erfordert einen Authentifizierungs-Benutzernamen oder Outbound-Proxy</string>
+    <string name="organizationLabelsGroup">Organisation</string>
+    <string name="outgoing_statistics_title">Ausgehende Statistiken</string>
+    <string name="password_helper">Zum Beispiel K23Rdw32</string>
+    <string name="payphone">Münztelefon</string>
+    <string name="permission_dialog_bluetooth_type">Bluetooth</string>
+    <string name="permission_dialog_camera_type">Kamera</string>
+    <string name="permission_dialog_contacts_type">Kontakte</string>
+    <string name="permission_dialog_location_type">Standort</string>
+    <string name="permission_dialog_microphone_type">Mikrofon</string>
+    <string name="permission_dialog_negative_action">Abbrechen</string>
+    <string name="permission_dialog_phone_type">Telefon</string>
+    <string name="permission_dialog_positive_action">Einstellungen</string>
+    <string name="permission_dialog_storage_type">Speicher</string>
+    <string name="permission_dialog_text">Angefragte Aktion erfordert Zugriff auf %1s. Einstellungen wählen, um Berechtigung zu ändern.</string>
+    <string name="permission_no_camera_for_qr_scan">"Zugriff auf Kamera erlauben, 
+um QR-Code zu scannen."</string>
+    <string name="permission_no_contacts">"Um Ihre Kontakte zu sehen,
+schalten Sie die Kontakt-Erlaubnis ein."</string>
+    <string name="permission_no_search">Um Ihre Kontakte zu durchsuchen, schalten Sie die Kontakt-Erlaubnis ein.</string>
+    <string name="permission_no_speeddial">"Um die Kurzwahl zu aktivieren,
+schalten Sie die Kontakt-Erlaubnis ein."</string>
+    <string name="permission_place_call">"Um einen Anruf zu tätigen, 
+ schalten Sie die Telefon-Erlaubnis ein."</string>
+    <string name="permission_single_turn_on">Einschalten</string>
+    <string name="phoneLabelsGroup">Telefon</string>
+    <string name="pick_too_many_recipients">Zu viele Empfänger</string>
+    <string name="plain_no">Nein</string>
+    <string name="poll_event_service_restart_dialog_msg">Neustarten des %s-Services. Bitte warten.</string>
+    <string name="postalLabelsGroup">Adresse</string>
+    <string name="postal_address">Adresse</string>
+    <string name="postal_city">Stadt</string>
+    <string name="postal_country">Land</string>
+    <string name="postal_postcode">PLZ</string>
+    <string name="postal_region">Staat</string>
+    <string name="postal_street">Straße</string>
+    <string name="pref_always_offer_video_summary">Video-Support beim Ruf übermitteln.</string>
+    <string name="pref_answer_after_hint">1-120 Sekunden</string>
+    <string name="pref_answer_after_summary">Sekunden</string>
+    <string name="pref_automatic_gain_control_summary">An das Telefonnetz angepasste Mikrofonpegel sicherstellen.</string>
+    <string name="pref_call_vibration_summary">Kompatibilität zu Android 4.x.</string>
+    <string name="pref_disable_proximity_sensor_summary">Aktivieren, um das Abschalten des Displays beim Telefonieren zu verhindern.</string>
+    <string name="pref_enable_on_start_summary">Registriere Account, wenn %1$s gestartet ist.</string>
+    <string name="pref_enable_presence_summary">Abonniere Präsenzzustand.</string>
+    <string name="pref_enable_publish_presence_summary">Anwesenheit veröffentlichen</string>
+    <string name="pref_enable_speaker_on_video_call_summary">Automatisch Lautsprecher aktiv. im Videocall.</string>
+    <string name="pref_hint_host">host:port</string>
+    <string name="pref_label_account_name">Accountname</string>
+    <string name="pref_label_always_offer_video">Immer Video anbieten</string>
+    <string name="pref_label_answer_after">Rufannahme nach</string>
+    <string name="pref_label_audio_driver">Audio Driver</string>
+    <string name="pref_label_authentication_user">Authentication user</string>
+    <string name="pref_label_auto_answer_incoming_calls">Automatische Rufannahme</string>
+    <string name="pref_label_automatic_gain_control">Audioausgabe-Verstärkung</string>
+    <string name="pref_label_automatically_enable_speaker_on_video_call">Automatische Lautsprecher-Aktivierung bei Videocalls</string>
+    <string name="pref_label_background_mode">Background Mode</string>
+    <string name="pref_label_bluetooth_permission_allowed">Bluetooth ist bereits aktiviert.</string>
+    <string name="pref_label_call_vibration">Vibration bei kommendem Ruf</string>
+    <string name="pref_label_caller_id">Anzeigename</string>
+    <string name="pref_label_caller_number">Rufnummer</string>
+    <string name="pref_label_characters_to_strip">Zu bereinigende Zeichen</string>
+    <string name="pref_label_clear_frequently_stats">Oft Gewählt löschen</string>
+    <string name="pref_label_clear_pinned_contacts">Angeheftete Kontakte löschen</string>
+    <string name="pref_label_clear_tls_cert_list">Zertifikatliste löschen</string>
+    <string name="pref_label_clear_trusted_ssl_certificates">Zertifikats-Cache löschen</string>
+    <string name="pref_label_clear_zrtp_cache">ZRTP-Cache löschen</string>
+    <string name="pref_label_contacts_display_order">Namensformat</string>
+    <string name="pref_label_contacts_sort_order">Sortier-Reihenfolge</string>
+    <string name="pref_label_contacts_sources">Kontakt-Quellen</string>
+    <string name="pref_label_context">Kontext</string>
+    <string name="pref_label_debub_log">Debug-Log</string>
+    <string name="pref_label_delete_debug_log">Debug-Logdatei löschen</string>
+    <string name="pref_label_disable_proximity_sensor">Deaktivierte Annährungssensor</string>
+    <string name="pref_label_dtmf_style">DTMF Modus</string>
+    <string name="pref_label_echo_cancellation">Echounterdrückung</string>
+    <string name="pref_label_enable_audio_thread_stats">Hohe Audio-Thread Statistiken aktivieren</string>
+    <string name="pref_label_enable_callthrough">Call-Through aktivieren</string>
+    <string name="pref_label_enable_crash_sound">Absturz-Ton aktivieren</string>
+    <string name="pref_label_enable_debub_log">Debug-Log aktivieren</string>
+    <string name="pref_label_enable_ipv6">Enable IPv6</string>
+    <string name="pref_label_enable_logcat_logger">Logcat Logger aktivieren</string>
+    <string name="pref_label_enable_number_rewriting">Nummern-Rewriting nutzen</string>
+    <string name="pref_label_enable_on_start">Bei Start aktivieren</string>
+    <string name="pref_label_enable_presence">Aktiviere Präsenzzustände</string>
+    <string name="pref_label_enable_publish_presence">Anwesenheit veröffentlichen aktivieren</string>
+    <string name="pref_label_enable_push_indication">Push-Anzeige aktivieren</string>
+    <string name="pref_label_enable_push_notification">Push-Benachrichtigung aktivieren</string>
+    <string name="pref_label_enable_push_sound">Push-Sound aktivieren</string>
+    <string name="pref_label_enable_rtp_proxy">Media-Proxy aktivieren</string>
+    <string name="pref_label_enable_strip_dial_characters">Rufnummernbereinigung aktivieren</string>
+    <string name="pref_label_enable_user_reg_event">Subscribe for register</string>
+    <string name="pref_label_enable_video_fmtp">Enable video FMTP</string>
+    <string name="pref_label_encryption_settings">Encryption Settings</string>
+    <string name="pref_label_host">Host</string>
+    <string name="pref_label_iax_account">IAX-Account</string>
+    <string name="pref_label_instant_auto_answer">Sofort annehmen</string>
+    <string name="pref_label_java_crash">Java-Absturz</string>
+    <string name="pref_label_java_driver_audio_record_source">JAVA-Treiber Audio-Aufnahmequelle</string>
+    <string name="pref_label_keep_alive_custom_interval">Keep alive custom interval</string>
+    <string name="pref_label_keep_alive_type">Keep alive time-out</string>
+    <string name="pref_label_keep_alive_wifi">Keep alive WiFi</string>
+    <string name="pref_label_keep_settings_after_restart">Einstellungen nach Neustart beibehalten</string>
+    <string name="pref_label_keypad_tones">Tastentöne</string>
+    <string name="pref_label_keypad_vibration">Tastenvibration</string>
+    <string name="pref_label_latency_check">Audiolatenz testen</string>
+    <string name="pref_label_latency_reduction">Latenz Reduzierung</string>
+    <string name="pref_label_limit_debub_log_file_length">Dateigröße beschränken</string>
+    <string name="pref_label_native_crash">Absturz</string>
+    <string name="pref_label_noise_suppression">Störunterdrückung</string>
+    <string name="pref_label_number_rewriting">Number Rewriting</string>
+    <string name="pref_label_number_rewriting_countries_list">Länderauswahl</string>
+    <string name="pref_label_number_rewriting_countries_list_summary">Standard-Ländercode wählen, der ohne Ländercode gewählten Nummern vorangestellt wird.</string>
+    <string name="pref_label_number_rewriting_prefix">Internationale Optionen zum Rewrite</string>
+    <string name="pref_label_outbound_proxy">Outbound Proxy</string>
+    <string name="pref_label_password">Password</string>
+    <string name="pref_label_provider_info">Provider-Info</string>
+    <string name="pref_label_registration_expiry_time">Registration expiry time</string>
+    <string name="pref_label_request_bluetooth_permission">Bluetoothverbindung zulassen</string>
+    <string name="pref_label_resampler_reduce_cpu_usage">Weniger CPU-Last (geringere Qualität)</string>
+    <string name="pref_label_ringtone">Klingelton</string>
+    <string name="pref_label_run_in_background">Im Hintergrund laufen</string>
+    <string name="pref_label_run_on_networks">Unterstützte Netze</string>
+    <string name="pref_label_security">Sicherheit</string>
+    <string name="pref_label_security_protocol_suite">Protokollfamilie</string>
+    <string name="pref_label_security_use_only_strong_ciphers">Nur starke Chiffren verwenden</string>
+    <string name="pref_label_send_logcat">Logcat senden</string>
+    <string name="pref_label_sent_debug_log">Debug-Log senden</string>
+    <string name="pref_label_set_audio_mode">Audiomodus wählen</string>
+    <string name="pref_label_set_audio_source">Audioquelle wählen</string>
+    <string name="pref_label_set_sampling_rate">Abtastrate wählen</string>
+    <string name="pref_label_set_speaker_gain">Lautsprecher-Pegel</string>
+    <string name="pref_label_set_stun_dns_srv_requests">STUN DNS SRV-Anfragen</string>
+    <string name="pref_label_set_stun_usage_flag_private_addr">STUN auf private Adressen erlauben</string>
+    <string name="pref_label_set_stun_usage_flag_private_srv">STUN mit privatem Server erlauben</string>
+    <string name="pref_label_show_diagnostics_section">Diagnosebereich anzeigen</string>
+    <string name="pref_label_simulate_anr">ANR simulieren</string>
+    <string name="pref_label_simulate_crash">Absturz simulieren</string>
+    <string name="pref_label_sip_account">SIP-Account</string>
+    <string name="pref_label_srtp_enable">Enable SRTP</string>
+    <string name="pref_label_start_verbose_logging">Ausführliches Logging starten</string>
+    <string name="pref_label_start_with_android">Starten beim Hochfahren</string>
+    <string name="pref_label_startup_screen">Startbildschirm</string>
+    <string name="pref_label_strip_chars">Entferne .-()[] {}/ aus Anzeigename</string>
+    <string name="pref_label_strip_dial_characters">Rufnummer von Zeichen bereinigen</string>
+    <string name="pref_label_stun_port">STUN Port</string>
+    <string name="pref_label_stun_refresh_period">STUN Aktualisierung</string>
+    <string name="pref_label_stun_server">STUN Server</string>
+    <string name="pref_label_subscribe_mwi">MWI abonnieren</string>
+    <string name="pref_label_summary_bluetooth_permission">Android 12 erfordert eine gesonderte Bluetooth-Freigabe. Aktivieren Sie hier den Freigabedialog.</string>
+    <string name="pref_label_summary_bluetooth_permission_allowed">Deaktivierung über die Android Systemeinstellungen.</string>
+    <string name="pref_label_transport_type">Transport Art</string>
+    <string name="pref_label_url_rates">Tarife</string>
+    <string name="pref_label_url_signup">Abschließen</string>
+    <string name="pref_label_use_full_blueparrot_functionality">Sämtliche Funktionen von BlueParrot-Geräten nutzen</string>
+    <string name="pref_label_use_google_analytics">Google Analytics senden</string>
+    <string name="pref_label_use_preconditions">Voraussetzungen verwenden</string>
+    <string name="pref_label_use_rport_for_media">Medien über RPORT</string>
+    <string name="pref_label_use_rport_for_signalling">Signalisierung mit RPORT</string>
+    <string name="pref_label_use_specific_codec_setup">Nutze spezielles Codec Setup</string>
+    <string name="pref_label_use_stun">STUN benutzen</string>
+    <string name="pref_label_username">Username</string>
+    <string name="pref_label_video_capture_options">Video-Capture-Optionen</string>
+    <string name="pref_label_zrtp_enable">Enable ZRTP</string>
+    <string name="pref_lable_security_tls_options">TLS-Optionen</string>
+    <string name="pref_reduce_cpu_usage_summary">Verwendet schnelles aber ungenaues Resampling bei 44,1 kHz nativer Samplingrate.</string>
+    <string name="pref_select_background_mode_summary_use_alarm_array_0">Eventuell weniger verlässliche Anrufsignalisierung, geringerer Stromverbrauch.</string>
+    <string name="pref_select_background_mode_summary_use_wake_lock_array_1">Zuverlässigste Anrufsignalisierung, hoher Stromverbrauch.</string>
+    <string name="pref_select_background_mode_use_alarm_array_0">Alarm-Timer nutzen</string>
+    <string name="pref_select_background_mode_use_wake_lock_array_1">Am Ruhemodus hindern</string>
+    <string name="pref_select_contacts_display_order_first_name_array_0">Vorname zuerst</string>
+    <string name="pref_select_contacts_display_order_last_name_array_1">Nachname zuerst</string>
+    <string name="pref_select_contacts_sort_order_first_name_array_0">Vorname</string>
+    <string name="pref_select_contacts_sort_order_last_name_array_1">Nachname</string>
+    <string name="pref_select_dtmf_style_disable_array_0">Deaktivieren</string>
+    <string name="pref_select_keep_alive_type_default_array_1">Standardeinstellung</string>
+    <string name="pref_select_keep_alive_type_disabled_array_0">Deaktiviert</string>
+    <string name="pref_select_latency_reduction_aggressive_array_0">Hoch</string>
+    <string name="pref_select_latency_reduction_normal_array_1">Normal</string>
+    <string name="pref_select_latency_reduction_off_array_2">Aus</string>
+    <string name="pref_select_use_stun_no_array_0">Nein</string>
+    <string name="pref_select_use_stun_use_custom_array_2">Benutzerspezifische Einstellungen verwenden</string>
+    <string name="pref_select_use_stun_use_default_array_1">Voreinstellung verwenden</string>
+    <string name="pref_startup_screen_call_log">Anrufliste</string>
+    <string name="pref_startup_screen_contacts">Kontakte</string>
+    <string name="pref_startup_screen_conversations">Gespräche</string>
+    <string name="pref_startup_screen_dialpad">Wahlfeld</string>
+    <string name="pref_startup_screen_favorites">Favoriten</string>
+    <string name="pref_startup_screen_messages">Neue Nachricht</string>
+    <string name="pref_summary_run_in_background">Keep running when screen is off</string>
+    <string name="pref_title_advanced">Erweitert</string>
+    <string name="pref_title_advanced_options">Erweiterte Optionen</string>
+    <string name="pref_title_audio">Audio</string>
+    <string name="pref_title_audio_codec_settings">Codec Einstellungen</string>
+    <string name="pref_title_audio_latency">Audio Latenz</string>
+    <string name="pref_title_authentication">Anmeldedaten</string>
+    <string name="pref_title_auto_answer">Automatische Rufannahme</string>
+    <string name="pref_title_bluetooth">Bluetooth</string>
+    <string name="pref_title_call">Anruf</string>
+    <string name="pref_title_call_recordings">Aufzeichnung</string>
+    <string name="pref_title_calls">Rufe</string>
+    <string name="pref_title_color_picker">Farbauswahl</string>
+    <string name="pref_title_connectivity">Verbindung</string>
+    <string name="pref_title_contacts">Kontakte</string>
+    <string name="pref_title_dialer">Dialer</string>
+    <string name="pref_title_features">Leistungsmerkmale</string>
+    <string name="pref_title_listening_ports">Überwachte Ports</string>
+    <string name="pref_title_local_iax_port">Lokaler IAX-Port</string>
+    <string name="pref_title_local_rtp_port">Lokaler RTP-Port</string>
+    <string name="pref_title_local_sip_port">Lokaler SIP-Port</string>
+    <string name="pref_title_local_tls_port">Lokaler TLS-Port</string>
+    <string name="pref_title_media_qos_dscp">Media QoS/DSCP</string>
+    <string name="pref_title_nat">NAT</string>
+    <string name="pref_title_network">Netzwerk</string>
+    <string name="pref_title_network_settings">Netzwerk Einstellungen</string>
+    <string name="pref_title_optional">Optional</string>
+    <string name="pref_title_port">Port</string>
+    <string name="pref_title_proxy_protocols">Proxy-Protokolle</string>
+    <string name="pref_title_push_transport">Push-Transport</string>
+    <string name="pref_title_qos_dscp">QoS/DSCP</string>
+    <string name="pref_title_random_port">Zufälliger Port</string>
+    <string name="pref_title_record_calls_in_mp3">Alle Gespräche in MP3 aufzeichen</string>
+    <string name="pref_title_rtcp_feedback">Video RTCP Rückantwort</string>
+    <string name="pref_title_signaling_qos_dscp">Signalisiere QoS/DSCP</string>
+    <string name="pref_title_transport">Transport</string>
+    <string name="pref_title_video">Video</string>
+    <string name="pref_title_video_codec_settings">Video Codec Settings</string>
+    <string name="pref_voicemail_extension">Voicemail Extension</string>
+    <string name="preference_copied">\"%1$s\" in Zwischenablage kopiert.</string>
+    <string name="premium_features_notice">Ihre bisherigen Käufe werden automatisch synchronisiert, wenn Sie das gleiche E-Mail-Konto, das für den Kauf (die Käufe) verwendet wurde, verwenden. Wenn der Kauf (die Käufe) nicht erscheint (erscheinen), kontaktieren Sie uns unter <a href="mailto:android@zoiper.com">android@zoiper.com</a></string>
+    <string name="premium_features_progres_bar_text">Wird geladen</string>
+    <string name="presence_status_away">Abwesend</string>
+    <string name="presence_status_brb">Gleich zurück</string>
+    <string name="presence_status_dnd">Nicht stören</string>
+    <string name="presence_status_invisible">Unsichtbar</string>
+    <string name="presence_status_offline">Offline</string>
+    <string name="presence_status_online">Online</string>
+    <string name="presence_status_otl">Beim Mittagessen</string>
+    <string name="presence_status_otp">Am Telefon</string>
+    <string name="presence_status_unavailbe">Nicht verfügbar</string>
+    <string name="presence_user_consent_dialog_text_body">"Wählen Sie OK, um zu bestätigen und Präsenz zu aktivieren. 
+ 
+Abbrechen belässt die Funktion inaktiv, und es werden keine Nutzerdaten übermittelt."</string>
+    <string name="presence_user_consent_dialog_text_bullets">"- senden Sie Ihre Kontaktdaten zum registrierten SIP-Account 
+ 
+- erfolgt eine gesicherte Verbindung abhängig vom gewählten Transport Type des Accounts"</string>
+    <string name="presence_user_consent_dialog_title">Präsenzzustand übermitteln</string>
+    <string name="presence_user_consent_header_text">Bei Nutzung der Präsenzfunktion von %s:</string>
+    <string name="preview_button_pref_title">Vorschau zeigen</string>
+    <string name="preview_color_pref_summary">Vorschau der gewählten Farben zeigen</string>
+    <string name="primary_color_pref_summary">Navigationsleiste</string>
+    <string name="primary_color_pref_title">Vordergrund</string>
+    <string name="prior_purchases_found_and_ready_to_use">Frühere Käufe gefunden und bereit zur Nutzung.</string>
+    <string name="privacy_and_terms_data_crash">- Absturzberichte;</string>
+    <string name="privacy_and_terms_data_syncing">- getätigte Einkäufe zu synchronisieren,</string>
+    <string name="privacy_and_terms_data_troubleshooting">- Probleme zu behandeln</string>
+    <string name="privacy_and_terms_data_types_text">Die App sammelt und übermittelt Daten zu Ihrer : E-Mail, App-Version, Geräte-ID, Storage-ID.</string>
+    <string name="privacy_and_terms_data_usage_header_text">Diese Daten werden verwendet für:</string>
+    <string name="privacy_and_terms_tap_to_agree">Tippe um zuzustimmen</string>
+    <string name="privacy_and_terms_text_header">Bedingungen und Datenschutz</string>
+    <string name="privacy_policy_screen_agree_text_description">Durch Fortfahren bestätigen Sie die</string>
+    <string name="private_ip_outbound_proxy">Beachten Sie, dass Push-Benachrichtigungen mit Servern im LAN nicht funktionieren.</string>
+    <string name="private_num">Privatnummer</string>
+    <string name="proceed">Trotzdem fortfahren</string>
+    <string name="product_not_available_in_this_version">Das Produkt ist in dieser Version nicht verfügbar</string>
+    <string name="provisioning_error">Provisionierungs-Fehler</string>
+    <string name="provisioning_error_dialog_account">Account</string>
+    <string name="provisioning_error_dialog_title">Provisioning-Fehler</string>
+    <string name="provisioning_missing_reregistration_mode">Neuregistrierungs-Modus</string>
+    <string name="provisioning_missing_value">Fehlt</string>
+    <string name="provisioning_request_timeout">Timeout der Bereitstellung-Anfrage</string>
+    <string name="provisioning_version_is_missing">Provisionierungs-Version fehlt</string>
+    <string name="push_disabled_warning_message">"Push-Proxy wurde deaktiviert. Keine kommenden Anrufe möglich. 
+ 
+Erneut aktivieren, um kommende Anrufe zu empfangen."</string>
+    <string name="push_notification_subs_title">Push-Benachrichtigungen</string>
+    <string name="push_notification_trial_hint">Die 7-tägige Testzeit kann jederzeit kostenfrei abgebrochen werden</string>
+    <string name="push_premium_feature">Keinen Anruf verpassen! Mit unserer Implementierung des Push-Dienstes kann Zoiper alle kommenden Rufe empfangen und diese an Android weiterleiten. Sie erhalten jedes Mal eine Benachrichtigung.</string>
+    <string name="push_premium_feature_title">Push</string>
+    <string name="push_subs_monthly_button_text">1 Monat</string>
+    <string name="push_subs_popup_text">"Push Proxy-Dienst 
+ 
+Niedrigerer Akkuverbrauch 
+Zuverlässige kommende Rufe &amp; Nachrichten 
+Fehlendes Audio vermeiden 
+Kostenlose Testzeit 
+ 
+Weitere Informationen zu Einschränkungen und Ablauf über Begrenzungen finden Sie bei den PUSH FAQ hier "<a href="https://www.zoiper.com/en/support/home/article/205/Zoiper%20mobile%20PUSH#android"/>" 
+"</string>
+    <string name="push_subs_yearly_button_text">1 Jahr</string>
+    <string name="push_subscription_expired_warning_message">"Ihr Abonnement für Push-Proxy ist abgelaufen und wurde deaktiviert. Kommende Anrufe werden nicht mehr empfangen, wenn die Applikation nicht geöffnet ist. 
+ 
+Erneuern Sie das Abonnement, um mit Push wieder Anrufe empfangen zu können"</string>
+    <string name="received_label">Empfangen:</string>
+    <string name="recordings_menu_delete">Löschen</string>
+    <string name="recordings_menu_select_all">Alles auswählen</string>
+    <string name="recordings_menu_share">Teilen</string>
+    <string name="registering_account">Account wird registriert. Bitte warten.</string>
+    <string name="relationLabelsGroup">Beziehung</string>
+    <string name="remove_contact">Löschen</string>
+    <string name="request_timeout_dialog_msg">Es ist ein Problem mit der Internetverbindung aufgetreten.</string>
+    <string name="request_timeout_dialog_negative_button">Abbrechen</string>
+    <string name="request_timeout_dialog_positive_button">Wiederholen</string>
+    <string name="restart">Neustart</string>
+    <string name="revers_background_color_pref_summary">Textfarbe über Hintergrundfarbe</string>
+    <string name="revers_background_color_pref_title">Hintergrund-Textfarbe</string>
+    <string name="reverse_primary_light_color_pref_summary">Textfarbe über Vordergrundfarbe</string>
+    <string name="reverse_primary_light_color_pref_title">Vordergrund-Textfarbe</string>
+    <string name="ringtone_silent">Lautlos</string>
+    <string name="ringtones">Klingeltöne</string>
+    <string name="savingDisplayGroups">Displayoptionen speichern…</string>
+    <string name="search_empty">Keine Treffer.</string>
+    <string name="search_menu_title">Suche</string>
+    <string name="search_shortcut_add_to_contact">Zu einem Kontakt hinzufügen</string>
+    <string name="search_shortcut_call_number">%s anrufen</string>
+    <string name="search_shortcut_create_new_contact">Neuen Kontakt erstellen</string>
+    <string name="seconds">Sekunden</string>
+    <string name="select_link_title">Aktion wählen</string>
+    <string name="select_voicemail_account">Account auswählen</string>
+    <string name="send">Senden</string>
+    <string name="send_debug_log_mail_msg">Möchten Sie das Debug-Log senden?</string>
+    <string name="send_debug_mail_dialog_msg">"ZoiPer ist abgestürzt :( 
+Bitte senden Sie uns den Absturzbericht für die Analyse."</string>
+    <string name="send_email_label">E-Mail senden</string>
+    <string name="send_mail">E-mail senden</string>
+    <string name="sending_message">WIRD GESENDET..</string>
+    <string name="sent_label">Gesendet:</string>
+    <string name="set_presence_label">Status setzen</string>
+    <string name="show_more_providers_button">Mehr</string>
+    <string name="show_service_notification_pref_summary">Zeige Status-Balken und Sperrbildschirm-Info</string>
+    <string name="show_service_notification_pref_title">Zeige Account Status-Benachrichtigung</string>
+    <string name="sip_tls_failed_message">Initialisierung des TLS-Protokolls ist fehlgeschlagen. TLS und SRTP sind nicht verfügbar. Sie können so fortfahren oder versuchen das Problem durch einen Neustart zu beheben.</string>
+    <string name="skip_button_text">Überspringen</string>
+    <string name="sms">Textnachricht</string>
+    <string name="speed_dial_empty">Ihre Kurzwahlliste ist noch leer</string>
+    <string name="speed_dial_empty_add_favorite_action">Favorit hinzufügen</string>
+    <string name="srtp_dialog_msg">TLS Transporttyp ist für die SRTP-Verschlüsselung erforderlich. Transporttyp auf TLS setzen?</string>
+    <string name="srtp_dialog_negative_button_msg">Nein</string>
+    <string name="srtp_dialog_positive_button_msg">Ja</string>
+    <string name="start_with_android_pref_summary">Start %1$s automatisch nach Neustart oder Aus-/Einschalten.</string>
+    <string name="statistics_background_message">"
+
+ In den letzten %1$d Stunden war das Telefon %2$d Stunden nicht erreichbar. (%3$.2f%%)
+
+
+
+ 
+
+Akkuverbrauch:
+
+ 
+
+Zoiper war %4$d von %5$d Stunden aktiv. (%6$.2f%%).
+
+ 
+
+Die Berechnung dauerte %7$d ms
+
+ "</string>
+    <string name="statistics_loading">Lade …</string>
+    <string name="status_available">Verfügbar</string>
+    <string name="status_away">Abwesend</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="status_busy">Besetzt</string>
+    <string name="status_idle">Ruhezustand</string>
+    <string name="status_not_registered">Nicht registriert</string>
+    <string name="status_ready">Account ist bereit</string>
+    <string name="status_register_failed">Registrierung fehlgeschlagen</string>
+    <string name="status_registering">Wird registriert</string>
+    <string name="stun_refresh_period_value">Eingangswert zwischen 20 und 3600 Sekunden</string>
+    <string name="subs_grace_period_warning">Es gibt Schwierigkeiten mit der Zahlung Ihres Abonnements. Gehen Sie zu den Google Play Abo Einstellungen.</string>
+    <string name="subs_premium_feature_button_free_trial">Freie Testversion</string>
+    <string name="subs_stopped_dialog_create_account_button">Erstellen</string>
+    <string name="subs_stopped_dialog_message">Ihr Kombipaket wurde wegen Zahlungsschwierigkeiten deaktiviert. Erstellen Sie einen kostenfreien Account oder gehen Sie zur Webseite von Google Play Zahlung.</string>
+    <string name="subs_stopped_dialog_message_with_gold">Ihr Kombipaket wurde wegen Zahlungsschwierigkeiten deaktiviert. Gehen Sie zur Webseite von Google Play Zahlung.</string>
+    <string name="subs_stopped_dialog_payment_button">Zahlung</string>
+    <string name="subs_stopped_dialog_title">Abonnement beendet</string>
+    <string name="summary_collapsed_preference_list">%1$s, %2$s</string>
+    <string name="supported_networks_pref_summary">Limitiere %1$s um bestimmte Arten der Anbindung zu nutzen.</string>
+    <string name="text_links">Tippen Sie auf \"Zustimmen &amp;amp; fortfahren\", um die &lt;font color=%1$s>&lt;a href=https://www.zoiper.com/en/zoiper-standard-terms-and-conditions/>Standard-Geschäftsbedingungen&lt;/a>&lt;/font> und die &lt;font color=%2$s>&lt;a href=https://www.zoiper.com/en/zoiper-privacy-policy/>Datenschutzerklärung&lt;/a>&lt;/font> von Zoiper zu akzeptieren</string>
+    <string name="text_terms_and_conditions">Geschäftsbedingungen</string>
+    <string name="theme_button_pref_title">Themenauswahl</string>
+    <string name="theme_current_label">Aktuell</string>
+    <string name="themes_fragment_text">Mit der neuen Designsprache können Sie schnell und einfach das Aussehen von Zoiper anpassen.</string>
+    <string name="themes_fragment_title">Themes</string>
+    <string name="themes_title">Themen</string>
+    <string name="title_activity_warnings">Warnungen</string>
+    <string name="title_premium_features">Premium-Funktionen</string>
+    <string name="tls_clear_cert_list_dialog_msg">Zertifikatslisten-Cache erfolgreich gelöscht.</string>
+    <string name="tls_dialog_msg">Das Aktivieren der Option \"RPORT zur Signalisierung verwenden\" ist für den TLS Transporttyp empfohlen. \"RPORT zur Signalisierung verwenden\" aktivieren?</string>
+    <string name="tls_dialog_negative_button_msg">Nein</string>
+    <string name="tls_dialog_positive_button_msg">Ja</string>
+    <string name="tls_error_cert_back_to_safety">Zurück zu Sicherheit</string>
+    <string name="tls_error_cert_proceed_anyway">Trotzdem fortfahren</string>
+    <string name="tls_error_cert_technical_details">Technische Details</string>
+    <string name="tls_error_cert_text">Fehler des Server-Sicherheitszertifikats! Für weitere Informationen klicken Sie auf Technische Details.</string>
+    <string name="tls_options_pref_summary">Konfiguration der TLS-Protokollfamilie.</string>
+    <string name="to_address_label">An:</string>
+    <string name="to_hint">An</string>
+    <string name="toast_account_has_active_call">Dieser Account hat einen aktiven Anruf. Bitte legen Sie auf und versuchen Sie es erneut.</string>
+    <string name="toast_call_detail_error">Kann Details zu dem angeforderten Anruf nicht lesen.</string>
+    <string name="toast_cannot_exit">Die Anwendung kann nicht während eines Anrufs beendet werden. Bitte hängen Sie auf und versuchen Sie es erneut.</string>
+    <string name="toast_change_default_account">Standard-Account geändert auf %s</string>
+    <string name="toast_frequently_called_cleared">Häufig angerufene Kontakte gelöscht</string>
+    <string name="toast_general_error">Ein Fehler ist aufgetreten. Der Crash-Bericht wurde gesendet.</string>
+    <string name="toast_has_active_call">Es gibt bereits einen aktiven Anruf</string>
+    <string name="toast_integer_max_number_exceeded">Die maximale Anzahl in diesem Bereich ist %d.</string>
+    <string name="toast_integer_min_number_exceeded">Die minimale Anzahl in diesem Bereich ist %d.</string>
+    <string name="toast_invalid_fqdn">Ungültiger Domainname</string>
+    <string name="toast_max_port_number">Maximale Port-Nummer ist 65535</string>
+    <string name="toast_min_port_number">Minimale Port-Nummer ist 1</string>
+    <string name="toast_network_connection_error">Fehler Netzwerkverbindung.</string>
+    <string name="toast_no_account_to_dial">Kein Account zum Wählen verfügbar.</string>
+    <string name="toast_pinned_contacts_cleared">Gepinnte Kontakte gelöscht</string>
+    <string name="toast_port_number_length">Maximale Länge der Portnummer ist 5 Zeichen.</string>
+    <string name="toast_qr_account_create_success">Account %s erfolgreich erstellt</string>
+    <string name="toast_qr_create_account_failed">Erstellen des Account fehlgeschlagen. Erneut versuchen.</string>
+    <string name="toast_qr_general_parse_error">Beim Versuch, die Accountinformationen zu erhalten, ist ein Fehler aufgetreten. Erneut versuchen.</string>
+    <string name="toast_qr_provider_mismatch">Provider stimmt nicht überein</string>
+    <string name="toast_qr_url_not_valid">Gescannte URL ungültig</string>
+    <string name="toast_some_fields_are_missing">Einige Felder fehlen:</string>
+    <string name="too_many_recipients">Nachricht hat zu viele Empfänger (%1$s). Es gibt eine Begrenzung von maximal %2$s Empfängern.</string>
+    <string name="total_input_bytes">Empfangene Bytes</string>
+    <string name="total_input_bytes_payload">Empfangene Bytes Nutzlast</string>
+    <string name="total_input_packets">Empfangene Pakete</string>
+    <string name="total_outgoing_packets_lost">Gesamte ausgehende Paketverluste</string>
+    <string name="total_output_bytes">Gesendete Bytes</string>
+    <string name="total_output_bytes_payload">Gesendete Bytes Nutzlast</string>
+    <string name="total_output_packets">Gesendete Pakete</string>
+    <string name="transfer_failed">Vermitteln fehlgeschlagen</string>
+    <string name="transfer_failed_cause">Umleitung fehlgeschlagen: %s</string>
+    <string name="transferring_label">Wird umgeleitet auf %s</string>
+    <string name="translation_dialog_no">Nein</string>
+    <string name="translation_dialog_text">Möchten Sie uns helfen, ZoiPer in Ihre Muttersprache zu übersetzen?</string>
+    <string name="translation_dialog_yes">Ja</string>
+    <string name="transport_type_not_supported">Nicht unterstützt</string>
+    <string name="trusted_ssl_certificates_list_dialog_msg">Zertifizierungs-Cache erfolgreich gelöscht.</string>
+    <string name="try_combo_pack_for_n_days">"Probieren SIe das Kombipaket 
+für %1$s Tage"</string>
+    <string name="try_push_service_for_n_days">"Versuche PUSH Service 
+für %1$s Tage"</string>
+    <string name="tutorial_button">Anleitung</string>
+    <string name="type_to_compose_text_enter_to_send">Nachricht eingeben</string>
+    <string name="undelivered_sms_dialog_body">Diese Nachricht konnte nicht senden.</string>
+    <string name="unexpected_value">Unerwarteter Wert</string>
+    <string name="unknown">Unbekannt</string>
+    <string name="unknown_sender">Unbekannter Absender</string>
+    <string name="unlimited_access_to_all_features">Unbegrenzter Zugang zu allen Funktionen</string>
+    <string name="unlock_debug_mode_dialog_msg">Debug-Modus aktiviert.</string>
+    <string name="unlock_zoiper_gold_dialog_msg">Gold-Modus bis zum Neustart aktiviert.</string>
+    <string name="unreliable_incoming_calls_label">Kommende Rufe unzuverlässig</string>
+    <string name="update_buttone">Upgrade</string>
+    <string name="update_zoiper_text">Eine neuere Version von Zoiper ist verfügbar.</string>
+    <string name="update_zoiper_title">Zoiper upgraden</string>
+    <string name="upgrade_button">Upgrade</string>
+    <string name="upgrade_combo_dialog_text">"Diese Funktion und weitere sind ausschließlich im Kombipaket verfügbar. 
+ 
+Schließen Sie ein Abonnement ab oder erhalten Sie im Premiumbereich eine Testversion."</string>
+    <string name="upgrade_combo_dialog_title">Umsteigen auf Kombipaket</string>
+    <string name="upgrade_premium_dialog_text">"Diese erweiterte Funktion muss käuflich erworben werden. 
+ 
+Sie können diese im Bereich Premiumfunktionen kaufen, abonnieren oder als Testversion erhalten."</string>
+    <string name="upgrade_premium_dialog_title">Upgrade auf Premiumfunktionen</string>
+    <string name="use_full_blueparrot_functionality_pref_summary">Volle BlueParrott-Funktion nutzt Bluetooth Low Energy (BLE), die Berechtigung zum Zugriff auf den Standort erfordert.</string>
+    <string name="user_profile_contacts_list_header">Ich</string>
+    <string name="username_helper">Beispiele: 23d42a3542 oder user@sip.example.com oder user@sip.example.com:5060</string>
+    <string name="v7_preference_off">AUS</string>
+    <string name="v7_preference_on">AN</string>
+    <string name="video_bitrate">Bitrate</string>
+    <string name="video_fps">FPS</string>
+    <string name="video_request_dialog_title">Video annehmen?</string>
+    <string name="video_size">Größe</string>
+    <string name="view_message_details">Details anzeigen</string>
+    <string name="view_updates_from_group">Updates anzeigen</string>
+    <string name="voicemail_extension_insturctions">Drücken und halten Sie die Taste 1, um Ihre Voicemail abzuhören</string>
+    <string name="warning_dialog_title">Warnung!</string>
+    <string name="warnings">Warnungen</string>
+    <string name="warnings_activity_title">Warnungen</string>
+    <string name="warnings_battery_alarm_run_background">Schalte <b>Im Hintergrund laufen</b> aus</string>
+    <string name="warnings_battery_alarm_scheduler">Wechseln zu <b>Wecker</b> anstelle von <b>Wachhalten</b></string>
+    <string name="warnings_battery_background_mode">unter Einstellungen > Verbindung > Hintergrund</string>
+    <string name="warnings_battery_connectivity">unter Einstellungen > Verbindung</string>
+    <string name="warnings_battery_disable_incoming">Deaktiviert kommende Rufe für Accounts ohne PUSH</string>
+    <string name="warnings_battery_disable_wakelock">Deaktiviert Wachhalten</string>
+    <string name="warnings_battery_possible_solutions">Mögliche Lösungen</string>
+    <string name="warnings_battery_try_combo">Teste Kombipaket</string>
+    <string name="warnings_battery_try_push">Versuche PUSH</string>
+    <string name="warnings_battery_use_push">Verwendet PUSH-Benachrichtigungsproxy (empfohlen)</string>
+    <string name="warnings_enable">Aktivieren</string>
+    <string name="warnings_enabled">Aktiviert</string>
+    <string name="warnings_go_to_connectivity"><u>Gehe zu Verbindung</u></string>
+    <string name="warnings_high_battery_use_content">Zoiper hat einen sehr hohen Akkuverbrauch.</string>
+    <string name="warnings_high_battery_use_title">Hoher Akkuverbrauch</string>
+    <string name="warnings_incoming_huawei">Folgen Sie der <a href="https://www.zoiper.com/en/support/home/article/164/Zoiper_disappearing_from_background_on_Huawei_devices">Anleitung</a>, um die Einstellungen für das Energiemanagements Ihres Huawei-Geräts, um kommende Rufe zu erhalten, wenn die Applikation im Hintergrund läuft.</string>
+    <string name="warnings_incoming_huawei_title">"Energiemanagement des Geräts ändern 
+
+(nur Huawei mit Android 8+) "</string>
+    <string name="warnings_incoming_screen_content">Benachrichtigungskanal für kommende Rufe ist dekativiert oder niedrig priorisiert.</string>
+    <string name="warnings_incoming_screen_title">Vermisste Anrufe</string>
+    <string name="warnings_incoming_switch_wakelock">Zu Wachhalten wechseln</string>
+    <string name="warnings_incoming_wakelock">Wechseln Sie für zuverlässige Anrufe zu dauerhaftem <b>Wachbleiben</b>" unter Einstellungen > Verbindung 
+ > "<b>Im Hintergrund laufen</b>. Aktivieren Sie <b>Wachhalten</b></string>
+    <string name="warnings_push_notifications_content">Push ist für Ihren VoIP-Account deaktiviert. Anrufe werden nicht empfangen.</string>
+    <string name="warnings_push_notifications_title">Push-Benachrichtigungen</string>
+    <string name="warnings_reset_statistics"><u>Statistiken zurücksetzen</u></string>
+    <string name="warnings_statistics_have_been_reset">Die Statistiken wurden zurückgesetzt</string>
+    <string name="warnings_tip">Tipp:</string>
+    <string name="warnings_unreliable_incoming_calls_content">Einige kommende Rufe schlagen fehl.</string>
+    <string name="warnings_unreliable_incoming_calls_title">Kommende Rufe unzuverlässig</string>
+    <string name="websiteLabelsGroup">Webseite</string>
+    <string name="whats_new_title">Neuigkeiten</string>
+    <string name="widget_account_removed">Gelöscht</string>
+    <string name="wrong_wireless_network_type">Falscher Netzwerktyp</string>
+    <string name="yes">Ja</string>
+    <string name="yes_but_no">Ja, aber nicht 100%</string>
+    <string name="zoiper_was_active">Zoiper war %1$dh %2$dm von %3$dh %4$dm <b>(%5$.2f%%)</b> aktiv</string>
+    <string name="zoiper_was_unavailable">In den letzten %1$dh %2$dm war das Telefon nicht erreichbar %3$dh %4$dm <b>(%5$.2f%%)</b></string>
+    <string name="zrtp_accept_button">Bestätigen</string>
+    <string name="zrtp_cache_clear_dialog_msg">ZRTP-Cache erfolgreich gelöscht.</string>
+    <string name="zrtp_cache_clear_service_not_running_dialog_msg">ZoiPer-Service wird nicht ausgeführt oder wird neu gestartet. Wiederholen.</string>
+    <string name="zrtp_dialog_msg">"SAS-Verifizierung ist \"%s\". 
+Vergleichen Sie den String mit Ihrem Peer."</string>
+    <string name="zrtp_dialog_title">SAS-Verifizierung</string>
+    <string name="zrtp_negotiation_failed">ZRTP-Verhandlung gescheitert.</string>
+    <string name="zrtp_reject_button">Ablehnen</string>
+</resources>

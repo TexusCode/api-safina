@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/toolbar_parent" android:background="@color/toolbar_background_color" android:layout_width="match_parent" android:layout_height="wrap_content" android:elevation="@dimen/tab_elevation"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomToolbar android:id="@id/toolbar_id" android:background="@color/toolbar_background_color" android:layout_width="match_parent" android:layout_height="?actionBarSize" style="@style/ToolbarStyle">
+        <include layout="@layout/search_edittext" />
+    </com.zoiper.android.util.themeframework.customviews.CustomToolbar>
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

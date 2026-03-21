@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#00000000" android:paddingTop="4.0dp" android:paddingBottom="17.0dp" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/account_widget_icon" android:layout_width="match_parent" android:layout_height="0.0dp" android:scaleType="centerInside" android:layout_weight="1.0" />
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="#ffffff" android:gravity="center" android:id="@id/account_widget_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" />
+</LinearLayout>

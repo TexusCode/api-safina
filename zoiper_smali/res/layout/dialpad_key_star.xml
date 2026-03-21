@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.dialpad.DialpadKeyButton android:id="@id/star" style="@style/DialpadKeyButtonStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:id="@id/button_wrapper" style="@style/DialpadKeyInternalLayoutStyle">
+        <com.zoiper.android.dialpad.DialpadTextView android:id="@id/dialpad_key_number" android:layout_marginBottom="@dimen/dialpad_key_star_margin_bottom" style="@style/DialpadKeyStarStyle" />
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+</com.zoiper.android.dialpad.DialpadKeyButton>

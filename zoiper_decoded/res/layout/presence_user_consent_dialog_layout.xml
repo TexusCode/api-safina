@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="@color/preference_dialog_title" android:id="@id/title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dp" android:text="@string/presence_user_consent_dialog_title" />
+        <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="@color/preference_dialog_title" android:id="@id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dp" />
+        <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="14.0sp" android:textColor="@color/preference_dialog_title" android:id="@id/body_bullets" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:text="@string/presence_user_consent_dialog_text_bullets" />
+        <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/preference_dialog_title" android:id="@id/body_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dp" android:layout_marginBottom="30.0dp" android:text="@string/presence_user_consent_dialog_text_body" />
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+</com.zoiper.android.util.themeframework.customviews.CustomScrollView>

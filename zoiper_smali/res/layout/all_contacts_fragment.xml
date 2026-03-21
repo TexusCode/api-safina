@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/pinned_header_list_layout" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/account_filter_header" />
+    <com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+        <view android:id="@android:id/list" android:paddingTop="18.0dp" android:fadingEdge="none" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginLeft="@dimen/contact_browser_list_padding_left" android:layout_marginRight="@dimen/contact_browser_list_padding_right" android:fastScrollEnabled="true" android:layout_marginStart="@dimen/contact_browser_list_padding_left" android:layout_marginEnd="@dimen/contact_browser_list_padding_right" android:nestedScrollingEnabled="true" class="com.zoiper.android.contacts.PinnedHeaderListView" style="@style/AppTheme" />
+        <com.zoiper.android.util.EmptyContentView android:layout_gravity="center" android:id="@id/empty_list_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="min_dialog_fragment_width">300.0dp</dimen>
+    <dimen name="text_additional_line_spacing_size">8.0sp</dimen>
+    <dimen name="text_additional_text_size">15.0sp</dimen>
+    <dimen name="text_button_agree_and_continue_size">20.0sp</dimen>
+    <dimen name="text_terms_and_condition_size">30.0sp</dimen>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_hours">
+        <item quantity="one">1 hora</item>
+        <item quantity="other">%d horas</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one">1 minuto</item>
+        <item quantity="other">%d minutos</item>
+    </plurals>
+    <plurals name="duration_seconds">
+        <item quantity="one">1 segundo</item>
+        <item quantity="other">%d secundos</item>
+    </plurals>
+    <plurals name="recipient_count">
+        <item quantity="one">%1$s pessoa</item>
+        <item quantity="other">" 1%1$s pessoas"</item>
+    </plurals>
+    <plurals name="search_results_title">
+        <item quantity="one">%1$s resultado para \"%2$s\"</item>
+        <item quantity="other">%1$s resultados para \"%2$s\"</item>
+    </plurals>
+</resources>

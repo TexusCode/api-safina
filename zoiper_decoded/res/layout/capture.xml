@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <SurfaceView android:id="@id/preview_view" android:layout_width="match_parent" android:layout_height="match_parent" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="13.0sp" android:textColor="@color/status_text" android:layout_gravity="center|top" android:id="@id/status_view" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/msg_default_status" />
+    <com.google.zxing.client.android.ViewfinderView android:id="@id/viewfinder_view" android:background="@color/transparent" android:layout_width="match_parent" android:layout_height="match_parent" />
+    <com.zoiper.android.util.EmptyContentView android:textSize="18.0sp" android:textColor="@color/status_text" android:layout_gravity="center" android:id="@id/empty_list_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="30.0dp" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="18.0sp" android:textColor="@color/status_text" android:layout_gravity="center|bottom" android:id="@id/count_down_time_left" android:background="@color/transparent" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="30.0dp" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="18.0sp" android:textColor="@color/status_text" android:layout_gravity="center|bottom" android:id="@id/link_view" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dp" />
+</com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:background="@color/primary_background" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textAppearance="?android:textAppearanceMedium" android:textColor="@color/preference_window_title_text_color" android:layout_gravity="center_vertical" android:id="@id/account_selection_title" android:background="@color/preference_window_title_background_color" android:padding="15.0dp" android:layout_width="match_parent" android:layout_height="?actionBarSize" />
+    <View android:id="@id/white_line" android:layout_width="match_parent" style="@style/PreferenceDivider" />
+    <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@id/select_default_account" android:layout_width="match_parent" android:layout_height="wrap_content" />
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

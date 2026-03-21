@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="about_title_text_size">16.0sp</dimen>
+    <dimen name="mtrl_alert_dialog_background_inset_bottom">24.0dp</dimen>
+    <dimen name="mtrl_alert_dialog_background_inset_top">24.0dp</dimen>
+    <dimen name="whats_new_button_cancel_text_size">13.0sp</dimen>
+</resources>

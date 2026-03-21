@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="horizontal" android:id="@id/list_card" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="@color/primary_background" android:layout_width="0.0dp" android:layout_height="match_parent" android:layout_weight="@integer/contact_list_space_layout_weight" />
+    <View android:background="@color/contact_all_list_background_color" android:layout_width="0.0dp" android:layout_height="match_parent" android:layout_weight="@integer/contact_list_card_layout_weight" android:elevation="@dimen/contact_list_card_elevation" />
+    <View android:background="@color/primary_background" android:layout_width="0.0dp" android:layout_height="match_parent" android:layout_weight="@integer/contact_list_space_layout_weight" />
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

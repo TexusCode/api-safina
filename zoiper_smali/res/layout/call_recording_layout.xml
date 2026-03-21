@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomImageView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_recording" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="@dimen/call_label_text_size" android:textColor="@color/incall_call_banner_subtext_color" android:padding="@dimen/call_card_recording_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/in_call_recording_text" />
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

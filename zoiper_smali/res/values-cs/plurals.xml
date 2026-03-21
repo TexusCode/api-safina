@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_hours">
+        <item quantity="one">Hodina</item>
+        <item quantity="few">Málo</item>
+        <item quantity="many">%d hours</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one">Jedna</item>
+        <item quantity="few">Málo</item>
+        <item quantity="many">%d minutes</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="duration_seconds">
+        <item quantity="one">jedna</item>
+        <item quantity="few">Málo</item>
+        <item quantity="many">Jiný %d seconds</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="recipient_count">
+        <item quantity="one">" Případ 0 nebo 2 nebo více výsledků. "</item>
+        <item quantity="few">" Málo "</item>
+        <item quantity="many">%1$s lidé</item>
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="search_results_title">
+        <item quantity="one">" Případ 1 výsledku. "</item>
+        <item quantity="few">" Málo "</item>
+        <item quantity="many">%1$s result for \"%2$s\"</item>
+        <item quantity="other"></item>
+    </plurals>
+</resources>

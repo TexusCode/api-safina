@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_hours">
+        <item quantity="one">1 heure</item>
+        <item quantity="other">%d heures</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one">1 minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <plurals name="duration_seconds">
+        <item quantity="one">1 seconde</item>
+        <item quantity="other">%d secondes</item>
+    </plurals>
+    <plurals name="recipient_count">
+        <item quantity="one">" Cas de 0 ou 2 résultats ou plus. "</item>
+        <item quantity="other">%1$s people</item>
+    </plurals>
+    <plurals name="search_results_title">
+        <item quantity="one">" Cas d'un résultat. "</item>
+        <item quantity="other">%1$s résultat pour \"%2$s\"</item>
+    </plurals>
+</resources>
