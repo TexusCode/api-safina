@@ -22,3 +22,8 @@ Homestead.yaml
 Thumbs.db
 /zoiper_decoded
 /zoiper_smali
+/zoiper_modified.apk
+/zoiper_safina_final.apk
+/zoiper_custom.keystore
+*.apk
+*.keystore
