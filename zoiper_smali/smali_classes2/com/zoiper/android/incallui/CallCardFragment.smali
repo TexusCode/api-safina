@@ -66,6 +66,8 @@
 
 .field private xO:Landroid/widget/TextView;
 
+.field private xCustomerInfo:Landroid/widget/TextView;
+
 .field private xP:Landroid/graphics/drawable/Drawable;
 
 .field private xQ:Landroid/view/View;
