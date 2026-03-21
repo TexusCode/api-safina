@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Main configuration file. -->
+<resources>
+
+    <company_info_values className="CompanyInfoValuesIds">
+
+        <!-- home_folder
+            Home folder of Zoiper. Default value '/zoiper/'.
+        -->
+        <string name="home_folder">/zoiper/</string>
+
+        <!-- google_project_id
+            The Zoiper project ID in google developer console.
+        -->
+        <string name="google_project_id"/>
+
+    </company_info_values>
+
+    <features className="EnabledFeaturesIds">
+
+        <!-- enable_call_transfer
+            Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_call_transfer">true</bool>
+
+        <!-- enable_call_transfer
+            Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_attended_call_transfer">true</bool>
+
+        <!-- enable_call_transfer
+            Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_unattended_call_transfer">true</bool>
+
+        <!-- enable_conference_call
+           Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_conference_call">true</bool>
+
+        <!-- enable_tls
+            Enables tls transport type.
+        -->
+        <bool name="enable_tls">true</bool>
+
+        <!-- enable_zrtp
+            Enables zrtp.
+        -->
+        <bool name="enable_zrtp">true</bool>
+
+        <!-- enable_srtp
+           Enables srtp.
+        -->
+        <bool name="enable_srtp">true</bool>
+
+        <!-- enable_presence
+           Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_presence">true</bool>
+
+
+        <!-- enable_call_log_presence
+            Default value false. Set to true for development purposes
+        -->
+        <bool name="enable_call_log_presence">true</bool>
+
+
+        <!-- enable_wideband_codecs
+           Enables wideband codecs.
+        -->
+        <bool name="enable_wideband_codecs">true</bool>
+
+        <!-- enable_video
+            Enable/disable Video.
+        -->
+        <bool name="enable_video">true</bool>
+
+        <!-- enable_video_conference_call
+             Enable/disable video conference call.
+        -->
+        <bool name="enable_video_conference_call">false</bool>
+
+        <!-- use_chat
+            Enables the Chat feature. Add a tab for the chat and allow receiving of
+            incoming messages.
+        -->
+        <bool name="enable_chat">true</bool>
+
+        <!-- enable_auto_answer
+            Default value false. Set to true for development purposes.
+        -->
+        <bool name="enable_auto_answer">true</bool>
+
+        <!-- limit_call_count
+            Enable/disable add call option in overflow menu. It should be unlocked with Zoiper Gold.
+            Default value false. Set to true for development purposes.
+        -->
+        <bool name="limit_call_count">false</bool>
+
+        <!-- enable_customization
+            Enable/disable option for customization Zoiper.
+            Default value false. Set to true for development purposes.
+        -->
+        <bool name="enable_customization">true</bool>
+
+        <!-- enable_provisioning_balance
+            When enabled then the balance url can be set from provisioning xml
+        -->
+        <bool name="enable_provisioning_balance">true</bool>
+
+        <!-- enable_provisioning_rate
+            When enabled then the rate url can be set from provisioning xml
+        -->
+        <bool name="enable_provisioning_rate">true</bool>
+
+        <!-- enable_call_recording
+           Enables call recording.
+       -->
+        <bool name="enable_call_recording">true</bool>
+
+        <!-- sip_account_available
+          Set SIP accounts available for creation. If set to false then the user will not be
+          able to add new SIP account.
+      -->
+        <bool name="enable_sip">true</bool>
+
+        <!-- iax_account_available
+             Set IAX accounts available for creation. If set to false then the user will not be
+             able to add new IAX account.
+         -->
+        <bool name="enable_iax">true</bool>
+
+        <!-- enable_msrp
+          Enable/disable MSRP.
+      -->
+        <bool name="enable_msrp">false</bool>
+
+        <!-- enable_msrp_file_transfer
+            Enable/disable MSRP file transfer.
+        -->
+        <bool name="enable_msrp_file_transfer">false</bool>
+
+        <!-- enable_provisioning
+      Enable provisioning. If set to false an account with default values will be created using the
+      name and password in the initial credentials screen.
+      Default value false.
+      -->
+        <bool name="enable_provisioning">false</bool>
+
+        <!-- enable_reprovisioning
+        If set to true the account will be reprovisioned on app start.
+        Default value false.
+        -->
+        <bool name="enable_reprovisioning">false</bool>
+
+        <!-- accept_unknown_calls
+         accept or not unknown calls via the onUnknownCall method.
+     -->
+        <bool name="enable_accept_unknown_calls">true</bool>
+
+        <!-- enable_change_colors_option
+           Enable/disable change colors option in Customize pref. It should be unlocked with Zoiper Gold.
+           Set to true for development purposes.
+        -->
+        <bool name="enable_change_colors_option">true</bool>
+
+        <!-- enable_push
+         Enable/disable push notifications to be used in the app.
+       -->
+        <bool name="enable_push">false</bool>
+
+        <!-- enable_call_through
+         Enable/disable call through.
+       -->
+        <bool name="enable_call_through">false</bool>
+
+        <!-- enable_mwi
+        Enable/disable Message Waiting Indicator.
+      -->
+        <bool name="enable_mwi">true</bool>
+
+        <!-- enable_qos_dscp
+        Enable/ disable Quality of Service(QoS) DSCP. The feature should be unlocked with Zoiper GOLD.
+        -->
+        <bool name="enable_qos_dscp">true</bool>
+
+        <!-- enable_combo_subscription
+        Enable/disable Combo subscription.
+        -->
+        <bool name="enable_combo_subscription">false</bool>
+
+    </features>
+
+    <colors className="ColorsIds">
+
+        <!-- default_theme_id
+            The default theme id that will be use on startup.
+            Pick one from ColorConstants class
+        -->
+        <integer name="default_theme_id">15</integer>
+
+        <!-- config_primary_light
+             Primary color light.
+        -->
+        <color name="config_primary_light">#f47920</color>
+
+        <!-- config_primary_dark
+             Primary color dark.
+        -->
+        <color name="config_primary_dark">#da6b38</color>
+
+        <!-- config_secondary_light
+             Secondary color light.
+        -->
+        <color name="config_secondary_light">#646464</color>
+
+        <!-- config_secondary_dark
+             Secondary color dark.
+        -->
+        <color name="config_secondary_dark">#404040</color>
+
+    </colors>
+
+    <debug className="DebugIds">
+
+        <!-- enable_library_logger_to_file
+            Enable/disable wrapper library logger to a file. When enabled
+            the collected log will be send when there is a crash.
+        -->
+        <bool name="enable_library_logger_to_file">false</bool>
+
+        <!-- debug_level
+            App-wide debug level:
+                0 - no debug logging
+                  1 - normal debug logging
+                  2 - ultra-verbose debug logging
+
+              Default value is 1. For stable releases it should be changed to 0.
+        -->
+        <integer name="debug_level">0</integer>
+
+        <!-- enable_log_to_file
+            Outputs log messages to a file. This has to be used for any kind of release builds.
+            Default value for development is false.
+        -->
+        <bool name="enable_log_to_file">true</bool>
+
+        <!-- allow_phrase_unlock_debug_mode
+            Enable/disable unlock debug mode witch phrase.
+        -->
+        <bool name="allow_phrase_unlock_debug_mode">true</bool>
+
+        <!-- phrase_to_unlock_debug_mode
+             Phrase to unlock debug mode.
+        -->
+        <string name="phrase_to_unlock_debug_mode">7827833284</string>
+
+        <!-- enable_detailed_errors
+            Enable/disable detailed errors.
+        -->
+        <bool name="enable_detailed_errors">true</bool>
+
+        <!-- debug_email_destination_address
+            Email destination for debug log. Current value: android@zoiper.com
+                -->
+        <string name="debug_email_destination_address">android@zoiper.com</string>
+
+        <!-- debug_log_file_length_limit
+            The maximum debug log file size. It is used when the debug log is started by default to
+            avoid sending unnecessary data. In bytes (default is 1MB).
+        -->
+        <integer name="debug_log_file_length_limit">1024000</integer>
+
+        <!-- use_google_analytics
+            Enable sending google analytics data for start and stop of Zoiper.
+        -->
+        <bool name="use_google_analytics">true</bool>
+
+        <!-- flush_app_log_on_every_message
+            Enable forceful stream.flush() on every logged message. Use when log_to_file is set to
+            "true" in order to ensure that the app log will have all messages when the app crashes.
+        -->
+        <bool name="flush_app_log_on_every_message">false</bool>
+
+        <!-- enable_crash_sound
+            Enable crash sound. A sound will be played on every java or native crash.
+            For native crashes sound will be played after the app recovers.
+        -->
+        <bool name="enable_crash_sound">false</bool>
+
+    </debug>
+
+    <account className="AccountIds">
+
+        <!-- account_recorder_always_delete
+           Default value for account recorder to delete every time the existing
+           account when QR code is scanned or when the recorder is used to record
+           an account. This way is user don't have direct access to adding account
+           function only one account will ever exists.
+         -->
+        <bool name="account_recorder_always_delete">false</bool>
+
+        <!-- account_limit
+            Limit number of accounts that can be created manually. Use 0 give unlimited number
+            of accounts.
+             // @formatter:on
+        -->
+        <integer name="account_limit">0</integer>
+
+        <!-- remove_account_editing
+            Remove edit account option.
+        -->
+        <bool name="remove_account_editing">false</bool>
+
+        <!-- enable_account_selection_dialog
+             Enable/disable account selection dialog in dialer tab.
+        -->
+        <bool name="enable_account_selection_dialog">true</bool>
+
+        <!-- use_username_as_account_name
+            If set true we ignore inputted account name and use username instead.
+        -->
+        <bool name="use_username_as_account_name">false</bool>
+
+        <!-- use_username_as_authentication_user
+            If set true we ignore inputted authentication user name and use username instead.
+        -->
+        <bool name="use_username_as_authentication_user">false</bool>
+
+    </account>
+
+    <purchase className="PurchaseIds">
+
+        <!-- available_in_app_products
+        This config determines which products are available in every build. This config
+        does not determine if its visible or not (For visibility check visible_in_app_products).
+        If a product is made unavailable then old purchases of that product will not be synced.
+           This is a combination between products ids:
+           1 - G729
+           2 - H264
+           4 - Zoiper Gold
+           8 - Monthly push subscription
+           16 - Yearly push subscription
+           32 - Monthly combo subscription
+           64 - Yearly combo subscription
+        -->
+        <integer name="available_in_app_products">27</integer>
+
+        <!-- visible_in_app_products
+        Used to show/hide products from the UI. If a product is not visible it
+        will still be synced and unlocked if the user already bought it before it was hidden.
+        This config is used only to hide or show products from the UI.
+        If a product is visible it should also be available with the config - available_in_app_products, otherwise
+        this config will be ignored.
+           This is a combination between products ids:
+           1 - G729
+           2 - H264
+           4 - Zoiper Gold
+           8 - Monthly push subscription
+           16 - Yearly push subscription
+           32 - Monthly combo subscription
+           64 - Yearly combo subscription
+        -->
+        <integer name="visible_in_app_products">27</integer>
+
+        <!-- in_app_billing_signature_base_64
+           Base64 signature used when signing in-app purchase requests. This signature is
+           different for each package name.
+           // @formatter:off
+        -->
+        <string name="in_app_billing_signature_base_64">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsTakYY8v/rfSrrhOQWJiZevwFheLL3w76cLUDwMcICTDsXsKWhWOSzDwq3Ytabx4lWN0TGEsDdozSOyijA0zXOQqHeJVvbAJHTHXDxLXmBGS1LV3M6W/SGlr4j8OcPktgEH9SPz5UBxDkSgghZNHeQRkaN0/gruD/b6sPb4GHDnWVTRZ4B1kcfnjI4IY7OdHagf7nPa/TSndGnSLLmetWCYVCVF0j6fQDU9X77Na5l8veFBCdIguu6MbvExeevhPdpBlVTGqeSsv+VuoqSjk/asvPAJCpfksR7BFKSeKtSVUr5K9Y0K43CJyjmfXMF3nDvaawgCYTES6Ul/vY02suQIDAQAB</string>
+
+        <!-- in_app_purchase_enabled
+            Enable/disable in-app purchases including subscriptions.
+        -->
+        <bool name="in_app_purchase_enabled">true</bool>
+
+    </purchase>
+
+    <cert className="CertIds">
+        <!-- cert_limited_version
+            If set to true application will stop working after prepaid licenses are depleted.
+        -->
+        <bool name="cert_limited_version">false</bool>
+
+
+        <!-- cert_server_cert
+            Cert server certificate string.
+        -->
+        <string name="cert_certificate"/>
+
+        <!-- cert_server_password
+            Cert server password.
+        -->
+        <string name="cert_server_password"/>
+
+        <!-- cert_server_username
+            Cert server username.
+        -->
+        <string name="cert_server_username"/>
+
+
+        <!-- cert_server_version
+            Cert server version.
+        -->
+        <string name="cert_server_version"/>
+
+        <!-- cert_server_url
+            Cert server URL.
+        -->
+        <string name="cert_server_url"/>
+
+    </cert>
+
+    <dialogs_and_screens className="DialogsAndScreensIds">
+
+        <!-- show_new_updates_dialog
+           Enable/disable displaying the New updates dialog.
+        -->
+        <bool name="show_new_updates_dialog">false</bool>
+
+
+        <!-- show_audio_quality_dialog
+            Enable/disable showing of the audio quality dialog after conversation end.
+            Default value true.
+        -->
+        <bool name="show_audio_quality_dialog">true</bool>
+
+        <!-- show_rating_dialog
+            A setting for disabling the rating dialog. It will work only for
+            the original Zoiper app with setting true.
+        -->
+        <bool name="show_rating_dialog">true</bool>
+
+
+        <!-- show_privacy_policy_screen
+            Whether ot not to show the privacy policy screen
+        -->
+        <bool name="show_privacy_policy_screen">true</bool>
+
+
+        <!-- show_initial_login_screen
+            Whether ot not to show the login screen after initial privacy policy terms agreed
+        -->
+        <bool name="show_initial_login_screen">true</bool>
+
+        <!-- show_combo_ad_screen
+            Whether ot not to show the combo advertising screen
+        -->
+        <bool name="show_combo_ad_screen">false</bool>
+
+        <!-- show_contact_account_selection_view
+            Select if Settings - Contacts - Contact Sources section
+            will display clickable option for requesting permission to
+            other accounts on the device.
+         -->
+        <bool name="show_contact_account_selection_view">false</bool>
+
+    </dialogs_and_screens>
+
+    <expiration className="ExpirationIds">
+
+        <!-- time_limited_version
+            Zoiper-Android time limited version enable/disable.
+        -->
+        <bool name="time_limited_version">false</bool>
+
+
+        <!-- time_limited_version_expire_date
+             Time limited version expire date. Set day, month and year: 20140320 - 20 March 2014.
+        -->
+        <string name="time_limited_version_expire_date"/>
+    </expiration>
+
+    <first_launch className="FirstLaunchIds">
+
+        <!-- start_first_launch_activity
+            First launch activity. Default value is false.
+        -->
+        <bool name="start_first_launch_activity">false</bool>
+
+        <!-- start_first_launch_every_time
+             This setting makes possible to start the first launch activity every
+             ZoiperTab onCreate is called. Not just the first time.
+         -->
+        <bool name="start_first_launch_every_time">false</bool>
+
+
+        <!-- first_launch_on_application_start
+            Start FirstLaunch on application start.
+        -->
+        <bool name="first_launch_on_app_start">false</bool>
+
+    </first_launch>
+
+    <preferences className="PreferencesIds">
+
+        <!-- redirect_to_premium_features_from_codec
+            Enable/disable the option to be redirected the user to premium features
+            if he don't own the codec he click on. For ZoiperBeta you should set this constant
+            to false so that the user can not access premium features.
+            Default value true.
+        -->
+        <bool name="redirect_to_premium_features_from_codec">true</bool>
+
+        <!-- use_default_label_for_premium_section
+            Set to "false" to change "Premium Features" section to "Features". This is intended
+            for Zoiper Premium release builds.
+            Default value is true.
+            -->
+        <bool name="use_default_label_for_premium_section">false</bool>
+
+    </preferences>
+
+    <qr className="QrIds">
+        <!-- config_qr_url_scheme
+           QR provisioning scheme. It is used when parse the url that is read from QR scan.
+            Usually in the form of config_qr_url_scheme:\\(32 characters long string)
+       -->
+        <string name="qr_url_scheme">c</string>
+
+        <!-- predefined_qr_customer_sid
+            Predefined QR customer_sid is used to limit QR code scans to only
+            this customer and give error when user try to scan some other
+            configuration. Empty string to allow all customer_sid.
+       -->
+        <string name="predefined_qr_customer_sid"/>
+
+        <!-- zoiper_test_qr_customer_sid
+             Zoiper service customer_sid for testing the predefined customer_sid.
+             It is checked only when there is predefined customer_sid to have
+             additional possibility to test.
+        -->
+        <string name="zoiper_test_qr_customer_sid"/>
+
+        <!-- qr_id_length
+            Predefined length for the ID returned after QR scan
+        -->
+        <integer name="qr_id_length">32</integer>
+
+
+        <!-- check_qr_id_length
+            If this constant is set to true we check the length of the QR id which comes from the scanned QR code.
+        -->
+        <bool name="check_qr_id_length">true</bool>
+    </qr>
+
+    <default_values className="DefaultValuesIds">
+
+        <!-- default_sample_rate
+            Default sample rate to be used for audio driver. Current value: 8000.
+        -->
+        <integer name="default_sample_rate">8000</integer>
+
+        <!-- constant_subscribe_seconds
+            Subscribe seconds for Instant messaging add contact.
+        -->
+        <integer name="constant_subscribe_seconds">0</integer>
+
+
+        <!-- zoiper_provisioning_url
+            Current value: 'https://oem.zoiper.com/zoiper_mobile_xml.php?type=2&android_version_code='
+            You should escape '&' with '&amp;' and any other special characters
+            Example: 'https://oem.zoiper.com/zoiper_mobile_xml.php?type=2&amp;android_version_code='
+        -->
+        <string name="zoiper_provisioning_url">https://oem.zoiper.com/zoiper_mobile_xml.php?type=2&amp;android_version_code=</string>
+
+        <!-- zoiper_provisioning_url_params
+             Current value: '&prov_version=1.13&qr_id='
+             You should escape '&' with '&amp;' and any other special characters
+             Example: '&amp;prov_version=1.13&amp;qr_id='
+        -->
+        <string name="zoiper_provisioning_url_params">&amp;prov_version=1.14&amp;qr_id=</string>
+
+        <!-- rtp_session_name
+            Rtp session name to be set to library.
+        -->
+        <string name="rtp_session_name">Zoiper</string>
+
+        <!-- rtp_username
+            Rtp username to be set to library.
+        -->
+        <string name="rtp_username">Zoiper</string>
+
+
+        <!-- rule_phone_number_length
+           Phone number exact length to prepend the prefix.
+        -->
+        <string name="rule_phone_number_length">10</string>
+
+        <!-- rule_phone_number_prefix
+             The prefix string to prepend.
+        -->
+        <string name="rule_phone_number_prefix">1</string>
+
+        <!-- call_through_base_url
+             Base url for the the call through
+        -->
+        <string name="call_through_base_url"/>
+
+    </default_values>
+
+    <phone_behaviour className="PhoneBehaviourIds">
+
+        <!-- enable_poll_events_service_start_on_screen_start
+            Enable/disable PollEventService start on screen start up when "Run in Background"
+            is disabled.
+        -->
+        <bool name="enable_poll_events_service_start_on_screen_start">true</bool>
+
+        <!-- enable_reliable_provisional
+            Enable/disable reliable provisional.
+        -->
+        <bool name="enable_reliable_provisional">false</bool>
+
+        <!-- enable_sip_header_dump
+        -->
+        <bool name="enable_sip_header_dump">false</bool>
+
+        <!-- enable_reload_accounts_intent
+            Allow other application to re-register Zoiper accounts.
+        -->
+        <bool name="enable_reload_accounts_intent">false</bool>
+
+        <!-- enable_user_binding_param
+            Enables option to add User Binding Param before registration.
+        -->
+        <bool name="enable_user_binding_param">false</bool>
+
+        <!-- enable_user_header_adding
+            Enables option to add User Header before registration.
+        -->
+        <bool name="enable_user_header_adding">false</bool>
+
+        <!-- enable_global_push_settings
+            Enable global settings for the push and not the per account ones.
+        -->
+        <bool name="enable_global_push_settings">true</bool>
+
+        <!--  enable_background_statistics
+            Turn on/off Background statistics and Warnings section -->
+        <bool name="enable_background_statistics">true</bool>
+
+        <!-- enable_private_ip_check_for_push
+            Enable/disable the private IP address check for account's hostname and
+            outbound proxy when the push is enabled.
+        -->
+        <bool name="enable_private_ip_check_for_push">true</bool>
+
+    </phone_behaviour>
+
+    <app_behaviour className="AppBehaviourIds">
+
+        <!-- use_global_ringtone
+            Enable/disable global ringtone.
+        -->
+        <bool name="use_global_ringtone">false</bool>
+
+        <!-- recipient_limit
+            The limit of recipients the field can accept.
+        -->
+        <integer name="recipient_limit">1</integer>
+
+        <!-- use_default_currency_for_balance
+            Enable/disable default country usage for getting balance url currency value.
+        -->
+        <bool name="use_default_currency_for_balance">false</bool>
+
+        <!-- config_editor_field_order_primary
+            If true, the order of name fields in the editor is primary (i.e. given name first)
+        -->
+        <bool name="config_editor_field_order_primary">true</bool>
+
+        <!-- use_phone_number_rule
+             Simple dial plan rule configuration. Use this configuration if there is a need to
+             set a prefix for phone number with a specific length.
+        -->
+        <bool name="use_phone_number_rule">false</bool>
+
+        <!-- enable_anr_watchdog
+                Enable ANR watchdog library to catch ANR's. When this is enabled ANR's are
+                converted to crashes and sent to ACRA.
+                -->
+        <bool name="enable_anr_watchdog">false</bool>
+
+    </app_behaviour>
+
+
+    <ui_behaviour className="UiBehaviourIds">
+
+        <!-- show_incoming_call_send_message
+           Whether to show or not the top option for sending text message in the
+           incoming call screen. Not fully implemented.
+       -->
+        <bool name="show_incoming_call_send_message">false</bool>
+
+
+        <!-- enable_zoiper_widget
+            Enable/disable Zoiper Widget.
+        -->
+        <bool name="enable_zoiper_widget">true</bool>
+
+
+        <!-- hide_in_chat_bar_options
+            Remove all option except delete thread on in chat view action bar.
+        -->
+        <bool name="hide_in_chat_bar_options">false</bool>
+
+        <!-- show_banner
+            Enable/disable banner in navigation drawer. Default value false.
+        -->
+        <bool name="show_banner">false</bool>
+
+
+        <!-- show_clear_test_purchases_button
+            If this constant is set to true we show the button for clear test purchases.
+        -->
+        <bool name="show_clear_test_purchases_button">false</bool>
+
+        <!-- show_push_private_ip_check_toast
+            Show / hide the toast after the check for private ip address.
+        -->
+        <bool name="show_push_private_ip_check_toast">false</bool>
+
+    </ui_behaviour>
+
+    <banafo_config className="BanafoIds">
+
+        <!-- enable_banafo_integration
+          Enable / disable banafo integration (as a feature)
+          -->
+        <bool name="enable_banafo_integration">true</bool>
+
+        <!-- banafo_integration_service_scheme_and_authority
+          The scheme + authority for Banafo services as required by Wrapper Library.
+          -->
+        <string name="banafo_integration_service_scheme_and_authority">https://app.banafo.com/</string>
+
+        <!-- banafo_integration_service_base_path
+          The base path for Banafo services as required by Wrapper Library.
+          -->
+        <string name="banafo_integration_service_base_path">api/</string>
+
+        <!-- banafo_integration_service_client_id
+          The client id for Banafo service as required by Wrapper Library.
+          -->
+        <string name="banafo_integration_service_client_id">MhHx9aqZ5t8gzLK7Oxpx</string>
+
+    </banafo_config>
+
+</resources>

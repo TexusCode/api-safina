@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.msg.ui.MessageListItem android:orientation="horizontal" android:id="@id/msg_list_item_send" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/mms_layout_view_parent" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/message_item_margin_left_right" android:layout_marginTop="@dimen/message_item_margin_top_bottom" android:layout_marginRight="@dimen/message_item_margin_left_right" android:layout_marginBottom="@dimen/message_item_margin_top_bottom" android:layout_weight="1.0">
+        <com.zoiper.android.util.themeframework.customviews.CustomRelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/message_block" android:background="@null" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/avatar_width_height" android:layout_alignParentRight="true">
+                <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="16.0sp" android:textColor="@color/message_send_text_color" android:gravity="left" android:autoLink="all" android:linksClickable="false" android:id="@id/text_view" android:paddingLeft="@dimen/message_item_text_padding_left_right" android:paddingTop="@dimen/message_item_text_padding_top" android:paddingRight="@dimen/message_item_text_padding_left_right" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:gravity="right" android:orientation="horizontal" android:paddingRight="@dimen/message_item_text_padding_left_right" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dp">
+                    <com.zoiper.android.util.themeframework.customviews.CustomImageView android:id="@id/delivered_indicator" android:paddingRight="3.0dp" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@null" />
+                    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textSize="12.0sp" android:textColor="@color/message_item_send_date_color" android:id="@id/date_view" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+            </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+        </com.zoiper.android.util.themeframework.customviews.CustomRelativeLayout>
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+</com.zoiper.android.msg.ui.MessageListItem>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@null" android:id="@id/audio_mode_speaker_id" android:title="@string/audio_mode_speaker" />
+    <item android:icon="@null" android:id="@id/audio_mode_earpiece_id" android:title="@string/audio_mode_earpiece" />
+    <item android:icon="@null" android:id="@id/audio_mode_wired_headset_id" android:title="@string/audio_mode_wired_headset" />
+    <item android:icon="@null" android:id="@id/audio_mode_bluetooth_id" android:title="@string/audio_mode_bluetooth" />
+</menu>

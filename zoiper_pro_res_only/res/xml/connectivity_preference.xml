@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/pref_title_connectivity"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:layout="@layout/default_locked_checkbox_preference_layout" android:title="@string/enable_push_notifications_pref_title" android:key="@string/preference_key_enable_push" android:summary="@string/enable_push_summary" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_proxy_protocols" android:title="@string/pref_title_proxy_protocols" android:key="@string/pref_key_proxy_protocols" android:dependency="@string/preference_key_enable_push" android:defaultValue="false" android:entryValues="@array/pref_select_proxy_protocols_values" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_push_transport" android:title="@string/pref_title_push_transport" android:key="@string/pref_key_push_transport" android:dependency="@string/preference_key_enable_push" android:defaultValue="E_TRANSPORT_TCP" android:entryValues="@array/pref_select_push_transport_values" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_keep_alive_wifi" android:key="@string/pref_key_keep_alive_wifi" android:summary="@string/keep_alive_wifi_pref_summary" android:defaultValue="true" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_run_in_background" android:key="@string/pref_key_run_in_background" android:summary="@string/pref_summary_run_in_background" android:defaultValue="true" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_background_mode" android:title="@string/pref_label_background_mode" android:key="@string/pref_key_background_mode" android:defaultValue="1" android:entryValues="@array/pref_select_background_mode_values" app:entrySummary="@array/pref_select_background_mode_summary" />
+    <PreferenceScreen android:layout="@layout/listening_ports_preference_screen_title_layout" android:title="@string/pref_title_listening_ports" android:key="@string/pref_key_listening_ports">
+        <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_local_sip_port" android:key="@string/pref_key_local_sip_port">
+            <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_title_random_port" android:key="@string/pref_key_random_port_sip" android:defaultValue="true" />
+            <com.zoiper.android.preferences.api.DigitsEditTextPreference android:enabled="false" android:title="@string/pref_title_port" android:key="@string/pref_key_sip_port" android:defaultValue="5060" />
+        </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+        <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_local_iax_port" android:key="@string/pref_key_local_iax_port">
+            <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_title_random_port" android:key="@string/pref_key_random_port_iax" android:defaultValue="true" />
+            <com.zoiper.android.preferences.api.DigitsEditTextPreference android:enabled="false" android:title="@string/pref_title_port" android:key="@string/pref_key_iax_port" android:defaultValue="4569" />
+        </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+        <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_local_rtp_port" android:key="@string/pref_key_local_rtp_port">
+            <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_title_random_port" android:key="@string/pref_key_random_port_rtp" android:defaultValue="true" />
+            <com.zoiper.android.preferences.api.DigitsEditTextPreference android:enabled="false" android:title="@string/pref_title_port" android:key="@string/pref_key_rtp_port" android:defaultValue="8000" />
+        </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+        <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_local_tls_port" android:key="@string/pref_key_local_tls_port">
+            <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_title_random_port" android:key="@string/pref_key_random_port_tls" android:defaultValue="true" />
+            <com.zoiper.android.preferences.api.DigitsEditTextPreference android:enabled="false" android:title="@string/pref_title_port" android:key="@string/pref_key_tls_port" android:defaultValue="5061" />
+        </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+    </PreferenceScreen>
+    <PreferenceScreen android:layout="@layout/qos_dscp_preference_screen_title_layout" android:title="@string/pref_title_qos_dscp" android:key="@string/pref_key_qos_dscp_section">
+        <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_qos_dscp" android:layout="@layout/default_locked_preference_layout" android:title="@string/pref_title_signaling_qos_dscp" android:key="@string/pref_key_signaling_qos_dscp" android:defaultValue="0" android:entryValues="@array/pref_select_qos_dscp_values" />
+        <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_qos_dscp" android:layout="@layout/default_locked_preference_layout" android:title="@string/pref_title_media_qos_dscp" android:key="@string/pref_key_media_qos_dscp" android:defaultValue="0" android:entryValues="@array/pref_select_qos_dscp_values" />
+    </PreferenceScreen>
+</PreferenceScreen>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayoutCompat android:orientation="vertical" android:background="@color/background_call_log_list_items" android:layout_width="match_parent" android:layout_height="match_parent" android:divider="?android:dividerHorizontal"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@android:id/list" android:background="@color/background_call_log_list_items" android:scrollbars="none" android:fadingEdge="none" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginTop="@dimen/call_log_list_view_margin_top" android:divider="@null" />
+        <com.zoiper.android.util.EmptyContentView android:layout_gravity="center" android:id="@id/empty_list_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayoutCompat>

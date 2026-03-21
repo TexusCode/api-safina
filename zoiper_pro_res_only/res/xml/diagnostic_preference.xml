@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/config_label_diagnostic"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceScreen android:layout="@layout/diagnostic_preference_screen_title_layout" android:title="@string/pref_label_debub_log">
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_show_diagnostics_section" android:key="@string/pref_key_show_diagnostics" android:defaultValue="false" />
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_debub_log" android:key="@string/pref_key_enable_debug_log" android:defaultValue="false" />
+        <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_delete_debug_log" android:key="@string/pref_key_delete_debug_log" />
+        <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_sent_debug_log" android:key="@string/pref_key_sent_debug_log" />
+    </PreferenceScreen>
+    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_start_verbose_logging" android:key="@string/pref_key_start_verbose_logging" />
+    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_send_logcat" android:key="@string/pref_key_send_logcat" />
+    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_latency_check" android:key="@string/pref_key_latency_check" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_push_indication" android:key="@string/pref_key_enable_push_indication" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_push_sound" android:key="@string/pref_key_enable_push_sound" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_crash_sound" android:key="@string/pref_key_enable_crash_sound" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_set_audio_source_preset" android:title="@string/pref_label_set_audio_source" android:key="@string/pref_key_set_audio_source_preset" android:defaultValue="4" android:entryValues="@array/pref_set_audio_source_preset_values" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_entries_set_audio_mode" android:title="@string/pref_label_set_audio_mode" android:key="@string/pref_key_set_audio_mode" android:defaultValue="3" android:entryValues="@array/pref_entries_values_set_audio_mode" app:entrySummary="@array/pref_summary_set_audio_mode" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_entries_sampling_rate" android:title="@string/pref_label_set_sampling_rate" android:key="@string/pref_key_set_sampling_rate" android:defaultValue="-1" android:entryValues="@array/pref_entries_values_sampling_rate" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_entries_java_driver_audio_record_source" android:title="@string/pref_label_java_driver_audio_record_source" android:key="@string/pref_key_java_driver_audio_record_source" android:defaultValue="7" android:entryValues="@array/pref_entries_values_java_driver_audio_record_source" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_audio_thread_stats" android:key="@string/pref_key_enable_audio_thread_stats" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_enable_logcat_logger" android:key="@string/pref_key_enable_logcat_logger" android:defaultValue="false" />
+    <PreferenceScreen android:layout="@layout/diagnostic_preference_screen_title_layout_simulate_crash" android:title="@string/pref_label_simulate_crash">
+        <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_java_crash" android:key="@string/pref_key_java_crash" />
+        <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_native_crash" android:key="@string/pref_key_native_crash" />
+        <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/pref_label_simulate_anr" android:key="@string/pref_key_simulate_anr" />
+    </PreferenceScreen>
+</PreferenceScreen>

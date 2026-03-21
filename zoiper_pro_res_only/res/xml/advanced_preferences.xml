@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/pref_title_advanced" android:key="@string/pref_key_advanced"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_strip_chars" android:key="@string/pref_key_strip_chars" android:defaultValue="false" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_start_with_android" android:key="@string/pref_key_start_with_android" android:defaultValue="true" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/pref_label_use_google_analytics" android:key="@string/pref_key_use_google_analytics" android:summary="@string/google_analytics_pref_summary" android:defaultValue="true" />
+    <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:title="@string/show_service_notification_pref_title" android:key="@string/pref_key_show_service_notification" android:summary="@string/show_service_notification_pref_summary" android:defaultValue="true" />
+    <com.zoiper.android.preferences.api.ListPreferenceWrapper android:entries="@array/pref_select_startup_screen" android:title="@string/pref_label_startup_screen" android:key="@string/pref_key_startup_screen" android:defaultValue="1" android:entryValues="@array/pref_select_startup_screen_values" />
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_title_network" android:key="@string/pref_key_network_category">
+        <PreferenceScreen android:layout="@layout/supported_networks_preference_screen_title_layout" android:title="@string/pref_label_run_on_networks" android:key="@string/pref_key_supported_networks">
+            <com.zoiper.android.preferences.view.SupportedNetworkPreference android:title="@string/pref_label_run_on_wifi" android:key="@string/pref_key_run_on_wifi" android:defaultValue="true" />
+            <com.zoiper.android.preferences.view.SupportedNetworkPreference android:title="@string/pref_label_run_on_two_g" android:key="@string/pref_key_run_on_two_g" android:defaultValue="true" />
+            <com.zoiper.android.preferences.view.SupportedNetworkPreference android:title="@string/pref_label_run_on_three_g" android:key="@string/pref_key_run_on_three_g" android:defaultValue="true" />
+            <com.zoiper.android.preferences.view.SupportedNetworkPreference android:title="@string/pref_label_run_on_four_g" android:key="@string/pref_key_run_on_four_g" android:defaultValue="true" />
+        </PreferenceScreen>
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/pref_label_security" android:key="@string/pref_key_security_category">
+        <PreferenceScreen android:layout="@layout/tls_options_preference_screen_title_layout" android:title="@string/pref_lable_security_tls_options" android:key="@string/pref_key_security_tls_options" android:summary="@string/tls_options_pref_summary">
+            <com.zoiper.android.preferences.view.UseOnlyStrongCiphers android:title="@string/pref_label_security_use_only_strong_ciphers" android:key="@string/pref_key_security_use_only_strong_ciphers" android:defaultValue="false" />
+            <com.zoiper.android.preferences.view.ProtocolSuite android:entries="@array/pref_security_protocol_suite" android:title="@string/pref_label_security_protocol_suite" android:key="@string/pref_key_security_protocol_suite" android:defaultValue="E_SECURE_SSLv23" android:entryValues="@array/pref_security_protocol_suite_values" />
+            <com.zoiper.android.preferences.view.TlsClearCertificateList android:title="@string/pref_label_clear_tls_cert_list" android:key="@string/pref_key_clear_tls_cert_list" />
+        </PreferenceScreen>
+        <com.zoiper.android.preferences.view.ClearZrtpCache android:title="@string/pref_label_clear_zrtp_cache" android:key="@string/pref_key_clear_zrtp_cache" android:summary="@string/clear_zrtp_cache_pref_summary" />
+        <com.zoiper.android.preferences.view.ClearCertificationCache android:title="@string/pref_label_clear_trusted_ssl_certificates" android:key="@string/pref_key_clear_trusted_ssl_certificates" android:summary="@string/clear_certification_cache_pref_summary" />
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+    <com.zoiper.android.preferences.api.PreferenceCategoryWrapper android:title="@string/label_sip">
+        <com.zoiper.android.preferences.api.CheckBoxPreferenceWrapper android:layout="@layout/default_locked_checkbox_preference_layout" android:title="@string/pref_title_enable_reliable_provisional" android:key="@string/pref_key_enable_reliable_provisional" android:summary="@string/pref_summary_enable_reliable_provisional" />
+    </com.zoiper.android.preferences.api.PreferenceCategoryWrapper>
+</PreferenceScreen>

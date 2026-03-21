@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.widget.ActivityTouchLinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="?android:listPreferredItemHeight" android:paddingStart="30.0dp" android:paddingEnd="30.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textAppearance="?android:textAppearanceMedium" android:textStyle="bold" android:textColor="@color/reverse_primary_background" android:id="@android:id/text1" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@color/reverse_primary_background" android:id="@android:id/text2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="-4.0dp" android:textDirection="ltr" />
+</com.zoiper.android.widget.ActivityTouchLinearLayout>

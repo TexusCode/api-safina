@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <account className="AccountPrefDefaultsIds">
+        <!-- Authentication -->
+
+        <string name="host_def_val"></string>
+
+        <!-- Optional -->
+
+        <string name="authentication_user_default"></string>
+
+        <string name="outbound_proxy_default"></string>
+
+        <string name="caller_id_default"></string>
+
+        <string name="voice_mail_extension_default"></string>
+
+        <string name="ringtone_default"></string>
+
+        <bool name="enable_subscribe_presence_default">false</bool>
+
+        <bool name="enable_publish_presence_default">false</bool>
+
+        <bool name="enable_on_start_default">true</bool>
+
+        <bool name="enable_specific_codec_setup_default">true</bool>
+
+        <!-- Encryption -->
+
+        <bool name="enable_zrtp_default">false</bool>
+
+        <bool name="enable_srtp_default">false</bool>
+
+        <bool name="enable_force_mediasec">false</bool>
+
+        <!-- Strip Dial characters -->
+
+        <bool name="enable_strip_dial_characters_default">true</bool>
+
+        <string name="characters_to_strip_default">.-() []{}/</string>
+
+        <!-- Number Rewriting -->
+
+        <bool name="enable_number_rewriting_default">false</bool>
+
+        <bool name="number_rewriting_remove_country_code">false</bool>
+
+        <string name="number_rewriting_country_default">NOT_SELECTED</string>
+
+        <string name="number_rewriting_prefix_default">+</string>
+
+        <!-- Optional -->
+
+        <bool name="enable_user_preconditions_default">false</bool>
+
+        <bool name="enable_subscribe_for_register_default">false</bool>
+
+        <bool name="enable_video_fmtp_default">true</bool>
+
+        <!-- Network Settings -->
+
+        <!-- in seconds -->
+        <integer name="registration_expiry_time_default">60</integer>
+
+        <integer name="registration_expiry_time_tcp_default">600</integer>
+
+        <string name="keep_alive_time_out_default">USE_DEFAULT</string>
+
+        <integer name="keep_alive_custom_interval_default">0</integer>
+
+        <bool name="enable_rtp_proxy_default">false</bool>
+
+        <bool name="enable_push_default">false</bool>
+
+        <!-- Transport -->
+
+        <string name="transport_type_default">E_TRANSPORT_UDP</string>
+
+        <bool name="enable_ipv6_default">false</bool>
+
+        <!-- NAT -->
+
+        <string name="enable_stun_default">USE_DEFAULT</string>
+
+        <string name="stun_server_default">stun.zoiper.com</string>
+
+        <integer name="stun_port_default">3478</integer>
+
+        <bool name="stun_allow_on_private_address">false</bool>
+
+        <bool name="stun_allow_with_private_server">false</bool>
+
+        <bool name="stun_enable_dns_srv_requests">false</bool>
+
+        <!-- in seconds -->
+        <integer name="stun_refresh_period_default">30</integer>
+
+        <bool name="enable_rport_for_signalling_default">true</bool>
+
+        <bool name="enable_rport_for_media_default">false</bool>
+        <!-- Features -->
+
+        <string name="dtmf_style_default">E_DTMF_MEDIA_OUTBAND</string>
+
+        <string name="mwi_subscription_default">DISABLED</string>
+
+        <string name="rtcp_feedback_default">E_RTP_PROFILE_AVP</string>
+
+        <!-- Constants -->
+
+        <string name="keep_alive_value_tcp_default">180</string>
+
+        <string name="keep_alive_value_udp_default">30</string>
+    </account>
+
+    <audio className="AudioPrefDefaultsIds">
+
+        <!-- Dialer -->
+
+        <bool name="enable_keypad_vibration">true</bool>
+
+        <bool name="enable_keypad_tones">true</bool>
+
+        <!-- Call -->
+
+        <bool name="enable_echo_cancellation">true</bool>
+
+        <bool name="enable_automatic_gain_control">true</bool>
+
+        <bool name="enable_noise_suppression">true</bool>
+
+        <bool name="enable_call_vibration">true</bool>
+
+        <integer name="speaker_gain">0</integer>
+
+        <!-- Audio Latency -->
+
+        <integer name="select_latency_reduction">2</integer>
+
+        <bool name="enable_proximity_sensor">false</bool>
+
+        <bool name="enable_resampler_reduce_cpu_usage">false</bool>
+
+        <integer name="select_audio_driver">0</integer>
+
+    </audio>
+
+    <video className="VideoPrefDefaultsIds">
+
+        <bool name="always_offer_video">false</bool>
+
+        <bool name="automatically_enable_speaker_on_video_call">true</bool>
+
+        <!-- Video Capture Options -->
+
+        <integer name="select_video_size">1</integer>
+
+        <integer name="select_video_fps">5</integer>
+
+        <integer name="video_bitrate">256000</integer>
+
+    </video>
+
+    <connectivity className="ConnectivityPrefDefaultsIds">
+
+        <bool name="enable_push">false</bool>
+
+        <string name="proxy_protocols">false</string>
+
+        <string name="push_transport">E_TRANSPORT_TCP</string>
+
+        <bool name="keep_alive_wifi">true</bool>
+
+        <bool name="run_in_background">true</bool>
+
+        <string name="background_mode">1</string>
+
+        <!-- Listening Ports -->
+
+        <!-- Local SIP Port -->
+
+        <bool name="use_random_sip_port">true</bool>
+
+        <integer name="port_sip">5060</integer>
+
+        <!-- Local IAX Port -->
+
+        <bool name="use_random_iax_port">true</bool>
+
+        <integer name="port_iax">4569</integer>
+
+        <!-- Local RTP Port -->
+
+        <bool name="use_random_rtp_port">true</bool>
+
+        <integer name="port_rtp">8000</integer>
+
+        <!-- Local TLS Port -->
+
+        <bool name="use_random_tls_port">true</bool>
+
+        <integer name="port_tls">5061</integer>
+
+    </connectivity>
+
+    <contacts className="ContactsPrefDefaultsIds">
+
+        <integer name="contacts_sort_order">1</integer>
+
+        <integer name="name_format">1</integer>
+
+    </contacts>
+
+    <calls className="CallsPrefDefaultsIds">
+
+        <!-- Auto Answer -->
+
+        <bool name="auto_answer_incoming_calls">false</bool>
+
+        <bool name="instant_auto_answer">false</bool>
+
+        <integer name="answer_after">5</integer>
+
+        <bool name="keep_settings_after_restart">false</bool>
+
+        <bool name="call_recording">false</bool>
+
+        <bool name="record_all_calls_in_mp3">false</bool>
+
+        <bool name="call_waiting">true</bool>
+
+    </calls>
+
+    <advanced className="AdvancedPrefDefaultsIds">
+
+        <bool name="strip_chars">false</bool>
+
+        <bool name="start_with_android">true</bool>
+
+        <bool name="use_google_analytics">true</bool>
+
+        <bool name="show_service_notification">true</bool>
+
+        <!-- Supported Networks -->
+
+        <bool name="run_on_wifi">true</bool>
+
+        <bool name="run_on_two_g">true</bool>
+
+        <bool name="run_on_three_g">true</bool>
+
+        <bool name="run_on_four_g">true</bool>
+
+        <!-- TLS Options -->
+
+        <bool name="use_only_strong_ciphers">false</bool>
+
+        <string name="security_protocol_suite">E_SECURE_TLSv1_2</string>
+
+    </advanced>
+
+    <diagnostics className="DiagnosticsPrefDefaultsIds">
+        <bool name="enable_debug_log">false</bool>
+        <bool name="enable_audio_high_thread_stats">false</bool>
+    </diagnostics>
+
+</resources>

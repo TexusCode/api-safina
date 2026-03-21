@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.video.VideoCallSurfaceView android:id="@id/videoGLSurfaceView" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="center" />
+    <com.zoiper.android.util.themeframework.customviews.CustomImageView android:layout_gravity="right" android:id="@id/change_camera_direction" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:layout_marginRight="10.0dp" android:src="@null" />
+</com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>

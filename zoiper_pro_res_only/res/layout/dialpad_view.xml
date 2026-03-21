@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view android:orientation="vertical" android:id="@id/dialpad_view" android:background="@color/background_dialpad" android:clickable="true" android:layout_width="match_parent" android:layout_height="match_parent" class="com.zoiper.android.dialpad.DialpadView"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="horizontal" android:id="@id/digits_container" android:layout_width="match_parent" android:layout_height="@dimen/dialpad_digits_adjustable_height">
+        <view android:textSize="@dimen/dialpad_digits_adjustable_text_size" android:textStyle="normal" android:textColor="@color/dialpad_digits_text_color" android:gravity="center" android:id="@id/digits" android:background="@android:color/transparent" android:focusableInTouchMode="true" android:layout_width="0.0dp" android:layout_height="match_parent" android:cursorVisible="true" android:maxLines="1" android:scrollHorizontally="true" android:singleLine="true" android:freezesText="true" android:layout_weight="1.0" android:inputType="phone" android:contentDescription="@string/content_description_dialpad_editbox" android:textCursorDrawable="@null" ex:resizingTextMinSize="@dimen/dialpad_digits_text_min_size" class="com.zoiper.android.dialpad.DigitsEditText"
+          xmlns:ex="http://schemas.android.com/apk/res-auto" />
+        <com.zoiper.android.util.themeframework.customviews.CustomImageButton android:state_enabled="false" android:id="@id/deleteButton" android:background="@drawable/dialpad_key_background" android:paddingLeft="@dimen/dialpad_digits_padding" android:paddingRight="@dimen/dialpad_digits_padding" android:layout_width="wrap_content" android:layout_height="match_parent" android:src="@null" android:contentDescription="@string/description_delete_button" app:tint="@color/delete_button_color" />
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+    <View android:background="@color/reverse_text_color" android:layout_width="match_parent" android:layout_height="1.0dp" />
+    <com.zoiper.android.widget.Space android:layout_width="match_parent" android:layout_height="@dimen/dialpad_space_above_keys" />
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="match_parent">
+        <include android:layout_width="0.0dp" android:layout_height="match_parent" android:layout_weight="3.0" layout="@layout/dialpad_v1" />
+        <include android:visibility="gone" android:layout_width="0.0dp" android:layout_height="match_parent" android:layout_weight="0.8" layout="@layout/dtmf_letters_keyboard" />
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+</view>

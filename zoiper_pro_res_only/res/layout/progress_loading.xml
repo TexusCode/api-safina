@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/screen_wait" android:background="@color/primary_background" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/screen_wait_progressbar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:indeterminateDrawable="@drawable/progress_cyrcle" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:id="@id/screen_wait_text" android:paddingLeft="@dimen/progress_loading_padding_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/premium_features_progres_bar_text" style="@style/ProgressLoading" />
+</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

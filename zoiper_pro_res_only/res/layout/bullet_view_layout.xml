@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:layout_gravity="start|top" android:id="@id/bullet_view_layoit_bulllet_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/CustomBulletViewTextColor" />
+    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:layout_gravity="start|top" android:id="@id/bullet_view_layoit_text_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAlignment="viewStart" android:layout_marginStart="4.0dp" style="@style/CustomBulletViewTextColor" />
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:background="@color/primary_background" android:focusableInTouchMode="true" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <include android:id="@id/banafo_login_fragment_unauthorized_container" android:visibility="gone" layout="@layout/banafo_login_view_unauthorized_layout" />
+        <include android:id="@id/banafo_login_fragment_failure_container" android:visibility="gone" layout="@layout/banafo_login_view_failure_layout" />
+        <include android:id="@id/banafo_login_fragment_success_container" android:visibility="gone" layout="@layout/banafo_login_view_success_layout" />
+    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
+</ScrollView>
