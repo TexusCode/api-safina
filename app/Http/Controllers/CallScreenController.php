@@ -10,6 +10,51 @@ use Illuminate\Http\Request;
 
 class CallScreenController extends Controller
 {
+    // Called by Android app at call START — creates record immediately
+    public function start(Request $request)
+    {
+        $phone = trim($request->get('phone', ''));
+        $type  = $request->get('type', 'incoming');
+
+        $customer = $phone ? $this->findCustomer($phone) : null;
+
+        try {
+            $call = CallHistory::create([
+                'caller_phone'     => $type === 'incoming' ? $phone : null,
+                'receiver_phone'   => $type === 'outgoing' ? $phone : null,
+                'call_type'        => $type,
+                'started_at'       => now(),
+                'duration_seconds' => 0,
+                'customer_name'    => $customer?->name,
+            ]);
+        } catch (\Exception $e) {
+            // Fallback if notes/customer_name columns don't exist yet (migration pending)
+            $call = CallHistory::create([
+                'caller_phone'     => $type === 'incoming' ? $phone : null,
+                'receiver_phone'   => $type === 'outgoing' ? $phone : null,
+                'call_type'        => $type,
+                'started_at'       => now(),
+                'duration_seconds' => 0,
+            ]);
+        }
+
+        return response()->json(['success' => true, 'id' => $call->id]);
+    }
+
+    // Called by Android app at call END — updates duration
+    public function end(Request $request)
+    {
+        $id       = (int) $request->get('id', 0);
+        $duration = (int) $request->get('duration_seconds', 0);
+
+        if ($id > 0) {
+            CallHistory::where('id', $id)->update(['duration_seconds' => $duration]);
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    // JSON endpoint for overlay — returns customer info
     public function info(Request $request)
     {
         $phone = trim($request->get('phone', ''));
@@ -28,10 +73,10 @@ class CallScreenController extends Controller
             ->orderByDesc('created_at')->first();
 
         return response()->json([
-            'found'     => true,
-            'name'      => $customer->name,
-            'address'   => $customer->adress ?? '',
-            'total_sum' => $totalSum,
+            'found'      => true,
+            'name'       => $customer->name,
+            'address'    => $customer->adress ?? '',
+            'total_sum'  => $totalSum,
             'last_order' => $lastOrder ? [
                 'no'     => $lastOrder->no,
                 'date'   => optional($lastOrder->created_at)->format('d.m.Y'),
@@ -40,11 +85,13 @@ class CallScreenController extends Controller
         ]);
     }
 
+    // Web page — shows customer info + outcome form
     public function show(Request $request)
     {
-        $phone = trim($request->get('phone', ''));
-        $type  = $request->get('type', 'incoming');
-        $phase = $request->get('phase', 'info');
+        $phone   = trim($request->get('phone', ''));
+        $type    = $request->get('type', 'incoming');
+        $phase   = $request->get('phase', 'info');   // 'info' | 'outcome'
+        $call_id = (int) $request->get('call_id', 0);
 
         $customer  = null;
         $totalSum  = 0;
@@ -61,59 +108,84 @@ class CallScreenController extends Controller
             }
         }
 
-        return view('call-screen', compact('phone', 'type', 'customer', 'totalSum', 'lastOrder'));
+        return view('call-screen', compact(
+            'phone', 'type', 'customer', 'totalSum', 'lastOrder', 'phase', 'call_id'
+        ));
     }
 
+    // Saves outcome category onto an existing call record
     public function saveOutcome(Request $request)
     {
+        $call_id  = (int) $request->get('call_id', 0);
         $phone    = trim($request->get('phone', ''));
         $category = trim($request->get('category', ''));
         $notes    = trim($request->get('notes', ''));
         $type     = $request->get('type', 'incoming');
         $name     = trim($request->get('customer_name', ''));
 
-        if ($phone === '' || $category === '') {
-            return response()->json(['success' => false, 'message' => 'phone and category required'], 422);
+        if ($category === '') {
+            return response()->json(['success' => false, 'message' => 'category required'], 422);
         }
 
-        // Try to find a call record created today with no category yet
-        $call = CallHistory::where(function ($q) use ($phone) {
-                $q->where('caller_phone', $phone)
-                  ->orWhere('receiver_phone', $phone);
-            })
-            ->whereDate('started_at', today())
-            ->whereNull('category')
-            ->latest('started_at')
-            ->first();
+        try {
+            // Prefer updating by ID (most reliable)
+            if ($call_id > 0) {
+                CallHistory::where('id', $call_id)->update([
+                    'category' => $category,
+                    'notes'    => $notes,
+                ]);
+                return response()->json(['success' => true]);
+            }
 
-        if ($call) {
-            $call->update([
-                'category'      => $category,
-                'notes'         => $notes,
-                'customer_name' => $name ?: $call->customer_name,
-            ]);
-        } else {
-            CallHistory::create([
-                'caller_phone'  => $type === 'incoming' ? $phone : null,
-                'receiver_phone'=> $type === 'outgoing' ? $phone : null,
-                'call_type'     => $type,
-                'category'      => $category,
-                'notes'         => $notes,
-                'customer_name' => $name,
-                'started_at'    => now(),
-                'duration_seconds' => 0,
-            ]);
+            // Fallback: find today's call by phone without category
+            $call = CallHistory::where(function ($q) use ($phone) {
+                    $q->where('caller_phone', $phone)
+                      ->orWhere('receiver_phone', $phone);
+                })
+                ->whereDate('started_at', today())
+                ->whereNull('category')
+                ->latest('started_at')
+                ->first();
+
+            if ($call) {
+                $call->update(['category' => $category, 'notes' => $notes]);
+            } else {
+                CallHistory::create([
+                    'caller_phone'     => $type === 'incoming' ? $phone : null,
+                    'receiver_phone'   => $type === 'outgoing' ? $phone : null,
+                    'call_type'        => $type,
+                    'category'         => $category,
+                    'notes'            => $notes,
+                    'customer_name'    => $name,
+                    'started_at'       => now(),
+                    'duration_seconds' => 0,
+                ]);
+            }
+
+            return response()->json(['success' => true]);
+
+        } catch (\Exception $e) {
+            // Migration may not have run — retry without optional columns
+            try {
+                CallHistory::create([
+                    'caller_phone'     => $type === 'incoming' ? $phone : null,
+                    'receiver_phone'   => $type === 'outgoing' ? $phone : null,
+                    'call_type'        => $type,
+                    'category'         => $category,
+                    'started_at'       => now(),
+                    'duration_seconds' => 0,
+                ]);
+                return response()->json(['success' => true]);
+            } catch (\Exception $e2) {
+                return response()->json(['success' => false, 'message' => $e2->getMessage()], 500);
+            }
         }
-
-        return response()->json(['success' => true]);
     }
 
     private function findCustomer(string $phone): ?Customer
     {
         $digits = preg_replace('/\D+/', '', $phone);
-        if ($digits === '') {
-            return null;
-        }
+        if ($digits === '') return null;
         $digits = ltrim($digits, '0') ?: '0';
 
         $withCountry = str_starts_with($digits, '992') ? $digits : '992' . $digits;

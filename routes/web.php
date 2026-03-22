@@ -118,6 +118,9 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 
 Route::get('check-customer/{phone}', [CheckCustomerController::class, 'checkCustomer'])->name('check-customer');
 Route::get('/call-screen', [CallScreenController::class, 'show'])->name('call-screen');
+Route::get('/call-info', [CallScreenController::class, 'info']);
+Route::post('/call-start', [CallScreenController::class, 'start'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/call-end', [CallScreenController::class, 'end'])->withoutMiddleware([VerifyCsrfToken::class]);
 Route::post('/call-screen/outcome', [CallScreenController::class, 'saveOutcome'])
     ->withoutMiddleware([VerifyCsrfToken::class])
     ->name('call-screen.outcome');
