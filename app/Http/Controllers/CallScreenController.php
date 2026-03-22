@@ -10,10 +10,41 @@ use Illuminate\Http\Request;
 
 class CallScreenController extends Controller
 {
+    public function info(Request $request)
+    {
+        $phone = trim($request->get('phone', ''));
+        if ($phone === '') {
+            return response()->json(['found' => false]);
+        }
+
+        $customer = $this->findCustomer($phone);
+        if (!$customer) {
+            return response()->json(['found' => false]);
+        }
+
+        $orderIds  = Order::where('customer_id', $customer->id)->pluck('id');
+        $totalSum  = (float) Suborder::whereIn('order_id', $orderIds)->sum('enum');
+        $lastOrder = Order::where('customer_id', $customer->id)
+            ->orderByDesc('created_at')->first();
+
+        return response()->json([
+            'found'     => true,
+            'name'      => $customer->name,
+            'address'   => $customer->adress ?? '',
+            'total_sum' => $totalSum,
+            'last_order' => $lastOrder ? [
+                'no'     => $lastOrder->no,
+                'date'   => optional($lastOrder->created_at)->format('d.m.Y'),
+                'status' => $lastOrder->status ?? '—',
+            ] : null,
+        ]);
+    }
+
     public function show(Request $request)
     {
         $phone = trim($request->get('phone', ''));
         $type  = $request->get('type', 'incoming');
+        $phase = $request->get('phase', 'info');
 
         $customer  = null;
         $totalSum  = 0;
