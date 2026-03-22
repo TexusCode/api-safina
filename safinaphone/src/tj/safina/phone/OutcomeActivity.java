@@ -1,9 +1,7 @@
 package tj.safina.phone;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,7 +13,11 @@ import android.webkit.WebViewClient;
 
 public class OutcomeActivity extends Activity {
 
+    private static final String BASE_URL = "https://safina-cleaning.tj/call-screen";
+
     private WebView webView;
+    // true only after the web page confirms category was saved (Android.close() called)
+    private boolean categorySelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,30 +25,21 @@ public class OutcomeActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Показываем поверх экрана блокировки, включаем экран и снимаем блокировку
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        // API 27+ — альтернативный способ для надёжности
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
             setTurnScreenOn(true);
-            KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            if (km != null) {
-                try { km.requestDismissKeyguard(this, null); } catch (Exception ignored) {}
-            }
         }
 
-        String phone  = getIntent().getStringExtra("phone");
-        String type   = getIntent().getStringExtra("type");
-        String phase  = getIntent().getStringExtra("phase");
-        int    callId = getIntent().getIntExtra("call_id", 0);
-        if (type == null) type = "incoming";
-        if (phase == null || phase.isEmpty()) phase = "outcome";
-        if (phone == null) phone = "";
-
         webView = new WebView(this);
+
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
@@ -56,6 +49,8 @@ public class OutcomeActivity extends Activity {
         webView.addJavascriptInterface(new Object() {
             @JavascriptInterface
             public void close() {
+                // Called by JS only after category is successfully saved
+                categorySelected = true;
                 runOnUiThread(() -> finish());
             }
         }, "Android");
@@ -69,18 +64,39 @@ public class OutcomeActivity extends Activity {
         });
 
         setContentView(webView);
+        loadPage(getIntent());
+    }
 
-        // Load directly in outcome phase — no JS injection needed
-        String url = "https://safina-cleaning.tj/call-screen"
-            + "?phone=" + phone
-            + "&type=" + type
-            + "&phase=" + phase
-            + "&call_id=" + callId;
-        webView.loadUrl(url);
+    // Handles FLAG_ACTIVITY_CLEAR_TOP re-delivery for a new call while screen is open
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        categorySelected = false;
+        loadPage(intent);
+    }
+
+    private void loadPage(Intent intent) {
+        String phone  = intent.getStringExtra("phone");
+        String type   = intent.getStringExtra("type");
+        int    callId = intent.getIntExtra("call_id", 0);
+        if (phone == null) phone = "";
+        if (type  == null) type  = "incoming";
+
+        webView.loadUrl(BASE_URL
+                + "?phone="   + phone
+                + "&type="    + type
+                + "&phase=outcome"
+                + "&call_id=" + callId);
     }
 
     @Override
     public void onBackPressed() {
-        // Keep outcome screen visible until operator explicitly submits/closes via the UI.
+        // Block the back button until the user selects a category.
+        // The page calls Android.close() after saving, which sets categorySelected = true.
+        if (categorySelected) {
+            super.onBackPressed();
+        }
+        // else: silently ignore — user must complete the form first
     }
 }

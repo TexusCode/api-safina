@@ -13,133 +13,98 @@ import java.util.regex.Pattern;
 
 public class CallMonitorService extends AccessibilityService {
 
-    private static final String TAG = "SafinaMonitor";
-    private static final String ZOIPER_PKG_PREMIUM = "com.zoiperpremium.android.app";
-    private static final String ZOIPER_PKG_BASE = "com.zoiper.android.app";
-    private static final Pattern PHONE_PATTERN = Pattern.compile("[+]?[0-9]{6,15}");
-    private static final long OUTGOING_START_DELAY_MS = 1200;
+    private static final String TAG        = "SafinaMonitor";
+    private static final String ZOIPER_PKG = "com.zoiperpremium.android.app";
+    private static final Pattern PHONE_PAT = Pattern.compile("[+]?[0-9]{6,15}");
 
-    private String lastOpenedPhone = null;
+    // Delay before we declare "call ended" when Zoiper window goes away.
+    // Long enough to survive a screen-lock/unlock cycle (~15 s auto-lock),
+    // short enough to show the outcome form quickly after a real call end.
+    private static final long CALL_END_DELAY_MS = 12_000;
 
-    // Delayed CALL_ENDED — mirrors IncomingCallListener's 2-second approach.
-    // 5 seconds so IncomingCallListener (2s) gets priority for incoming calls.
-    private final Handler callEndHandler = new Handler(Looper.getMainLooper());
-    private Runnable callEndRunnable = null;
-    private final Handler outgoingStartHandler = new Handler(Looper.getMainLooper());
-    private Runnable pendingOutgoingStart = null;
-    private String pendingOutgoingPhone = null;
+    private String lastPhone = null;
+
+    private final Handler  endHandler  = new Handler(Looper.getMainLooper());
+    private       Runnable endRunnable = null;
+
+    // Tracks whether we already saw a null-root since the last phone detection.
+    // Prevents re-posting the delay on every repeated null event.
+    private boolean pendingEnd = false;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         if (event.getPackageName() == null) return;
-        if (!isZoiperPackage(event.getPackageName().toString())) return;
+        if (!ZOIPER_PKG.contentEquals(event.getPackageName())) return;
 
         AccessibilityNodeInfo root = getRootInActiveWindow();
 
         if (root == null) {
-            cancelPendingOutgoingStart();
-            // Zoiper window not accessible (locked screen or call ended).
-            // Start a delayed broadcast — cancelled if Zoiper becomes visible again
-            // (meaning it was just a transient lock-screen hide, not a real call end).
-            if (lastOpenedPhone != null
-                    && callEndRunnable == null
-                    && CallState.isActive
-                    && "outgoing".equals(CallState.activeType)) {
-                callEndRunnable = () -> {
-                    callEndRunnable = null;
-                    if (!CallState.isActive) return; // IncomingCallListener already handled it
-                    if (!"outgoing".equals(CallState.activeType)) return;
-                    lastOpenedPhone = null;
-                    CallState.finishCall();
+            // Zoiper window gone — locked screen OR real call end.
+            // Post a delayed CALL_ENDED only the FIRST time we see null
+            // (not again on repeated null events that cancel→restart the timer).
+            if (lastPhone != null && !pendingEnd && CallState.isActive) {
+                pendingEnd = true;
+                endRunnable = () -> {
+                    endRunnable = null;
+                    if (!CallState.isActive) return; // IncomingCallListener already handled
+                    Log.d(TAG, "CALL_ENDED from CallMonitorService (outgoing path)");
+                    lastPhone  = null;
+                    pendingEnd = false;
+                    CallState.isActive = false;
                     Intent b = new Intent(CallState.ACTION_CALL_ENDED);
                     b.setPackage(getPackageName());
                     sendBroadcast(b);
-                    Log.d(TAG, "CALL_ENDED sent from CallMonitorService (outgoing/no-notif path)");
                 };
-                callEndHandler.postDelayed(callEndRunnable, 5000);
+                endHandler.postDelayed(endRunnable, CALL_END_DELAY_MS);
             }
             return;
         }
 
-        // Zoiper window is visible — cancel any pending CALL_ENDED (screen just unlocked)
-        if (callEndRunnable != null) {
-            callEndHandler.removeCallbacks(callEndRunnable);
-            callEndRunnable = null;
+        // Zoiper window is visible → cancel any pending CALL_ENDED
+        if (endRunnable != null) {
+            endHandler.removeCallbacks(endRunnable);
+            endRunnable = null;
+            pendingEnd = false;
         }
 
-        String phone = findPhoneInTree(root);
+        String phone = scanTree(root);
         root.recycle();
 
-        Log.d(TAG, "Zoiper event, phone found: " + phone);
+        if (phone == null) return; // Zoiper open but not showing a call (e.g. dial pad)
 
-        if (phone != null) {
-            // Incoming calls are handled by IncomingCallListener.
-            // Avoid starting a second session from AccessibilityService.
-            if (CallState.isActive && phone.equals(CallState.activePhone)) {
-                lastOpenedPhone = phone;
-                cancelPendingOutgoingStart();
-                return;
-            }
-
-            if (!phone.equals(lastOpenedPhone)) {
-                scheduleOutgoingStart(phone);
-            }
+        if (!phone.equals(lastPhone)) {
+            lastPhone  = phone;
+            pendingEnd = false;
+            CallState.isActive = true;
+            Log.d(TAG, "Outgoing call detected: " + phone);
+            Intent i = new Intent(this, InfoOverlayService.class);
+            i.putExtra("phone", phone);
+            i.putExtra("type",  "outgoing");
+            startForegroundService(i);
         }
     }
 
-    private void scheduleOutgoingStart(String phone) {
-        if (phone == null || phone.isEmpty()) return;
-        if (pendingOutgoingStart != null && phone.equals(pendingOutgoingPhone)) return;
+    // ── Tree scan ─────────────────────────────────────────────────────────────
 
-        cancelPendingOutgoingStart();
-        pendingOutgoingPhone = phone;
-        pendingOutgoingStart = () -> {
-            String candidate = pendingOutgoingPhone;
-            pendingOutgoingPhone = null;
-            pendingOutgoingStart = null;
-            if (candidate == null || candidate.isEmpty()) return;
-            if (CallState.isActive) return;
-            if (CallState.beginCall(candidate, "outgoing")) {
-                lastOpenedPhone = candidate;
-                openCallInfo(candidate);
-            }
-        };
-        outgoingStartHandler.postDelayed(pendingOutgoingStart, OUTGOING_START_DELAY_MS);
-    }
-
-    private void cancelPendingOutgoingStart() {
-        if (pendingOutgoingStart != null) {
-            outgoingStartHandler.removeCallbacks(pendingOutgoingStart);
-            pendingOutgoingStart = null;
-            pendingOutgoingPhone = null;
-        }
-    }
-
-    private boolean isZoiperPackage(String pkg) {
-        return ZOIPER_PKG_PREMIUM.equals(pkg) || ZOIPER_PKG_BASE.equals(pkg);
-    }
-
-    private String findPhoneInTree(AccessibilityNodeInfo node) {
+    private String scanTree(AccessibilityNodeInfo node) {
         if (node == null) return null;
 
         CharSequence text = node.getText();
         if (text != null) {
-            String candidate = extractPhone(text.toString().trim());
-            if (candidate != null) return candidate;
+            String c = extractPhone(text.toString().trim());
+            if (c != null) return c;
         }
-
         CharSequence desc = node.getContentDescription();
         if (desc != null) {
-            String candidate = extractPhone(desc.toString());
-            if (candidate != null) return candidate;
+            String c = extractPhone(desc.toString());
+            if (c != null) return c;
         }
-
         for (int i = 0; i < node.getChildCount(); i++) {
             AccessibilityNodeInfo child = node.getChild(i);
             if (child != null) {
-                String result = findPhoneInTree(child);
+                String r = scanTree(child);
                 child.recycle();
-                if (result != null) return result;
+                if (r != null) return r;
             }
         }
         return null;
@@ -147,53 +112,31 @@ public class CallMonitorService extends AccessibilityService {
 
     private String extractPhone(String text) {
         if (text == null || text.isEmpty()) return null;
-        String cleaned = text.replaceAll("[\\s\\-\\.\\(\\)]", "");
-        Matcher m = PHONE_PATTERN.matcher(cleaned);
+        String s = text.replaceAll("[\\s\\-\\.\\(\\)]", "");
+        Matcher m = PHONE_PAT.matcher(s);
         if (m.find()) {
-            String found = m.group();
-            if (found.length() >= 6 && found.length() <= 15) {
-                return normalizePhone(found);
-            }
+            String f = m.group();
+            if (f.length() >= 6 && f.length() <= 15) return normalize(f);
         }
         return null;
     }
 
-    private String normalizePhone(String phone) {
-        if (phone == null || phone.isEmpty()) return phone;
-        // Strip + prefix
-        phone = phone.replaceAll("^\\+", "");
-        // Strip SIP trunk prefix 6304304
-        if (phone.startsWith("6304304")) phone = phone.substring(7);
-        // Strip international dialing prefix 00
-        if (phone.startsWith("00")) phone = phone.substring(2);
-        // Strip 0 before 992 (e.g. 0992XXXXXXXXX)
-        if (phone.startsWith("0992") && phone.length() >= 13) phone = phone.substring(1);
-        // Strip Tajikistan country code 992 if it gives a 9-digit local number
-        if (phone.startsWith("992") && phone.length() == 12) phone = phone.substring(3);
-        // If still too long, extract the real number
-        if (phone.length() > 9) {
-            // Prefer 9-digit Tajik mobile (starts with 9)
-            java.util.regex.Matcher m9 = java.util.regex.Pattern.compile("9[0-9]{8}").matcher(phone);
+    private String normalize(String p) {
+        if (p == null || p.isEmpty()) return p;
+        p = p.replaceAll("^\\+", "");
+        if (p.startsWith("6304304"))              p = p.substring(7);
+        if (p.startsWith("00"))                   p = p.substring(2);
+        if (p.startsWith("0992") && p.length() >= 13) p = p.substring(1);
+        if (p.startsWith("992")  && p.length() == 12) p = p.substring(3);
+        if (p.length() > 9) {
+            Matcher m9 = Pattern.compile("9[0-9]{8}").matcher(p);
             if (m9.find()) return m9.group();
-            // Fallback: strip leading zeros and take first 7 digits (Dushanbe landline)
-            phone = phone.replaceAll("^0+", "");
-            if (phone.length() > 7) phone = phone.substring(0, 7);
+            p = p.replaceAll("^0+", "");
+            if (p.length() > 7) p = p.substring(0, 7);
         }
-        // Strip remaining leading zero if number is long enough
-        if (phone.startsWith("0") && phone.length() > 6) phone = phone.substring(1);
-        return phone;
+        if (p.startsWith("0") && p.length() > 6) p = p.substring(1);
+        return p;
     }
 
-    private void openCallInfo(String phone) {
-        Log.d(TAG, "Starting InfoOverlayService for outgoing: " + phone);
-        Intent i = new Intent(this, InfoOverlayService.class);
-        i.putExtra("phone", phone);
-        i.putExtra("type", "outgoing");
-        startForegroundService(i);
-    }
-
-    @Override
-    public void onInterrupt() {
-        Log.d(TAG, "Accessibility service interrupted");
-    }
+    @Override public void onInterrupt() {}
 }

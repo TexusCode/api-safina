@@ -15,8 +15,7 @@ import java.util.regex.Pattern;
 public class IncomingCallListener extends NotificationListenerService {
 
     private static final String TAG = "SafinaMonitor";
-    private static final String ZOIPER_PKG_PREMIUM = "com.zoiperpremium.android.app";
-    private static final String ZOIPER_PKG_BASE = "com.zoiper.android.app";
+    private static final String ZOIPER_PKG = "com.zoiperpremium.android.app";
     private static final Pattern PHONE_PATTERN = Pattern.compile("[+]?[0-9]{6,15}");
 
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -26,7 +25,7 @@ public class IncomingCallListener extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null) return;
-        if (!isZoiperPackage(sbn.getPackageName())) return;
+        if (!ZOIPER_PKG.equals(sbn.getPackageName())) return;
 
         // Cancel any pending CALL_ENDED — Zoiper just posted a new notification
         // This handles the ringing→active call transition
@@ -34,7 +33,7 @@ public class IncomingCallListener extends NotificationListenerService {
             handler.removeCallbacks(callEndRunnable);
             callEndRunnable = null;
             // Call was just answered — record the answered timestamp for duration
-            CallState.markAnsweredNow();
+            CallState.answeredAt = System.currentTimeMillis();
             Log.d(TAG, "Call answered — ringing→active transition detected");
             return; // overlay already showing, don't re-open
         }
@@ -56,12 +55,10 @@ public class IncomingCallListener extends NotificationListenerService {
         if (phone != null) {
             phone = normalizePhone(phone);
             if (phone.equals(lastPostedPhone) && CallState.isActive) return; // already showing
-            if (!CallState.beginCall(phone, "incoming")) {
-                Log.d(TAG, "Incoming ignored (session already active): " + phone);
-                return;
-            }
             lastPostedPhone = phone;
             Log.d(TAG, "Incoming call, phone: " + phone);
+            CallState.isActive = true;
+            CallState.answeredAt = 0; // reset; will be set when answered
             Intent i = new Intent(this, InfoOverlayService.class);
             i.putExtra("phone", phone);
             i.putExtra("type", "incoming");
@@ -72,7 +69,7 @@ public class IncomingCallListener extends NotificationListenerService {
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         if (sbn == null) return;
-        if (!isZoiperPackage(sbn.getPackageName())) return;
+        if (!ZOIPER_PKG.equals(sbn.getPackageName())) return;
         Log.d(TAG, "Zoiper notification removed");
 
         if (!CallState.isActive) return;
@@ -82,7 +79,7 @@ public class IncomingCallListener extends NotificationListenerService {
         callEndRunnable = () -> {
             callEndRunnable = null;
             lastPostedPhone = null;
-            CallState.finishCall();
+            CallState.isActive = false;
             Intent broadcast = new Intent(CallState.ACTION_CALL_ENDED);
             broadcast.setPackage(getPackageName());
             sendBroadcast(broadcast);
@@ -102,10 +99,6 @@ public class IncomingCallListener extends NotificationListenerService {
             if (found.length() >= 6 && found.length() <= 15) return found;
         }
         return null;
-    }
-
-    private boolean isZoiperPackage(String pkg) {
-        return ZOIPER_PKG_PREMIUM.equals(pkg) || ZOIPER_PKG_BASE.equals(pkg);
     }
 
     private String normalizePhone(String phone) {

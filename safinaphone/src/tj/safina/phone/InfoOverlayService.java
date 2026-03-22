@@ -38,40 +38,41 @@ public class InfoOverlayService extends Service {
     private static final String BASE       = "https://safina-cleaning.tj";
 
     private WindowManager wm;
-    private LinearLayout rootView;       // entire overlay card
-    private LinearLayout detailsLayout;  // rows below the header — hidden when minimised
-    private TextView tvMinimise;         // ▲ / ▼ toggle button
-    private boolean minimised = false;
+    private LinearLayout  rootView;
+    private LinearLayout  detailsLayout;
+    private TextView      tvMinimise;
+    private boolean       minimised = false;
 
-    private String currentPhone;
-    private String currentType;
-    private int callId = 0;
-    private long callStartTime = 0;
+    // State for the current call — reset on every genuine new call.
+    private String  currentPhone;
+    private String  currentType;
+    private int     callId        = 0;
+    private long    callStartTime = 0;
+
     private boolean receiverRegistered = false;
-    private boolean awaitingOutcome = false;
+
+    // ─── CALL_ENDED broadcast receiver ───────────────────────────────────────
 
     private final BroadcastReceiver callEndedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context ctx, Intent intent) {
-            if (awaitingOutcome) return;
-            awaitingOutcome = true;
-
-            Log.d(TAG, "CALL_ENDED -> logging duration, launching outcome");
+            Log.d(TAG, "CALL_ENDED → ending call id=" + callId);
+            // Log duration immediately on background thread
             new Thread(InfoOverlayService.this::logCallEnd).start();
-            removeOverlay();
-            stopForeground(STOP_FOREGROUND_REMOVE);
-
-            // Zoiper may still bring its own activity to front after hangup.
-            // Launch outcome screen immediately and retry shortly to keep it visible.
-            launchOutcomeActivity();
-            Handler h = new Handler(Looper.getMainLooper());
-            h.postDelayed(InfoOverlayService.this::launchOutcomeActivity, 900);
-            h.postDelayed(() -> {
+            // Wait 2 seconds so Zoiper finishes its own post-call UI transition
+            // and doesn't cover the OutcomeActivity when it appears.
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                // Overlay is still visible here → Android allows starting Activity
                 launchOutcomeActivity();
+                removeOverlay();
+                currentPhone = null;
+                currentType  = null;
                 stopSelf();
-            }, 2200);
+            }, 2000);
         }
     };
+
+    // ─── Lifecycle ────────────────────────────────────────────────────────────
 
     @Override
     public void onCreate() {
@@ -81,37 +82,46 @@ public class InfoOverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        startForeground(NOTIF_ID, buildNotification()); // must be first
+        startForeground(NOTIF_ID, buildNotification());
 
         if (intent == null) return START_NOT_STICKY;
 
         String newPhone = intent.getStringExtra("phone");
-        String newType = intent.getStringExtra("type");
-        if (newPhone == null || newPhone.isEmpty()) return START_NOT_STICKY;
-        if (newType == null || newType.isEmpty()) newType = "incoming";
+        String newType  = intent.getStringExtra("type");
+
+        // ── Dedup ─────────────────────────────────────────────────────────────
+        // Both IncomingCallListener and CallMonitorService can start this service
+        // for the same call. Only the FIRST start (isNewCall=true) sets the type,
+        // so IncomingCallListener cannot override "outgoing" with "incoming"
+        // when it fires second for an already-detected outgoing call.
+        boolean isNewCall = (newPhone != null && !newPhone.equals(currentPhone));
+
+        if (isNewCall && newPhone != null) {
+            currentPhone = newPhone;
+            currentType  = newType != null ? newType : "incoming";
+        }
 
         if (!Settings.canDrawOverlays(this)) {
-            // Keep call workflow working even without overlay permission:
-            // call info / outcome activities are still launched.
-            Log.w(TAG, "Overlay permission not granted, using activity-only mode");
+            Log.e(TAG, "Overlay permission not granted – stopping");
+            stopSelf();
+            return START_NOT_STICKY;
         }
 
-        boolean sameCall = CallState.isActive
-                && newPhone.equals(currentPhone)
-                && callStartTime > 0;
-
-        if (!sameCall) {
-            currentPhone = newPhone;
-            currentType = newType;
-            awaitingOutcome = false;
-            callStartTime = System.currentTimeMillis();
-            callId = 0;
+        if (isNewCall) {
+            callStartTime        = System.currentTimeMillis();
+            callId               = 0;
+            CallState.answeredAt = 0;
             new Thread(this::logCallStart).start();
-            launchCallInfoActivity();
-        } else {
-            Log.d(TAG, "Duplicate start ignored for phone=" + newPhone + " type=" + newType);
         }
 
+        if (rootView == null) {
+            showOverlay();
+        } else {
+            refreshHeader();
+            if (isNewCall) resetDetails();
+        }
+
+        // Register CALL_ENDED receiver once per service instance.
         if (!receiverRegistered) {
             IntentFilter f = new IntentFilter(CallState.ACTION_CALL_ENDED);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -122,29 +132,37 @@ public class InfoOverlayService extends Service {
             receiverRegistered = true;
         }
 
+        if (isNewCall) {
+            new Thread(this::fetchAndUpdateInfo).start();
+        }
         return START_NOT_STICKY;
     }
 
-    // ─────────────────────────────────────────────────────────
-    // Build the overlay
-    // ─────────────────────────────────────────────────────────
+    @Override
+    public IBinder onBind(Intent i) { return null; }
+
+    @Override
+    public void onDestroy() {
+        removeOverlay();
+        super.onDestroy();
+    }
+
+    // ─── Overlay ──────────────────────────────────────────────────────────────
 
     private void showOverlay() {
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-        // ── Root card ─────────────────────────────────────────
         rootView = new LinearLayout(this);
         rootView.setOrientation(LinearLayout.VERTICAL);
         rootView.setBackgroundColor(0xF01a1a2e);
         rootView.setPadding(dp(14), dp(10), dp(14), dp(12));
 
-        // ── Header row: icon · phone · type · minimise ────────
+        // Header row
         LinearLayout header = new LinearLayout(this);
         header.setOrientation(LinearLayout.HORIZONTAL);
         header.setGravity(Gravity.CENTER_VERTICAL);
 
         TextView tvIcon = new TextView(this);
-        tvIcon.setTag("icon");
         tvIcon.setText("incoming".equals(currentType) ? "📥" : "📤");
         tvIcon.setTextSize(14f);
         header.addView(tvIcon, wrap());
@@ -159,7 +177,6 @@ public class InfoOverlayService extends Service {
         header.addView(tvPhone, stretch());
 
         TextView tvType = new TextView(this);
-        tvType.setTag("type");
         tvType.setText("incoming".equals(currentType) ? "Входящий" : "Исходящий");
         tvType.setTextColor(0xFF9ca3af);
         tvType.setTextSize(10f);
@@ -176,37 +193,10 @@ public class InfoOverlayService extends Service {
 
         rootView.addView(header, fullWidth());
 
-        // ── Details section (shown / hidden on minimise) ──────
+        // Details section
         detailsLayout = new LinearLayout(this);
         detailsLayout.setOrientation(LinearLayout.VERTICAL);
         detailsLayout.setPadding(0, dp(6), 0, 0);
-
-        addDefaultDetailsPlaceholder();
-        rootView.addView(detailsLayout, fullWidth());
-
-        // ── WindowManager params ───────────────────────────────
-        WindowManager.LayoutParams wp = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
-                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
-                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-                PixelFormat.TRANSLUCENT);
-        wp.gravity = Gravity.TOP | Gravity.START;
-        wp.x = 0;
-        wp.y = 0;
-
-        wm.addView(rootView, wp);
-    }
-
-    private void addDefaultDetailsPlaceholder() {
-        if (detailsLayout == null) return;
-
-        detailsLayout.removeAllViews();
 
         View div = new View(this);
         div.setBackgroundColor(0x33FFFFFF);
@@ -220,91 +210,104 @@ public class InfoOverlayService extends Service {
         tvInfo.setPadding(0, dp(6), 0, 0);
         tvInfo.setTag("info");
         detailsLayout.addView(tvInfo, fullWidth());
+
+        rootView.addView(detailsLayout, fullWidth());
+
+        // Window params — show at top, over lock screen, non-intrusive
+        WindowManager.LayoutParams wp = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                        | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+                PixelFormat.TRANSLUCENT);
+        wp.gravity = Gravity.TOP | Gravity.START;
+
+        wm.addView(rootView, wp);
     }
 
     private void toggleMinimise() {
         minimised = !minimised;
         detailsLayout.setVisibility(minimised ? View.GONE : View.VISIBLE);
         tvMinimise.setText(minimised ? "▼" : "▲");
-
         if (wm != null && rootView != null) {
-            WindowManager.LayoutParams wp =
-                    (WindowManager.LayoutParams) rootView.getLayoutParams();
-            wm.updateViewLayout(rootView, wp);
+            wm.updateViewLayout(rootView,
+                    (WindowManager.LayoutParams) rootView.getLayoutParams());
         }
     }
 
     private void refreshHeader() {
         if (rootView == null) return;
-
-        new Handler(Looper.getMainLooper()).post(() -> {
-            TextView tvPhone = rootView.findViewWithTag("phone");
-            TextView tvType = rootView.findViewWithTag("type");
-            TextView tvIcon = rootView.findViewWithTag("icon");
-
-            if (tvPhone != null) tvPhone.setText(currentPhone != null ? currentPhone : "—");
-            if (tvType != null) tvType.setText("incoming".equals(currentType) ? "Входящий" : "Исходящий");
-            if (tvIcon != null) tvIcon.setText("incoming".equals(currentType) ? "📥" : "📤");
-        });
+        TextView tv = rootView.findViewWithTag("phone");
+        if (tv != null)
+            new Handler(Looper.getMainLooper()).post(
+                    () -> tv.setText(currentPhone != null ? currentPhone : "—"));
     }
 
     private void resetDetails() {
         if (detailsLayout == null) return;
-        new Handler(Looper.getMainLooper()).post(this::addDefaultDetailsPlaceholder);
+        TextView tv = detailsLayout.findViewWithTag("info");
+        if (tv != null)
+            new Handler(Looper.getMainLooper()).post(
+                    () -> tv.setText("Загрузка данных клиента..."));
     }
 
-    // ─────────────────────────────────────────────────────────
-    // Fetch customer data
-    // ─────────────────────────────────────────────────────────
+    private void removeOverlay() {
+        if (rootView != null && wm != null) {
+            try { wm.removeView(rootView); } catch (Exception ignored) {}
+            rootView = null;
+        }
+        if (receiverRegistered) {
+            try { unregisterReceiver(callEndedReceiver); } catch (Exception ignored) {}
+            receiverRegistered = false;
+        }
+    }
+
+    // ─── Customer info fetch ──────────────────────────────────────────────────
 
     private void fetchAndUpdateInfo() {
         try {
-            String url = BASE + "/call-info?phone=" + currentPhone;
-            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            HttpURLConnection conn = (HttpURLConnection)
+                    new URL(BASE + "/call-info?phone=" + currentPhone).openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(6000);
             conn.setReadTimeout(6000);
             conn.setRequestProperty("Accept", "application/json");
 
             if (conn.getResponseCode() != 200) {
-                setInfoText("❓ Клиент не найден в базе");
-                return;
+                setInfoText("❓ Клиент не найден"); return;
             }
 
             Scanner sc = new Scanner(conn.getInputStream()).useDelimiter("\\A");
-            String body = sc.hasNext() ? sc.next() : "";
-            JSONObject j = new JSONObject(body);
+            JSONObject j = new JSONObject(sc.hasNext() ? sc.next() : "{}");
 
             if (!j.optBoolean("found", false)) {
-                setInfoText("❓ Новый клиент");
-                return;
+                setInfoText("❓ Новый клиент"); return;
             }
 
             StringBuilder sb = new StringBuilder();
-
             String name = j.optString("name", "");
             if (!name.isEmpty()) sb.append("👤  ").append(name).append("\n");
 
             String addr = j.optString("address", "");
             if (!addr.isEmpty()) sb.append("📍  ").append(addr).append("\n");
 
-            double sum = j.optDouble("total_sum", 0);
-            sb.append("💰  ").append(String.format("%.0f", sum)).append(" сом.\n");
+            sb.append("💰  ")
+              .append(String.format("%.0f", j.optDouble("total_sum", 0)))
+              .append(" сом.\n");
 
             JSONObject lo = j.optJSONObject("last_order");
             if (lo != null) {
-                String no = lo.optString("no", "?");
+                sb.append("📦  Заказ #").append(lo.optString("no", "?"));
                 String date = lo.optString("date", "");
-                String status = lo.optString("status", "—");
-                sb.append("📦  Заказ #").append(no);
                 if (!date.isEmpty()) sb.append("  ").append(date);
-                sb.append("\n");
-                sb.append("📋  Статус: ").append(status);
+                sb.append("\n📋  Статус: ").append(lo.optString("status", "—"));
             }
 
             setInfoText(sb.toString().trim());
         } catch (Exception e) {
-            Log.e(TAG, "fetchInfo error: " + e.getMessage());
+            Log.e(TAG, "fetchInfo: " + e.getMessage());
             setInfoText("Ошибка загрузки данных");
         }
     }
@@ -313,26 +316,21 @@ public class InfoOverlayService extends Service {
         new Handler(Looper.getMainLooper()).post(() -> {
             if (detailsLayout == null) return;
             TextView tv = detailsLayout.findViewWithTag("info");
-            if (tv == null) {
-                addDefaultDetailsPlaceholder();
-                tv = detailsLayout.findViewWithTag("info");
-            }
             if (tv != null) tv.setText(text);
         });
     }
 
-    // ─────────────────────────────────────────────────────────
-    // Call logging
-    // ─────────────────────────────────────────────────────────
+    // ─── Call logging ─────────────────────────────────────────────────────────
 
     private void logCallStart() {
         try {
-            String body = "{\"phone\":\"" + currentPhone + "\",\"type\":\"" + currentType + "\"}";
+            String body = "{\"phone\":\"" + currentPhone
+                    + "\",\"type\":\"" + currentType + "\"}";
             String resp = doPost(BASE + "/call-start", body);
             if (resp != null) {
                 JSONObject j = new JSONObject(resp);
                 callId = j.optInt("id", 0);
-                Log.d(TAG, "Call logged id=" + callId);
+                Log.d(TAG, "call-start → id=" + callId);
             }
         } catch (Exception e) {
             Log.e(TAG, "logCallStart: " + e.getMessage());
@@ -341,20 +339,20 @@ public class InfoOverlayService extends Service {
 
     private void logCallEnd() {
         if (callId == 0) return;
-        long startMs = (CallState.answeredAt > 0) ? CallState.answeredAt : callStartTime;
-        int durationSec = (int) ((System.currentTimeMillis() - startMs) / 1000);
+        long start = (CallState.answeredAt > 0) ? CallState.answeredAt : callStartTime;
+        int  sec   = (int) ((System.currentTimeMillis() - start) / 1000);
         try {
-            String body = "{\"id\":" + callId + ",\"duration_seconds\":" + durationSec + "}";
-            doPost(BASE + "/call-end", body);
-            Log.d(TAG, "Call ended duration=" + durationSec + "s");
+            doPost(BASE + "/call-end",
+                    "{\"id\":" + callId + ",\"duration_seconds\":" + sec + "}");
+            Log.d(TAG, "call-end id=" + callId + " dur=" + sec + "s");
         } catch (Exception e) {
             Log.e(TAG, "logCallEnd: " + e.getMessage());
         }
     }
 
-    private String doPost(String urlStr, String jsonBody) {
+    private String doPost(String url, String body) {
         try {
-            HttpURLConnection c = (HttpURLConnection) new URL(urlStr).openConnection();
+            HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
             c.setRequestMethod("POST");
             c.setConnectTimeout(6000);
             c.setReadTimeout(6000);
@@ -362,7 +360,7 @@ public class InfoOverlayService extends Service {
             c.setRequestProperty("Accept", "application/json");
             c.setDoOutput(true);
             try (OutputStream os = c.getOutputStream()) {
-                os.write(jsonBody.getBytes("UTF-8"));
+                os.write(body.getBytes("UTF-8"));
             }
             if (c.getResponseCode() != 200) return null;
             Scanner sc = new Scanner(c.getInputStream()).useDelimiter("\\A");
@@ -373,54 +371,20 @@ public class InfoOverlayService extends Service {
         }
     }
 
-    // ─────────────────────────────────────────────────────────
-    // Lifecycle
-    // ─────────────────────────────────────────────────────────
-
-    private void removeOverlay() {
-        if (rootView != null && wm != null) {
-            try {
-                wm.removeView(rootView);
-            } catch (Exception ignored) {
-            }
-            rootView = null;
-        }
-        if (receiverRegistered) {
-            try {
-                unregisterReceiver(callEndedReceiver);
-            } catch (Exception ignored) {
-            }
-            receiverRegistered = false;
-        }
-    }
-
-    private void launchCallInfoActivity() {
-        startCallInfoActivity();
-        Handler h = new Handler(Looper.getMainLooper());
-        h.postDelayed(() -> {
-            if (CallState.isActive && !awaitingOutcome) {
-                startCallInfoActivity();
-            }
-        }, 900);
-    }
-
-    private void startCallInfoActivity() {
-        Intent i = new Intent(this, OutcomeActivity.class);
-        i.putExtra("phone", currentPhone);
-        i.putExtra("type", currentType);
-        i.putExtra("phase", "info");
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-    }
+    // ─── Launch outcome ───────────────────────────────────────────────────────
 
     private void launchOutcomeActivity() {
         Intent i = new Intent(this, OutcomeActivity.class);
-        i.putExtra("phone", currentPhone);
-        i.putExtra("type", currentType);
+        i.putExtra("phone",   currentPhone);
+        i.putExtra("type",    currentType);
         i.putExtra("call_id", callId);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // FLAG_ACTIVITY_NEW_TASK: required for starting from Service.
+        // FLAG_ACTIVITY_CLEAR_TOP: reuse existing instance if any, reload via onNewIntent.
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
+
+    // ─── Notification ─────────────────────────────────────────────────────────
 
     private void createNotificationChannel() {
         NotificationChannel ch = new NotificationChannel(
@@ -437,20 +401,7 @@ public class InfoOverlayService extends Service {
                 .build();
     }
 
-    @Override
-    public IBinder onBind(Intent i) {
-        return null;
-    }
-
-    @Override
-    public void onDestroy() {
-        removeOverlay();
-        super.onDestroy();
-    }
-
-    // ─────────────────────────────────────────────────────────
-    // Layout helpers
-    // ─────────────────────────────────────────────────────────
+    // ─── Layout helpers ───────────────────────────────────────────────────────
 
     private int dp(int v) {
         return (int) (v * getResources().getDisplayMetrics().density);
@@ -463,8 +414,8 @@ public class InfoOverlayService extends Service {
     }
 
     private LinearLayout.LayoutParams stretch() {
-        return new LinearLayout.LayoutParams(0,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+        return new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
     }
 
     private LinearLayout.LayoutParams fullWidth() {

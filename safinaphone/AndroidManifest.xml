@@ -32,11 +32,6 @@
             android:exported="false"
             android:launchMode="singleTop"/>
 
-        <activity
-            android:name=".CallInfoActivity"
-            android:exported="false"
-            android:launchMode="singleTop"/>
-
         <service
             android:name=".InfoOverlayService"
             android:exported="false"

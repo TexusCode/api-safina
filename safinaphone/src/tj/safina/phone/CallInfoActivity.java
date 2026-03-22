@@ -1,13 +1,15 @@
 package tj.safina.phone;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
@@ -35,22 +37,12 @@ public class CallInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Floating dialog setup
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setBackgroundDrawable(new ColorDrawable(0x00000000));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true);
-            setTurnScreenOn(true);
-            KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            if (km != null) {
-                try { km.requestDismissKeyguard(this, null); } catch (Exception ignored) {}
-            }
-        }
 
         currentPhone = getIntent().getStringExtra("phone");
         currentType  = getIntent().getStringExtra("type");
@@ -59,6 +51,16 @@ public class CallInfoActivity extends Activity {
         webView = new WebView(this);
         configureWebView();
         setContentView(webView);
+
+        // Size: 95% width, 50% height, centered
+        DisplayMetrics m = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(m);
+        WindowManager.LayoutParams p = getWindow().getAttributes();
+        p.width     = (int)(m.widthPixels  * 0.95f);
+        p.height    = (int)(m.heightPixels * 0.50f);
+        p.gravity   = Gravity.CENTER;
+        p.dimAmount = 0.65f;
+        getWindow().setAttributes(p);
 
         loadCallScreen(currentPhone, currentType);
     }
@@ -123,6 +125,10 @@ public class CallInfoActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Keep call info screen visible during an active call.
+        if (webView != null && webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            finish();
+        }
     }
 }
