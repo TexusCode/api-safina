@@ -14,8 +14,10 @@ import java.util.regex.Pattern;
 public class CallMonitorService extends AccessibilityService {
 
     private static final String TAG = "SafinaMonitor";
-    private static final String ZOIPER_PKG = "com.zoiperpremium.android.app";
+    private static final String ZOIPER_PKG_PREMIUM = "com.zoiperpremium.android.app";
+    private static final String ZOIPER_PKG_BASE = "com.zoiper.android.app";
     private static final Pattern PHONE_PATTERN = Pattern.compile("[+]?[0-9]{6,15}");
+    private static final long OUTGOING_START_DELAY_MS = 1200;
 
     private String lastOpenedPhone = null;
 
@@ -23,15 +25,19 @@ public class CallMonitorService extends AccessibilityService {
     // 5 seconds so IncomingCallListener (2s) gets priority for incoming calls.
     private final Handler callEndHandler = new Handler(Looper.getMainLooper());
     private Runnable callEndRunnable = null;
+    private final Handler outgoingStartHandler = new Handler(Looper.getMainLooper());
+    private Runnable pendingOutgoingStart = null;
+    private String pendingOutgoingPhone = null;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         if (event.getPackageName() == null) return;
-        if (!ZOIPER_PKG.contentEquals(event.getPackageName())) return;
+        if (!isZoiperPackage(event.getPackageName().toString())) return;
 
         AccessibilityNodeInfo root = getRootInActiveWindow();
 
         if (root == null) {
+            cancelPendingOutgoingStart();
             // Zoiper window not accessible (locked screen or call ended).
             // Start a delayed broadcast — cancelled if Zoiper becomes visible again
             // (meaning it was just a transient lock-screen hide, not a real call end).
@@ -71,14 +77,46 @@ public class CallMonitorService extends AccessibilityService {
             // Avoid starting a second session from AccessibilityService.
             if (CallState.isActive && phone.equals(CallState.activePhone)) {
                 lastOpenedPhone = phone;
+                cancelPendingOutgoingStart();
                 return;
             }
 
-            if (!phone.equals(lastOpenedPhone) && CallState.beginCall(phone, "outgoing")) {
-                lastOpenedPhone = phone;
-                openCallInfo(phone);
+            if (!phone.equals(lastOpenedPhone)) {
+                scheduleOutgoingStart(phone);
             }
         }
+    }
+
+    private void scheduleOutgoingStart(String phone) {
+        if (phone == null || phone.isEmpty()) return;
+        if (pendingOutgoingStart != null && phone.equals(pendingOutgoingPhone)) return;
+
+        cancelPendingOutgoingStart();
+        pendingOutgoingPhone = phone;
+        pendingOutgoingStart = () -> {
+            String candidate = pendingOutgoingPhone;
+            pendingOutgoingPhone = null;
+            pendingOutgoingStart = null;
+            if (candidate == null || candidate.isEmpty()) return;
+            if (CallState.isActive) return;
+            if (CallState.beginCall(candidate, "outgoing")) {
+                lastOpenedPhone = candidate;
+                openCallInfo(candidate);
+            }
+        };
+        outgoingStartHandler.postDelayed(pendingOutgoingStart, OUTGOING_START_DELAY_MS);
+    }
+
+    private void cancelPendingOutgoingStart() {
+        if (pendingOutgoingStart != null) {
+            outgoingStartHandler.removeCallbacks(pendingOutgoingStart);
+            pendingOutgoingStart = null;
+            pendingOutgoingPhone = null;
+        }
+    }
+
+    private boolean isZoiperPackage(String pkg) {
+        return ZOIPER_PKG_PREMIUM.equals(pkg) || ZOIPER_PKG_BASE.equals(pkg);
     }
 
     private String findPhoneInTree(AccessibilityNodeInfo node) {
