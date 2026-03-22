@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:id="@id/provider_info_layout" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textAppearance="?android:textAppearanceLarge" android:textColor="@android:color/white" android:gravity="left" android:id="@id/provider_name" android:background="@color/voip_providers_setup_dialog_title_background" android:paddingLeft="20.0dp" android:paddingTop="10.0dp" android:paddingBottom="10.0dp" android:clickable="false" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/choose_voip_provider" />
-    <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@android:id/list" android:persistentDrawingCache="all" android:layout_width="match_parent" android:layout_height="match_parent" android:drawSelectorOnTop="false" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

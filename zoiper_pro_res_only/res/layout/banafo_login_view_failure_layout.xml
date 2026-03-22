@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="vertical" android:padding="@dimen/banafo_login_views_padding" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textColor="@color/red_700" android:text="@string/banafo_login_view_failure_header_text" style="@style/BanafoActivitySuccessAndFailureHeaderTextStyle" />
-    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:id="@id/banafo_login_view_failure_layout_body_text_view" android:textAlignment="viewStart" style="@style/BanafoActivityDefaultBodyTextStyle" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:id="@id/banafo_login_view_failure_layout_retry_button" android:layout_marginTop="45.0dp" android:text="@string/banafo_login_view_failure_retry_button_text" style="@style/BanafoActivityButtonStyle" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

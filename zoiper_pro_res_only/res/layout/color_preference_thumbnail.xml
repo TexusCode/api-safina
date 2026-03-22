@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:id="@id/thumbnail" android:background="@drawable/thumbnail_border" android:layout_width="@dimen/preference_thumbnail_size" android:layout_height="@dimen/preference_thumbnail_size"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_margin="1.0dp" android:src="@null" />
-    <View android:id="@id/colorPreview" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_margin="1.0dp" />
-</FrameLayout>

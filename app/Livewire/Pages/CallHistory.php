@@ -26,6 +26,8 @@ class CallHistory extends Component
                 $subQuery->where('caller_phone', 'like', "%{$search}%")
                     ->orWhere('receiver_phone', 'like', "%{$search}%")
                     ->orWhere('call_type', 'like', "%{$search}%")
+                    ->orWhere('category', 'like', "%{$search}%")
+                    ->orWhere('customer_name', 'like', "%{$search}%")
                     ->orWhere('external_id', 'like', "%{$search}%");
             });
         }

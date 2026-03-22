@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.dialpad.DialpadKeyButton style="@style/DialpadKeyButtonStyle"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:layout_gravity="right|center" android:orientation="horizontal" android:id="@id/button_wrapper" android:baselineAligned="false" style="@style/DialpadKeyInternalLayoutStyle">
-        <com.zoiper.android.dialpad.DialpadTextView android:layout_gravity="end" android:id="@id/dialpad_key_number" android:layout_width="@dimen/dialpad_key_numbers_width" android:layout_marginRight="@dimen/dialpad_key_numbers_margin_right" android:layout_marginBottom="0.0dp" style="@style/DialpadKeyNumberStyle" />
-        <com.zoiper.android.util.themeframework.customviews.CustomTextView android:gravity="start" android:layout_gravity="center" android:id="@id/dialpad_key_letters" android:layout_width="@dimen/dialpad_key_text_width" style="@style/DialpadKeyLettersStyle" />
-    </com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>
-</com.zoiper.android.dialpad.DialpadKeyButton>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomLinearLayout android:orientation="horizontal" android:id="@id/confirmButtonsContainer" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="0.0"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:textColor="@color/preference_bottom_button_text" android:id="@id/saveButton" android:background="@drawable/preference_bottom_button_background" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/button_save" android:layout_weight="0.5" />
-    <com.zoiper.android.util.themeframework.customviews.CustomButton android:textColor="@color/preference_bottom_button_text" android:id="@id/cancelButton" android:background="@drawable/preference_bottom_button_background" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/button_cancel" android:layout_weight="0.5" />
-</com.zoiper.android.util.themeframework.customviews.CustomLinearLayout>

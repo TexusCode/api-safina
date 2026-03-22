@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen android:title="@string/config_label_customize"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.preferences.api.PreferenceWrapper android:title="@string/theme_button_pref_title" android:key="@string/pref_key_theme_button" android:summary="@string/default_theme_label" />
-    <com.zoiper.android.preferences.api.PreferenceWrapper android:layout="@layout/default_locked_preference_layout" android:title="@string/color_picker_button_pref_title" android:key="@string/color_picker_button_pref_key" android:summary="@string/change_colors_pref_summary" />
-</PreferenceScreen>

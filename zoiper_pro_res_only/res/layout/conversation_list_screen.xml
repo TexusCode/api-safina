@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomRelativeLayout android:background="@color/primary_background" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zoiper.android.util.themeframework.customviews.CustomListView android:id="@id/conversationListView" android:scrollbars="none" android:fadingEdgeLength="@dimen/conversation_list_fading_edge_length" android:layout_width="match_parent" android:layout_height="match_parent" android:drawSelectorOnTop="false" android:divider="@drawable/conversation_list_divider" android:dividerHeight="@dimen/conversation_list_divider_height" />
-    <com.zoiper.android.util.themeframework.customviews.CustomTextView android:textAppearance="?android:textAppearanceMedium" android:textColor="@color/chat_list_empty_text" android:gravity="center" android:id="@id/empty" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/loading_conversations" />
-</com.zoiper.android.util.themeframework.customviews.CustomRelativeLayout>

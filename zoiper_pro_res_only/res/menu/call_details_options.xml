@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:icon="@drawable/ic_call_log_delete" android:id="@id/menu_remove_from_call_log" android:title="@string/call_detail_menu_remove_from_call_log" android:onClick="onMenuRemoveFromCallLog" app:showAsAction="ifRoom" />
-</menu>

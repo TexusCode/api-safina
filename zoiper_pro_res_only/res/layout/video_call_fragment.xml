@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.zoiper.android.util.themeframework.customviews.CustomFrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <ViewStub android:id="@id/videoCallViewsStub" android:layout="@layout/video_call_views" android:inflatedId="@id/videoCallViews" android:layout_width="match_parent" android:layout_height="match_parent" />
-</com.zoiper.android.util.themeframework.customviews.CustomFrameLayout>
