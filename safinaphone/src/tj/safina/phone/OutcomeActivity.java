@@ -67,10 +67,6 @@ public class OutcomeActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            finish();
-        }
+        // Keep outcome screen visible until operator explicitly submits/closes via the UI.
     }
 }

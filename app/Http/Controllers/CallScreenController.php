@@ -16,6 +16,19 @@ class CallScreenController extends Controller
         $phone = trim($request->get('phone', ''));
         $type  = $request->get('type', 'incoming');
 
+        // Protect against duplicate "call-start" from multiple Android listeners
+        // for the same real call session.
+        $phoneField = $type === 'incoming' ? 'caller_phone' : 'receiver_phone';
+        $existing = CallHistory::where('call_type', $type)
+            ->where($phoneField, $phone !== '' ? $phone : null)
+            ->where('started_at', '>=', now()->subSeconds(45))
+            ->latest('id')
+            ->first();
+
+        if ($existing) {
+            return response()->json(['success' => true, 'id' => $existing->id, 'dedup' => true]);
+        }
+
         $customer = $phone ? $this->findCustomer($phone) : null;
 
         try {

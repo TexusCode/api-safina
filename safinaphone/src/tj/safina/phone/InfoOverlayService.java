@@ -20,8 +20,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,33 +32,35 @@ import java.util.Scanner;
 
 public class InfoOverlayService extends Service {
 
-    private static final String TAG       = "SafinaMonitor";
+    private static final String TAG        = "SafinaMonitor";
     private static final String CHANNEL_ID = "safina_overlay";
     private static final int    NOTIF_ID   = 1001;
     private static final String BASE       = "https://safina-cleaning.tj";
 
-    private WindowManager   wm;
-    private LinearLayout    rootView;       // entire overlay card
-    private LinearLayout    detailsLayout;  // rows below the header — hidden when minimised
-    private TextView        tvMinimise;     // ▲ / ▼ toggle button
-    private boolean         minimised = false;
+    private WindowManager wm;
+    private LinearLayout rootView;       // entire overlay card
+    private LinearLayout detailsLayout;  // rows below the header — hidden when minimised
+    private TextView tvMinimise;         // ▲ / ▼ toggle button
+    private boolean minimised = false;
 
-    private String  currentPhone;
-    private String  currentType;
-    private int     callId       = 0;
-    private long    callStartTime = 0;
+    private String currentPhone;
+    private String currentType;
+    private int callId = 0;
+    private long callStartTime = 0;
     private boolean receiverRegistered = false;
     private boolean awaitingOutcome = false;
-    private TextView outcomeStatusView;
 
     private final BroadcastReceiver callEndedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context ctx, Intent intent) {
             if (awaitingOutcome) return;
             awaitingOutcome = true;
-            Log.d(TAG, "CALL_ENDED → logging duration, showing category panel");
+
+            Log.d(TAG, "CALL_ENDED -> logging duration, launching outcome");
             new Thread(InfoOverlayService.this::logCallEnd).start();
-            showOutcomePanel();
+            removeOverlay();
+            launchOutcomeActivity();
+            stopSelf();
         }
     };
 
@@ -77,11 +77,9 @@ public class InfoOverlayService extends Service {
         if (intent == null) return START_NOT_STICKY;
 
         String newPhone = intent.getStringExtra("phone");
-        String newType  = intent.getStringExtra("type");
-        if (newPhone != null) {
-            currentPhone = newPhone;
-            currentType  = newType != null ? newType : "incoming";
-        }
+        String newType = intent.getStringExtra("type");
+        if (newPhone == null || newPhone.isEmpty()) return START_NOT_STICKY;
+        if (newType == null || newType.isEmpty()) newType = "incoming";
 
         if (!Settings.canDrawOverlays(this)) {
             Log.e(TAG, "Overlay permission not granted");
@@ -89,12 +87,21 @@ public class InfoOverlayService extends Service {
             return START_NOT_STICKY;
         }
 
-        awaitingOutcome = false;
-        callStartTime       = System.currentTimeMillis();
-        callId              = 0;
-        CallState.answeredAt = 0;
+        boolean sameCall = CallState.isActive
+                && newPhone.equals(currentPhone)
+                && newType.equals(currentType)
+                && callStartTime > 0;
 
-        new Thread(this::logCallStart).start();
+        if (!sameCall) {
+            currentPhone = newPhone;
+            currentType = newType;
+            awaitingOutcome = false;
+            callStartTime = System.currentTimeMillis();
+            callId = 0;
+            new Thread(this::logCallStart).start();
+        } else {
+            Log.d(TAG, "Duplicate start ignored for phone=" + newPhone + " type=" + newType);
+        }
 
         if (rootView == null) {
             showOverlay();
@@ -139,6 +146,7 @@ public class InfoOverlayService extends Service {
         header.setGravity(Gravity.CENTER_VERTICAL);
 
         TextView tvIcon = new TextView(this);
+        tvIcon.setTag("icon");
         tvIcon.setText("incoming".equals(currentType) ? "📥" : "📤");
         tvIcon.setTextSize(14f);
         header.addView(tvIcon, wrap());
@@ -153,6 +161,7 @@ public class InfoOverlayService extends Service {
         header.addView(tvPhone, stretch());
 
         TextView tvType = new TextView(this);
+        tvType.setTag("type");
         tvType.setText("incoming".equals(currentType) ? "Входящий" : "Исходящий");
         tvType.setTextColor(0xFF9ca3af);
         tvType.setTextSize(10f);
@@ -174,21 +183,7 @@ public class InfoOverlayService extends Service {
         detailsLayout.setOrientation(LinearLayout.VERTICAL);
         detailsLayout.setPadding(0, dp(6), 0, 0);
 
-        // divider
-        View div = new View(this);
-        div.setBackgroundColor(0x33FFFFFF);
-        detailsLayout.addView(div, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, dp(1)));
-
-        // loading placeholder
-        TextView tvInfo = new TextView(this);
-        tvInfo.setText("Загрузка данных клиента...");
-        tvInfo.setTextColor(0xFF9ca3af);
-        tvInfo.setTextSize(12f);
-        tvInfo.setPadding(0, dp(6), 0, 0);
-        tvInfo.setTag("info");
-        detailsLayout.addView(tvInfo, fullWidth());
-
+        addDefaultDetailsPlaceholder();
         rootView.addView(detailsLayout, fullWidth());
 
         // ── WindowManager params ───────────────────────────────
@@ -197,7 +192,7 @@ public class InfoOverlayService extends Service {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 PixelFormat.TRANSLUCENT);
         wp.gravity = Gravity.TOP | Gravity.START;
         wp.x = 0;
@@ -206,11 +201,30 @@ public class InfoOverlayService extends Service {
         wm.addView(rootView, wp);
     }
 
+    private void addDefaultDetailsPlaceholder() {
+        if (detailsLayout == null) return;
+
+        detailsLayout.removeAllViews();
+
+        View div = new View(this);
+        div.setBackgroundColor(0x33FFFFFF);
+        detailsLayout.addView(div, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(1)));
+
+        TextView tvInfo = new TextView(this);
+        tvInfo.setText("Загрузка данных клиента...");
+        tvInfo.setTextColor(0xFF9ca3af);
+        tvInfo.setTextSize(12f);
+        tvInfo.setPadding(0, dp(6), 0, 0);
+        tvInfo.setTag("info");
+        detailsLayout.addView(tvInfo, fullWidth());
+    }
+
     private void toggleMinimise() {
         minimised = !minimised;
         detailsLayout.setVisibility(minimised ? View.GONE : View.VISIBLE);
         tvMinimise.setText(minimised ? "▼" : "▲");
-        // Resize the window to match new content height
+
         if (wm != null && rootView != null) {
             WindowManager.LayoutParams wp =
                     (WindowManager.LayoutParams) rootView.getLayoutParams();
@@ -220,139 +234,21 @@ public class InfoOverlayService extends Service {
 
     private void refreshHeader() {
         if (rootView == null) return;
-        TextView tvPhone = rootView.findViewWithTag("phone");
-        if (tvPhone != null)
-            new Handler(Looper.getMainLooper()).post(() ->
-                    tvPhone.setText(currentPhone != null ? currentPhone : "—"));
+
+        new Handler(Looper.getMainLooper()).post(() -> {
+            TextView tvPhone = rootView.findViewWithTag("phone");
+            TextView tvType = rootView.findViewWithTag("type");
+            TextView tvIcon = rootView.findViewWithTag("icon");
+
+            if (tvPhone != null) tvPhone.setText(currentPhone != null ? currentPhone : "—");
+            if (tvType != null) tvType.setText("incoming".equals(currentType) ? "Входящий" : "Исходящий");
+            if (tvIcon != null) tvIcon.setText("incoming".equals(currentType) ? "📥" : "📤");
+        });
     }
 
     private void resetDetails() {
         if (detailsLayout == null) return;
-        new Handler(Looper.getMainLooper()).post(() -> {
-            TextView tvInfo = detailsLayout.findViewWithTag("info");
-            if (tvInfo == null) {
-                detailsLayout.removeAllViews();
-
-                View div = new View(this);
-                div.setBackgroundColor(0x33FFFFFF);
-                detailsLayout.addView(div, new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT, dp(1)));
-
-                TextView placeholder = new TextView(this);
-                placeholder.setText("Загрузка данных клиента...");
-                placeholder.setTextColor(0xFF9ca3af);
-                placeholder.setTextSize(12f);
-                placeholder.setPadding(0, dp(6), 0, 0);
-                placeholder.setTag("info");
-                detailsLayout.addView(placeholder, fullWidth());
-                outcomeStatusView = null;
-                return;
-            }
-            tvInfo.setText("Загрузка данных клиента...");
-            outcomeStatusView = null;
-        });
-    }
-
-    private void showOutcomePanel() {
-        if (rootView == null) showOverlay();
-        if (detailsLayout == null) return;
-
-        minimised = false;
-        detailsLayout.setVisibility(View.VISIBLE);
-        if (tvMinimise != null) tvMinimise.setText("▲");
-
-        detailsLayout.removeAllViews();
-
-        TextView title = new TextView(this);
-        title.setText("Выберите категорию звонка");
-        title.setTextColor(Color.WHITE);
-        title.setTextSize(13f);
-        title.setTypeface(null, Typeface.BOLD);
-        title.setPadding(0, 0, 0, dp(8));
-        detailsLayout.addView(title, fullWidth());
-
-        GridLayout grid = new GridLayout(this);
-        grid.setColumnCount(2);
-        grid.setTag("outcome_grid");
-
-        String[] categories = new String[] {
-                "Оформил заказ",
-                "Статус заказа",
-                "Спросил цену",
-                "Перезвонит",
-                "Отказал",
-                "Жалоба",
-                "Консультация",
-                "Доставка / самовывоз",
-                "Ошибочный звонок",
-                "Другое"
-        };
-
-        for (int i = 0; i < categories.length; i++) {
-            final String category = categories[i];
-            Button btn = new Button(this);
-            btn.setAllCaps(false);
-            btn.setText(category);
-            btn.setTextSize(11f);
-            btn.setTextColor(Color.WHITE);
-            btn.setBackgroundColor(0xFF1f2937);
-            btn.setOnClickListener(v -> submitOutcome(category));
-
-            GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
-            lp.width = 0;
-            lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-            lp.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            lp.setMargins(0, 0, (i % 2 == 0) ? dp(6) : 0, dp(6));
-            grid.addView(btn, lp);
-        }
-
-        detailsLayout.addView(grid, fullWidth());
-
-        outcomeStatusView = new TextView(this);
-        outcomeStatusView.setText("Нажмите категорию для сохранения");
-        outcomeStatusView.setTextColor(0xFF9ca3af);
-        outcomeStatusView.setTextSize(12f);
-        outcomeStatusView.setPadding(0, dp(6), 0, 0);
-        detailsLayout.addView(outcomeStatusView, fullWidth());
-
-        if (wm != null && rootView != null) {
-            WindowManager.LayoutParams wp =
-                    (WindowManager.LayoutParams) rootView.getLayoutParams();
-            wm.updateViewLayout(rootView, wp);
-        }
-    }
-
-    private void submitOutcome(String category) {
-        setOutcomeButtonsEnabled(false);
-        setOutcomeStatus("Сохраняем: " + category + "...");
-
-        new Thread(() -> {
-            boolean saved = saveOutcome(category);
-            new Handler(Looper.getMainLooper()).post(() -> {
-                if (saved) {
-                    setOutcomeStatus("✅ Сохранено: " + category);
-                    new Handler(Looper.getMainLooper()).postDelayed(this::stopSelf, 1200);
-                } else {
-                    setOutcomeButtonsEnabled(true);
-                    setOutcomeStatus("⚠️ Ошибка сохранения. Выберите категорию снова.");
-                }
-            });
-        }).start();
-    }
-
-    private void setOutcomeButtonsEnabled(boolean enabled) {
-        if (detailsLayout == null) return;
-        View grid = detailsLayout.findViewWithTag("outcome_grid");
-        if (!(grid instanceof GridLayout)) return;
-        GridLayout g = (GridLayout) grid;
-        for (int i = 0; i < g.getChildCount(); i++) {
-            View child = g.getChildAt(i);
-            if (child != null) child.setEnabled(enabled);
-        }
-    }
-
-    private void setOutcomeStatus(String text) {
-        if (outcomeStatusView != null) outcomeStatusView.setText(text);
+        new Handler(Looper.getMainLooper()).post(this::addDefaultDetailsPlaceholder);
     }
 
     // ─────────────────────────────────────────────────────────
@@ -382,24 +278,21 @@ public class InfoOverlayService extends Service {
                 return;
             }
 
-            // Build multi-line info text
             StringBuilder sb = new StringBuilder();
 
             String name = j.optString("name", "");
-            if (!name.isEmpty())
-                sb.append("👤  ").append(name).append("\n");
+            if (!name.isEmpty()) sb.append("👤  ").append(name).append("\n");
 
             String addr = j.optString("address", "");
-            if (!addr.isEmpty())
-                sb.append("📍  ").append(addr).append("\n");
+            if (!addr.isEmpty()) sb.append("📍  ").append(addr).append("\n");
 
             double sum = j.optDouble("total_sum", 0);
             sb.append("💰  ").append(String.format("%.0f", sum)).append(" сом.\n");
 
             JSONObject lo = j.optJSONObject("last_order");
             if (lo != null) {
-                String no     = lo.optString("no",     "?");
-                String date   = lo.optString("date",   "");
+                String no = lo.optString("no", "?");
+                String date = lo.optString("date", "");
                 String status = lo.optString("status", "—");
                 sb.append("📦  Заказ #").append(no);
                 if (!date.isEmpty()) sb.append("  ").append(date);
@@ -408,7 +301,6 @@ public class InfoOverlayService extends Service {
             }
 
             setInfoText(sb.toString().trim());
-
         } catch (Exception e) {
             Log.e(TAG, "fetchInfo error: " + e.getMessage());
             setInfoText("Ошибка загрузки данных");
@@ -419,6 +311,10 @@ public class InfoOverlayService extends Service {
         new Handler(Looper.getMainLooper()).post(() -> {
             if (detailsLayout == null) return;
             TextView tv = detailsLayout.findViewWithTag("info");
+            if (tv == null) {
+                addDefaultDetailsPlaceholder();
+                tv = detailsLayout.findViewWithTag("info");
+            }
             if (tv != null) tv.setText(text);
         });
     }
@@ -443,33 +339,14 @@ public class InfoOverlayService extends Service {
 
     private void logCallEnd() {
         if (callId == 0) return;
-        long startMs    = (CallState.answeredAt > 0) ? CallState.answeredAt : callStartTime;
-        int  durationSec = (int) ((System.currentTimeMillis() - startMs) / 1000);
+        long startMs = (CallState.answeredAt > 0) ? CallState.answeredAt : callStartTime;
+        int durationSec = (int) ((System.currentTimeMillis() - startMs) / 1000);
         try {
             String body = "{\"id\":" + callId + ",\"duration_seconds\":" + durationSec + "}";
             doPost(BASE + "/call-end", body);
             Log.d(TAG, "Call ended duration=" + durationSec + "s");
         } catch (Exception e) {
             Log.e(TAG, "logCallEnd: " + e.getMessage());
-        }
-    }
-
-    private boolean saveOutcome(String category) {
-        try {
-            JSONObject payload = new JSONObject();
-            payload.put("call_id", callId);
-            payload.put("phone", currentPhone != null ? currentPhone : "");
-            payload.put("type", currentType != null ? currentType : "incoming");
-            payload.put("category", category);
-            payload.put("notes", "");
-
-            String resp = doPost(BASE + "/call-screen/outcome", payload.toString());
-            if (resp == null || resp.isEmpty()) return false;
-            JSONObject j = new JSONObject(resp);
-            return j.optBoolean("success", false);
-        } catch (Exception e) {
-            Log.e(TAG, "saveOutcome: " + e.getMessage());
-            return false;
         }
     }
 
@@ -500,13 +377,28 @@ public class InfoOverlayService extends Service {
 
     private void removeOverlay() {
         if (rootView != null && wm != null) {
-            try { wm.removeView(rootView); } catch (Exception ignored) {}
+            try {
+                wm.removeView(rootView);
+            } catch (Exception ignored) {
+            }
             rootView = null;
         }
         if (receiverRegistered) {
-            try { unregisterReceiver(callEndedReceiver); } catch (Exception ignored) {}
+            try {
+                unregisterReceiver(callEndedReceiver);
+            } catch (Exception ignored) {
+            }
             receiverRegistered = false;
         }
+    }
+
+    private void launchOutcomeActivity() {
+        Intent i = new Intent(this, OutcomeActivity.class);
+        i.putExtra("phone", currentPhone);
+        i.putExtra("type", currentType);
+        i.putExtra("call_id", callId);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
     private void createNotificationChannel() {
@@ -524,7 +416,10 @@ public class InfoOverlayService extends Service {
                 .build();
     }
 
-    @Override public IBinder onBind(Intent i) { return null; }
+    @Override
+    public IBinder onBind(Intent i) {
+        return null;
+    }
 
     @Override
     public void onDestroy() {
