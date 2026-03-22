@@ -8,10 +8,13 @@ public class CallState {
     // Set when call transitions from ringing -> answered (for accurate duration)
     public static volatile long answeredAt = 0;
     public static volatile long startedAt = 0;
+    public static volatile long ignoreStartsUntil = 0;
 
     // One active call session at a time. Prevents duplicate start from multiple listeners.
     public static synchronized boolean beginCall(String phone, String type) {
         if (phone == null || phone.isEmpty()) return false;
+        long now = System.currentTimeMillis();
+        if (now < ignoreStartsUntil) return false;
         if (isActive) {
             // Same call already active.
             if (phone.equals(activePhone)) return false;
@@ -38,5 +41,7 @@ public class CallState {
         activeType = null;
         answeredAt = 0;
         startedAt = 0;
+        // Zoiper may emit trailing UI events after hangup; suppress false new-call detection.
+        ignoreStartsUntil = System.currentTimeMillis() + 5000;
     }
 }

@@ -59,8 +59,16 @@ public class InfoOverlayService extends Service {
             Log.d(TAG, "CALL_ENDED -> logging duration, launching outcome");
             new Thread(InfoOverlayService.this::logCallEnd).start();
             removeOverlay();
+
+            // Zoiper may still bring its own activity to front after hangup.
+            // Launch outcome screen immediately and retry shortly to keep it visible.
             launchOutcomeActivity();
-            stopSelf();
+            Handler h = new Handler(Looper.getMainLooper());
+            h.postDelayed(InfoOverlayService.this::launchOutcomeActivity, 900);
+            h.postDelayed(() -> {
+                launchOutcomeActivity();
+                stopSelf();
+            }, 2200);
         }
     };
 
