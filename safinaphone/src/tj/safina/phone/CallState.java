@@ -9,12 +9,25 @@ public class CallState {
     public static volatile long answeredAt = 0;
     public static volatile long startedAt = 0;
     public static volatile long ignoreStartsUntil = 0;
+    public static volatile String lastEndedPhone = null;
+    public static volatile String lastEndedType = null;
+    public static volatile long lastEndedAt = 0;
 
     // One active call session at a time. Prevents duplicate start from multiple listeners.
     public static synchronized boolean beginCall(String phone, String type) {
         if (phone == null || phone.isEmpty()) return false;
         long now = System.currentTimeMillis();
         if (now < ignoreStartsUntil) return false;
+
+        // Suppress residual Zoiper UI numbers right after hangup.
+        if (lastEndedPhone != null && (now - lastEndedAt) < 20000) {
+            if (phone.equals(lastEndedPhone)
+                    || phone.contains(lastEndedPhone)
+                    || lastEndedPhone.contains(phone)) {
+                return false;
+            }
+        }
+
         if (isActive) {
             // Same call already active.
             if (phone.equals(activePhone)) return false;
@@ -36,6 +49,9 @@ public class CallState {
     }
 
     public static synchronized void finishCall() {
+        String endedPhone = activePhone;
+        String endedType = activeType;
+
         isActive = false;
         activePhone = null;
         activeType = null;
@@ -43,5 +59,8 @@ public class CallState {
         startedAt = 0;
         // Zoiper may emit trailing UI events after hangup; suppress false new-call detection.
         ignoreStartsUntil = System.currentTimeMillis() + 5000;
+        lastEndedPhone = endedPhone;
+        lastEndedType = endedType;
+        lastEndedAt = System.currentTimeMillis();
     }
 }

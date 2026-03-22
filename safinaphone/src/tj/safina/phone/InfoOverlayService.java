@@ -59,6 +59,7 @@ public class InfoOverlayService extends Service {
             Log.d(TAG, "CALL_ENDED -> logging duration, launching outcome");
             new Thread(InfoOverlayService.this::logCallEnd).start();
             removeOverlay();
+            stopForeground(STOP_FOREGROUND_REMOVE);
 
             // Zoiper may still bring its own activity to front after hangup.
             // Launch outcome screen immediately and retry shortly to keep it visible.
@@ -200,6 +201,9 @@ public class InfoOverlayService extends Service {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
                         WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 PixelFormat.TRANSLUCENT);
         wp.gravity = Gravity.TOP | Gravity.START;
