@@ -37,24 +37,23 @@ class CallScreenController extends Controller
 
         $customer = $phone ? $this->findCustomer($phone) : null;
 
+        // caller_phone is NOT NULL in the schema, so always populate it.
+        // For outgoing calls the customer is the receiver; phone goes in both columns.
+        $data = [
+            'caller_phone'     => $phone,
+            'receiver_phone'   => $type === 'outgoing' ? $phone : null,
+            'call_type'        => $type,
+            'started_at'       => now(),
+            'duration_seconds' => 0,
+        ];
+
         try {
-            $call = CallHistory::create([
-                'caller_phone'     => $type === 'incoming' ? $phone : null,
-                'receiver_phone'   => $type === 'outgoing' ? $phone : null,
-                'call_type'        => $type,
-                'started_at'       => now(),
-                'duration_seconds' => 0,
-                'customer_name'    => $customer?->name,
-            ]);
+            $data['customer_name'] = $customer?->name;
+            $call = CallHistory::create($data);
         } catch (\Exception $e) {
-            // Fallback if notes/customer_name columns don't exist yet (migration pending)
-            $call = CallHistory::create([
-                'caller_phone'     => $type === 'incoming' ? $phone : null,
-                'receiver_phone'   => $type === 'outgoing' ? $phone : null,
-                'call_type'        => $type,
-                'started_at'       => now(),
-                'duration_seconds' => 0,
-            ]);
+            // customer_name column may not exist yet (migration pending)
+            unset($data['customer_name']);
+            $call = CallHistory::create($data);
         }
 
         return response()->json(['success' => true, 'id' => $call->id]);
@@ -149,10 +148,15 @@ class CallScreenController extends Controller
         try {
             // Prefer updating by ID (most reliable)
             if ($call_id > 0) {
-                CallHistory::where('id', $call_id)->update([
-                    'category' => $category,
-                    'notes'    => $notes,
-                ]);
+                try {
+                    CallHistory::where('id', $call_id)->update([
+                        'category' => $category,
+                        'notes'    => $notes,
+                    ]);
+                } catch (\Exception $eNotes) {
+                    // notes column may not exist yet — save category only
+                    CallHistory::where('id', $call_id)->update(['category' => $category]);
+                }
                 return response()->json(['success' => true]);
             }
 
@@ -167,37 +171,35 @@ class CallScreenController extends Controller
                 ->first();
 
             if ($call) {
-                $call->update(['category' => $category, 'notes' => $notes]);
+                try {
+                    $call->update(['category' => $category, 'notes' => $notes]);
+                } catch (\Exception $eNotes) {
+                    $call->update(['category' => $category]);
+                }
             } else {
-                CallHistory::create([
-                    'caller_phone'     => $type === 'incoming' ? $phone : null,
+                // Last-resort create — use $phone for caller_phone (NOT NULL in schema)
+                $row = [
+                    'caller_phone'     => $phone,
                     'receiver_phone'   => $type === 'outgoing' ? $phone : null,
                     'call_type'        => $type,
                     'category'         => $category,
-                    'notes'            => $notes,
-                    'customer_name'    => $name,
                     'started_at'       => now(),
                     'duration_seconds' => 0,
-                ]);
+                ];
+                try {
+                    $row['notes']         = $notes;
+                    $row['customer_name'] = $name;
+                    CallHistory::create($row);
+                } catch (\Exception $ex) {
+                    unset($row['notes'], $row['customer_name']);
+                    CallHistory::create($row);
+                }
             }
 
             return response()->json(['success' => true]);
 
         } catch (\Exception $e) {
-            // Migration may not have run — retry without optional columns
-            try {
-                CallHistory::create([
-                    'caller_phone'     => $type === 'incoming' ? $phone : null,
-                    'receiver_phone'   => $type === 'outgoing' ? $phone : null,
-                    'call_type'        => $type,
-                    'category'         => $category,
-                    'started_at'       => now(),
-                    'duration_seconds' => 0,
-                ]);
-                return response()->json(['success' => true]);
-            } catch (\Exception $e2) {
-                return response()->json(['success' => false, 'message' => $e2->getMessage()], 500);
-            }
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 

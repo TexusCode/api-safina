@@ -1,7 +1,9 @@
 package tj.safina.phone;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,11 +27,23 @@ public class OutcomeActivity extends Activity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+            KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            if (km != null) {
+                try { km.requestDismissKeyguard(this, null); } catch (Exception ignored) {}
+            }
+        }
 
         String phone  = getIntent().getStringExtra("phone");
         String type   = getIntent().getStringExtra("type");
+        String phase  = getIntent().getStringExtra("phase");
         int    callId = getIntent().getIntExtra("call_id", 0);
         if (type == null) type = "incoming";
+        if (phase == null || phase.isEmpty()) phase = "outcome";
         if (phone == null) phone = "";
 
         webView = new WebView(this);
@@ -60,7 +74,7 @@ public class OutcomeActivity extends Activity {
         String url = "https://safina-cleaning.tj/call-screen"
             + "?phone=" + phone
             + "&type=" + type
-            + "&phase=outcome"
+            + "&phase=" + phase
             + "&call_id=" + callId;
         webView.loadUrl(url);
     }

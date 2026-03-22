@@ -91,14 +91,13 @@ public class InfoOverlayService extends Service {
         if (newType == null || newType.isEmpty()) newType = "incoming";
 
         if (!Settings.canDrawOverlays(this)) {
-            Log.e(TAG, "Overlay permission not granted");
-            stopSelf();
-            return START_NOT_STICKY;
+            // Keep call workflow working even without overlay permission:
+            // call info / outcome activities are still launched.
+            Log.w(TAG, "Overlay permission not granted, using activity-only mode");
         }
 
         boolean sameCall = CallState.isActive
                 && newPhone.equals(currentPhone)
-                && newType.equals(currentType)
                 && callStartTime > 0;
 
         if (!sameCall) {
@@ -108,18 +107,9 @@ public class InfoOverlayService extends Service {
             callStartTime = System.currentTimeMillis();
             callId = 0;
             new Thread(this::logCallStart).start();
+            launchCallInfoActivity();
         } else {
             Log.d(TAG, "Duplicate start ignored for phone=" + newPhone + " type=" + newType);
-        }
-
-        if (rootView == null) {
-            showOverlay();
-        } else {
-            minimised = false;
-            if (tvMinimise != null) tvMinimise.setText("▲");
-            detailsLayout.setVisibility(View.VISIBLE);
-            refreshHeader();
-            resetDetails();
         }
 
         if (!receiverRegistered) {
@@ -132,7 +122,6 @@ public class InfoOverlayService extends Service {
             receiverRegistered = true;
         }
 
-        new Thread(this::fetchAndUpdateInfo).start();
         return START_NOT_STICKY;
     }
 
@@ -403,6 +392,25 @@ public class InfoOverlayService extends Service {
             }
             receiverRegistered = false;
         }
+    }
+
+    private void launchCallInfoActivity() {
+        startCallInfoActivity();
+        Handler h = new Handler(Looper.getMainLooper());
+        h.postDelayed(() -> {
+            if (CallState.isActive && !awaitingOutcome) {
+                startCallInfoActivity();
+            }
+        }, 900);
+    }
+
+    private void startCallInfoActivity() {
+        Intent i = new Intent(this, OutcomeActivity.class);
+        i.putExtra("phone", currentPhone);
+        i.putExtra("type", currentType);
+        i.putExtra("phase", "info");
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
     private void launchOutcomeActivity() {
