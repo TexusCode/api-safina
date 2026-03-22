@@ -76,8 +76,14 @@
                         <span class="text-xs text-neutral-500">{{ optional($call->started_at)->diffForHumans(null, false, false) }}</span>
                     </div>
                     <p class="text-xs text-neutral-500">{{ optional($call->started_at)->format('d.m H:i') }} • {{ gmdate('H:i:s', $call->duration_seconds) }}</p>
+                    @if($call->customer_name)
+                    <p class="text-xs text-indigo-400 font-medium">👤 {{ $call->customer_name }}</p>
+                    @endif
                     <p class="text-sm text-neutral-300">{{ $call->caller_phone }} → {{ $call->receiver_phone ?? '—' }}</p>
-                    <p class="text-xs text-neutral-400">Категория: {{ $call->category ?: '—' }}</p>
+                    <p class="text-xs text-neutral-400">Категория: <span class="{{ $call->category ? 'text-amber-400' : '' }}">{{ $call->category ?: '—' }}</span></p>
+                    @if($call->notes)
+                    <p class="text-xs text-neutral-500 italic mt-0.5">{{ $call->notes }}</p>
+                    @endif
                 </div>
                 @if ($call->audio_path)
                     <a href="{{ $call->audio_path }}" target="_blank"

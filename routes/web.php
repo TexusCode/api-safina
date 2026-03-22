@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CallHistoryController;
+use App\Http\Controllers\CallScreenController;
 use App\Http\Controllers\CheckCustomerController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\ApplicantRole;
@@ -116,6 +117,10 @@ Route::middleware(['auth', StatusCheck::class])->group(function () {
 
 
 Route::get('check-customer/{phone}', [CheckCustomerController::class, 'checkCustomer'])->name('check-customer');
+Route::get('/call-screen', [CallScreenController::class, 'show'])->name('call-screen');
+Route::post('/call-screen/outcome', [CallScreenController::class, 'saveOutcome'])
+    ->withoutMiddleware([VerifyCsrfToken::class])
+    ->name('call-screen.outcome');
 Route::post('/call-history-log', [CallHistoryController::class, 'store'])
     ->withoutMiddleware([VerifyCsrfToken::class]);
 
