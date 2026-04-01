@@ -1,34 +1,33 @@
 <div class="space-y-5">
 
-    {{-- Заголовок + кнопки --}}
-    <div class="flex items-center justify-between">
-        <div>
-            <h1 class="text-xl font-semibold text-white">Затраты</h1>
-            <p class="text-sm text-neutral-400">Учёт и аналитика расходов</p>
-        </div>
-        <div class="flex gap-2">
-            <flux:modal.trigger name="add-category">
-                <flux:button variant="ghost" size="sm">
-                    <svg class="size-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-7" />
-                        <path d="M3 15l6 -6" />
-                        <path d="M5 9h4v4" />
-                    </svg>
-                    Категории
-                </flux:button>
-            </flux:modal.trigger>
-            <flux:modal.trigger name="add-expense">
-                <flux:button variant="primary">
-                    <svg class="size-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 5v14" />
-                        <path d="M5 12h14" />
-                    </svg>
-                    Добавить
-                </flux:button>
-            </flux:modal.trigger>
-        </div>
+    {{-- Заголовок --}}
+    <div>
+        <h1 class="text-xl font-semibold text-white">Затраты</h1>
+        <p class="text-sm text-neutral-400">Учёт и аналитика расходов</p>
+    </div>
+
+    {{-- Кнопки --}}
+    <div class="grid grid-cols-2 gap-3">
+        <flux:modal.trigger name="add-category">
+            <button type="button" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium
+                bg-neutral-800 border border-neutral-600 text-white hover:bg-neutral-700 transition-colors">
+                <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 14v6" /><path d="M14 17h6" />
+                </svg>
+                Категории
+            </button>
+        </flux:modal.trigger>
+        <flux:modal.trigger name="add-expense">
+            <button type="button" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-medium
+                bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14" /><path d="M5 12h14" />
+                </svg>
+                Добавить расход
+            </button>
+        </flux:modal.trigger>
     </div>
 
     {{-- Карточки итогов --}}
