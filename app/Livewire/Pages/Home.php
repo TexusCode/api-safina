@@ -7,8 +7,6 @@ use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Rashodho;
 use App\Models\Suborder;
-use App\Texhub\Telegram;
-use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
@@ -20,70 +18,80 @@ class Home extends Component
     public $avgCheck;
     public $avgPerDay;
     public $avgEarningPerDay;
-
     public $diffCheck;
     public $diffPerDay;
     public $diffEarningPerDay;
-    protected function calculateStat()
-    {
-        $start = now()->startOfMonth();
-        $end = now();
 
-        // все заказы за месяц
-        $this->monthlyOrders = Order::whereBetween('created_at', [$start, $end])->count();
+    public $total = 0;
+    public $expenses = 0;
+    public $operatorStats = [];
 
-        // новые клиенты за месяц
-        $this->newCustomers = Customer::whereBetween('created_at', [$start, $end])->count();
-
-        // заказы "в ожидании"
-        $this->pendingOrders = Order::where('status', 'В ожидании')->whereBetween('created_at', [$start, $end])->count();
-
-        // заказы "доставлено"
-        $this->deliveredOrders = Order::where('status', 'Доставлено')->whereBetween('created_at', [$start, $end])->count();
-    }
     public function mount()
     {
         if (Auth::user()?->role === 'operator') {
             return redirect()->route('operator-dashboard');
         }
-        $this->calculateStats();
-        $this->calculateStat();
-    }
 
-    protected function calculateStats()
-    {
-        // ===== Текущий месяц =====
         $startCurrent = now()->startOfMonth();
         $endCurrent = now();
 
-        $ordersCurrent = Order::whereBetween('created_at', [$startCurrent, $endCurrent])->get();
-        $totalOrdersCurrent = $ordersCurrent->count();
-        $totalSumCurrent = $ordersCurrent->flatMap->suborders->sum('enum');
+        // Счётчики за месяц — лёгкие COUNT запросы
+        $this->monthlyOrders = Order::whereBetween('created_at', [$startCurrent, $endCurrent])->count();
+        $this->newCustomers = Customer::whereBetween('created_at', [$startCurrent, $endCurrent])->count();
+        $this->pendingOrders = Order::where('status', 'В ожидании')->whereBetween('created_at', [$startCurrent, $endCurrent])->count();
+        $this->deliveredOrders = Order::where('status', 'Доставлено')->whereBetween('created_at', [$startCurrent, $endCurrent])->count();
 
-        $daysPassedCurrent = $startCurrent->diffInDays($endCurrent) + 1;
+        // Сумма подзаказов текущего месяца — один запрос через subquery вместо загрузки всех заказов
+        $totalSumCurrent = Suborder::whereIn('order_id',
+            Order::whereBetween('created_at', [$startCurrent, $endCurrent])->select('id')
+        )->sum('enum');
 
-        $this->avgCheck = $totalOrdersCurrent > 0 ? $totalSumCurrent / $totalOrdersCurrent : 0;
-        $this->avgPerDay = $daysPassedCurrent > 0 ? $totalOrdersCurrent / $daysPassedCurrent : 0;
-        $this->avgEarningPerDay = $daysPassedCurrent > 0 ? $totalSumCurrent / $daysPassedCurrent : 0;
+        $daysPassedCurrent = max(1, $startCurrent->diffInDays($endCurrent) + 1);
 
-        // ===== Прошлый месяц =====
+        $this->avgCheck = $this->monthlyOrders > 0 ? $totalSumCurrent / $this->monthlyOrders : 0;
+        $this->avgPerDay = $this->monthlyOrders / $daysPassedCurrent;
+        $this->avgEarningPerDay = $totalSumCurrent / $daysPassedCurrent;
+
+        // Прошлый месяц — тоже через DB запросы
         $startPrev = now()->subMonth()->startOfMonth();
         $endPrev = now()->subMonth()->endOfMonth();
 
-        $ordersPrev = Order::whereBetween('created_at', [$startPrev, $endPrev])->get();
-        $totalOrdersPrev = $ordersPrev->count();
-        $totalSumPrev = $ordersPrev->flatMap->suborders->sum('enum');
+        $totalOrdersPrev = Order::whereBetween('created_at', [$startPrev, $endPrev])->count();
+        $totalSumPrev = Suborder::whereIn('order_id',
+            Order::whereBetween('created_at', [$startPrev, $endPrev])->select('id')
+        )->sum('enum');
 
-        $daysPrev = $startPrev->diffInDays($endPrev) + 1;
+        $daysPrev = max(1, $startPrev->diffInDays($endPrev) + 1);
 
         $avgCheckPrev = $totalOrdersPrev > 0 ? $totalSumPrev / $totalOrdersPrev : 0;
-        $avgPerDayPrev = $daysPrev > 0 ? $totalOrdersPrev / $daysPrev : 0;
-        $avgEarningPerDayPrev = $daysPrev > 0 ? $totalSumPrev / $daysPrev : 0;
+        $avgPerDayPrev = $totalOrdersPrev / $daysPrev;
+        $avgEarningPerDayPrev = $totalSumPrev / $daysPrev;
 
-        // ===== Разница в процентах =====
         $this->diffCheck = $this->calcDiff($this->avgCheck, $avgCheckPrev);
         $this->diffPerDay = $this->calcDiff($this->avgPerDay, $avgPerDayPrev);
         $this->diffEarningPerDay = $this->calcDiff($this->avgEarningPerDay, $avgEarningPerDayPrev);
+
+        // Общая сумма заработка — один SUM запрос
+        $lastStartId = Order::where('no', 1)->latest('id')->value('id');
+        $this->total = $lastStartId
+            ? Suborder::whereIn('order_id',
+                Order::where('id', '>=', $lastStartId)->select('id')
+            )->sum('enum')
+            : 0;
+
+        // Затраты — один SUM запрос
+        $this->expenses = Rashodho::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('price');
+
+        // Статистика операторов
+        $this->operatorStats = Order::with('operator')
+            ->whereBetween('created_at', [$startCurrent, $endCurrent])
+            ->whereNotNull('operator_id')
+            ->selectRaw('operator_id, COUNT(*) as total')
+            ->groupBy('operator_id')
+            ->orderByDesc('total')
+            ->get();
     }
 
     private function calcDiff($current, $prev)
@@ -93,41 +101,9 @@ class Home extends Component
         }
         return round((($current - $prev) / $prev) * 100, 1);
     }
+
     public function render()
     {
-        $lastStart = Order::where('no', 1)
-            ->latest('id')
-            ->first();
-
-        $orders = collect();
-        $total = 0;
-
-        $orders = Order::where('id', '>=', $lastStart->id)
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $total = Suborder::whereIn('order_id', $orders->pluck('id'))
-            ->sum('enum');
-
-        $totalExpenses = Rashodho::whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->sum('price');
-
-        $monthStart = now()->startOfMonth();
-        $monthEnd = now()->endOfMonth();
-        $operatorStats = Order::with('operator')
-            ->whereBetween('created_at', [$monthStart, $monthEnd])
-            ->whereNotNull('operator_id')
-            ->selectRaw('operator_id, COUNT(*) as total')
-            ->groupBy('operator_id')
-            ->orderByDesc('total')
-            ->get();
-
-        return view('livewire.pages.home', [
-            'orders' => $orders,
-            'total' => $total,
-            'expenses' => $totalExpenses,
-            'operatorStats' => $operatorStats,
-        ]);
+        return view('livewire.pages.home');
     }
 }
