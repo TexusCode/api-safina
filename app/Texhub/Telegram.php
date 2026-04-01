@@ -105,6 +105,7 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
         $orders = '';
         foreach ($suborders as $item) {
+            $quantity = '-';
             if ($item->type == 'Колин') {
                 $quantity = $item->width . "x" . $item->height . "см";
             }
@@ -124,7 +125,6 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 $quantity = $item->quantity . "кг";
             }
             $orders = $orders . $item->type . ": " . $quantity . " - ";
-            $quantity = null;
         }
         if ($customer->latitude && $customer->longitude) {
             $chat->location($customer->latitude, $customer->longitude)->send();
@@ -154,7 +154,8 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->customer->save();
 
         $this->chat
-            ->message('📍 Отправьте геолокацию заказа!');
+            ->message('📍 Отправьте геолокацию заказа!')
+            ->send();
     }
 
     public function dostavleno($id): void
