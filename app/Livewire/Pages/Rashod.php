@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\ExpenseCategory;
 use App\Models\Rashodho;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -9,9 +10,16 @@ use Livewire\WithPagination;
 class Rashod extends Component
 {
     use WithPagination;
+
+    // Добавление расхода
     public $price;
     public $content;
-    public $category = "Продукт";
+    public $category = '';
+
+    // Добавление категории
+    public $newCategoryName = '';
+
+    // Фильтры
     public string $search = '';
     public string $categoryFilter = '';
     public string $dateFrom = '';
@@ -19,27 +27,47 @@ class Rashod extends Component
     public string $sortField = 'created_at';
     public string $sortDirection = 'desc';
     public int $perPage = 50;
-    public array $categories = [
-        'Продукт',
-        'Зарплата',
-        'Комуналные услуги',
-        'Расходы заведения',
-        'Маркетинг',
-        'Транспорт топливо',
-        'Транспорт ремонт',
-    ];
-    public $todos;
 
     public function add()
     {
+        $this->validate([
+            'price' => 'required|numeric|min:0.01',
+            'category' => 'required|string',
+        ]);
+
         Rashodho::create([
             'price' => $this->price,
             'content' => $this->content,
             'category' => $this->category,
         ]);
         $this->reset(['price', 'content', 'category']);
-        $this->dispatch('alert', 'Успешно доавлено');
+        $this->dispatch('alert', 'Успешно добавлено');
         $this->dispatch('modal-close', name: 'add-expense');
+    }
+
+    public function addCategory()
+    {
+        $this->validate([
+            'newCategoryName' => 'required|string|min:2|unique:expense_categories,name',
+        ], [
+            'newCategoryName.required' => 'Введите название категории',
+            'newCategoryName.unique' => 'Такая категория уже существует',
+            'newCategoryName.min' => 'Минимум 2 символа',
+        ]);
+
+        ExpenseCategory::create(['name' => $this->newCategoryName]);
+        $this->reset('newCategoryName');
+        $this->dispatch('alert', 'Категория добавлена');
+        $this->dispatch('modal-close', name: 'add-category');
+    }
+
+    public function deleteCategory($id)
+    {
+        if (auth()->user()?->role !== 'admin') {
+            abort(403);
+        }
+        ExpenseCategory::whereKey($id)->delete();
+        $this->dispatch('alert', 'Категория удалена');
     }
 
     public function updated($name)
@@ -67,6 +95,7 @@ class Rashod extends Component
         $this->dispatch('alert', 'Расход удален');
         $this->resetPage();
     }
+
     public function render()
     {
         $allowedSorts = ['created_at', 'price', 'category'];
@@ -98,9 +127,31 @@ class Rashod extends Component
 
         $rashod = $query->orderBy($sortField, $sortDirection)->paginate($this->perPage);
 
+        $categories = ExpenseCategory::orderBy('name')->get();
+
+        // Сумма за текущий фильтр
+        $filteredQuery = Rashodho::query();
+        if ($this->categoryFilter !== '') {
+            $filteredQuery->where('category', $this->categoryFilter);
+        }
+        if ($this->dateFrom !== '') {
+            $filteredQuery->whereDate('created_at', '>=', $this->dateFrom);
+        }
+        if ($this->dateTo !== '') {
+            $filteredQuery->whereDate('created_at', '<=', $this->dateTo);
+        }
+        $filteredTotal = $filteredQuery->sum('price');
+
+        // Сумма за текущий месяц
+        $monthTotal = Rashodho::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('price');
+
         return view('livewire.pages.rashod', [
             'rashod' => $rashod,
-            'categories' => $this->categories,
+            'categories' => $categories,
+            'filteredTotal' => $filteredTotal,
+            'monthTotal' => $monthTotal,
         ]);
     }
 }
