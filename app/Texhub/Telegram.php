@@ -161,7 +161,6 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                         ReplyButton::make('📍 Отправить текущую геопозицию')->requestLocation(),
                     ])
                     ->resize()
-                    ->oneTime()
             )
             ->send();
     }
