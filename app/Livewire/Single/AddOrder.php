@@ -17,6 +17,7 @@ class AddOrder extends Component
     public $customer_address;
     public $tariff;
     public $note;
+    public $car_number = '1';
     public function add_order()
     {
         $customer = Customer::where('phone', $this->customer_phone)->first();
@@ -40,7 +41,13 @@ class AddOrder extends Component
             'operator_id' => Auth::id(),
         ]);
         $teleg = new Telegram();
-        $teleg->deliver_chat_send($ord->id);
+        if ($this->car_number == '2') {
+            $teleg->deliver_chat_send_two($ord->id);
+        } elseif ($this->car_number == '3') {
+            $teleg->deliver_chat_send_three($ord->id);
+        } else {
+            $teleg->deliver_chat_send($ord->id);
+        }
         return redirect()->route('edit-order-single', $ord->id);
     }
     public function render()

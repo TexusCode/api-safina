@@ -103,6 +103,10 @@ class OrderView extends Component
             $tel = new Telegram();
             $tel->del_chat_send($this->order->id);
         }
+        if ($this->status == 'Готово / Отправить на машину №2') {
+            $tel = new Telegram();
+            $tel->del_chat_send_two($this->order->id);
+        }
         if ($this->status == 'Готово / Отправить на машину №3') {
             $tel = new Telegram();
             $tel->del_chat_send_three($this->order->id);

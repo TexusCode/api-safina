@@ -14,8 +14,13 @@ import java.util.regex.Pattern;
 public class CallMonitorService extends AccessibilityService {
 
     private static final String TAG        = "SafinaMonitor";
-    private static final String ZOIPER_PKG = "com.zoiperpremium.android.app";
-    private static final Pattern PHONE_PAT = Pattern.compile("[+]?[0-9]{6,15}");
+    private static final String ZOIPER_FREE = "com.zoiper.android.app";
+    private static final String ZOIPER_PRO  = "com.zoiperpremium.android.app";
+    private static final Pattern PHONE_PAT  = Pattern.compile("[+]?[0-9]{6,15}");
+
+    private boolean isZoiper(CharSequence pkg) {
+        return pkg != null && (ZOIPER_FREE.contentEquals(pkg) || ZOIPER_PRO.contentEquals(pkg));
+    }
 
     // Delay before we declare "call ended" when Zoiper window goes away.
     // Long enough to survive a screen-lock/unlock cycle (~15 s auto-lock),
@@ -34,7 +39,7 @@ public class CallMonitorService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         if (event.getPackageName() == null) return;
-        if (!ZOIPER_PKG.contentEquals(event.getPackageName())) return;
+        if (!isZoiper(event.getPackageName())) return;
 
         AccessibilityNodeInfo root = getRootInActiveWindow();
 

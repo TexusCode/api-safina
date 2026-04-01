@@ -14,9 +14,14 @@ import java.util.regex.Pattern;
 
 public class IncomingCallListener extends NotificationListenerService {
 
-    private static final String TAG = "SafinaMonitor";
-    private static final String ZOIPER_PKG = "com.zoiperpremium.android.app";
+    private static final String TAG         = "SafinaMonitor";
+    private static final String ZOIPER_FREE = "com.zoiper.android.app";
+    private static final String ZOIPER_PRO  = "com.zoiperpremium.android.app";
     private static final Pattern PHONE_PATTERN = Pattern.compile("[+]?[0-9]{6,15}");
+
+    private boolean isZoiper(String pkg) {
+        return ZOIPER_FREE.equals(pkg) || ZOIPER_PRO.equals(pkg);
+    }
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable callEndRunnable = null;
@@ -25,7 +30,7 @@ public class IncomingCallListener extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (sbn == null) return;
-        if (!ZOIPER_PKG.equals(sbn.getPackageName())) return;
+        if (!isZoiper(sbn.getPackageName())) return;
 
         // Cancel any pending CALL_ENDED — Zoiper just posted a new notification
         // This handles the ringing→active call transition
@@ -69,7 +74,7 @@ public class IncomingCallListener extends NotificationListenerService {
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         if (sbn == null) return;
-        if (!ZOIPER_PKG.equals(sbn.getPackageName())) return;
+        if (!isZoiper(sbn.getPackageName())) return;
         Log.d(TAG, "Zoiper notification removed");
 
         if (!CallState.isActive) return;

@@ -17,7 +17,7 @@ class OperatorAddOrder extends Component
     public $customer_address;
     public $tariff;
     public $note;
-    public $three_car = false;
+    public $car_number = '1';
 
     public function add_order()
     {
@@ -46,7 +46,9 @@ class OperatorAddOrder extends Component
         ]);
 
         $teleg = new Telegram();
-        if ($this->three_car == true) {
+        if ($this->car_number == '2') {
+            $teleg->deliver_chat_send_two($ord->id);
+        } elseif ($this->car_number == '3') {
             $teleg->deliver_chat_send_three($ord->id);
         } else {
             $teleg->deliver_chat_send($ord->id);

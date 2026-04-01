@@ -15,7 +15,7 @@ class AddOrder extends Component
     public $customer_address;
     public $tariff;
     public $note;
-    public $three_car = false;
+    public $car_number = '1';
     public function add_order()
     {
         $customer = Customer::where('phone', $this->customer_phone)->first();
@@ -39,12 +39,12 @@ class AddOrder extends Component
             'note' => $this->note,
             'operator_id' => Auth::id(),
         ]);
-        if ($this->three_car == true) {
-            //
-            $teleg = new Telegram();
+        $teleg = new Telegram();
+        if ($this->car_number == '2') {
+            $teleg->deliver_chat_send_two($ord->id);
+        } elseif ($this->car_number == '3') {
             $teleg->deliver_chat_send_three($ord->id);
         } else {
-            $teleg = new Telegram();
             $teleg->deliver_chat_send($ord->id);
         }
         $message = Auth::user()->name . ": Добавил заказ №" . $ord->no;

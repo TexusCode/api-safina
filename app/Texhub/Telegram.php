@@ -29,42 +29,31 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $chat->message($message)->send();
     }
 
+    // Машина №1 (Chat ID 2)
     public function deliver_chat_send($order_id): void
     {
-        $order = Order::find($order_id);
-        $name = $order->customer->name;
-        $phone = $order->customer->phone;
-        $address = $order->customer->adress;
-        $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(2);
-        $customer = $order->customer;
-        if ($customer->latitude && $customer->longitude) {
-            $chat->location($customer->latitude, $customer->longitude)->send();
-        }
-        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
-            ->keyboard(
-                Keyboard::make()
-                    ->row([
-                        Button::make("📞 $phone")->copyText("$phone"),
-                    ])
-                    ->row([
-                        Button::make('📍 Добавить адрес')->action('add_location')->param('id', $order->id),
-                        Button::make('✏️ Изменить')->url("https://safina-cleaning.tj/edit-order-single/$order->id"),
-                    ])
-                    ->row([
-                        Button::make('✅ Получено')->action('done')->param('id', $order->id),
-                        Button::make('❌ Отмена')->action('cancel')->param('id', $order->id),
-                    ])
-            )->send();
+        $this->sendDeliverMessage($order_id, TelegraphChat::find(2));
     }
+
+    // Машина №2 (Chat ID 1)
+    public function deliver_chat_send_two($order_id): void
+    {
+        $this->sendDeliverMessage($order_id, TelegraphChat::find(1));
+    }
+
+    // Машина №3 (Chat ID 5)
     public function deliver_chat_send_three($order_id): void
     {
+        $this->sendDeliverMessage($order_id, TelegraphChat::find(5));
+    }
+
+    private function sendDeliverMessage($order_id, $chat): void
+    {
         $order = Order::find($order_id);
         $name = $order->customer->name;
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
         $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(5);
         $customer = $order->customer;
         if ($customer->latitude && $customer->longitude) {
             $chat->location($customer->latitude, $customer->longitude)->send();
@@ -85,56 +74,25 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ])
             )->send();
     }
+    // Готово → Машина №1 (Chat ID 2)
     public function del_chat_send($order_id): void
     {
-        $order = Order::find($order_id);
-        $suborders = Suborder::where('order_id', $order->id)->get();
-        $total = $suborders->isNotEmpty() ? $suborders->sum('enum') : null;
-        $name = $order->customer->name;
-        $phone = $order->customer->phone;
-        $address = $order->customer->adress;
-        $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(1);
-        $customer = $order->customer;
-
-        $orders = '';
-        foreach ($suborders as $item) {
-            if ($item->type == 'Колин') {
-                $quantity = $item->width . "x" . $item->height . "см";
-            }
-            if ($item->type == 'Курпа') {
-                $quantity = $item->width . "x" . $item->height . "см";
-            }
-            if ($item->type == 'Болишт') {
-                $quantity = $item->quantity . "шт";
-            }
-            if ($item->type == 'Курпача') {
-                $quantity = $item->quantity . "м";
-            }
-            if ($item->type == 'Одеяло') {
-                $quantity = $item->quantity . "шт";
-            }
-            if ($item->type == 'Парда') {
-                $quantity = $item->quantity . "кг";
-            }
-            $orders = $orders . $item->type . ": " . $quantity . " - ";
-            $quantity = null;
-        }
-        if ($customer->latitude && $customer->longitude) {
-            $chat->location($customer->latitude, $customer->longitude)->send();
-        }
-        $chat->message("📦 Заказ <b>№$order->no</b>\n👤 Имя: <b>$name</b>\n🏠 Адрес: <b>$address</b>\n📝 Заметка: <b>$note</b>\n📅 Дата: <b>$order->created_at</b>\n💲 Сумма: <b>$total c</b>\n$orders\n📞 <b>Нажмите ниже, чтобы скопировать номер</b> 👇")
-            ->keyboard(
-                Keyboard::make()
-                    ->row([
-                        Button::make("📞 $phone")->copyText("$phone"),
-                    ])
-                    ->row([
-                        Button::make('✅ Доставлено')->action('dostavleno')->param('id', $order->id),
-                    ])
-            )->send();
+        $this->sendReadyMessage($order_id, TelegraphChat::find(2));
     }
+
+    // Готово → Машина №2 (Chat ID 1)
+    public function del_chat_send_two($order_id): void
+    {
+        $this->sendReadyMessage($order_id, TelegraphChat::find(1));
+    }
+
+    // Готово → Машина №3 (Chat ID 5)
     public function del_chat_send_three($order_id): void
+    {
+        $this->sendReadyMessage($order_id, TelegraphChat::find(5));
+    }
+
+    private function sendReadyMessage($order_id, $chat): void
     {
         $order = Order::find($order_id);
         $suborders = Suborder::where('order_id', $order->id)->get();
@@ -143,7 +101,6 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $phone = $order->customer->phone;
         $address = $order->customer->adress;
         $note = $order->note ?? "Нет заметок!";
-        $chat = TelegraphChat::find(5);
         $customer = $order->customer;
 
         $orders = '';
@@ -197,7 +154,15 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->customer->save();
 
         $this->chat
-            ->message('📍 Отправьте геолокацию заказа!')
+            ->message('📍 Нажмите кнопку ниже, чтобы отправить геолокацию!')
+            ->replyKeyboard(
+                ReplyKeyboard::make()
+                    ->row([
+                        ReplyButton::make('📍 Отправить геолокацию')->requestLocation(),
+                    ])
+                    ->resize()
+                    ->oneTime()
+            )
             ->send();
     }
 

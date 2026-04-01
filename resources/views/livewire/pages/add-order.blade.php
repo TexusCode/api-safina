@@ -74,8 +74,38 @@
         dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500
         dark:focus:ring-neutral-600" rows="3" placeholder="Добавьте примечание, если есть!"></textarea>
         </div>
-        <div class="mt-5">
-            <flux:checkbox wire:model="three_car" label="Отправить на машину №3" />
+        <div class="grid space-y-2 mt-5">
+            <label class="block text-sm font-medium mb-2 dark:text-white">Выберите машину</label>
+
+            <label for="car_1" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm
+                focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700
+                dark:text-neutral-400">
+                <input type="radio" id="car_1" name="car_number" wire:model="car_number" value="1" checked class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500
+                    checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                    dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500
+                    dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Машина №1</span>
+            </label>
+
+            <label for="car_2" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm
+                focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700
+                dark:text-neutral-400">
+                <input type="radio" id="car_2" name="car_number" wire:model="car_number" value="2" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500
+                    checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                    dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500
+                    dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Машина №2</span>
+            </label>
+
+            <label for="car_3" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm
+                focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700
+                dark:text-neutral-400">
+                <input type="radio" id="car_3" name="car_number" wire:model="car_number" value="3" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500
+                    checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                    dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500
+                    dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Машина №3</span>
+            </label>
         </div>
         <button type="submit" class="py-2 mt-5 w-full text-center text-base font-medium rounded-lg border border-transparent
             bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700
