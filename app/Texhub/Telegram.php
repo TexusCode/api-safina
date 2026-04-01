@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Suborder;
 use App\Support\CancellationLink;
 use App\Support\ReviewLink;
+use DefStudio\Telegraph\DTO\Chat;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -153,16 +154,50 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->customer->map = true;
         $order->customer->save();
 
+        $chatType = $this->callbackQuery?->message()?->chat()?->type() ?? $this->message?->chat()?->type();
+
+        if ($chatType !== Chat::TYPE_PRIVATE) {
+            $userChatId = (string) ($this->callbackQuery?->from()?->id() ?? '');
+
+            if ($userChatId !== '') {
+                $privateReply = FacadesTelegraph::bot($this->bot)
+                    ->chat($userChatId)
+                    ->message('📍 Нажмите кнопку ниже — Telegram запросит доступ и отправит текущую геопозицию.')
+                    ->replyKeyboard($this->locationRequestKeyboard())
+                    ->send();
+
+                if ($privateReply->telegraphOk()) {
+                    $this->chat
+                        ->message('✅ Запрос геопозиции отправлен вам в личный чат с ботом. Нажмите кнопку там.')
+                        ->send();
+                    $this->reply('Запрос отправлен в личный чат.');
+
+                    return;
+                }
+            }
+
+            $this->chat
+                ->message('⚠️ В этом чате Telegram не даёт авто-запрос геопозиции. Откройте личный чат с ботом, нажмите Start и повторите действие.')
+                ->send();
+            $this->reply('Нужно открыть личный чат с ботом и нажать Start.');
+
+            return;
+        }
+
         $this->chat
             ->message('📍 Нажмите кнопку ниже — Telegram запросит доступ и отправит текущую геопозицию.')
-            ->replyKeyboard(
-                ReplyKeyboard::make()
-                    ->row([
-                        ReplyButton::make('📍 Отправить текущую геопозицию')->requestLocation(),
-                    ])
-                    ->resize()
-            )
+            ->replyKeyboard($this->locationRequestKeyboard())
             ->send();
+    }
+
+    private function locationRequestKeyboard(): ReplyKeyboard
+    {
+        return ReplyKeyboard::make()
+            ->row([
+                ReplyButton::make('📍 Отправить текущую геопозицию')->requestLocation(),
+            ])
+            ->resize()
+            ->oneTime();
     }
 
     public function dostavleno($id): void
