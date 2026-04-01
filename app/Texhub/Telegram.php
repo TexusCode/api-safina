@@ -153,9 +153,8 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->customer->map = true;
         $order->customer->save();
 
-        // Получаем чат из БД напрямую и отправляем reply keyboard с кнопкой геолокации
-        $chatModel = TelegraphChat::find($this->chat->id);
-        $chatModel->message('📍 Нажмите кнопку ниже, чтобы отправить геолокацию!')
+        $this->chat
+            ->message('📍 Нажмите кнопку ниже, чтобы отправить геолокацию!')
             ->replyKeyboard(
                 ReplyKeyboard::make()
                     ->row([
@@ -225,21 +224,13 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $latitude = $this->message->location()->latitude();
             $longitude = $this->message->location()->longitude();
             $googlemap = Customer::where('map', true)->first();
-
-            if (!$googlemap) {
-                return;
-            }
-
             $googlemap->latitude = $latitude;
             $googlemap->longitude = $longitude;
             $googlemap->map = false;
             $googlemap->save();
 
-            // Убираем reply keyboard и отправляем подтверждение
-            $chatModel = TelegraphChat::find($this->chat->id);
-            $chatModel->message("✅ Адрес успешно сохранён!")
-                ->removeReplyKeyboard()
-                ->send();
+            $this->chat->deleteMessage($this->messageId)->send();
+            $this->chat->message("Адрес успешно сохранено!")->send();
         }
     }
 }
