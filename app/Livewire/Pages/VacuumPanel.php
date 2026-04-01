@@ -48,7 +48,7 @@ class VacuumPanel extends Component
             if (
                 $hasRelevant
                 && !$hasNotReady
-                && !in_array($suborder->order->status, ['Готово', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3', 'Доставлено'], true)
+                && !in_array($suborder->order->status, ['Готово / Отправить на машину №1', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3', 'Доставлено'], true)
             ) {
                 $suborder->order->update(['status' => 'Готово к отправке']);
             }
@@ -94,7 +94,7 @@ class VacuumPanel extends Component
             ->whereNotNull('height')
             ->whereHas('order', function ($query) use ($windowStart, $windowEnd, $repeatWashCooldown, $searchOrder) {
                 $query->whereBetween('created_at', [$windowStart, $windowEnd])
-                    ->whereNotIn('status', ['Готово', 'Доставлено', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3'])
+                    ->whereNotIn('status', ['Готово / Отправить на машину №1', 'Доставлено', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3'])
                     ->when($searchOrder !== '', function ($orderQuery) use ($searchOrder) {
                         $orderQuery->where('no', 'like', '%' . $searchOrder . '%');
                     })

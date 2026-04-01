@@ -75,7 +75,7 @@ class QualityControl extends Component
                 $query->whereBetween('created_at', [$windowStart, $windowEnd])
                     ->whereNotIn('status', [
                         'Доставлено',
-                        'Готово',
+                        'Готово / Отправить на машину №1',
                         'Готово к отправке',
                         'Готово / Отправить на машину №2',
                         'Готово / Отправить на машину №3',
@@ -94,7 +94,7 @@ class QualityControl extends Component
                 $query->whereBetween('created_at', [$windowStart, $windowEnd])
                     ->whereNotIn('status', [
                         'Доставлено',
-                        'Готово',
+                        'Готово / Отправить на машину №1',
                         'Готово к отправке',
                         'Готово / Отправить на машину №2',
                         'Готово / Отправить на машину №3',

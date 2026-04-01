@@ -109,8 +109,7 @@
             </li>
         </ul>
         @endif
-        <button type="button" wire:click="open" {{ $order->status
-            =="Готово"?'disabled':'' }} {{ $order->status
+        <button type="button" wire:click="open" {{ str_starts_with($order->status, 'Готово / Отправить') ? 'disabled' : '' }} {{ $order->status
             =="Доставлено"?'disabled':'' }}
             class="py-2 mt-3 w-full text-center text-base font-medium rounded-lg border border-transparent bg-blue-600
             text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50

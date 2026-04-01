@@ -99,7 +99,7 @@ class OrderView extends Component
         if ($this->status == 'Доставлено') {
             BankTransaction::recordOrderIncome($this->order);
         }
-        if ($this->status == 'Готово') {
+        if ($this->status == 'Готово / Отправить на машину №1') {
             $tel = new Telegram();
             $tel->del_chat_send($this->order->id);
         }

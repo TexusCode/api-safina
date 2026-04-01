@@ -31,9 +31,9 @@
                             | <span
                                 class="text-xs px-2 py-0.5 bg-blue-500 rounded-sm group-hover:text-white">Получено</span>
                             @endif
-                            @if($order->status == 'Готово')
+                            @if(str_starts_with($order->status, 'Готово / Отправить'))
                             | <span
-                                class="text-xs px-2 py-0.5 bg-purple-500 rounded-sm group-hover:text-white">Готово</span>
+                                class="text-xs px-2 py-0.5 bg-purple-500 rounded-sm group-hover:text-white">{{ $order->status }}</span>
                             @endif
                             @if($order->status == 'Доставлено')
                             | <span

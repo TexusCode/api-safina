@@ -98,14 +98,14 @@
             block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500
             disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700
             dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-            {{ in_array($order->status, ['Готово', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3', 'Доставлено']) ? 'disabled' : '' }}>
+            {{ in_array($order->status, ['Готово / Отправить на машину №1', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3', 'Доставлено']) ? 'disabled' : '' }}>
             <option value="В ожидании">В ожидании</option>
             <option value="Получено">Получено</option>
             <option value="В стирке">В стирке</option>
             <option value="В пылесосе">В пылесосе</option>
             <option value="Повторныя стирка">Повторныя стирка</option>
             <option value="Готово к отправке">Готово к отправке</option>
-            <option value="Готово">Готово (Машина №1)</option>
+            <option value="Готово / Отправить на машину №1">Готово / Отправить на машину №1</option>
             <option value="Готово / Отправить на машину №2">Готово / Отправить на машину №2</option>
             <option value="Готово / Отправить на машину №3">Готово / Отправить на машину №3</option>
             <option value="Доставлено">Доставлено</option>
@@ -187,7 +187,7 @@
                 </li>
             </ul>
         @endif
-        <button type="button" wire:click="open" {{ $order->status == 'Готово' ? 'disabled' : '' }}
+        <button type="button" wire:click="open" {{ in_array($order->status, ['Готово / Отправить на машину №1', 'Готово / Отправить на машину №2', 'Готово / Отправить на машину №3']) ? 'disabled' : '' }}
             {{ $order->status == 'Доставлено' ? 'disabled' : '' }}
             class="py-2 mt-3 w-full text-center text-base font-medium rounded-lg border border-transparent bg-blue-600
             text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50
