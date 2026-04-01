@@ -154,7 +154,15 @@ class Telegram extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $order->customer->save();
 
         $this->chat
-            ->message('📍 Отправьте геолокацию заказа!')
+            ->message('📍 Нажмите кнопку ниже — Telegram запросит доступ и отправит текущую геопозицию.')
+            ->replyKeyboard(
+                ReplyKeyboard::make()
+                    ->row([
+                        ReplyButton::make('📍 Отправить текущую геопозицию')->requestLocation(),
+                    ])
+                    ->resize()
+                    ->oneTime()
+            )
             ->send();
     }
 
